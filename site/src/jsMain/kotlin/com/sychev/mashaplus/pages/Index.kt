@@ -1,6 +1,10 @@
 package com.sychev.mashaplus.pages
 
 import androidx.compose.runtime.Composable
+import com.sychev.mashaplus.HeadlineTextStyle
+import com.sychev.mashaplus.SubheadlineTextStyle
+import com.sychev.mashaplus.components.layouts.PageLayout
+import com.sychev.mashaplus.toSitePalette
 import com.varabyte.kobweb.compose.css.StyleVariable
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -13,6 +17,7 @@ import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.forms.Button
+import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.layout.breakpoint.displayIfAtLeast
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.style.ComponentStyle
@@ -23,13 +28,12 @@ import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.colors.ColorSchemes
-import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.css.cssRem
+import org.jetbrains.compose.web.css.fr
+import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.vh
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Text
-import com.sychev.mashaplus.HeadlineTextStyle
-import com.sychev.mashaplus.SubheadlineTextStyle
-import com.sychev.mashaplus.components.layouts.PageLayout
-import com.sychev.mashaplus.toSitePalette
 
 // Container that has a tagline and grid on desktop, and just the tagline on mobile
 val HeroContainerStyle by ComponentStyle {
@@ -76,6 +80,7 @@ fun HomePage() {
                 val sitePalette = ColorMode.current.toSitePalette()
 
                 Column(Modifier.gap(2.cssRem)) {
+                    Image("/main_photo.png", "Kobweb Logo", Modifier.fillMaxWidth())
                     Div(HeadlineTextStyle.toAttrs()) {
                         SpanText(
                             "Use this template as your starting point for ", Modifier.color(
@@ -95,7 +100,7 @@ fun HomePage() {
                     }
 
                     Div(SubheadlineTextStyle.toAttrs()) {
-                        SpanText("You can read the ")
+                        SpanText("Eblan ")
                         Link("/about", "About")
                         SpanText(" page for more information.")
                     }
@@ -112,15 +117,15 @@ fun HomePage() {
                 }
             }
 
-            Div(HomeGridStyle.toAttrs()) {
-                val sitePalette = ColorMode.current.toSitePalette()
-                GridCell(sitePalette.brand.primary, 1, 1, 2, 2)
-                GridCell(ColorSchemes.Monochrome._600, 1, 3)
-                GridCell(ColorSchemes.Monochrome._100, 1, 4, width = 2)
-                GridCell(sitePalette.brand.accent, 2, 3, width = 2)
-                GridCell(ColorSchemes.Monochrome._300, 2, 5)
-                GridCell(ColorSchemes.Monochrome._800, 3, 1, width = 5)
-            }
+//            Div(HomeGridStyle.toAttrs()) {
+//                val sitePalette = ColorMode.current.toSitePalette()
+//                GridCell(sitePalette.brand.primary, 1, 1, 2, 2)
+//                GridCell(ColorSchemes.Monochrome._600, 1, 3)
+//                GridCell(ColorSchemes.Monochrome._100, 1, 4, width = 2)
+//                GridCell(sitePalette.brand.accent, 2, 3, width = 2)
+//                GridCell(ColorSchemes.Monochrome._300, 2, 5)
+//                GridCell(ColorSchemes.Monochrome._800, 3, 1, width = 5)
+//            }
         }
     }
 }

@@ -21,9 +21,12 @@ import org.jetbrains.compose.web.css.percent
 import com.sychev.mashaplus.components.sections.Footer
 import com.sychev.mashaplus.components.sections.NavHeader
 import com.sychev.mashaplus.toSitePalette
+import com.varabyte.kobweb.compose.ui.graphics.Color
+import com.varabyte.kobweb.silk.components.graphics.Image
+import org.jetbrains.compose.web.css.px
 
 val PageContentStyle by ComponentStyle {
-    base { Modifier.fillMaxSize().padding(leftRight = 2.cssRem, top = 4.cssRem) }
+    base { Modifier.fillMaxSize() }
     Breakpoint.MD { Modifier.maxWidth(60.cssRem) }
 }
 
@@ -66,7 +69,6 @@ fun PageLayout(title: String, content: @Composable ColumnScope.() -> Unit) {
     LaunchedEffect(title) {
         document.title = "Kobweb - $title"
     }
-
     Box(
         Modifier
             .fillMaxWidth()
@@ -78,19 +80,16 @@ fun PageLayout(title: String, content: @Composable ColumnScope.() -> Unit) {
             // Grids are powerful but have a bit of a learning curve. For more info, see:
             // https://css-tricks.com/snippets/css/complete-guide-grid/
             .gridTemplateRows { size(1.fr); size(minContent) },
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.TopCenter,
     ) {
-        SvgCobweb(Modifier.gridRow(1).align(Alignment.TopStart))
         Column(
             // Isolate the content, because otherwise the absolute-positioned SVG above will render on top of it.
             // This is confusing but how browsers work. Read up on stacking contexts for more info.
             // https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_positioned_layout/Understanding_z-index/Stacking_context
             // Some people might have used z-index instead, but best practice is to avoid that if possible, because
             // as a site gets complex, Z-fighting can be a huge pain to track down.
-            Modifier.fillMaxSize().gridRow(1),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            NavHeader()
             Column(
                 PageContentStyle.toModifier(),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -99,6 +98,7 @@ fun PageLayout(title: String, content: @Composable ColumnScope.() -> Unit) {
             }
         }
         // Associate the footer with the row that will get pushed off the bottom of the page if it can't fit.
+        NavHeader()
         Footer(Modifier.fillMaxWidth().gridRow(2))
     }
 }

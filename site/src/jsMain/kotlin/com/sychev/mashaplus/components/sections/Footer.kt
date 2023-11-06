@@ -20,6 +20,7 @@ import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.dom.Span
 import com.sychev.mashaplus.toSitePalette
+import com.varabyte.kobweb.compose.ui.graphics.Color
 
 val FooterStyle by ComponentStyle.base {
     Modifier
