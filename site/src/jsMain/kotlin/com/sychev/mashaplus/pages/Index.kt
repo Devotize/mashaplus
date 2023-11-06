@@ -1,11 +1,12 @@
 package com.sychev.mashaplus.pages
 
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import com.sychev.mashaplus.HeadlineTextStyle
 import com.sychev.mashaplus.MediumPadding
 import com.sychev.mashaplus.SubheadlineTextStyle
 import com.sychev.mashaplus.components.layouts.PageLayout
 import com.sychev.mashaplus.toSitePalette
+import com.sychev.mashaplus.utils.stubAnimation
 import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.StyleVariable
 import com.varabyte.kobweb.compose.foundation.layout.Box
@@ -33,9 +34,11 @@ import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.colors.ColorSchemes
+import kotlinx.coroutines.delay
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Text
+import kotlin.time.Duration.Companion.seconds
 
 // Container that has a tagline and grid on desktop, and just the tagline on mobile
 val HeroContainerStyle by ComponentStyle {
@@ -141,6 +144,16 @@ val LogoSlideInAnim by Keyframes {
     }
 }
 
+val MainPhotoSlideInAnim by Keyframes {
+    from {
+        Modifier.translateY(-(100).percent)
+    }
+
+    to {
+        Modifier
+    }
+}
+
 val LogoStyle by ComponentStyle {
     base { Modifier.width(85.px) }
     Breakpoint.MD { Modifier.width(240.px) }
@@ -159,10 +172,60 @@ val BottomPhotoGradientStyle by ComponentStyle {
     Breakpoint.MD { Modifier.fillMaxWidth().height(MainPhotoHeightMD).objectFit(ObjectFit.Fill) }
 }
 
+private val mainPhotos = listOf(
+    "/main_photo_1.png",
+    "/main_photo_2.png",
+    "/main_photo_3.png",
+    "/main_photo_4.png",
+    "/main_photo_5.png",
+    "/main_photo_6.png",
+)
+
 @Composable
 private fun ImageHeaderWithLogo() {
     Box(modifier = Modifier.fillMaxWidth()) {
-        Image("/main_photo.png", "Main photo", MainPhotoStyle.toModifier())
+        var mainPhoto by remember { mutableStateOf(mainPhotos.first()) }
+        var previousMainPhoto by remember { mutableStateOf<String?>(null) }
+        LaunchedEffect(true) {
+            var i = 1
+            while (true) {
+                delay(2.seconds)
+                mainPhoto = mainPhotos[i]
+                if (i == mainPhotos.lastIndex) {
+                    i = 0
+                } else {
+                    i++
+                }
+            }
+        }
+        previousMainPhoto?.let {
+            Image(
+                it,
+                "Main photo",
+                MainPhotoStyle
+                    .toModifier(),
+            )
+        }
+
+        key(mainPhoto) {
+            Image(
+                mainPhoto,
+                "Main photo",
+                MainPhotoStyle
+                    .toModifier()
+                    .animation(
+                        MainPhotoSlideInAnim.toAnimation(
+                            duration = 300.ms,
+                            timingFunction = AnimationTimingFunction.EaseIn,
+                            direction = AnimationDirection.Normal,
+                            fillMode = AnimationFillMode.Backwards,
+                        )
+                    )
+                    .onAnimationEnd {
+                        previousMainPhoto = mainPhoto
+                    },
+            )
+        }
         Image(
             "/masha_logo.png",
             "Logo icon",
@@ -186,7 +249,7 @@ private fun ImageHeaderWithLogo() {
             mainPhotoGradientRes,
             "gradient dark",
             BottomPhotoGradientStyle.toModifier()
-                .align(Alignment.BottomCenter),
+                .align(Alignment.BottomCenter).stubAnimation(),
         )
     }
 }

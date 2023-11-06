@@ -3,6 +3,7 @@ package com.sychev.mashaplus.components.sections
 import androidx.compose.runtime.*
 import com.sychev.mashaplus.components.widgets.IconButton
 import com.sychev.mashaplus.toSitePalette
+import com.sychev.mashaplus.utils.stubAnimation
 import com.varabyte.kobweb.compose.css.functions.clamp
 import com.varabyte.kobweb.compose.dom.ElementTarget
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -56,7 +57,7 @@ private fun MenuItems() {
 @Composable
 private fun ColorModeButton() {
     var colorMode by ColorMode.currentState
-    IconButton(onClick = { colorMode = colorMode.opposite },) {
+    IconButton(onClick = { colorMode = colorMode.opposite }) {
         if (colorMode.isLight) MoonIcon(Modifier.color(Color.white)) else SunIcon((Modifier.color(Color.white)))
     }
     Tooltip(ElementTarget.PreviousSibling, "Toggle color mode", placement = PopupPlacement.BottomRight)
@@ -112,7 +113,8 @@ fun NavHeader() {
             Modifier
                 .fontSize(1.5.cssRem)
                 .gap(1.cssRem)
-                .displayUntil(Breakpoint.MD),
+                .displayUntil(Breakpoint.MD)
+                .stubAnimation(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             var menuState by remember { mutableStateOf(SideMenuState.CLOSED) }
@@ -125,7 +127,7 @@ fun NavHeader() {
                 )
             }
 
-            HamburgerButton(onClick =  { menuState = SideMenuState.OPEN })
+            HamburgerButton(onClick = { menuState = SideMenuState.OPEN })
             ColorModeButton()
         }
 
@@ -168,7 +170,10 @@ private fun SideMenu(menuState: SideMenuState, close: () -> Unit, onAnimationEnd
                 horizontalAlignment = Alignment.Start
             ) {
                 CloseButton(onClick = { close() })
-                Column(Modifier.padding(right = 0.75.cssRem).gap(1.5.cssRem).fontSize(1.4.cssRem), horizontalAlignment = Alignment.Start) {
+                Column(
+                    Modifier.padding(right = 0.75.cssRem).gap(1.5.cssRem).fontSize(1.4.cssRem),
+                    horizontalAlignment = Alignment.Start
+                ) {
                     MenuItems()
                 }
             }
