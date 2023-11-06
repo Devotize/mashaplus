@@ -39,7 +39,12 @@ val NavHeaderStyle by ComponentStyle.base {
 
 @Composable
 private fun NavLink(path: String, text: String) {
-    Link(path, text, variant = UndecoratedLinkVariant.then(UncoloredLinkVariant))
+    Link(
+        path,
+        text,
+        variant = UndecoratedLinkVariant.then(UncoloredLinkVariant),
+        modifier = Modifier.color(Color.white)
+    )
 }
 
 @Composable

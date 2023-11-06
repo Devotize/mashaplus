@@ -1,11 +1,13 @@
 package com.sychev.mashaplus.pages
 
 import androidx.compose.runtime.Composable
-import com.sychev.mashaplus.*
+import com.sychev.mashaplus.HeadlineTextStyle
+import com.sychev.mashaplus.MediumPadding
+import com.sychev.mashaplus.SubheadlineTextStyle
 import com.sychev.mashaplus.components.layouts.PageLayout
+import com.sychev.mashaplus.toSitePalette
+import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.StyleVariable
-import com.varabyte.kobweb.compose.css.functions.LinearGradient
-import com.varabyte.kobweb.compose.css.functions.linearGradient
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
@@ -76,14 +78,13 @@ private fun GridCell(color: Color, row: Int, column: Int, width: Int? = null, he
 fun HomePage() {
     PageLayout("Home") {
         Row(HeroContainerStyle.toModifier()) {
-            Box {
+            Box(modifier = Modifier.fillMaxWidth()) {
                 val sitePalette = ColorMode.current.toSitePalette()
-
-                Column(Modifier.gap(2.cssRem)) {
+                Column(Modifier.gap(2.cssRem).width(100.percent)) {
                     ImageHeaderWithLogo()
                     Div(HeadlineTextStyle.toAttrs()) {
                         SpanText(
-                            "Use this template as your starting point for ", Modifier.color(
+                            "Use this template as your starting point ", Modifier.color(
                                 when (ColorMode.current) {
                                     ColorMode.LIGHT -> Colors.Black
                                     ColorMode.DARK -> Colors.White
@@ -145,11 +146,23 @@ val LogoStyle by ComponentStyle {
     Breakpoint.MD { Modifier.width(240.px) }
 }
 
+private val MainPhotoHeightBase = 240.px
+private val MainPhotoHeightMD = 660.px
+
+val MainPhotoStyle by ComponentStyle {
+    base { Modifier.fillMaxWidth().height(MainPhotoHeightBase).objectFit(ObjectFit.Cover) }
+    Breakpoint.MD { Modifier.fillMaxWidth().height(MainPhotoHeightMD).objectFit(ObjectFit.Cover) }
+}
+
+val BottomPhotoGradientStyle by ComponentStyle {
+    base { Modifier.fillMaxWidth().height(MainPhotoHeightBase).objectFit(ObjectFit.Fill) }
+    Breakpoint.MD { Modifier.fillMaxWidth().height(MainPhotoHeightMD).objectFit(ObjectFit.Fill) }
+}
+
 @Composable
 private fun ImageHeaderWithLogo() {
-    Box(modifier = Modifier) {
-        val sitePalette = ColorMode.current.toSitePalette()
-        Image("/main_photo.png", "Main photo", Modifier.fillMaxWidth())
+    Box(modifier = Modifier.fillMaxWidth()) {
+        Image("/main_photo.png", "Main photo", MainPhotoStyle.toModifier())
         Image(
             "/masha_logo.png",
             "Logo icon",
@@ -163,43 +176,18 @@ private fun ImageHeaderWithLogo() {
                         direction = AnimationDirection.Normal,
                         fillMode = AnimationFillMode.Forwards
                     )
-                ),
+                )
         )
-        val gradient = linearGradient(dir = LinearGradient.Direction.ToBottom) {
-            add(color = DesignLightPurple)
-            add(color = sitePalette.brand.background)
+        val mainPhotoGradientRes = when (ColorMode.current) {
+            ColorMode.DARK -> "/main_image_gradient_dark.png"
+            ColorMode.LIGHT -> "/main_image_gradient_light.png"
         }
-        Column(modifier = Modifier.align(Alignment.BottomCenter).fillMaxWidth()) {
-            Box(
-                modifier = Modifier
-                    .background(sitePalette.brand.background)
-                    .height(15.px)
-                    .opacity(.7)
-                    .fillMaxWidth(),
-            )
-            Box(
-                modifier = Modifier
-                    .background(sitePalette.brand.background)
-                    .height(15.px)
-                    .opacity(.8)
-                    .fillMaxWidth(),
-            )
-            Box(
-                modifier = Modifier
-                    .background(sitePalette.brand.background)
-                    .height(15.px)
-                    .opacity(.9)
-                    .fillMaxWidth(),
-            )
-            Box(
-                modifier = Modifier
-                    .background(sitePalette.brand.background)
-                    .height(15.px)
-                    .opacity(1)
-                    .fillMaxWidth(),
-            )
-        }
-
+        Image(
+            mainPhotoGradientRes,
+            "gradient dark",
+            BottomPhotoGradientStyle.toModifier()
+                .align(Alignment.BottomCenter),
+        )
     }
 }
 
