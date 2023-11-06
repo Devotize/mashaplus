@@ -1,18 +1,18 @@
 package com.sychev.mashaplus.components.sections
 
 import androidx.compose.runtime.*
+import com.sychev.mashaplus.components.widgets.IconButton
+import com.sychev.mashaplus.toSitePalette
 import com.varabyte.kobweb.compose.css.functions.clamp
 import com.varabyte.kobweb.compose.dom.ElementTarget
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
-import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.animation.Keyframes
 import com.varabyte.kobweb.silk.components.animation.toAnimation
-import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.icons.CloseIcon
 import com.varabyte.kobweb.silk.components.icons.HamburgerIcon
 import com.varabyte.kobweb.silk.components.icons.MoonIcon
@@ -32,8 +32,6 @@ import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.css.*
-import com.sychev.mashaplus.components.widgets.IconButton
-import com.sychev.mashaplus.toSitePalette
 
 val NavHeaderStyle by ComponentStyle.base {
     Modifier.fillMaxWidth().padding(1.cssRem)
@@ -125,8 +123,6 @@ fun NavHeader() {
             HamburgerButton(onClick =  { menuState = SideMenuState.OPEN })
             ColorModeButton()
         }
-
-        Spacer()
 
         Row(Modifier.gap(1.5.cssRem).displayIfAtLeast(Breakpoint.MD), verticalAlignment = Alignment.CenterVertically) {
             MenuItems()

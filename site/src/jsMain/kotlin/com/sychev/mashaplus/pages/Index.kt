@@ -1,14 +1,15 @@
 package com.sychev.mashaplus.pages
 
 import androidx.compose.runtime.Composable
-import com.sychev.mashaplus.HeadlineTextStyle
-import com.sychev.mashaplus.SubheadlineTextStyle
+import com.sychev.mashaplus.*
 import com.sychev.mashaplus.components.layouts.PageLayout
-import com.sychev.mashaplus.toSitePalette
 import com.varabyte.kobweb.compose.css.StyleVariable
+import com.varabyte.kobweb.compose.css.functions.LinearGradient
+import com.varabyte.kobweb.compose.css.functions.linearGradient
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
+import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.graphics.Colors
@@ -16,6 +17,8 @@ import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.rememberPageContext
+import com.varabyte.kobweb.silk.components.animation.Keyframes
+import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.layout.breakpoint.displayIfAtLeast
@@ -28,17 +31,14 @@ import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.colors.ColorSchemes
-import org.jetbrains.compose.web.css.cssRem
-import org.jetbrains.compose.web.css.fr
-import org.jetbrains.compose.web.css.px
-import org.jetbrains.compose.web.css.vh
+import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Text
 
 // Container that has a tagline and grid on desktop, and just the tagline on mobile
 val HeroContainerStyle by ComponentStyle {
     base { Modifier.fillMaxWidth().gap(2.cssRem) }
-    Breakpoint.MD { Modifier.margin { top(20.vh) } }
+    Breakpoint.MD { Modifier.fillMaxWidth() }
 }
 
 // A demo grid that appears on the homepage because it looks good
@@ -80,7 +80,7 @@ fun HomePage() {
                 val sitePalette = ColorMode.current.toSitePalette()
 
                 Column(Modifier.gap(2.cssRem)) {
-                    Image("/main_photo.png", "Kobweb Logo", Modifier.fillMaxWidth())
+                    ImageHeaderWithLogo()
                     Div(HeadlineTextStyle.toAttrs()) {
                         SpanText(
                             "Use this template as your starting point for ", Modifier.color(
@@ -129,3 +129,77 @@ fun HomePage() {
         }
     }
 }
+
+val LogoSlideInAnim by Keyframes {
+    from {
+        Modifier.translateX(100.percent)
+    }
+
+    to {
+        Modifier
+    }
+}
+
+val LogoStyle by ComponentStyle {
+    base { Modifier.width(85.px) }
+    Breakpoint.MD { Modifier.width(240.px) }
+}
+
+@Composable
+private fun ImageHeaderWithLogo() {
+    Box(modifier = Modifier) {
+        val sitePalette = ColorMode.current.toSitePalette()
+        Image("/main_photo.png", "Main photo", Modifier.fillMaxWidth())
+        Image(
+            "/masha_logo.png",
+            "Logo icon",
+            LogoStyle.toModifier()
+                .padding(top = MediumPadding, left = MediumPadding)
+                .align(Alignment.TopEnd)
+                .animation(
+                    LogoSlideInAnim.toAnimation(
+                        duration = 400.ms,
+                        timingFunction = AnimationTimingFunction.EaseIn,
+                        direction = AnimationDirection.Normal,
+                        fillMode = AnimationFillMode.Forwards
+                    )
+                ),
+        )
+        val gradient = linearGradient(dir = LinearGradient.Direction.ToBottom) {
+            add(color = DesignLightPurple)
+            add(color = sitePalette.brand.background)
+        }
+        Column(modifier = Modifier.align(Alignment.BottomCenter).fillMaxWidth()) {
+            Box(
+                modifier = Modifier
+                    .background(sitePalette.brand.background)
+                    .height(15.px)
+                    .opacity(.7)
+                    .fillMaxWidth(),
+            )
+            Box(
+                modifier = Modifier
+                    .background(sitePalette.brand.background)
+                    .height(15.px)
+                    .opacity(.8)
+                    .fillMaxWidth(),
+            )
+            Box(
+                modifier = Modifier
+                    .background(sitePalette.brand.background)
+                    .height(15.px)
+                    .opacity(.9)
+                    .fillMaxWidth(),
+            )
+            Box(
+                modifier = Modifier
+                    .background(sitePalette.brand.background)
+                    .height(15.px)
+                    .opacity(1)
+                    .fillMaxWidth(),
+            )
+        }
+
+    }
+}
+

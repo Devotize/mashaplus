@@ -20,6 +20,7 @@ class SitePalette(
     class Brand(
         val primary: Color,
         val accent: Color,
+        val background: Color,
     )
 }
 
@@ -30,6 +31,7 @@ object SitePalettes {
         brand = SitePalette.Brand(
             primary = Color.rgb(0x3C83EF),
             accent = DesignAccent,
+            background = DesignBackgroundLight
         )
     )
     val dark = SitePalette(
@@ -38,6 +40,7 @@ object SitePalettes {
         brand = SitePalette.Brand(
             primary = Color.rgb(0x3C83EF),
             accent = DesignAccent,
+            background = DesignBackgroundDark,
         )
     )
 }
@@ -60,3 +63,4 @@ fun initTheme(ctx: InitSilkContext) {
 val DesignBackgroundDark = Color.rgb(0x1c1829)
 val DesignAccent = Color.rgb(0x5bf6f6)
 val DesignBackgroundLight = Color.rgb(0xededed)
+val DesignLightPurple = Color.rgb(0x5d5087)

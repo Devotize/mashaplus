@@ -2,6 +2,9 @@ package com.sychev.mashaplus.components.layouts
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import com.sychev.mashaplus.components.sections.Footer
+import com.sychev.mashaplus.components.sections.NavHeader
+import com.sychev.mashaplus.toSitePalette
 import com.varabyte.kobweb.compose.dom.svg.*
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -18,16 +21,10 @@ import kotlinx.browser.document
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.fr
 import org.jetbrains.compose.web.css.percent
-import com.sychev.mashaplus.components.sections.Footer
-import com.sychev.mashaplus.components.sections.NavHeader
-import com.sychev.mashaplus.toSitePalette
-import com.varabyte.kobweb.compose.ui.graphics.Color
-import com.varabyte.kobweb.silk.components.graphics.Image
-import org.jetbrains.compose.web.css.px
 
 val PageContentStyle by ComponentStyle {
     base { Modifier.fillMaxSize() }
-    Breakpoint.MD { Modifier.maxWidth(60.cssRem) }
+    Breakpoint.MD { Modifier.fillMaxSize() }
 }
 
 // NOTE: This is a fun little graphic that showcases what you can do with SVG. However, this probably does not make
