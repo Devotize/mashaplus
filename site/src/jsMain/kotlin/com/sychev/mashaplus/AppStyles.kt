@@ -40,15 +40,28 @@ fun initSiteStyles(ctx: InitSilkContext) {
 
 val HeadlineTextStyle by ComponentStyle.base {
     Modifier
-        .fontSize(3.cssRem)
-        .textAlign(TextAlign.Start)
+        .fontSize(1.8.cssRem)
+        .textAlign(TextAlign.Center)
         .lineHeight(1.2) //1.5x doesn't look as good on very large text
 }
 
 val SubheadlineTextStyle by ComponentStyle.base {
     Modifier
         .fontSize(1.cssRem)
+        .textAlign(TextAlign.Center)
+        .color(colorMode.toPalette().color.toRgb().copyf(alpha = 0.8f))
+}
+
+val ModalTitleTextStyle by ComponentStyle.base {
+    Modifier
+        .fontSize(1.1.cssRem)
         .textAlign(TextAlign.Start)
+}
+
+val ModalDescriptionTextStyle by ComponentStyle.base {
+    Modifier
+        .fontSize(0.9.cssRem)
+        .textAlign(TextAlign.Center)
         .color(colorMode.toPalette().color.toRgb().copyf(alpha = 0.8f))
 }
 

@@ -2,7 +2,6 @@ package com.sychev.mashaplus.components.layouts
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import com.sychev.mashaplus.components.sections.Footer
 import com.sychev.mashaplus.components.sections.NavHeader
 import com.sychev.mashaplus.toSitePalette
 import com.varabyte.kobweb.compose.dom.svg.*
@@ -99,6 +98,5 @@ fun PageLayout(title: String, content: @Composable ColumnScope.() -> Unit) {
         }
         // Associate the footer with the row that will get pushed off the bottom of the page if it can't fit.
         NavHeader()
-        Footer(Modifier.fillMaxWidth().gridRow(2))
     }
 }
