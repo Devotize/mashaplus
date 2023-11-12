@@ -45,6 +45,13 @@ val HeadlineTextStyle by ComponentStyle.base {
         .lineHeight(1.2) //1.5x doesn't look as good on very large text
 }
 
+val Headline2TextStyle by ComponentStyle.base {
+    Modifier
+        .fontSize(1.6.cssRem)
+        .textAlign(TextAlign.Start)
+        .lineHeight(1.1) //1.5x doesn't look as good on very large text
+}
+
 val SubheadlineTextStyle by ComponentStyle.base {
     Modifier
         .fontSize(1.cssRem)
@@ -58,10 +65,17 @@ val ModalTitleTextStyle by ComponentStyle.base {
         .textAlign(TextAlign.Start)
 }
 
-val ModalDescriptionTextStyle by ComponentStyle.base {
+val ModalDescriptionTextStyleCentered by ComponentStyle.base {
     Modifier
         .fontSize(0.9.cssRem)
         .textAlign(TextAlign.Center)
+        .color(colorMode.toPalette().color.toRgb().copyf(alpha = 0.8f))
+}
+
+val ModalDescriptionTextStyle by ComponentStyle.base {
+    Modifier
+        .fontSize(0.9.cssRem)
+        .textAlign(TextAlign.Start)
         .color(colorMode.toPalette().color.toRgb().copyf(alpha = 0.8f))
 }
 
