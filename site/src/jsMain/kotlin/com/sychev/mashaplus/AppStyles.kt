@@ -49,7 +49,14 @@ val Headline2TextStyle by ComponentStyle.base {
     Modifier
         .fontSize(1.6.cssRem)
         .textAlign(TextAlign.Start)
-        .lineHeight(1.1) //1.5x doesn't look as good on very large text
+        .lineHeight(1.1)
+}
+
+val ButtonTextStyle by ComponentStyle.base {
+    Modifier
+        .fontSize(1.1.cssRem)
+        .textAlign(TextAlign.Start)
+        .lineHeight(0.9)
 }
 
 val SubheadlineTextStyle by ComponentStyle.base {
@@ -85,4 +92,11 @@ val CircleButtonVariant by ButtonStyle.addVariantBase {
 
 val UncoloredButtonVariant by ButtonStyle.addVariantBase {
     Modifier.setVariable(ButtonVars.BackgroundDefaultColor, Colors.Transparent)
+}
+
+val DefaultButtonVariant by ButtonStyle.addVariantBase {
+    Modifier
+        .padding(leftRight = MediumPadding, topBottom = XSmallPadding)
+        .lineHeight(1.5)
+        .backgroundColor(DesignSurfaceDark)
 }

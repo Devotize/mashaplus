@@ -7,6 +7,7 @@ import com.sychev.mashaplus.components.widgets.Card
 import com.sychev.mashaplus.components.widgets.Divider
 import com.sychev.mashaplus.utils.*
 import com.varabyte.kobweb.compose.css.ObjectFit
+import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -19,6 +20,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.animation.Keyframes
 import com.varabyte.kobweb.silk.components.animation.toAnimation
+import com.varabyte.kobweb.silk.components.forms.ButtonStyle
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.icons.mdi.MdiLink
 import com.varabyte.kobweb.silk.components.navigation.Link
@@ -31,6 +33,7 @@ import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.dom.Button
 import org.jetbrains.compose.web.dom.Div
 import kotlin.time.Duration.Companion.seconds
 
@@ -247,6 +250,39 @@ fun HomePage() {
                                         .color(palette.brand.text)
                                 )
                             }
+                        }
+                        Box(Modifier.height(XXLargePadding))
+                    }
+                    Column(modifier = Modifier.fillMaxWidth().backgroundColor(palette.brand.background)) {
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            Spacer()
+                            Div(HeadlineTextStyle.toAttrs()) {
+                                SpanText(
+                                    "Остались вопросы?",
+                                    modifier = Modifier
+                                        .color(palette.brand.text)
+                                        .fadeInAnimation()
+                                )
+                            }
+                            Spacer()
+                        }
+                        Box(Modifier.height(MediumPadding))
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            Spacer()
+                            Link("https://vk.com/masha_plus_band?w=app6013442_-218638803%2523form_id%253D1") {
+                                Button(ButtonStyle.toAttrs(DefaultButtonVariant)) {
+                                    Div(ButtonTextStyle.toAttrs()) {
+                                        SpanText(
+                                            "Оставить заявку",
+                                            modifier = Modifier
+                                                .color(palette.brand.text)
+                                                .fillMaxWidth()
+                                                .textAlign(TextAlign.Center)
+                                        )
+                                    }
+                                }
+                            }
+                            Spacer()
                         }
                     }
                 }

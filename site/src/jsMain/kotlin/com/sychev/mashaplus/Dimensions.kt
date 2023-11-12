@@ -6,7 +6,7 @@ import org.jetbrains.compose.web.css.px
 /**
  * 8.px
  */
-val XXSmallPadding = 12.px
+val XXSmallPadding = 8.px
 
 /**
  * 12.px
