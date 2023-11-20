@@ -104,11 +104,6 @@ enum class SideMenuState {
 @Composable
 fun NavHeader() {
     Row(NavHeaderStyle.toModifier(), verticalAlignment = Alignment.CenterVertically) {
-//        Link("https://kobweb.varabyte.com") {
-//            // Block display overrides inline display of the <img> tag, so it calculates centering better
-//            Image("/kobweb-logo.png", "Kobweb Logo", Modifier.height(2.cssRem).display(DisplayStyle.Block))
-//        } //TODO use as example for vk page link
-
         Row(
             Modifier
                 .fontSize(1.5.cssRem)
@@ -126,8 +121,6 @@ fun NavHeader() {
                     onAnimationEnd = { if (menuState == SideMenuState.CLOSING) menuState = SideMenuState.CLOSED }
                 )
             }
-
-            HamburgerButton(onClick = { menuState = SideMenuState.OPEN })
             ColorModeButton()
         }
 

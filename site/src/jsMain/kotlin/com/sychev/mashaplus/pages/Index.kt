@@ -118,7 +118,7 @@ fun HomePage() {
                             modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = XLargePadding)
                                 .fadeInAnimation()
                         ) {
-                            VideoVK("https://vk.com/video_ext.php?oid=-218638803&id=456239071&hd=2")
+                            VideoYT("https://www.youtube.com/embed/_c2B9DN_khg?si=eVhKkAczzjP_Afsm")
                         }
                         Box(Modifier.height((XXLargePadding + XSmallPadding) * 2))
                         Div(HeadlineTextStyle.toAttrs()) {
@@ -133,7 +133,7 @@ fun HomePage() {
                             modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = XLargePadding)
                                 .fadeInAnimation()
                         ) {
-                            VideoVK("https://vk.com/video_ext.php?oid=-174061350&id=456292768&hd=2")
+                            VideoYT("https://www.youtube.com/embed/aEh4p6dUbvU?si=sZIsdey5lwHZ-rBx")
                         }
                         Box(Modifier.height(XXLargePadding + XSmallPadding))
                     }
@@ -178,7 +178,7 @@ fun HomePage() {
                         )
                         Div(Headline2TextStyle.toAttrs()) {
                             SpanText(
-                                "Идейальный выпускной",
+                                "Идеальный выпускной",
                                 modifier = Modifier
                                     .color(palette.brand.text)
                                     .padding(leftRight = LargePadding)
@@ -191,12 +191,7 @@ fun HomePage() {
                         ) {
                             Div(ModalDescriptionTextStyle.toAttrs()) {
                                 SpanText(
-                                    "Последний звонок, последний урок, вручение аттестатов, а что же потом? \n" +
-                                            "А потом танцы с одноклассниками до утра, любимые песни известных исполнителей и самая невероятная ночь твоей жизни! \n" +
-                                            "Что же для этого нужно?\n" +
-                                            "1. Ведущий, которой найдёт подход к каждому.\n" +
-                                            "2. Диджей, знающий, когда нужно поплакать, а когда устроить жаркие танцы.\n" +
-                                            "3. И, разумеется, вокалисты, которые знают все современные хиты и предпочтения выпускников и их родителей.",
+                                    "Последний звонок, последний урок, вручение аттестатов... Наша команда готова сделать ваш выпускной неповторимым. Особенный ведущий, эмоциональный диджей и талантливые вокалисты создадут вечер, который запомнится на всю жизнь. Доверьтесь нам и создайте самую невероятную ночь вашего выпускного!",
                                     modifier = Modifier
                                         .color(palette.brand.text)
                                 )
@@ -285,6 +280,43 @@ fun HomePage() {
                             Spacer()
                         }
                     }
+                    Box(Modifier.height(MediumPadding))
+                    Column(modifier = Modifier.fillMaxWidth().backgroundColor(palette.brand.surface)) {
+                        Box(Modifier.height(MediumPadding))
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            Spacer()
+                            Div(SubheadlineTextStyle.toAttrs()) {
+                                SpanText(
+                                    "Музыкальный проект \"Маша+\"",
+                                    modifier = Modifier
+                                        .color(palette.brand.text)
+                                        .fadeInAnimation()
+                                )
+                            }
+                            Spacer()
+                        }
+                        Box(Modifier.height(MediumPadding))
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            Spacer()
+                            Link("https://vk.com/masha_plus_band") {
+                                Image(
+                                    "/vk_logo.png",
+                                    "",
+                                    LogoStyleSmall
+                                        .toModifier(),
+                                )
+                            }
+                            Box(Modifier.width(XXSmallPadding))
+                            Image(
+                                "/inst_logo.png",
+                                "",
+                                LogoStyleSmall
+                                    .toModifier(),
+                            )
+                            Spacer()
+                        }
+                        Box(Modifier.height(MediumPadding))
+                    }
                 }
             }
         }
@@ -312,7 +344,11 @@ val MainPhotoSlideInAnim by Keyframes {
 }
 
 val LogoStyle by ComponentStyle {
-    base { Modifier.width(9.cssRem) }
+    base { Modifier.width(11.cssRem) }
+}
+
+val LogoStyleSmall by ComponentStyle {
+    base { Modifier.width(2.cssRem) }
 }
 
 private val MainPhotoHeightBase = 320.px
@@ -397,7 +433,8 @@ private fun ImageHeaderWithLogo() {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .align(Alignment.BottomCenter).stubAnimation(),
+                .align(Alignment.BottomCenter)
+                .zIndex(2f),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
@@ -414,7 +451,6 @@ private fun ImageHeaderWithLogo() {
                         .textShadow(offsetY = 1.px, offsetX = 1.px, blurRadius = 1.px, color = Colors.Black)
                 )
             }
-            Box(modifier = Modifier.height(0.5.cssRem))
         }
 
     }
