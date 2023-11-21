@@ -4,6 +4,16 @@ import org.jetbrains.compose.web.css.px
 
 
 /**
+ * 2.px
+ */
+val XXXXSmallPadding = 4.px
+
+/**
+ * 4.px
+ */
+val XXXSmallPadding = 4.px
+
+/**
  * 8.px
  */
 val XXSmallPadding = 8.px

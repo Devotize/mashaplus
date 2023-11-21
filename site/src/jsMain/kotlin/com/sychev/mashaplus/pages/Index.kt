@@ -5,6 +5,7 @@ import com.sychev.mashaplus.*
 import com.sychev.mashaplus.components.layouts.PageLayout
 import com.sychev.mashaplus.components.widgets.Card
 import com.sychev.mashaplus.components.widgets.Divider
+import com.sychev.mashaplus.components.widgets.Slider
 import com.sychev.mashaplus.utils.*
 import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.TextAlign
@@ -198,6 +199,16 @@ fun HomePage() {
                             }
                         }
                         Box(Modifier.height(XXLargePadding))
+                        Slider(
+                            items = listOf(
+                                "/main_photo_1.png",
+                                "/main_photo_2.png",
+                                "/main_photo_3.png",
+                            )
+                        ) {
+                            Image(it, modifier = SliderPhotoStyle.toModifier())
+                        }
+                        Box(Modifier.height(XXLargePadding))
                         Row(modifier = Modifier.fillMaxWidth()) {
                             Spacer()
                             Div(HeadlineTextStyle.toAttrs()) {
@@ -353,6 +364,8 @@ val LogoStyleSmall by ComponentStyle {
 
 private val MainPhotoHeightBase = 320.px
 private val MainPhotoHeightMD = 660.px
+private val SliderPhotoHeightBase = 280.px
+private val SliderPhotoHeightMD = 620.px
 
 val MainPhotoStyle by ComponentStyle {
     base { Modifier.fillMaxWidth().height(MainPhotoHeightBase).objectFit(ObjectFit.Cover) }
@@ -362,6 +375,11 @@ val MainPhotoStyle by ComponentStyle {
 val BottomPhotoGradientStyle by ComponentStyle {
     base { Modifier.fillMaxWidth().height(MainPhotoHeightBase).objectFit(ObjectFit.Fill) }
     Breakpoint.MD { Modifier.fillMaxWidth().height(MainPhotoHeightMD).objectFit(ObjectFit.Fill) }
+}
+
+val SliderPhotoStyle by ComponentStyle {
+    base { Modifier.fillMaxWidth().height(SliderPhotoHeightBase).objectFit(ObjectFit.Cover) }
+    Breakpoint.MD { Modifier.fillMaxWidth().height(SliderPhotoHeightMD).objectFit(ObjectFit.Cover) }
 }
 
 private val mainPhotos = listOf(
