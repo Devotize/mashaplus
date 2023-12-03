@@ -58,7 +58,9 @@ private fun MenuItems() {
 private fun ColorModeButton() {
     var colorMode by ColorMode.currentState
     IconButton(onClick = { colorMode = colorMode.opposite }) {
-        if (colorMode.isLight) MoonIcon(Modifier.color(Color.white)) else SunIcon((Modifier.color(Color.white)))
+        if (colorMode.isLight) MoonIcon(Modifier.color(Color.white).zIndex(2)) else SunIcon(
+            (Modifier.color(Color.white).zIndex(2))
+        )
     }
     Tooltip(ElementTarget.PreviousSibling, "Toggle color mode", placement = PopupPlacement.BottomRight)
 }
@@ -125,7 +127,6 @@ fun NavHeader() {
         }
 
         Row(Modifier.gap(1.5.cssRem).displayIfAtLeast(Breakpoint.MD), verticalAlignment = Alignment.CenterVertically) {
-            MenuItems()
             ColorModeButton()
         }
     }
