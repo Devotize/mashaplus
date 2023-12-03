@@ -61,46 +61,10 @@ fun HomePage() {
                     val palette = ColorMode.current.toSitePalette()
                     ImageHeaderWithLogo()
                     Column(modifier = Modifier.padding(XXSmallPadding).fillMaxWidth()) {
-                        FeaturesCardsViews(modifier = Modifier.fillMaxWidth())
+                        FeaturesCardsSection(modifier = Modifier.fillMaxWidth())
                         Divider(width = 100.percent)
                         Box(Modifier.height(XXLargePadding))
-                        Row(modifier = Modifier.fillMaxWidth()) {
-                            Spacer()
-                            Div(HeadlineTextStyle.toAttrs()) {
-                                SpanText(
-                                    "Коллектив молодых, ярких вокалистов",
-                                    modifier = Modifier
-                                        .color(palette.brand.text)
-                                        .align(Alignment.CenterVertically)
-                                )
-                            }
-                            Spacer()
-                        }
-                        Box(
-                            modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = XLargePadding)
-                                .fadeInAnimation()
-                        ) {
-                            VideoYT("https://www.youtube.com/embed/_c2B9DN_khg?si=eVhKkAczzjP_Afsm")
-                        }
-                        Box(Modifier.height((XXLargePadding + XSmallPadding) * 2))
-                        Row(modifier = Modifier.fillMaxWidth()) {
-                            Spacer()
-                            Div(HeadlineTextStyle.toAttrs()) {
-                                SpanText(
-                                    "Мы можем устроить любой праздник",
-                                    modifier = Modifier
-                                        .color(palette.brand.text)
-                                        .align(Alignment.CenterVertically)
-                                )
-                            }
-                            Spacer()
-                        }
-                        Box(
-                            modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = XLargePadding)
-                                .fadeInAnimation()
-                        ) {
-                            VideoYT("https://www.youtube.com/embed/aEh4p6dUbvU?si=sZIsdey5lwHZ-rBx")
-                        }
+                        VideosSection()
                         Box(Modifier.height(XXLargePadding + XSmallPadding))
                     }
                     Box(modifier = Modifier.fillMaxWidth()) {
@@ -111,8 +75,33 @@ fun HomePage() {
                                 .toModifier()
                                 .fadeInAnimation(),
                         )
-                        Box(modifier = Modifier.padding(LargePadding).align(Alignment.TopStart)) {
+                        Box(
+                            modifier = Modifier.displayUntil(Breakpoint.MD).padding(LargePadding)
+                                .align(Alignment.TopStart)
+                        ) {
                             Div(ModalDescriptionTextStyle.toAttrs()) {
+                                SpanText(
+                                    "Яркость, блеск и целое музыкальное представление для вас и ваших гостей. Два блока — мировые хиты всех времен и любимые песни 90-ых в новой аранжировке от наших вокалистов и музыкантов, энергичные танцы и шикарные костюмы — вам точно нужно это прочувствовать!",
+                                    modifier = Modifier
+                                        .color(palette.brand.greyText)
+                                        .opacity(.8f)
+                                        .fadeInAnimation()
+                                        .textShadow(
+                                            offsetY = .5.px,
+                                            offsetX = .5.px,
+                                            blurRadius = 1.px,
+                                            color = Colors.White
+                                        )
+                                )
+                            }
+                        }
+                        Box(
+                            modifier = Modifier.displayIfAtLeast(Breakpoint.MD)
+                                .width(820.px)
+                                .padding(LargePadding).align(Alignment.TopStart)
+                                .align(Alignment.BottomCenter)
+                        ) {
+                            Div(ModalTitleTextStyle.toAttrs()) {
                                 SpanText(
                                     "Яркость, блеск и целое музыкальное представление для вас и ваших гостей. Два блока — мировые хиты всех времен и любимые песни 90-ых в новой аранжировке от наших вокалистов и музыкантов, энергичные танцы и шикарные костюмы — вам точно нужно это прочувствовать!",
                                     modifier = Modifier
@@ -573,7 +562,7 @@ private fun ImageHeaderWithLogo() {
 }
 
 @Composable
-private fun FeaturesCardsViews(modifier: Modifier) {
+private fun FeaturesCardsSection(modifier: Modifier) {
     val palette = ColorMode.current.toSitePalette()
     Column(modifier = modifier.displayUntil(Breakpoint.MD)) {
         Card(modifier = Modifier.width(245.px).slideRightAnimation()) {
@@ -674,5 +663,113 @@ private fun FeaturesCardsViews(modifier: Modifier) {
     Box(Modifier.height(XLargePadding))
 }
 
-
+@Composable
+fun VideosSection() {
+    val palette = ColorMode.current.toSitePalette()
+    Column(modifier = Modifier.fillMaxWidth().displayUntil(Breakpoint.MD)) {
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Spacer()
+            Div(HeadlineTextStyle.toAttrs()) {
+                SpanText(
+                    "Коллектив молодых, ярких вокалистов",
+                    modifier = Modifier
+                        .color(palette.brand.text)
+                        .align(Alignment.CenterVertically)
+                )
+            }
+            Spacer()
+        }
+        Box(
+            modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = XLargePadding)
+                .fadeInAnimation()
+        ) {
+            VideoYT("https://www.youtube.com/embed/_c2B9DN_khg?si=eVhKkAczzjP_Afsm")
+        }
+        Box(Modifier.height((XXLargePadding + XSmallPadding) * 2))
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Spacer()
+            Div(HeadlineTextStyle.toAttrs()) {
+                SpanText(
+                    "Мы можем устроить любой праздник",
+                    modifier = Modifier
+                        .color(palette.brand.text)
+                        .align(Alignment.CenterVertically)
+                )
+            }
+            Spacer()
+        }
+        Box(
+            modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = XLargePadding)
+                .fadeInAnimation()
+        ) {
+            VideoYT("https://www.youtube.com/embed/aEh4p6dUbvU?si=sZIsdey5lwHZ-rBx")
+        }
+    }
+    //Breakpoint.MD
+    Column(modifier = Modifier.fillMaxWidth().displayIfAtLeast(Breakpoint.MD)) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column {
+                Div(HeadlineTextStyle.toAttrs()) {
+                    SpanText(
+                        "Коллектив молодых, ярких вокалистов",
+                        modifier = Modifier
+                            .color(palette.brand.text)
+                            .align(Alignment.CenterHorizontally)
+                    )
+                }
+                Box(Modifier.height(LargePadding))
+                Div(Headline2TextStyle.toAttrs()) {
+                    SpanText(
+                        "Концерный формат выступлений",
+                        modifier = Modifier
+                            .color(palette.brand.text)
+                            .align(Alignment.CenterHorizontally)
+                    )
+                }
+            }
+            Box(
+                modifier = Modifier.align(Alignment.CenterVertically).padding(top = XLargePadding)
+                    .fadeInAnimation()
+            ) {
+                VideoYT("https://www.youtube.com/embed/_c2B9DN_khg?si=eVhKkAczzjP_Afsm")
+            }
+        }
+        Box(Modifier.height(XLargePadding))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier.align(Alignment.CenterVertically).padding(top = XLargePadding)
+                    .fadeInAnimation()
+            ) {
+                VideoYT("https://www.youtube.com/embed/aEh4p6dUbvU?si=sZIsdey5lwHZ-rBx")
+            }
+            Column {
+                Div(HeadlineTextStyle.toAttrs()) {
+                    SpanText(
+                        "Мы можем устроить любой праздник",
+                        modifier = Modifier
+                            .color(palette.brand.text)
+                            .align(Alignment.CenterHorizontally)
+                    )
+                }
+                Box(Modifier.height(LargePadding))
+                Div(Headline2TextStyle.toAttrs()) {
+                    SpanText(
+                        "Широкий репертуар: от лаунжа до современных композиций",
+                        modifier = Modifier
+                            .color(palette.brand.text)
+                            .align(Alignment.CenterHorizontally)
+                    )
+                }
+            }
+        }
+    }
+}
 
