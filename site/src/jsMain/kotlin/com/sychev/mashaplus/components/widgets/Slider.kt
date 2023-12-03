@@ -1,10 +1,7 @@
 package com.sychev.mashaplus.components.widgets
 
 import androidx.compose.runtime.*
-import com.sychev.mashaplus.MediumPadding
-import com.sychev.mashaplus.XXSmallPadding
-import com.sychev.mashaplus.XXXXSmallPadding
-import com.sychev.mashaplus.toSitePalette
+import com.sychev.mashaplus.*
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
@@ -13,12 +10,23 @@ import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.icons.mdi.MdiKeyboardArrowLeft
 import com.varabyte.kobweb.silk.components.icons.mdi.MdiKeyboardArrowRight
+import com.varabyte.kobweb.silk.components.style.ComponentStyle
+import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
+import org.jetbrains.compose.web.css.px
+
+val DotsIndicatorStyle by ComponentStyle {
+    base { Modifier.size(12.px) }
+    Breakpoint.MD { Modifier.size(32.px) }
+}
 
 @Composable
 inline fun <reified T> Slider(
+    modifier: Modifier = Modifier,
     items: List<T>,
     crossinline content: @Composable (T) -> Unit,
 ) {
@@ -28,7 +36,7 @@ inline fun <reified T> Slider(
         //TODO
     }
     key(selectedIndex) {
-        Box {
+        Box(modifier = modifier) {
             items.getOrNull(selectedIndex)?.let {
                 content(it)
             }
@@ -69,15 +77,15 @@ inline fun <reified T> Slider(
                 }
             }
             Row(modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 1.1.cssRem).paddingInline { }) {
-                items.forEachIndexed { index, t ->
+                items.forEachIndexed { index, _ ->
                     val selected = index == selectedIndex
                     Box(
-                        modifier = Modifier
+                        modifier = DotsIndicatorStyle.toModifier()
                             .borderRadius(100.percent, 100.percent)
+                            .border(1.px, style = LineStyle.Solid, color = DesignWhiteText)
                             .background(
-                                if (selected) Colors.Orange else Colors.White
+                                if (selected) Colors.White else Colors.Transparent
                             )
-                            .size(1.1.cssRem)
                             .onClick {
                                 selectedIndex = index
                             }

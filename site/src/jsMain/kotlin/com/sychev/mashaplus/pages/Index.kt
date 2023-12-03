@@ -5,11 +5,13 @@ import com.sychev.mashaplus.*
 import com.sychev.mashaplus.components.layouts.PageLayout
 import com.sychev.mashaplus.components.widgets.Card
 import com.sychev.mashaplus.components.widgets.Divider
-import com.sychev.mashaplus.components.widgets.Slider
+import com.sychev.mashaplus.components.widgets.VocalistWidget
+import com.sychev.mashaplus.models.getFemaleVocalists
+import com.sychev.mashaplus.models.getMaleVocalists
 import com.sychev.mashaplus.utils.*
+import com.varabyte.kobweb.compose.css.BackgroundSize
 import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.TextAlign
-import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
@@ -23,7 +25,6 @@ import com.varabyte.kobweb.silk.components.animation.Keyframes
 import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
 import com.varabyte.kobweb.silk.components.graphics.Image
-import com.varabyte.kobweb.silk.components.icons.mdi.MdiLink
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.style.ComponentStyle
 import com.varabyte.kobweb.silk.components.style.base
@@ -158,6 +159,65 @@ fun HomePage() {
                             }
                         }
                     }
+                    Column(modifier = Modifier.width(100.percent)) {
+                        VocalistWidget("Вокалисты", getMaleVocalists())
+                        Box(Modifier.height(XLargePadding))
+                        VocalistWidget("Вокалистки", getFemaleVocalists())
+                        Box(modifier = Modifier.padding(leftRight = XXLargePadding, top = XSmallPadding)) {
+                            Column(
+                                modifier = Modifier.borderRadius(0.5.cssRem, 0.5.cssRem)
+                                    .border(1.px, LineStyle.Solid, palette.brand.text)
+                            ) {
+                                Box(
+                                    modifier = Modifier.fillMaxWidth()
+                                        .padding(leftRight = LargePadding, top = XSmallPadding)
+                                        .fadeInAnimation()
+                                ) {
+                                    Div(ModalDescriptionTextStyle.toAttrs()) {
+                                        SpanText(
+                                            "У вокалиста есть минимальный комплект оборудования, необходимый для подзвучивания",
+                                            modifier = Modifier
+                                                .color(palette.brand.text)
+                                        )
+                                    }
+                                }
+                                Box(
+                                    modifier = Modifier.fillMaxWidth()
+                                        .padding(
+                                            leftRight = LargePadding,
+                                            top = XSmallPadding,
+                                            bottom = XXXSmallPadding
+                                        )
+                                        .fadeInAnimation()
+                                ) {
+                                    Div(ModalDescriptionTextStyle.toAttrs()) {
+                                        SpanText(
+                                            "Количество блоков оговаривется заранее, возможны любые варианты",
+                                            modifier = Modifier
+                                                .color(palette.brand.text)
+                                        )
+                                    }
+                                }
+                                Box(
+                                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                                        .padding(bottom = XXSmallPadding)
+                                ) {
+                                    Div(Headline2TextStyle.toAttrs()) {
+                                        SpanText(
+                                            "Цена: 10 000₽",
+                                            modifier = Modifier
+                                                .color(palette.brand.text)
+                                                .padding(leftRight = LargePadding)
+                                                .fadeInAnimation()
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    Box(modifier = Modifier.fillMaxWidth().padding(XXSmallPadding)) {
+                        Divider(width = 100.percent)
+                    }
                     Column {
                         Row(modifier = Modifier.fillMaxWidth()) {
                             Spacer()
@@ -199,15 +259,6 @@ fun HomePage() {
                             }
                         }
                         Box(Modifier.height(XXLargePadding))
-                        Slider(
-                            items = listOf(
-                                "/main_photo_1.png",
-                                "/main_photo_2.png",
-                                "/main_photo_3.png",
-                            )
-                        ) {
-                            Image(it, modifier = SliderPhotoStyle.toModifier())
-                        }
                         Box(Modifier.height(XXLargePadding))
                         Row(modifier = Modifier.fillMaxWidth()) {
                             Spacer()
@@ -227,22 +278,20 @@ fun HomePage() {
                             MainPhotoStyle
                                 .toModifier().padding(LargePadding).fadeInAnimation(),
                         )
-                        Div(Headline2TextStyle.toAttrs()) {
+                        Box(modifier = Modifier.align(Alignment.CenterHorizontally)) {
                             Link("https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg") {
-                                Row(modifier = Modifier, verticalAlignment = Alignment.CenterVertically) {
-                                    SpanText(
-                                        "Посмотреть",
-                                        modifier = Modifier
-                                            .color(palette.brand.text)
-                                            .padding(left = LargePadding)
-                                            .textDecorationLine(TextDecorationLine.Underline)
-                                            .fadeInAnimation()
-                                    )
-                                    MdiLink(Modifier.color(palette.brand.text))
+                                Button(ButtonStyle.toAttrs(DefaultButtonVariant)) {
+                                    Div(ButtonTextStyle.toAttrs()) {
+                                        SpanText(
+                                            "Посмотреть репертуар",
+                                            modifier = Modifier
+                                                .color(palette.brand.text)
+                                                .fillMaxWidth()
+                                                .textAlign(TextAlign.Center)
+                                        )
+                                    }
                                 }
-
                             }
-
                         }
                         Box(
                             modifier = Modifier.fillMaxWidth().padding(leftRight = XXLargePadding, top = XSmallPadding)
@@ -364,7 +413,7 @@ val LogoStyleSmall by ComponentStyle {
 
 private val MainPhotoHeightBase = 320.px
 private val MainPhotoHeightMD = 660.px
-private val SliderPhotoHeightBase = 280.px
+private val SliderPhotoHeightBase = 380.px
 private val SliderPhotoHeightMD = 620.px
 
 val MainPhotoStyle by ComponentStyle {
@@ -378,7 +427,13 @@ val BottomPhotoGradientStyle by ComponentStyle {
 }
 
 val SliderPhotoStyle by ComponentStyle {
-    base { Modifier.fillMaxWidth().height(SliderPhotoHeightBase).objectFit(ObjectFit.Cover) }
+    base {
+        Modifier
+            .fillMaxWidth()
+            .height(SliderPhotoHeightBase)
+            .objectFit(ObjectFit.Cover)
+            .backgroundSize(BackgroundSize.Cover)
+    }
     Breakpoint.MD { Modifier.fillMaxWidth().height(SliderPhotoHeightMD).objectFit(ObjectFit.Cover) }
 }
 
