@@ -13,10 +13,7 @@ import com.sychev.mashaplus.utils.*
 import com.varabyte.kobweb.compose.css.BackgroundSize
 import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.TextAlign
-import com.varabyte.kobweb.compose.foundation.layout.Box
-import com.varabyte.kobweb.compose.foundation.layout.Column
-import com.varabyte.kobweb.compose.foundation.layout.Row
-import com.varabyte.kobweb.compose.foundation.layout.Spacer
+import com.varabyte.kobweb.compose.foundation.layout.*
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
@@ -26,6 +23,8 @@ import com.varabyte.kobweb.silk.components.animation.Keyframes
 import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
 import com.varabyte.kobweb.silk.components.graphics.Image
+import com.varabyte.kobweb.silk.components.layout.breakpoint.displayIfAtLeast
+import com.varabyte.kobweb.silk.components.layout.breakpoint.displayUntil
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.style.ComponentStyle
 import com.varabyte.kobweb.silk.components.style.base
@@ -62,60 +61,20 @@ fun HomePage() {
                     val palette = ColorMode.current.toSitePalette()
                     ImageHeaderWithLogo()
                     Column(modifier = Modifier.padding(XXSmallPadding).fillMaxWidth()) {
-                        Card(modifier = Modifier.width(245.px).slideRightAnimation()) {
-                            Div(ModalTitleTextStyle.toAttrs()) {
-                                SpanText(
-                                    "Принцип конструктора",
-                                    modifier = Modifier.color(palette.brand.text)
-                                )
-                            }
-                            Div(ModalDescriptionTextStyleCentered.toAttrs()) {
-                                SpanText(
-                                    "Каждый заказчик сам может выбрать себе исполнителей на свой праздник",
-                                    modifier = Modifier.color(palette.brand.greyText)
-                                )
-                            }
-                        }
-                        Box(modifier = Modifier.height(XXSmallPadding))
-                        Card(modifier = Modifier.width(245.px).slideLeftAnimation().align(Alignment.End)) {
-                            Div(ModalTitleTextStyle.toAttrs()) {
-                                SpanText(
-                                    "Разнообразный состав",
-                                    modifier = Modifier.color(palette.brand.text)
-                                )
-                            }
-                            Div(ModalDescriptionTextStyleCentered.toAttrs()) {
-                                SpanText(
-                                    "В активе музпроекта 13 профессиональных вокалистов и 10 инструменталистов",
-                                    modifier = Modifier.color(palette.brand.greyText)
-                                )
-                            }
-                        }
-                        Box(modifier = Modifier.height(XXSmallPadding))
-                        Card(modifier = Modifier.width(245.px).slideRightAnimation()) {
-                            Div(ModalTitleTextStyle.toAttrs()) {
-                                SpanText(
-                                    "Формат мероприятий",
-                                    modifier = Modifier.color(palette.brand.text)
-                                )
-                            }
-                            Div(ModalDescriptionTextStyleCentered.toAttrs()) {
-                                SpanText(
-                                    "От уютного вечера в ресторане до свадеб и юбилеев, а также выступления на концертных площадках города и за его пределами",
-                                    modifier = Modifier.color(palette.brand.greyText)
-                                )
-                            }
-                        }
-                        Box(Modifier.height(XLargePadding))
+                        FeaturesCardsViews(modifier = Modifier.fillMaxWidth())
                         Divider(width = 100.percent)
                         Box(Modifier.height(XXLargePadding))
-                        Div(HeadlineTextStyle.toAttrs()) {
-                            SpanText(
-                                "Коллектив молодых, ярких вокалистов",
-                                modifier = Modifier
-                                    .color(palette.brand.text)
-                                    .align(Alignment.CenterHorizontally)
-                            )
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            Spacer()
+                            Div(HeadlineTextStyle.toAttrs()) {
+                                SpanText(
+                                    "Коллектив молодых, ярких вокалистов",
+                                    modifier = Modifier
+                                        .color(palette.brand.text)
+                                        .align(Alignment.CenterVertically)
+                                )
+                            }
+                            Spacer()
                         }
                         Box(
                             modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = XLargePadding)
@@ -124,13 +83,17 @@ fun HomePage() {
                             VideoYT("https://www.youtube.com/embed/_c2B9DN_khg?si=eVhKkAczzjP_Afsm")
                         }
                         Box(Modifier.height((XXLargePadding + XSmallPadding) * 2))
-                        Div(HeadlineTextStyle.toAttrs()) {
-                            SpanText(
-                                "Мы можем устроить любой праздник",
-                                modifier = Modifier
-                                    .color(palette.brand.text)
-                                    .align(Alignment.CenterHorizontally)
-                            )
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            Spacer()
+                            Div(HeadlineTextStyle.toAttrs()) {
+                                SpanText(
+                                    "Мы можем устроить любой праздник",
+                                    modifier = Modifier
+                                        .color(palette.brand.text)
+                                        .align(Alignment.CenterVertically)
+                                )
+                            }
+                            Spacer()
                         }
                         Box(
                             modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = XLargePadding)
@@ -156,6 +119,12 @@ fun HomePage() {
                                         .color(palette.brand.greyText)
                                         .opacity(.8f)
                                         .fadeInAnimation()
+                                        .textShadow(
+                                            offsetY = .5.px,
+                                            offsetX = .5.px,
+                                            blurRadius = 1.px,
+                                            color = Colors.White
+                                        )
                                 )
                             }
                         }
@@ -478,13 +447,21 @@ val LogoStyleSmall by ComponentStyle {
 }
 
 private val MainPhotoHeightBase = 320.px
-private val MainPhotoHeightMD = 660.px
+private val MainPhotoHeightMD = 720.px
 private val SliderPhotoHeightBase = 380.px
 private val SliderPhotoHeightMD = 620.px
 
 val MainPhotoStyle by ComponentStyle {
     base { Modifier.fillMaxWidth().height(MainPhotoHeightBase).objectFit(ObjectFit.Cover) }
     Breakpoint.MD { Modifier.fillMaxWidth().height(MainPhotoHeightMD).objectFit(ObjectFit.Cover) }
+}
+
+val SecondaryPhotoStyle by ComponentStyle {
+    base { Modifier.fillMaxWidth().height(MainPhotoHeightBase).objectFit(ObjectFit.Cover) }
+    Breakpoint.MD {
+        Modifier.fillMaxWidth().height(MainPhotoHeightMD).objectFit(ObjectFit.Cover)
+            .padding(leftRight = XXXLargePadding)
+    }
 }
 
 val BottomPhotoGradientStyle by ComponentStyle {
@@ -594,4 +571,108 @@ private fun ImageHeaderWithLogo() {
 
     }
 }
+
+@Composable
+private fun FeaturesCardsViews(modifier: Modifier) {
+    val palette = ColorMode.current.toSitePalette()
+    Column(modifier = modifier.displayUntil(Breakpoint.MD)) {
+        Card(modifier = Modifier.width(245.px).slideRightAnimation()) {
+            Div(ModalTitleTextStyle.toAttrs()) {
+                SpanText(
+                    "Принцип конструктора",
+                    modifier = Modifier.color(palette.brand.text)
+                )
+            }
+            Div(ModalDescriptionTextStyleCentered.toAttrs()) {
+                SpanText(
+                    "Каждый заказчик сам может выбрать себе исполнителей на свой праздник",
+                    modifier = Modifier.color(palette.brand.greyText)
+                )
+            }
+        }
+        Box(modifier = Modifier.height(XXSmallPadding))
+        Card(modifier = Modifier.width(245.px).slideLeftAnimation().align(Alignment.End)) {
+            Div(ModalTitleTextStyle.toAttrs()) {
+                SpanText(
+                    "Разнообразный состав",
+                    modifier = Modifier.color(palette.brand.text)
+                )
+            }
+            Div(ModalDescriptionTextStyleCentered.toAttrs()) {
+                SpanText(
+                    "В активе музпроекта 13 профессиональных вокалистов и 10 инструменталистов",
+                    modifier = Modifier.color(palette.brand.greyText)
+                )
+            }
+        }
+        Box(modifier = Modifier.height(XXSmallPadding))
+        Card(modifier = Modifier.width(245.px).slideRightAnimation()) {
+            Div(ModalTitleTextStyle.toAttrs()) {
+                SpanText(
+                    "Формат мероприятий",
+                    modifier = Modifier.color(palette.brand.text)
+                )
+            }
+            Div(ModalDescriptionTextStyleCentered.toAttrs()) {
+                SpanText(
+                    "От уютного вечера в ресторане до свадеб и юбилеев, а также выступления на концертных площадках города и за его пределами",
+                    modifier = Modifier.color(palette.brand.greyText)
+                )
+            }
+        }
+        Box(Modifier.height(XLargePadding))
+    }
+    //Breakpoint.MD
+    Row(
+        modifier = modifier.displayIfAtLeast(Breakpoint.MD),
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Card(modifier = Modifier.width(245.px).fadeInAnimation()) {
+            Div(ModalTitleTextStyle.toAttrs()) {
+                SpanText(
+                    "Принцип конструктора",
+                    modifier = Modifier.color(palette.brand.text)
+                )
+            }
+            Div(ModalDescriptionTextStyleCentered.toAttrs()) {
+                SpanText(
+                    "Каждый заказчик сам может выбрать себе исполнителей на свой праздник",
+                    modifier = Modifier.color(palette.brand.greyText)
+                )
+            }
+        }
+        Card(modifier = Modifier.width(245.px).fadeInAnimation()) {
+            Div(ModalTitleTextStyle.toAttrs()) {
+                SpanText(
+                    "Разнообразный состав",
+                    modifier = Modifier.color(palette.brand.text)
+                )
+            }
+            Div(ModalDescriptionTextStyleCentered.toAttrs()) {
+                SpanText(
+                    "В активе музпроекта 13 профессиональных вокалистов и 10 инструменталистов",
+                    modifier = Modifier.color(palette.brand.greyText)
+                )
+            }
+        }
+        Card(modifier = Modifier.width(315.px).fadeInAnimation()) {
+            Div(ModalTitleTextStyle.toAttrs()) {
+                SpanText(
+                    "Формат мероприятий",
+                    modifier = Modifier.color(palette.brand.text)
+                )
+            }
+            Div(ModalDescriptionTextStyleCentered.toAttrs()) {
+                SpanText(
+                    "От уютного вечера в ресторане до свадеб и юбилеев, а также выступления на концертных площадках города и за его пределами",
+                    modifier = Modifier.color(palette.brand.greyText)
+                )
+            }
+        }
+    }
+    Box(Modifier.height(XLargePadding))
+}
+
+
 
