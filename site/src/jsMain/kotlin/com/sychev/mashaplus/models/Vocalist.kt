@@ -1,7 +1,7 @@
 package com.sychev.mashaplus.models
 
 data class Vocalist(
-    val name: String,
+    val name: String = "",
     val imgRes: String,
 )
 
@@ -68,5 +68,29 @@ fun getFemaleVocalists() = listOf(
     Vocalist(
         name = "Елена",
         imgRes = "/elena.png"
+    ),
+)
+
+fun getVocalistsCouples() = listOf(
+    Vocalist(
+        imgRes = "/dima_lena.png"
+    ),
+    Vocalist(
+        imgRes = "/alina_ilya.png"
+    ),
+    Vocalist(
+        imgRes = "/two_pretty_gr.png"
+    ),
+    Vocalist(
+        imgRes = "/adnrusha_plus_one.png"
+    ),
+    Vocalist(
+        imgRes = "/dima_lena.png"
+    ),
+    Vocalist(
+        imgRes = "/ulia_sasha.png"
+    ),
+    Vocalist(
+        imgRes = "/sasha_alya.png"
     ),
 )

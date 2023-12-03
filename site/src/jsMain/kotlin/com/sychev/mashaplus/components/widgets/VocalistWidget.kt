@@ -24,23 +24,25 @@ import org.jetbrains.compose.web.dom.Div
 
 @Composable
 fun VocalistWidget(
-    title: String,
+    title: String?,
     vocalists: List<Vocalist>
 ) {
     val palette = ColorMode.current.toSitePalette()
-    Row(modifier = Modifier.fillMaxWidth()) {
-        Spacer()
-        Div(HeadlineTextStyle.toAttrs()) {
-            SpanText(
-                title,
-                modifier = Modifier
-                    .color(palette.brand.text)
-                    .fadeInAnimation()
-            )
+    title?.let {
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Spacer()
+            Div(HeadlineTextStyle.toAttrs()) {
+                SpanText(
+                    title,
+                    modifier = Modifier
+                        .color(palette.brand.text)
+                        .fadeInAnimation()
+                )
+            }
+            Spacer()
         }
-        Spacer()
+        Box(Modifier.height(XXSmallPadding))
     }
-    Box(Modifier.height(XXSmallPadding))
     Slider(
         modifier = Modifier.width(100.percent).padding(leftRight = XXLargePadding),
         items = vocalists

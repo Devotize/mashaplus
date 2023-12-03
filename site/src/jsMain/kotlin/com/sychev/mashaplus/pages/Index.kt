@@ -8,6 +8,7 @@ import com.sychev.mashaplus.components.widgets.Divider
 import com.sychev.mashaplus.components.widgets.VocalistWidget
 import com.sychev.mashaplus.models.getFemaleVocalists
 import com.sychev.mashaplus.models.getMaleVocalists
+import com.sychev.mashaplus.models.getVocalistsCouples
 import com.sychev.mashaplus.utils.*
 import com.varabyte.kobweb.compose.css.BackgroundSize
 import com.varabyte.kobweb.compose.css.ObjectFit
@@ -205,6 +206,71 @@ fun HomePage() {
                                     Div(Headline2TextStyle.toAttrs()) {
                                         SpanText(
                                             "Цена: 10 000₽",
+                                            modifier = Modifier
+                                                .color(palette.brand.text)
+                                                .padding(leftRight = LargePadding)
+                                                .fadeInAnimation()
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    Box(modifier = Modifier.fillMaxWidth().padding(XXSmallPadding)) {
+                        Divider(width = 100.percent)
+                    }
+                    Column(Modifier.fillMaxWidth()) {
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            Spacer()
+                            Div(HeadlineTextStyle.toAttrs()) {
+                                SpanText(
+                                    "Дуэт",
+                                    modifier = Modifier
+                                        .color(palette.brand.text)
+                                        .fadeInAnimation()
+                                )
+                            }
+                            Spacer()
+                        }
+                        Box(
+                            modifier = Modifier.fillMaxWidth().padding(leftRight = XXLargePadding, top = XSmallPadding)
+                                .fadeInAnimation()
+                        ) {
+                            Div(ModalDescriptionTextStyleCentered.toAttrs()) {
+                                SpanText(
+                                    "Огромным приемуществом нашего проекта является взаимозавменяемость",
+                                    modifier = Modifier
+                                        .color(palette.brand.text)
+                                )
+                            }
+                        }
+                        Box(Modifier.height(MediumPadding))
+                        VocalistWidget(null, getVocalistsCouples())
+                        Box(modifier = Modifier.padding(leftRight = XXLargePadding, top = XSmallPadding)) {
+                            Column(
+                                modifier = Modifier.borderRadius(0.5.cssRem, 0.5.cssRem)
+                                    .border(1.px, LineStyle.Solid, palette.brand.text)
+                            ) {
+                                Box(
+                                    modifier = Modifier.fillMaxWidth()
+                                        .padding(leftRight = LargePadding, top = XSmallPadding)
+                                        .fadeInAnimation()
+                                ) {
+                                    Div(ModalDescriptionTextStyle.toAttrs()) {
+                                        SpanText(
+                                            "Есть возможность выбрать репертуар и внешний вид вокалистов специально под ваше мероприятие (заранее)",
+                                            modifier = Modifier
+                                                .color(palette.brand.text)
+                                        )
+                                    }
+                                }
+                                Box(
+                                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                                        .padding(bottom = XXSmallPadding)
+                                ) {
+                                    Div(Headline2TextStyle.toAttrs()) {
+                                        SpanText(
+                                            "Цена: 20 000₽",
                                             modifier = Modifier
                                                 .color(palette.brand.text)
                                                 .padding(leftRight = LargePadding)
