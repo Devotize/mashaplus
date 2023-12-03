@@ -47,3 +47,8 @@ val XXLargePadding = 24.px
  * 64.px
  */
 val XXXLargePadding = 64.px
+
+/**
+ * 128.px
+ */
+val XXXXLargePadding = 128.px

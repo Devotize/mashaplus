@@ -73,19 +73,16 @@ fun getFemaleVocalists() = listOf(
 
 fun getVocalistsCouples() = listOf(
     Vocalist(
-        imgRes = "/dima_lena.png"
+        imgRes = "/alina_ilya.png"
     ),
     Vocalist(
-        imgRes = "/alina_ilya.png"
+        imgRes = "/dima_lena.png"
     ),
     Vocalist(
         imgRes = "/two_pretty_gr.png"
     ),
     Vocalist(
         imgRes = "/adnrusha_plus_one.png"
-    ),
-    Vocalist(
-        imgRes = "/dima_lena.png"
     ),
     Vocalist(
         imgRes = "/ulia_sasha.png"

@@ -119,59 +119,84 @@ fun HomePage() {
                         }
                     }
                     Column(modifier = Modifier.width(100.percent)) {
-                        VocalistWidget("Вокалисты", getMaleVocalists())
-                        Box(Modifier.height(XLargePadding))
-                        VocalistWidget("Вокалистки", getFemaleVocalists())
-                        Box(modifier = Modifier.padding(leftRight = XXLargePadding, top = XSmallPadding)) {
-                            Column(
-                                modifier = Modifier.borderRadius(0.5.cssRem, 0.5.cssRem)
-                                    .border(1.px, LineStyle.Solid, palette.brand.text)
-                            ) {
-                                Box(
-                                    modifier = Modifier.fillMaxWidth()
-                                        .padding(leftRight = LargePadding, top = XSmallPadding)
-                                        .fadeInAnimation()
+                        Column(modifier = Modifier.width(100.percent).displayUntil(Breakpoint.MD)) {
+                            VocalistWidget("Вокалисты", getMaleVocalists())
+                            Box(Modifier.height(XLargePadding))
+                            VocalistWidget("Вокалистки", getFemaleVocalists())
+                        }
+                        Row(
+                            modifier = Modifier.width(100.percent).displayIfAtLeast(Breakpoint.MD),
+                        ) {
+                            Spacer()
+                            VocalistWidget(
+                                "Вокалисты",
+                                getMaleVocalists(),
+                                modifier = Modifier,
+                                sliderModifier = Modifier.width(420.px)
+                            )
+                            Box(Modifier.width(XXXLargePadding))
+                            VocalistWidget(
+                                "Вокалистки",
+                                getFemaleVocalists(),
+                                modifier = Modifier,
+                                sliderModifier = Modifier.width(420.px)
+                            )
+                            Spacer()
+                        }
+                        Row(Modifier.fillMaxWidth()) {
+                            Spacer()
+                            Box(modifier = Modifier.padding(leftRight = XXLargePadding, top = XSmallPadding)) {
+                                Column(
+                                    modifier = Modifier.borderRadius(0.5.cssRem, 0.5.cssRem)
+                                        .border(1.px, LineStyle.Solid, palette.brand.text)
                                 ) {
-                                    Div(ModalDescriptionTextStyle.toAttrs()) {
-                                        SpanText(
-                                            "У вокалиста есть минимальный комплект оборудования, необходимый для подзвучивания",
-                                            modifier = Modifier
-                                                .color(palette.brand.text)
-                                        )
+                                    Box(
+                                        modifier = Modifier.fillMaxWidth()
+                                            .padding(leftRight = LargePadding, top = XSmallPadding)
+                                            .fadeInAnimation()
+                                    ) {
+                                        Div(ModalDescriptionTextStyle.toAttrs()) {
+                                            SpanText(
+                                                "У вокалиста есть минимальный комплект оборудования, необходимый для подзвучивания",
+                                                modifier = Modifier
+                                                    .color(palette.brand.text)
+                                            )
+                                        }
                                     }
-                                }
-                                Box(
-                                    modifier = Modifier.fillMaxWidth()
-                                        .padding(
-                                            leftRight = LargePadding,
-                                            top = XSmallPadding,
-                                            bottom = XXXSmallPadding
-                                        )
-                                        .fadeInAnimation()
-                                ) {
-                                    Div(ModalDescriptionTextStyle.toAttrs()) {
-                                        SpanText(
-                                            "Количество блоков оговаривется заранее, возможны любые варианты",
-                                            modifier = Modifier
-                                                .color(palette.brand.text)
-                                        )
+                                    Box(
+                                        modifier = Modifier.fillMaxWidth()
+                                            .padding(
+                                                leftRight = LargePadding,
+                                                top = XSmallPadding,
+                                                bottom = XXXSmallPadding
+                                            )
+                                            .fadeInAnimation()
+                                    ) {
+                                        Div(ModalDescriptionTextStyle.toAttrs()) {
+                                            SpanText(
+                                                "Количество блоков оговаривется заранее, возможны любые варианты",
+                                                modifier = Modifier
+                                                    .color(palette.brand.text)
+                                            )
+                                        }
                                     }
-                                }
-                                Box(
-                                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                                        .padding(bottom = XXSmallPadding)
-                                ) {
-                                    Div(Headline2TextStyle.toAttrs()) {
-                                        SpanText(
-                                            "Цена: 10 000₽",
-                                            modifier = Modifier
-                                                .color(palette.brand.text)
-                                                .padding(leftRight = LargePadding)
-                                                .fadeInAnimation()
-                                        )
+                                    Box(
+                                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                                            .padding(bottom = XXSmallPadding)
+                                    ) {
+                                        Div(Headline2TextStyle.toAttrs()) {
+                                            SpanText(
+                                                "Цена: 10 000₽",
+                                                modifier = Modifier
+                                                    .color(palette.brand.text)
+                                                    .padding(leftRight = LargePadding)
+                                                    .fadeInAnimation()
+                                            )
+                                        }
                                     }
                                 }
                             }
+                            Spacer()
                         }
                     }
                     Box(modifier = Modifier.fillMaxWidth().padding(XXSmallPadding)) {
@@ -190,59 +215,72 @@ fun HomePage() {
                             }
                             Spacer()
                         }
-                        Box(
-                            modifier = Modifier.fillMaxWidth().padding(leftRight = XXLargePadding, top = XSmallPadding)
-                                .fadeInAnimation()
-                        ) {
-                            Div(ModalDescriptionTextStyleCentered.toAttrs()) {
-                                SpanText(
-                                    "Огромным приемуществом нашего проекта является взаимозавменяемость",
-                                    modifier = Modifier
-                                        .color(palette.brand.text)
-                                )
+                        Row(Modifier.fillMaxWidth()) {
+                            Spacer()
+                            Box(
+                                modifier = Modifier.padding(leftRight = XXLargePadding, top = XSmallPadding)
+                                    .fadeInAnimation()
+                            ) {
+                                Div(ModalDescriptionTextStyleCentered.toAttrs()) {
+                                    SpanText(
+                                        "Огромным приемуществом нашего проекта является взаимозавменяемость",
+                                        modifier = Modifier
+                                            .color(palette.brand.text)
+                                    )
+                                }
                             }
+                            Spacer()
                         }
                         Box(Modifier.height(MediumPadding))
-                        VocalistWidget(null, getVocalistsCouples())
-                        Box(modifier = Modifier.padding(leftRight = XXLargePadding, top = XSmallPadding)) {
-                            Column(
-                                modifier = Modifier.borderRadius(0.5.cssRem, 0.5.cssRem)
-                                    .border(1.px, LineStyle.Solid, palette.brand.text)
-                            ) {
-                                Box(
-                                    modifier = Modifier.fillMaxWidth()
-                                        .padding(leftRight = LargePadding, top = XSmallPadding)
-                                        .fadeInAnimation()
+                        Column(modifier = Modifier.fillMaxWidth().displayUntil(Breakpoint.MD)) {
+                            VocalistWidget(null, getVocalistsCouples())
+                        }
+                        Column(modifier = Modifier.fillMaxWidth().displayIfAtLeast(Breakpoint.MD)) {
+                            VocalistWidget(null, getVocalistsCouples(), sliderModifier = Modifier.width(620.px))
+                        }
+                        Row(Modifier.fillMaxWidth()) {
+                            Spacer()
+                            Box(modifier = Modifier.padding(leftRight = XXLargePadding, top = XSmallPadding)) {
+                                Column(
+                                    modifier = Modifier.borderRadius(0.5.cssRem, 0.5.cssRem)
+                                        .border(1.px, LineStyle.Solid, palette.brand.text)
                                 ) {
-                                    Div(ModalDescriptionTextStyle.toAttrs()) {
-                                        SpanText(
-                                            "Есть возможность выбрать репертуар и внешний вид вокалистов специально под ваше мероприятие (заранее)",
-                                            modifier = Modifier
-                                                .color(palette.brand.text)
-                                        )
+                                    Box(
+                                        modifier = Modifier.fillMaxWidth()
+                                            .padding(leftRight = LargePadding, top = XSmallPadding)
+                                            .fadeInAnimation()
+                                    ) {
+                                        Div(ModalDescriptionTextStyle.toAttrs()) {
+                                            SpanText(
+                                                "Есть возможность выбрать репертуар и внешний вид вокалистов специально под ваше мероприятие (заранее)",
+                                                modifier = Modifier
+                                                    .color(palette.brand.text)
+                                            )
+                                        }
                                     }
-                                }
-                                Box(
-                                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                                        .padding(bottom = XXSmallPadding)
-                                ) {
-                                    Div(Headline2TextStyle.toAttrs()) {
-                                        SpanText(
-                                            "Цена: 20 000₽",
-                                            modifier = Modifier
-                                                .color(palette.brand.text)
-                                                .padding(leftRight = LargePadding)
-                                                .fadeInAnimation()
-                                        )
+                                    Box(
+                                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                                            .padding(bottom = XXSmallPadding)
+                                    ) {
+                                        Div(Headline2TextStyle.toAttrs()) {
+                                            SpanText(
+                                                "Цена: 20 000₽",
+                                                modifier = Modifier
+                                                    .color(palette.brand.text)
+                                                    .padding(leftRight = LargePadding)
+                                                    .fadeInAnimation()
+                                            )
+                                        }
                                     }
                                 }
                             }
+                            Spacer()
                         }
                     }
                     Box(modifier = Modifier.fillMaxWidth().padding(XXSmallPadding)) {
                         Divider(width = 100.percent)
                     }
-                    Column {
+                    Column(modifier = EventsContainerStyle.toModifier()) {
                         Row(modifier = Modifier.fillMaxWidth()) {
                             Spacer()
                             Div(HeadlineTextStyle.toAttrs()) {
@@ -259,19 +297,18 @@ fun HomePage() {
                             "/club_dance.png",
                             "Main photo",
                             MainPhotoStyle
-                                .toModifier().padding(LargePadding).fadeInAnimation(),
+                                .toModifier().padding(topBottom = LargePadding).fadeInAnimation(),
                         )
                         Div(Headline2TextStyle.toAttrs()) {
                             SpanText(
                                 "Идеальный выпускной",
                                 modifier = Modifier
                                     .color(palette.brand.text)
-                                    .padding(leftRight = LargePadding)
                                     .fadeInAnimation()
                             )
                         }
                         Box(
-                            modifier = Modifier.fillMaxWidth().padding(leftRight = XXLargePadding, top = XSmallPadding)
+                            modifier = Modifier.fillMaxWidth().padding(top = XSmallPadding)
                                 .fadeInAnimation()
                         ) {
                             Div(ModalDescriptionTextStyle.toAttrs()) {
@@ -300,7 +337,7 @@ fun HomePage() {
                             "/repertoire.png",
                             "Main photo",
                             MainPhotoStyle
-                                .toModifier().padding(LargePadding).fadeInAnimation(),
+                                .toModifier().padding(topBottom = LargePadding).fadeInAnimation(),
                         )
                         Box(modifier = Modifier.align(Alignment.CenterHorizontally)) {
                             Link("https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg") {
@@ -318,7 +355,7 @@ fun HomePage() {
                             }
                         }
                         Box(
-                            modifier = Modifier.fillMaxWidth().padding(leftRight = XXLargePadding, top = XSmallPadding)
+                            modifier = Modifier.fillMaxWidth().padding(top = XSmallPadding)
                                 .fadeInAnimation()
                         ) {
                             Div(ModalDescriptionTextStyle.toAttrs()) {
@@ -405,6 +442,11 @@ fun HomePage() {
             }
         }
     }
+}
+
+val EventsContainerStyle by ComponentStyle {
+    base { Modifier.padding(leftRight = LargePadding) }
+    Breakpoint.MD { Modifier.padding(leftRight = XXXXLargePadding) }
 }
 
 val LogoSlideInAnim by Keyframes {
