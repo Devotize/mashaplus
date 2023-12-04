@@ -1,13 +1,17 @@
 package com.sychev.mashaplus.components.sections
 
 import androidx.compose.runtime.*
+import com.sychev.mashaplus.NumberHeadlineTextStyle
 import com.sychev.mashaplus.components.widgets.IconButton
 import com.sychev.mashaplus.toSitePalette
+import com.sychev.mashaplus.utils.fadeInAnimation
 import com.sychev.mashaplus.utils.stubAnimation
 import com.varabyte.kobweb.compose.css.functions.clamp
 import com.varabyte.kobweb.compose.dom.ElementTarget
+import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
+import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
@@ -30,9 +34,12 @@ import com.varabyte.kobweb.silk.components.overlay.Tooltip
 import com.varabyte.kobweb.silk.components.style.ComponentStyle
 import com.varabyte.kobweb.silk.components.style.base
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.components.style.toAttrs
 import com.varabyte.kobweb.silk.components.style.toModifier
+import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.dom.Div
 
 val NavHeaderStyle by ComponentStyle.base {
     Modifier.fillMaxWidth().padding(1.cssRem)
@@ -105,9 +112,11 @@ enum class SideMenuState {
 
 @Composable
 fun NavHeader() {
-    Row(NavHeaderStyle.toModifier(), verticalAlignment = Alignment.CenterVertically) {
+    val palette = ColorMode.current.toSitePalette()
+    Row(NavHeaderStyle.toModifier().fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         Row(
             Modifier
+                .fillMaxWidth()
                 .fontSize(1.5.cssRem)
                 .gap(1.cssRem)
                 .displayUntil(Breakpoint.MD)
@@ -123,11 +132,39 @@ fun NavHeader() {
                     onAnimationEnd = { if (menuState == SideMenuState.CLOSING) menuState = SideMenuState.CLOSED }
                 )
             }
-            ColorModeButton()
+            Row(
+                Modifier.width(100.percent),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                ColorModeButton()
+                Spacer()
+                Div(NumberHeadlineTextStyle.toAttrs()) {
+                    SpanText(
+                        "8 (931) 951-20-00",
+                        modifier = Modifier
+                            .color(palette.brand.whiteText)
+                            .fadeInAnimation()
+                    )
+                }
+            }
+
         }
 
-        Row(Modifier.gap(1.5.cssRem).displayIfAtLeast(Breakpoint.MD), verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            Modifier.gap(1.5.cssRem).displayIfAtLeast(Breakpoint.MD),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
             ColorModeButton()
+            Div(NumberHeadlineTextStyle.toAttrs()) {
+                SpanText(
+                    "8 (931) 951-20-00",
+                    modifier = Modifier
+                        .color(palette.brand.whiteText)
+                        .fadeInAnimation()
+                )
+            }
         }
     }
 }

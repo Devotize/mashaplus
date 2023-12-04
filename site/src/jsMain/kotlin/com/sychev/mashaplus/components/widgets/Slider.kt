@@ -21,7 +21,7 @@ import org.jetbrains.compose.web.css.px
 
 val DotsIndicatorStyle by ComponentStyle {
     base { Modifier.size(12.px) }
-    Breakpoint.MD { Modifier.size(32.px) }
+    Breakpoint.MD { Modifier.size(18.px) }
 }
 
 @Composable

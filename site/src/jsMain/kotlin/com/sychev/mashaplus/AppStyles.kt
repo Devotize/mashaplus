@@ -1,5 +1,6 @@
 package com.sychev.mashaplus
 
+import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
@@ -10,6 +11,7 @@ import com.varabyte.kobweb.silk.components.layout.DividerStyle
 import com.varabyte.kobweb.silk.components.style.ComponentStyle
 import com.varabyte.kobweb.silk.components.style.addVariantBase
 import com.varabyte.kobweb.silk.components.style.base
+import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.init.InitSilk
 import com.varabyte.kobweb.silk.init.InitSilkContext
 import com.varabyte.kobweb.silk.init.registerStyleBase
@@ -51,6 +53,12 @@ val Headline2TextStyle by ComponentStyle.base {
         .textAlign(TextAlign.Start)
         .lineHeight(1.1)
 }
+val NumberHeadlineTextStyle by ComponentStyle.base {
+    Modifier
+        .fontSize(1.3.cssRem)
+        .textAlign(TextAlign.End)
+        .lineHeight(1.1)
+}
 
 val ButtonTextStyle by ComponentStyle.base {
     Modifier
@@ -59,11 +67,28 @@ val ButtonTextStyle by ComponentStyle.base {
         .lineHeight(0.9)
 }
 
-val SubheadlineTextStyle by ComponentStyle.base {
+val SubheadlineTextStyle by ComponentStyle {
+    base {
+        Modifier
+            .fontSize(1.cssRem)
+            .textAlign(TextAlign.Center)
+            .color(colorMode.toPalette().color.toRgb().copyf(alpha = 0.8f))
+    }
+    Breakpoint.MD {
+        Modifier
+            .fontSize(1.5.cssRem)
+            .textAlign(TextAlign.Center)
+            .color(colorMode.toPalette().color.toRgb().copyf(alpha = 0.8f))
+    }
+
+}
+
+val SubheadlineBoldTextStyle by ComponentStyle.base {
     Modifier
         .fontSize(1.cssRem)
         .textAlign(TextAlign.Center)
         .color(colorMode.toPalette().color.toRgb().copyf(alpha = 0.8f))
+        .fontWeight(FontWeight.Bold)
 }
 
 val ModalTitleTextStyle by ComponentStyle.base {

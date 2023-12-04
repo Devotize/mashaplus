@@ -180,20 +180,7 @@ fun HomePage() {
                                             )
                                         }
                                     }
-                                    Box(
-                                        modifier = Modifier.align(Alignment.CenterHorizontally)
-                                            .padding(bottom = XXSmallPadding)
-                                    ) {
-                                        Div(Headline2TextStyle.toAttrs()) {
-                                            SpanText(
-                                                "Цена: 10 000₽",
-                                                modifier = Modifier
-                                                    .color(palette.brand.text)
-                                                    .padding(leftRight = LargePadding)
-                                                    .fadeInAnimation()
-                                            )
-                                        }
-                                    }
+                                    Box(modifier = Modifier.height(XSmallPadding))
                                 }
                             }
                             Spacer()
@@ -258,20 +245,7 @@ fun HomePage() {
                                             )
                                         }
                                     }
-                                    Box(
-                                        modifier = Modifier.align(Alignment.CenterHorizontally)
-                                            .padding(bottom = XXSmallPadding)
-                                    ) {
-                                        Div(Headline2TextStyle.toAttrs()) {
-                                            SpanText(
-                                                "Цена: 20 000₽",
-                                                modifier = Modifier
-                                                    .color(palette.brand.text)
-                                                    .padding(leftRight = LargePadding)
-                                                    .fadeInAnimation()
-                                            )
-                                        }
-                                    }
+                                    Box(modifier = Modifier.height(XSmallPadding))
                                 }
                             }
                             Spacer()
@@ -346,7 +320,7 @@ fun HomePage() {
                                         SpanText(
                                             "Посмотреть репертуар",
                                             modifier = Modifier
-                                                .color(palette.brand.text)
+                                                .color(palette.brand.whiteText)
                                                 .fillMaxWidth()
                                                 .textAlign(TextAlign.Center)
                                         )
@@ -391,7 +365,7 @@ fun HomePage() {
                                         SpanText(
                                             "Оставить заявку",
                                             modifier = Modifier
-                                                .color(palette.brand.text)
+                                                .color(palette.brand.whiteText)
                                                 .fillMaxWidth()
                                                 .textAlign(TextAlign.Center)
                                         )
@@ -406,7 +380,7 @@ fun HomePage() {
                         Box(Modifier.height(MediumPadding))
                         Row(modifier = Modifier.fillMaxWidth()) {
                             Spacer()
-                            Div(SubheadlineTextStyle.toAttrs()) {
+                            Div(SubheadlineBoldTextStyle.toAttrs()) {
                                 SpanText(
                                     "Музыкальный проект \"Маша+\"",
                                     modifier = Modifier
@@ -420,20 +394,45 @@ fun HomePage() {
                         Row(modifier = Modifier.fillMaxWidth()) {
                             Spacer()
                             Link("https://vk.com/masha_plus_band") {
+                                val imgResVK = if (ColorMode.current.isDark) {
+                                    "/vk_logo.png"
+                                } else {
+                                    "/vk_logo_black.png"
+                                }
                                 Image(
-                                    "/vk_logo.png",
+                                    imgResVK,
                                     "",
                                     LogoStyleSmall
                                         .toModifier(),
                                 )
                             }
                             Box(Modifier.width(XXSmallPadding))
-                            Image(
-                                "/inst_logo.png",
-                                "",
-                                LogoStyleSmall
-                                    .toModifier(),
-                            )
+                            Link("https://instagram.com/masha_plus_band?igshid=OGQ5ZDc2ODk2ZA==") {
+                                val imgResInst = if (ColorMode.current.isDark) {
+                                    "/inst_logo.png"
+                                } else {
+                                    "/inst_logo_black.png"
+                                }
+                                Image(
+                                    imgResInst,
+                                    "",
+                                    LogoStyleSmall
+                                        .toModifier(),
+                                )
+                            }
+                            Spacer()
+                        }
+                        Box(Modifier.height(XXSmallPadding))
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            Spacer()
+                            Div(SubheadlineBoldTextStyle.toAttrs()) {
+                                SpanText(
+                                    "8 (931) 951-20-00",
+                                    modifier = Modifier
+                                        .color(palette.brand.text)
+                                        .fadeInAnimation()
+                                )
+                            }
                             Spacer()
                         }
                         Box(Modifier.height(MediumPadding))
