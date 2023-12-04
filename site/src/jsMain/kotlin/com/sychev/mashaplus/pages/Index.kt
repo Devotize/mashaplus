@@ -630,7 +630,7 @@ private fun FeaturesCardsSection(modifier: Modifier) {
             }
             Div(ModalDescriptionTextStyleCentered.toAttrs()) {
                 SpanText(
-                    "В активе музпроекта 13 профессиональных вокалистов и 10 инструменталистов",
+                    "В активе музпроекта 15 профессиональных вокалистов и 10 инструменталистов",
                     modifier = Modifier.color(palette.brand.greyText)
                 )
             }
@@ -681,7 +681,7 @@ private fun FeaturesCardsSection(modifier: Modifier) {
             }
             Div(ModalDescriptionTextStyleCentered.toAttrs()) {
                 SpanText(
-                    "В активе музпроекта 13 профессиональных вокалистов и 10 инструменталистов",
+                    "В активе музпроекта 15 профессиональных вокалистов и 10 инструменталистов",
                     modifier = Modifier.color(palette.brand.greyText)
                 )
             }
