@@ -19,6 +19,7 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.core.Page
+import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.animation.Keyframes
 import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
@@ -357,7 +358,24 @@ fun HomePage() {
                             Spacer()
                         }
                         Box(Modifier.height(MediumPadding))
-                        Row(modifier = Modifier.fillMaxWidth()) {
+                        Row(modifier = Modifier.fillMaxWidth().displayUntil(Breakpoint.MD)) {
+                            Spacer()
+                            Link("https://api.whatsapp.com/send/?phone=%2B79052629514&text&type=phone_number&app_absent=0") {
+                                Button(ButtonStyle.toAttrs(DefaultButtonVariant)) {
+                                    Div(ButtonTextStyle.toAttrs()) {
+                                        SpanText(
+                                            "Оставить заявку",
+                                            modifier = Modifier
+                                                .color(palette.brand.whiteText)
+                                                .fillMaxWidth()
+                                                .textAlign(TextAlign.Center)
+                                        )
+                                    }
+                                }
+                            }
+                            Spacer()
+                        }
+                        Row(modifier = Modifier.fillMaxWidth().displayIfAtLeast(Breakpoint.MD)) {
                             Spacer()
                             Link("https://vk.com/masha_plus_band?w=app6013442_-218638803%2523form_id%253D1") {
                                 Button(ButtonStyle.toAttrs(DefaultButtonVariant)) {
@@ -425,13 +443,19 @@ fun HomePage() {
                         Box(Modifier.height(XXSmallPadding))
                         Row(modifier = Modifier.fillMaxWidth()) {
                             Spacer()
-                            Div(SubheadlineBoldTextStyle.toAttrs()) {
-                                SpanText(
-                                    "8 (931) 951-20-00",
-                                    modifier = Modifier
-                                        .color(palette.brand.text)
-                                        .fadeInAnimation()
-                                )
+                            Link(
+                                "tel:+79500205701",
+                                openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                                openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE
+                            ) {
+                                Div(SubheadlineBoldTextStyle.toAttrs()) {
+                                    SpanText(
+                                        "8 (931) 951-20-00",
+                                        modifier = Modifier
+                                            .color(palette.brand.text)
+                                            .fadeInAnimation()
+                                    )
+                                }
                             }
                             Spacer()
                         }
