@@ -444,7 +444,7 @@ fun HomePage() {
                         Row(modifier = Modifier.fillMaxWidth()) {
                             Spacer()
                             Link(
-                                "tel:+79500205701",
+                                "tel:+79319512000",
                                 openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
                                 openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE
                             ) {
