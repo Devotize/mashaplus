@@ -211,7 +211,7 @@ fun HomePage() {
                             ) {
                                 Div(ModalDescriptionTextStyleCentered.toAttrs()) {
                                     SpanText(
-                                        "Огромным приемуществом нашего проекта является взаимозавменяемость",
+                                        "Огромным приемуществом нашего проекта является взаимозаменяемость",
                                         modifier = Modifier
                                             .color(palette.brand.text)
                                     )
