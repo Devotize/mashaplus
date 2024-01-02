@@ -1,4 +1,5 @@
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
+import kotlinx.html.link
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -13,7 +14,16 @@ version = "1.0-SNAPSHOT"
 kobweb {
     app {
         index {
+            faviconPath.set("/masha_logo.png")
             description.set("Musical Band")
+            head.add {
+                link(rel = "preconnect", href = "https://fonts.googleapis.com")
+                link(rel = "preconnect", href = "https://fonts.gstatic.com") { attributes["crossorigin"] = "" }
+                link(
+                    href = "https://fonts.googleapis.com/css2?family=Source+Sans+3&display=swap",
+                    rel = "stylesheet"
+                )
+            }
         }
     }
 }

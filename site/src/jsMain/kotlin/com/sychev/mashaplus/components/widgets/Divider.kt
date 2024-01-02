@@ -7,12 +7,12 @@ import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import org.jetbrains.compose.web.css.CSSNumeric
+import org.jetbrains.compose.web.css.CSSLengthOrPercentageValue
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
 
 @Composable
-fun Divider(width: CSSNumeric) {
+fun Divider(width: CSSLengthOrPercentageValue) {
     Box(
         modifier = Modifier
             .width(width)

@@ -54,6 +54,7 @@ fun VideoYT(
         fullLinkSB.append("&mute=1")
         val videoId = sourceEmbedLink.substringAfter("embed/").substringBefore("?")
         fullLinkSB.append("&playlist=$videoId")
+        fullLinkSB.append("&origin=https://https://masha-plus.ru/")
         attr("src", fullLinkSB.toString())
         attr("frameborder", "0")
         attr("allow", "autoplay; encrypted-media; picture-in-picture")
