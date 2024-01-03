@@ -600,7 +600,10 @@ private fun FeaturesTopSection(modifier: Modifier) {
         Box(Modifier.height(XLargePadding))
     }
     // After Breakpoint.MD
-    Row(Modifier.padding(top = XXXXLargePadding, left = XXXXLargePadding * 1.5, right = XLargePadding).fillMaxWidth()) {
+    Row(
+        Modifier.padding(top = XXXXLargePadding, left = XXXXLargePadding * 1.5, right = XLargePadding).fillMaxWidth()
+            .displayIfAtLeast(Breakpoint.MD)
+    ) {
         Box(Modifier.width(660.px)) {
             Div(SectionTitleStyle.toAttrs()) {
                 SpanText(
@@ -769,12 +772,14 @@ private fun VariousEventsSection() {
             }
             Spacer()
         }
+        Box(Modifier.height(LargePadding))
         Image(
             "/club_dance.png",
             "Main photo",
-            MainPhotoStyle
-                .toModifier().padding(topBottom = LargePadding).fadeInAnimation(),
+            SectionPhotoStyle
+                .toModifier().fadeInAnimation(),
         )
+        Box(Modifier.height(LargePadding))
         Div(Headline2TextStyle.toAttrs()) {
             SpanText(
                 "Идеальный выпускной",
@@ -795,8 +800,7 @@ private fun VariousEventsSection() {
                 )
             }
         }
-        Box(Modifier.height(XXLargePadding))
-        Box(Modifier.height(XXLargePadding))
+        Box(Modifier.height(XXLargePadding * 1.5))
         Row(modifier = Modifier.fillMaxWidth()) {
             Spacer()
             Div(HeadlineTextStyle.toAttrs()) {
@@ -809,12 +813,14 @@ private fun VariousEventsSection() {
             }
             Spacer()
         }
+        Box(Modifier.height(LargePadding))
         Image(
             "/repertoire.png",
             "Main photo",
-            MainPhotoStyle
-                .toModifier().padding(topBottom = LargePadding).fadeInAnimation(),
+            SectionPhotoStyle
+                .toModifier().fadeInAnimation(),
         )
+        Box(Modifier.height(LargePadding))
         Box(modifier = Modifier.align(Alignment.CenterHorizontally)) {
             Link("https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg") {
                 Button(ButtonStyle.toAttrs(DefaultButtonVariant)) {
