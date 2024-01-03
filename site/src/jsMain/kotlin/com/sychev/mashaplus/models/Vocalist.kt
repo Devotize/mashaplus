@@ -7,6 +7,10 @@ data class Vocalist(
 
 fun getMaleVocalists() = listOf(
     Vocalist(
+        name = "Андрей Махо",
+        imgRes = "/andrey_maho.png"
+    ),
+    Vocalist(
         name = "Дима Сэ",
         imgRes = "/dima_se.png"
     ),
@@ -17,10 +21,6 @@ fun getMaleVocalists() = listOf(
     Vocalist(
         name = "Саша Ростов",
         imgRes = "/sasha_rostov.png"
-    ),
-    Vocalist(
-        name = "Андрей Махо",
-        imgRes = "/andrey_maho.png"
     ),
 )
 
