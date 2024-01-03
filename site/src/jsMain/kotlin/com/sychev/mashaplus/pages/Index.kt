@@ -63,7 +63,7 @@ fun HomePage() {
                     val palette = ColorMode.current.toSitePalette()
                     ImageHeaderWithLogo()
                     Column(modifier = Modifier.padding(XXSmallPadding).fillMaxWidth()) {
-                        FeaturesCardsSection(modifier = Modifier.fillMaxWidth())
+                        FeaturesTopSection(modifier = Modifier.fillMaxWidth())
                         Divider(width = 100.percent)
                         Box(Modifier.height(XXLargePadding))
                         VideosSection()
@@ -380,7 +380,7 @@ fun HomePage() {
     }
 }
 
-val EventsContainerStyle by ComponentStyle {
+val SectionContainerStyle by ComponentStyle {
     base { Modifier.padding(leftRight = LargePadding) }
     Breakpoint.MD { Modifier.padding(leftRight = XXXXLargePadding * 1.5) }
 }
@@ -547,7 +547,7 @@ private fun ImageHeaderWithLogo() {
 }
 
 @Composable
-private fun FeaturesCardsSection(modifier: Modifier) {
+private fun FeaturesTopSection(modifier: Modifier) {
     val palette = ColorMode.current.toSitePalette()
     Column(modifier = modifier.displayUntil(Breakpoint.MD)) {
         Card(modifier = Modifier.width(245.px).slideRightAnimation()) {
@@ -596,52 +596,49 @@ private fun FeaturesCardsSection(modifier: Modifier) {
         }
         Box(Modifier.height(XLargePadding))
     }
-    //Breakpoint.MD
-    Row(
-        modifier = modifier.displayIfAtLeast(Breakpoint.MD),
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Card(modifier = Modifier.width(245.px).fadeInAnimation()) {
-            Div(ModalTitleTextStyle.toAttrs()) {
+    // After Breakpoint.MD
+    Row(Modifier.padding(top = XXXXLargePadding, left = XXXXLargePadding * 1.5, right = XLargePadding).fillMaxWidth()) {
+        Box(Modifier.width(660.px)) {
+            Div(SectionTitleStyle.toAttrs()) {
                 SpanText(
-                    "Принцип конструктора",
-                    modifier = Modifier.color(palette.brand.text)
-                )
-            }
-            Div(ModalDescriptionTextStyleCentered.toAttrs()) {
-                SpanText(
-                    "Каждый заказчик сам может выбрать себе исполнителей на свой праздник",
-                    modifier = Modifier.color(palette.brand.greyText)
+                    "О нас",
+                    modifier = Modifier
+                        .color(palette.brand.text)
+                        .fadeInAnimation()
                 )
             }
         }
-        Card(modifier = Modifier.width(245.px).fadeInAnimation()) {
-            Div(ModalTitleTextStyle.toAttrs()) {
+        Spacer()
+        Column(modifier = Modifier) {
+            Div(Headline2TextStyle.toAttrs()) {
                 SpanText(
-                    "Разнообразный состав",
-                    modifier = Modifier.color(palette.brand.text)
+                    "Masha+» – это не просто музыкальный проект, это волшебное слияние талантливых вокалистов и музыкантов, создающих атмосферу, которая словно воплощает в себе саму суть ваших мечтаний.",
+                    modifier = Modifier
+                        .color(palette.brand.text)
+                        .fadeInAnimation()
                 )
             }
-            Div(ModalDescriptionTextStyleCentered.toAttrs()) {
-                SpanText(
-                    "В активе музпроекта 15 профессиональных вокалистов и 10 инструменталистов",
-                    modifier = Modifier.color(palette.brand.greyText)
-                )
-            }
-        }
-        Card(modifier = Modifier.width(315.px).fadeInAnimation()) {
-            Div(ModalTitleTextStyle.toAttrs()) {
-                SpanText(
-                    "Формат мероприятий",
-                    modifier = Modifier.color(palette.brand.text)
-                )
-            }
-            Div(ModalDescriptionTextStyleCentered.toAttrs()) {
-                SpanText(
-                    "От уютного вечера в ресторане до свадеб и юбилеев, а также выступления на концертных площадках города и за его пределами",
-                    modifier = Modifier.color(palette.brand.greyText)
-                )
+            Box(Modifier.height(48.px))
+            Row(Modifier.fillMaxWidth()) {
+                Box(Modifier.width(40.percent)) {
+                    Div(ModalDescriptionTextStyle.toAttrs()) {
+                        SpanText(
+                            "Каждый заказчик сам может выбрать себе исполнителей на свой праздник. Мы - не просто агенство с подборкой незнакомых вокалистов, мы - коллестив, где все знают друг друга и много лет работают вместе",
+                            modifier = Modifier
+                                .color(palette.brand.text)
+                        )
+                    }
+                }
+                Box(Modifier.width(XXXLargePadding))
+                Box(Modifier.width(45.percent).padding()) {
+                    Div(ModalDescriptionTextStyle.toAttrs()) {
+                        SpanText(
+                            "От уютного вечера в ресторане до свадеб и юбилеев, а также выступления на концертных площадках города и за его пределами. Репертуар наших артистов весьма широк! Вы можете насладиться своим ужином под ненавязчивый лаунж или же зарядиться качевыми треками.",
+                            modifier = Modifier
+                                .color(palette.brand.text)
+                        )
+                    }
+                }
             }
         }
     }
@@ -762,7 +759,7 @@ fun VideosSection() {
 private fun VariousEventsSection() {
     val palette = ColorMode.current.toSitePalette()
     // Until MD
-    Column(modifier = EventsContainerStyle.toModifier().displayUntil(Breakpoint.MD)) {
+    Column(modifier = SectionContainerStyle.toModifier().displayUntil(Breakpoint.MD)) {
         Row(modifier = Modifier.fillMaxWidth()) {
             Spacer()
             Div(HeadlineTextStyle.toAttrs()) {
@@ -852,7 +849,7 @@ private fun VariousEventsSection() {
         Box(Modifier.height(XXLargePadding))
     }
     // After MD
-    Column(modifier = EventsContainerStyle.toModifier().displayIfAtLeast(Breakpoint.MD).fillMaxWidth()) {
+    Column(modifier = SectionContainerStyle.toModifier().displayIfAtLeast(Breakpoint.MD).fillMaxWidth()) {
         Row(modifier = Modifier.fillMaxWidth()) {
             Column(modifier = Modifier.width(460.px)) {
                 Div(SectionTitleStyle.toAttrs()) {
