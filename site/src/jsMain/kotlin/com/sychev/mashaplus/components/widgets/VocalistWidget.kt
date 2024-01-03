@@ -54,7 +54,7 @@ fun VocalistWidget(
             Box(modifier = Modifier.fillMaxWidth()) {
                 Image(
                     it.imgRes,
-                    modifier = SliderPhotoStyle.toModifier().borderRadius(0.5.cssRem, 0.5.cssRem)
+                    modifier = SliderPhotoStyle.toModifier().borderRadius(0.9.cssRem, 0.9.cssRem)
                 )
                 Box(
                     modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = XXXLargePadding)

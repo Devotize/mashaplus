@@ -14,7 +14,10 @@ import com.sychev.mashaplus.utils.*
 import com.varabyte.kobweb.compose.css.BackgroundSize
 import com.varabyte.kobweb.compose.css.ObjectFit
 import com.varabyte.kobweb.compose.css.TextAlign
-import com.varabyte.kobweb.compose.foundation.layout.*
+import com.varabyte.kobweb.compose.foundation.layout.Box
+import com.varabyte.kobweb.compose.foundation.layout.Column
+import com.varabyte.kobweb.compose.foundation.layout.Row
+import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
@@ -687,67 +690,61 @@ fun VideosSection() {
             VideoYT("https://www.youtube.com/embed/aEh4p6dUbvU?si=sZIsdey5lwHZ-rBx")
         }
     }
-    //Breakpoint.MD
-    Column(modifier = Modifier.fillMaxWidth().displayIfAtLeast(Breakpoint.MD)) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column {
-                Div(HeadlineTextStyle.toAttrs()) {
+    // After Breakpoint.MD
+    Column(modifier = SectionContainerStyle.toModifier().fillMaxWidth().displayIfAtLeast(Breakpoint.MD)) {
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Column(modifier = Modifier.width(460.px)) {
+                Div(SectionTitleStyle.toAttrs()) {
                     SpanText(
                         "Коллектив молодых, ярких вокалистов",
                         modifier = Modifier
                             .color(palette.brand.text)
-                            .align(Alignment.CenterHorizontally)
+                            .fadeInAnimation()
                     )
                 }
-                Box(Modifier.height(LargePadding))
+                Box(Modifier.height(48.px))
                 Div(Headline2TextStyle.toAttrs()) {
                     SpanText(
                         "Концерный формат выступлений",
                         modifier = Modifier
                             .color(palette.brand.text)
-                            .align(Alignment.CenterHorizontally)
+                            .fadeInAnimation()
                     )
                 }
             }
+            Spacer()
             Box(
-                modifier = Modifier.align(Alignment.CenterVertically).padding(top = XLargePadding)
+                modifier = Modifier
                     .fadeInAnimation()
             ) {
                 VideoYT("https://www.youtube.com/embed/_c2B9DN_khg?si=eVhKkAczzjP_Afsm")
             }
         }
-        Box(Modifier.height(XLargePadding))
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+        Box(Modifier.height(XXXXLargePadding))
+        Row(modifier = Modifier.fillMaxWidth()) {
             Box(
-                modifier = Modifier.align(Alignment.CenterVertically).padding(top = XLargePadding)
+                modifier = Modifier
                     .fadeInAnimation()
             ) {
                 VideoYT("https://www.youtube.com/embed/aEh4p6dUbvU?si=sZIsdey5lwHZ-rBx")
             }
-            Column {
-                Div(HeadlineTextStyle.toAttrs()) {
+            Spacer()
+            Column(modifier = Modifier.width(460.px)) {
+                Div(SectionTitleStyle.toAttrs()) {
                     SpanText(
                         "Мы можем устроить любой праздник",
                         modifier = Modifier
                             .color(palette.brand.text)
-                            .align(Alignment.CenterHorizontally)
+                            .fadeInAnimation()
                     )
                 }
-                Box(Modifier.height(LargePadding))
+                Box(Modifier.height(48.px))
                 Div(Headline2TextStyle.toAttrs()) {
                     SpanText(
                         "Широкий репертуар: от лаунжа до современных композиций",
                         modifier = Modifier
                             .color(palette.brand.text)
-                            .align(Alignment.CenterHorizontally)
+                            .fadeInAnimation()
                     )
                 }
             }
