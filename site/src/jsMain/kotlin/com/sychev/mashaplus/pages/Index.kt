@@ -7,6 +7,7 @@ import com.sychev.mashaplus.components.widgets.Card
 import com.sychev.mashaplus.components.widgets.Divider
 import com.sychev.mashaplus.components.widgets.VocalistWidget
 import com.sychev.mashaplus.models.getFemaleVocalists
+import com.sychev.mashaplus.models.getMainPhotos
 import com.sychev.mashaplus.models.getMaleVocalists
 import com.sychev.mashaplus.models.getVocalistsCouples
 import com.sychev.mashaplus.utils.*
@@ -255,95 +256,7 @@ fun HomePage() {
                     Box(modifier = Modifier.fillMaxWidth().padding(XXSmallPadding)) {
                         Divider(width = 100.percent)
                     }
-                    Column(modifier = EventsContainerStyle.toModifier()) {
-                        Row(modifier = Modifier.fillMaxWidth()) {
-                            Spacer()
-                            Div(HeadlineTextStyle.toAttrs()) {
-                                SpanText(
-                                    "Разнообразные события",
-                                    modifier = Modifier
-                                        .color(palette.brand.text)
-                                        .fadeInAnimation()
-                                )
-                            }
-                            Spacer()
-                        }
-                        Image(
-                            "/club_dance.png",
-                            "Main photo",
-                            MainPhotoStyle
-                                .toModifier().padding(topBottom = LargePadding).fadeInAnimation(),
-                        )
-                        Div(Headline2TextStyle.toAttrs()) {
-                            SpanText(
-                                "Идеальный выпускной",
-                                modifier = Modifier
-                                    .color(palette.brand.text)
-                                    .fadeInAnimation()
-                            )
-                        }
-                        Box(
-                            modifier = Modifier.fillMaxWidth().padding(top = XSmallPadding)
-                                .fadeInAnimation()
-                        ) {
-                            Div(ModalDescriptionTextStyle.toAttrs()) {
-                                SpanText(
-                                    "Последний звонок, последний урок, вручение аттестатов... Наша команда готова сделать ваш выпускной неповторимым. Особенный ведущий, эмоциональный диджей и талантливые вокалисты создадут вечер, который запомнится на всю жизнь. Доверьтесь нам и создайте самую невероятную ночь вашего выпускного!",
-                                    modifier = Modifier
-                                        .color(palette.brand.text)
-                                )
-                            }
-                        }
-                        Box(Modifier.height(XXLargePadding))
-                        Box(Modifier.height(XXLargePadding))
-                        Row(modifier = Modifier.fillMaxWidth()) {
-                            Spacer()
-                            Div(HeadlineTextStyle.toAttrs()) {
-                                SpanText(
-                                    "Широкий репертуар",
-                                    modifier = Modifier
-                                        .color(palette.brand.text)
-                                        .fadeInAnimation()
-                                )
-                            }
-                            Spacer()
-                        }
-                        Image(
-                            "/repertoire.png",
-                            "Main photo",
-                            MainPhotoStyle
-                                .toModifier().padding(topBottom = LargePadding).fadeInAnimation(),
-                        )
-                        Box(modifier = Modifier.align(Alignment.CenterHorizontally)) {
-                            Link("https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg") {
-                                Button(ButtonStyle.toAttrs(DefaultButtonVariant)) {
-                                    Div(ButtonTextStyle.toAttrs()) {
-                                        SpanText(
-                                            "Посмотреть репертуар",
-                                            modifier = Modifier
-                                                .color(palette.brand.whiteText)
-                                                .fillMaxWidth()
-                                                .textAlign(TextAlign.Center)
-                                        )
-                                    }
-                                }
-                            }
-                        }
-                        Box(
-                            modifier = Modifier.fillMaxWidth().padding(top = XSmallPadding)
-                                .fadeInAnimation()
-                        ) {
-                            Div(ModalDescriptionTextStyle.toAttrs()) {
-                                SpanText(
-                                    "Репертуар наших артистов весьма широк! Вы можете насладиться своим ужином под ненавязчивый лаунж или же зарядиться качевыми треками.\n" +
-                                            "Полный плейлист наших вокалистов смотрите в прикрепленном файле. И не спешите расстраиваться, если не увидите в нем свой любимый трек — ребята с удовольствием выучат его ради вас и вашего праздника! \uD83D\uDE09",
-                                    modifier = Modifier
-                                        .color(palette.brand.text)
-                                )
-                            }
-                        }
-                        Box(Modifier.height(XXLargePadding))
-                    }
+                    VariousEventsSection()
                     Column(modifier = Modifier.fillMaxWidth().backgroundColor(palette.brand.background)) {
                         Row(modifier = Modifier.fillMaxWidth()) {
                             Spacer()
@@ -469,7 +382,7 @@ fun HomePage() {
 
 val EventsContainerStyle by ComponentStyle {
     base { Modifier.padding(leftRight = LargePadding) }
-    Breakpoint.MD { Modifier.padding(leftRight = XXXXLargePadding) }
+    Breakpoint.MD { Modifier.padding(leftRight = XXXXLargePadding * 1.5) }
 }
 
 val LogoSlideInAnim by Keyframes {
@@ -504,10 +417,25 @@ private val MainPhotoHeightBase = 320.px
 private val MainPhotoHeightMD = 720.px
 private val SliderPhotoHeightBase = 380.px
 private val SliderPhotoHeightMD = 620.px
+private val SectionPhotoHeightBase = 245.px
+private val SectionPhotoHeightMD = 490.px
+private val SectionPhotoWidthBase = 345.px
+private val SectionPhotoWidthMD = 690.px
 
 val MainPhotoStyle by ComponentStyle {
     base { Modifier.fillMaxWidth().height(MainPhotoHeightBase).objectFit(ObjectFit.Cover) }
     Breakpoint.MD { Modifier.fillMaxWidth().height(MainPhotoHeightMD).objectFit(ObjectFit.Cover) }
+}
+
+val SectionPhotoStyle by ComponentStyle {
+    base {
+        Modifier.fillMaxWidth().height(MainPhotoHeightBase).objectFit(ObjectFit.Cover)
+            .borderRadius(0.9.cssRem, 0.9.cssRem)
+    }
+    Breakpoint.MD {
+        Modifier.height(SectionPhotoHeightMD).width(SectionPhotoWidthMD).objectFit(ObjectFit.Cover)
+            .borderRadius(0.9.cssRem, 0.9.cssRem)
+    }
 }
 
 val SecondaryPhotoStyle by ComponentStyle {
@@ -534,18 +462,10 @@ val SliderPhotoStyle by ComponentStyle {
     Breakpoint.MD { Modifier.fillMaxWidth().height(SliderPhotoHeightMD).objectFit(ObjectFit.Cover) }
 }
 
-private val mainPhotos = listOf(
-    "/main_photo_1.png",
-    "/main_photo_2.png",
-    "/main_photo_3.png",
-    "/main_photo_4.png",
-    "/main_photo_5.png",
-    "/main_photo_6.png",
-)
-
 @Composable
 private fun ImageHeaderWithLogo() {
     Box(modifier = Modifier.fillMaxWidth()) {
+        val mainPhotos = getMainPhotos()
         var mainPhoto by remember { mutableStateOf(mainPhotos.first()) }
         var previousMainPhoto by remember { mutableStateOf<String?>(null) }
         LaunchedEffect(true) {
@@ -838,3 +758,262 @@ fun VideosSection() {
     }
 }
 
+@Composable
+private fun VariousEventsSection() {
+    val palette = ColorMode.current.toSitePalette()
+    // Until MD
+    Column(modifier = EventsContainerStyle.toModifier().displayUntil(Breakpoint.MD)) {
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Spacer()
+            Div(HeadlineTextStyle.toAttrs()) {
+                SpanText(
+                    "Разнообразные события",
+                    modifier = Modifier
+                        .color(palette.brand.text)
+                        .fadeInAnimation()
+                )
+            }
+            Spacer()
+        }
+        Image(
+            "/club_dance.png",
+            "Main photo",
+            MainPhotoStyle
+                .toModifier().padding(topBottom = LargePadding).fadeInAnimation(),
+        )
+        Div(Headline2TextStyle.toAttrs()) {
+            SpanText(
+                "Идеальный выпускной",
+                modifier = Modifier
+                    .color(palette.brand.text)
+                    .fadeInAnimation()
+            )
+        }
+        Box(
+            modifier = Modifier.fillMaxWidth().padding(top = XSmallPadding)
+                .fadeInAnimation()
+        ) {
+            Div(ModalDescriptionTextStyle.toAttrs()) {
+                SpanText(
+                    "Последний звонок, последний урок, вручение аттестатов... Наша команда готова сделать ваш выпускной неповторимым. Особенный ведущий, эмоциональный диджей и талантливые вокалисты создадут вечер, который запомнится на всю жизнь. Доверьтесь нам и создайте самую невероятную ночь вашего выпускного!",
+                    modifier = Modifier
+                        .color(palette.brand.text)
+                )
+            }
+        }
+        Box(Modifier.height(XXLargePadding))
+        Box(Modifier.height(XXLargePadding))
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Spacer()
+            Div(HeadlineTextStyle.toAttrs()) {
+                SpanText(
+                    "Широкий репертуар",
+                    modifier = Modifier
+                        .color(palette.brand.text)
+                        .fadeInAnimation()
+                )
+            }
+            Spacer()
+        }
+        Image(
+            "/repertoire.png",
+            "Main photo",
+            MainPhotoStyle
+                .toModifier().padding(topBottom = LargePadding).fadeInAnimation(),
+        )
+        Box(modifier = Modifier.align(Alignment.CenterHorizontally)) {
+            Link("https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg") {
+                Button(ButtonStyle.toAttrs(DefaultButtonVariant)) {
+                    Div(ButtonTextStyle.toAttrs()) {
+                        SpanText(
+                            "Посмотреть репертуар",
+                            modifier = Modifier
+                                .color(palette.brand.whiteText)
+                                .fillMaxWidth()
+                                .textAlign(TextAlign.Center)
+                        )
+                    }
+                }
+            }
+        }
+        Box(
+            modifier = Modifier.fillMaxWidth().padding(top = XSmallPadding)
+                .fadeInAnimation()
+        ) {
+            Div(ModalDescriptionTextStyle.toAttrs()) {
+                SpanText(
+                    "Репертуар наших артистов весьма широк! Вы можете насладиться своим ужином под ненавязчивый лаунж или же зарядиться качевыми треками.\n" +
+                            "Полный плейлист наших вокалистов смотрите в прикрепленном файле. И не спешите расстраиваться, если не увидите в нем свой любимый трек — ребята с удовольствием выучат его ради вас и вашего праздника! \uD83D\uDE09",
+                    modifier = Modifier
+                        .color(palette.brand.text)
+                )
+            }
+        }
+        Box(Modifier.height(XXLargePadding))
+    }
+    // After MD
+    Column(modifier = EventsContainerStyle.toModifier().displayIfAtLeast(Breakpoint.MD).fillMaxWidth()) {
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Column(modifier = Modifier.width(460.px)) {
+                Div(SectionTitleStyle.toAttrs()) {
+                    SpanText(
+                        "Разнообразные события",
+                        modifier = Modifier
+                            .color(palette.brand.text)
+                            .fadeInAnimation()
+                    )
+                }
+                Box(Modifier.height(48.px))
+                Div(Headline2TextStyle.toAttrs()) {
+                    SpanText(
+                        "Наши профессиональные музыканты – это не просто исполнители, а хранители музыкальной магии, готовые воплотить вашу музыкальную фантазию в неповторимый момент.",
+                        modifier = Modifier
+                            .color(palette.brand.text)
+                            .fadeInAnimation()
+                    )
+                }
+                Box(Modifier.height(48.px))
+                Div(ModalDescriptionTextStyle.toAttrs()) {
+                    SpanText(
+                        "Последний звонок, последний урок, вручение аттестатов... Наша команда готова сделать ваш выпускной неповторимым. Особенный ведущий, эмоциональный диджей и талантливые вокалисты создадут вечер, который запомнится на всю жизнь. Доверьтесь нам и создайте самую невероятную ночь вашего выпускного!",
+                        modifier = Modifier
+                            .color(palette.brand.text)
+                    )
+                }
+            }
+            Spacer()
+            Image(
+                "/club_dance.png",
+                "Main photo",
+                SectionPhotoStyle
+                    .toModifier().fadeInAnimation(),
+            )
+        }
+        Box(Modifier.height(XXXXLargePadding))
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Column(modifier = Modifier.width(460.px)) {
+                Div(SectionTitleStyle.toAttrs()) {
+                    SpanText(
+                        "Исполнители",
+                        modifier = Modifier
+                            .color(palette.brand.text)
+                            .fadeInAnimation()
+                    )
+                }
+            }
+            Spacer()
+            Column(Modifier.width(SectionPhotoWidthMD)) {
+                Div(HeadlineTextStyle.toAttrs()) {
+                    SpanText(
+                        "Разнообразный состав",
+                        modifier = Modifier
+                            .color(palette.brand.text)
+                            .fadeInAnimation()
+                    )
+                }
+                Box(Modifier.height(XXXLargePadding))
+                Div(ModalDescriptionTextStyle.toAttrs()) {
+                    SpanText(
+                        "Активные и молодые музыканты",
+                        modifier = Modifier
+                            .color(palette.brand.text)
+                            .fadeInAnimation()
+                    )
+                }
+                Box(Modifier.height(XXXLargePadding))
+                Row(Modifier.fillMaxWidth()) {
+                    Column {
+                        Divider(310.px)
+                        Box(Modifier.height(XXSmallPadding))
+                        Div(HugeThinTextStyle.toAttrs()) {
+                            SpanText(
+                                "13",
+                                modifier = Modifier
+                                    .color(palette.brand.text)
+                                    .fadeInAnimation()
+                            )
+                        }
+                        Box(Modifier.height(XXXXSmallPadding))
+                        Div(ModalDescriptionTextStyle.toAttrs()) {
+                            SpanText(
+                                "Профессиональных вокалистов",
+                                modifier = Modifier
+                                    .color(palette.brand.text)
+                                    .fadeInAnimation()
+                            )
+                        }
+                    }
+                    Spacer()
+                    Column {
+                        Divider(310.px)
+                        Box(Modifier.height(XXSmallPadding))
+                        Div(HugeThinTextStyle.toAttrs()) {
+                            SpanText(
+                                "10",
+                                modifier = Modifier
+                                    .color(palette.brand.text)
+                                    .fadeInAnimation()
+                            )
+                        }
+                        Box(Modifier.height(XXXXSmallPadding))
+                        Div(ModalDescriptionTextStyle.toAttrs()) {
+                            SpanText(
+                                "Инструменталистов",
+                                modifier = Modifier
+                                    .color(palette.brand.text)
+                                    .fadeInAnimation()
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        Box(Modifier.height(XXXXLargePadding))
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Image(
+                "/repertoire.png",
+                "Main photo",
+                SectionPhotoStyle
+                    .toModifier().fadeInAnimation(),
+            )
+            Spacer()
+            Column(modifier = Modifier.width(460.px)) {
+                Div(SectionTitleStyle.toAttrs()) {
+                    SpanText(
+                        "Широкий репертуар",
+                        modifier = Modifier
+                            .color(palette.brand.text)
+                            .fadeInAnimation()
+                    )
+                }
+                Box(Modifier.height(48.px))
+                Div(Headline2TextStyle.toAttrs()) {
+                    SpanText(
+                        "У каждого из наших вокалистов огромный репертуар и " +
+                                "большое количество интересных аранжировок, так же " +
+                                "мы можем выучить какую-то композицию лично для вас",
+                        modifier = Modifier
+                            .color(palette.brand.text)
+                            .fadeInAnimation()
+                    )
+                }
+                Box(Modifier.height(48.px))
+                Box(modifier = Modifier.align(Alignment.Start)) {
+                    Link("https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg") {
+                        Button(ButtonStyle.toAttrs(DefaultButtonVariant)) {
+                            Div(ButtonTextStyle.toAttrs()) {
+                                SpanText(
+                                    "Посмотреть репертуар",
+                                    modifier = Modifier
+                                        .color(palette.brand.whiteText)
+                                        .fillMaxWidth()
+                                        .textAlign(TextAlign.Center)
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

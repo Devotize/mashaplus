@@ -41,7 +41,7 @@ val XLargePadding = 24.px
 /**
  * 48.px
  */
-val XXLargePadding = 24.px
+val XXLargePadding = 48.px
 
 /**
  * 64.px

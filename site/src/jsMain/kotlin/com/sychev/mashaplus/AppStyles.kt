@@ -48,6 +48,24 @@ val HeadlineTextStyle by ComponentStyle.base {
         .lineHeight(1.2) //1.5x doesn't look as good on very large text
 }
 
+val HugeThinTextStyle by ComponentStyle.base {
+    Modifier
+        .fontFamily("Source Sans 3")
+        .fontSize(2.3.cssRem)
+        .textAlign(TextAlign.Center)
+        .lineHeight(1.5) //1.5x doesn't look as good on very large text
+        .fontWeight(FontWeight.Thin)
+}
+
+val SectionTitleStyle by ComponentStyle.base {
+    Modifier
+        .fontFamily("Source Sans 3")
+        .fontSize(1.2.cssRem)
+        .textAlign(TextAlign.Center)
+        .lineHeight(0.9) //1.5x doesn't look as good on very large text
+        .fontWeight(FontWeight.ExtraBold)
+}
+
 val Headline2TextStyle by ComponentStyle.base {
     Modifier
         .fontFamily("Source Sans 3")
