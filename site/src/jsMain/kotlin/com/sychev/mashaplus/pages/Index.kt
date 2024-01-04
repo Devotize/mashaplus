@@ -47,7 +47,7 @@ import kotlin.time.Duration.Companion.seconds
 // Container that has a tagline and grid on desktop, and just the tagline on mobile
 val HeroContainerStyle by ComponentStyle {
     base { Modifier.fillMaxWidth().gap(2.cssRem) }
-    Breakpoint.MD { Modifier.fillMaxWidth() }
+    Breakpoint.LG { Modifier.fillMaxWidth() }
 }
 
 val VideoStyle by ComponentStyle.base {
@@ -81,7 +81,7 @@ fun HomePage() {
                                 .fadeInAnimation(),
                         )
                         Box(
-                            modifier = Modifier.displayUntil(Breakpoint.MD).padding(LargePadding)
+                            modifier = Modifier.displayUntil(Breakpoint.LG).padding(LargePadding)
                                 .align(Alignment.TopStart)
                         ) {
                             Div(ModalDescriptionTextStyle.toAttrs()) {
@@ -101,7 +101,7 @@ fun HomePage() {
                             }
                         }
                         Box(
-                            modifier = Modifier.displayIfAtLeast(Breakpoint.MD)
+                            modifier = Modifier.displayIfAtLeast(Breakpoint.LG)
                                 .width(820.px)
                                 .padding(LargePadding).align(Alignment.TopStart)
                                 .align(Alignment.BottomCenter)
@@ -124,13 +124,13 @@ fun HomePage() {
                         }
                     }
                     Column(modifier = Modifier.width(100.percent)) {
-                        Column(modifier = Modifier.width(100.percent).displayUntil(Breakpoint.MD)) {
+                        Column(modifier = Modifier.width(100.percent).displayUntil(Breakpoint.LG)) {
                             VocalistWidget("Вокалисты", getMaleVocalists())
                             Box(Modifier.height(XLargePadding))
                             VocalistWidget("Вокалистки", getFemaleVocalists())
                         }
                         Row(
-                            modifier = Modifier.width(100.percent).displayIfAtLeast(Breakpoint.MD),
+                            modifier = Modifier.width(100.percent).displayIfAtLeast(Breakpoint.LG),
                         ) {
                             Spacer()
                             VocalistWidget(
@@ -224,10 +224,10 @@ fun HomePage() {
                             Spacer()
                         }
                         Box(Modifier.height(MediumPadding))
-                        Column(modifier = Modifier.fillMaxWidth().displayUntil(Breakpoint.MD)) {
+                        Column(modifier = Modifier.fillMaxWidth().displayUntil(Breakpoint.LG)) {
                             VocalistWidget(null, getVocalistsCouples())
                         }
-                        Column(modifier = Modifier.fillMaxWidth().displayIfAtLeast(Breakpoint.MD)) {
+                        Column(modifier = Modifier.fillMaxWidth().displayIfAtLeast(Breakpoint.LG)) {
                             VocalistWidget(null, getVocalistsCouples(), sliderModifier = Modifier.width(620.px))
                         }
                         Row(Modifier.fillMaxWidth()) {
@@ -274,7 +274,7 @@ fun HomePage() {
                             Spacer()
                         }
                         Box(Modifier.height(MediumPadding))
-                        Row(modifier = Modifier.fillMaxWidth().displayUntil(Breakpoint.MD)) {
+                        Row(modifier = Modifier.fillMaxWidth().displayUntil(Breakpoint.LG)) {
                             Spacer()
                             Link("https://api.whatsapp.com/send/?phone=%2B79052629514&text&type=phone_number&app_absent=0") {
                                 Button(ButtonStyle.toAttrs(DefaultButtonVariant)) {
@@ -291,7 +291,7 @@ fun HomePage() {
                             }
                             Spacer()
                         }
-                        Row(modifier = Modifier.fillMaxWidth().displayIfAtLeast(Breakpoint.MD)) {
+                        Row(modifier = Modifier.fillMaxWidth().displayIfAtLeast(Breakpoint.LG)) {
                             Spacer()
                             Link("https://vk.com/masha_plus_band?w=app6013442_-218638803%2523form_id%253D1") {
                                 Button(ButtonStyle.toAttrs(DefaultButtonVariant)) {
@@ -385,7 +385,7 @@ fun HomePage() {
 
 val SectionContainerStyle by ComponentStyle {
     base { Modifier.padding(leftRight = LargePadding) }
-    Breakpoint.MD { Modifier.padding(leftRight = XXXXLargePadding * 1.5) }
+    Breakpoint.LG { Modifier.padding(leftRight = XXXXLargePadding * 1.5) }
 }
 
 val LogoSlideInAnim by Keyframes {
@@ -427,7 +427,7 @@ private val SectionPhotoWidthMD = 690.px
 
 val MainPhotoStyle by ComponentStyle {
     base { Modifier.fillMaxWidth().height(MainPhotoHeightBase).objectFit(ObjectFit.Cover) }
-    Breakpoint.MD { Modifier.fillMaxWidth().height(MainPhotoHeightMD).objectFit(ObjectFit.Cover) }
+    Breakpoint.LG { Modifier.fillMaxWidth().height(MainPhotoHeightMD).objectFit(ObjectFit.Cover) }
 }
 
 val SectionPhotoStyle by ComponentStyle {
@@ -435,7 +435,7 @@ val SectionPhotoStyle by ComponentStyle {
         Modifier.fillMaxWidth().height(MainPhotoHeightBase).objectFit(ObjectFit.Cover)
             .borderRadius(0.9.cssRem, 0.9.cssRem)
     }
-    Breakpoint.MD {
+    Breakpoint.LG {
         Modifier.height(SectionPhotoHeightMD).width(SectionPhotoWidthMD).objectFit(ObjectFit.Cover)
             .borderRadius(0.9.cssRem, 0.9.cssRem)
     }
@@ -443,7 +443,7 @@ val SectionPhotoStyle by ComponentStyle {
 
 val SecondaryPhotoStyle by ComponentStyle {
     base { Modifier.fillMaxWidth().height(MainPhotoHeightBase).objectFit(ObjectFit.Cover) }
-    Breakpoint.MD {
+    Breakpoint.LG {
         Modifier.fillMaxWidth().height(MainPhotoHeightMD).objectFit(ObjectFit.Cover)
             .padding(leftRight = XXXLargePadding)
     }
@@ -451,7 +451,7 @@ val SecondaryPhotoStyle by ComponentStyle {
 
 val BottomPhotoGradientStyle by ComponentStyle {
     base { Modifier.fillMaxWidth().height(MainPhotoHeightBase).objectFit(ObjectFit.Fill) }
-    Breakpoint.MD { Modifier.fillMaxWidth().height(MainPhotoHeightMD).objectFit(ObjectFit.Fill) }
+    Breakpoint.LG { Modifier.fillMaxWidth().height(MainPhotoHeightMD).objectFit(ObjectFit.Fill) }
 }
 
 val SliderPhotoStyle by ComponentStyle {
@@ -462,7 +462,7 @@ val SliderPhotoStyle by ComponentStyle {
             .objectFit(ObjectFit.Cover)
             .backgroundSize(BackgroundSize.Cover)
     }
-    Breakpoint.MD { Modifier.fillMaxWidth().height(SliderPhotoHeightMD).objectFit(ObjectFit.Cover) }
+    Breakpoint.LG { Modifier.fillMaxWidth().height(SliderPhotoHeightMD).objectFit(ObjectFit.Cover) }
 }
 
 @Composable
@@ -552,7 +552,7 @@ private fun ImageHeaderWithLogo() {
 @Composable
 private fun FeaturesTopSection(modifier: Modifier) {
     val palette = ColorMode.current.toSitePalette()
-    Column(modifier = modifier.displayUntil(Breakpoint.MD)) {
+    Column(modifier = modifier.displayUntil(Breakpoint.LG)) {
         Card(modifier = Modifier.width(245.px).slideRightAnimation()) {
             Div(ModalTitleTextStyle.toAttrs()) {
                 SpanText(
@@ -599,10 +599,10 @@ private fun FeaturesTopSection(modifier: Modifier) {
         }
         Box(Modifier.height(XLargePadding))
     }
-    // After Breakpoint.MD
+    // After Breakpoint.LG
     Row(
         Modifier.padding(top = XXXXLargePadding, left = XXXXLargePadding * 1.5, right = XLargePadding).fillMaxWidth()
-            .displayIfAtLeast(Breakpoint.MD)
+            .displayIfAtLeast(Breakpoint.LG)
     ) {
         Box(Modifier.width(660.px)) {
             Div(SectionTitleStyle.toAttrs()) {
@@ -654,7 +654,7 @@ private fun FeaturesTopSection(modifier: Modifier) {
 @Composable
 fun VideosSection() {
     val palette = ColorMode.current.toSitePalette()
-    Column(modifier = Modifier.fillMaxWidth().displayUntil(Breakpoint.MD)) {
+    Column(modifier = Modifier.fillMaxWidth().displayUntil(Breakpoint.LG)) {
         Row(modifier = Modifier.fillMaxWidth()) {
             Spacer()
             Div(HeadlineTextStyle.toAttrs()) {
@@ -693,8 +693,8 @@ fun VideosSection() {
             VideoYT("https://www.youtube.com/embed/aEh4p6dUbvU?si=sZIsdey5lwHZ-rBx")
         }
     }
-    // After Breakpoint.MD
-    Column(modifier = SectionContainerStyle.toModifier().fillMaxWidth().displayIfAtLeast(Breakpoint.MD)) {
+    // After Breakpoint.LG
+    Column(modifier = SectionContainerStyle.toModifier().fillMaxWidth().displayIfAtLeast(Breakpoint.LG)) {
         Row(modifier = Modifier.fillMaxWidth()) {
             Column(modifier = Modifier.width(460.px)) {
                 Div(SectionTitleStyle.toAttrs()) {
@@ -759,7 +759,7 @@ fun VideosSection() {
 private fun VariousEventsSection() {
     val palette = ColorMode.current.toSitePalette()
     // Until MD
-    Column(modifier = SectionContainerStyle.toModifier().displayUntil(Breakpoint.MD)) {
+    Column(modifier = SectionContainerStyle.toModifier().displayUntil(Breakpoint.LG)) {
         Row(modifier = Modifier.fillMaxWidth()) {
             Spacer()
             Div(HeadlineTextStyle.toAttrs()) {
@@ -852,7 +852,7 @@ private fun VariousEventsSection() {
         Box(Modifier.height(XXLargePadding))
     }
     // After MD
-    Column(modifier = SectionContainerStyle.toModifier().displayIfAtLeast(Breakpoint.MD).fillMaxWidth()) {
+    Column(modifier = SectionContainerStyle.toModifier().displayIfAtLeast(Breakpoint.LG).fillMaxWidth()) {
         Row(modifier = Modifier.fillMaxWidth()) {
             Column(modifier = Modifier.width(460.px)) {
                 Div(SectionTitleStyle.toAttrs()) {

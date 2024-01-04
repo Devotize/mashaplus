@@ -16,7 +16,7 @@ val VideoFrameStyle by ComponentStyle {
     base {
         Modifier.height(180.px).width(320.px)
     }
-    Breakpoint.MD {
+    Breakpoint.LG {
         Modifier.height(410.px).width(720.px).borderRadius(0.9.cssRem, 0.9.cssRem)
     }
 }

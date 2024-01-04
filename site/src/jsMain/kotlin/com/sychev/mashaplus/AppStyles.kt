@@ -97,7 +97,7 @@ val SubheadlineTextStyle by ComponentStyle {
             .textAlign(TextAlign.Center)
             .color(colorMode.toPalette().color.toRgb().copyf(alpha = 0.8f))
     }
-    Breakpoint.MD {
+    Breakpoint.LG {
         Modifier
             .fontFamily("Source Sans 3")
             .fontSize(1.5.cssRem)

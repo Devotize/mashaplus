@@ -23,7 +23,7 @@ import org.jetbrains.compose.web.css.percent
 
 val PageContentStyle by ComponentStyle {
     base { Modifier.fillMaxSize() }
-    Breakpoint.MD { Modifier.fillMaxSize() }
+    Breakpoint.LG { Modifier.fillMaxSize() }
 }
 
 // NOTE: This is a fun little graphic that showcases what you can do with SVG. However, this probably does not make

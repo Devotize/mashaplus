@@ -23,7 +23,7 @@ private val mainPhotosSmallScreen = listOf(
 @Composable
 fun getMainPhotos(): List<String> {
     val bp = rememberBreakpoint()
-    return if (bp > Breakpoint.MD) {
+    return if (bp > Breakpoint.LG) {
         mainPhotosBigScreen
     } else {
         mainPhotosSmallScreen

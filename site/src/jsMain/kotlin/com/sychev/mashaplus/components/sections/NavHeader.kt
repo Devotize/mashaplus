@@ -119,7 +119,7 @@ fun NavHeader() {
                 .fillMaxWidth()
                 .fontSize(1.5.cssRem)
                 .gap(1.cssRem)
-                .displayUntil(Breakpoint.MD)
+                .displayUntil(Breakpoint.LG)
                 .stubAnimation(),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -152,7 +152,7 @@ fun NavHeader() {
         }
 
         Row(
-            Modifier.gap(1.5.cssRem).displayIfAtLeast(Breakpoint.MD),
+            Modifier.gap(1.5.cssRem).displayIfAtLeast(Breakpoint.LG),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
