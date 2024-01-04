@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.sychev.mashaplus"
-version = "1.0-SNAPSHOT"
+version = "1.1"
 
 kobweb {
     app {
