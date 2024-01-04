@@ -5,11 +5,9 @@ import com.sychev.mashaplus.*
 import com.sychev.mashaplus.components.layouts.PageLayout
 import com.sychev.mashaplus.components.widgets.Card
 import com.sychev.mashaplus.components.widgets.Divider
+import com.sychev.mashaplus.components.widgets.SliderSimpleArrow
 import com.sychev.mashaplus.components.widgets.VocalistWidget
-import com.sychev.mashaplus.models.getFemaleVocalists
-import com.sychev.mashaplus.models.getMainPhotos
-import com.sychev.mashaplus.models.getMaleVocalists
-import com.sychev.mashaplus.models.getVocalistsCouples
+import com.sychev.mashaplus.models.*
 import com.sychev.mashaplus.utils.*
 import com.varabyte.kobweb.compose.css.BackgroundSize
 import com.varabyte.kobweb.compose.css.ObjectFit
@@ -28,6 +26,7 @@ import com.varabyte.kobweb.silk.components.animation.Keyframes
 import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
 import com.varabyte.kobweb.silk.components.graphics.Image
+import com.varabyte.kobweb.silk.components.icons.mdi.MdiStar
 import com.varabyte.kobweb.silk.components.layout.breakpoint.displayIfAtLeast
 import com.varabyte.kobweb.silk.components.layout.breakpoint.displayUntil
 import com.varabyte.kobweb.silk.components.navigation.Link
@@ -37,6 +36,7 @@ import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toAttrs
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.web.css.*
@@ -260,6 +260,7 @@ fun HomePage() {
                         Divider(width = 100.percent)
                     }
                     VariousEventsSection()
+                    TestimonialsSection(Modifier.fillMaxWidth().padding(leftRight = LargePadding))
                     Column(modifier = Modifier.fillMaxWidth().backgroundColor(palette.brand.background)) {
                         Row(modifier = Modifier.fillMaxWidth()) {
                             Spacer()
@@ -1012,6 +1013,68 @@ private fun VariousEventsSection() {
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun TestimonialsSection(modifier: Modifier = Modifier) {
+    val palette = ColorMode.current.toSitePalette()
+    val breakpoint = rememberBreakpoint()
+    val sidePadding = if (breakpoint > Breakpoint.LG) {
+        XXXXLargePadding
+    } else {
+        XXXXSmallPadding
+    }
+    Column(modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+        Div(HeadlineTextStyle.toAttrs()) {
+            SpanText(
+                "Отзывы",
+                modifier = Modifier
+                    .color(palette.brand.text)
+                    .fadeInAnimation()
+            )
+        }
+        Box(Modifier.height(LargePadding))
+        Div(SectionTitleStyle.toAttrs()) {
+            SpanText(
+                "Посмотрите, что говорят люди!",
+                modifier = Modifier
+                    .color(palette.brand.text)
+                    .fadeInAnimation()
+            )
+        }
+        Box(Modifier.height(XXLargePadding))
+        SliderSimpleArrow(
+            modifier = Modifier.fillMaxWidth().padding(leftRight = sidePadding),
+            items = testimonials,
+            hasDotsIndicator = false
+        ) {
+            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                Div(ModalDescriptionTextStyleCentered.toAttrs()) {
+                    SpanText(
+                        it.text,
+                        modifier = Modifier
+                            .color(palette.brand.text)
+                            .fadeInAnimation()
+                    )
+                }
+                Box(Modifier.height(XXXLargePadding))
+                Row {
+                    repeat(5) {
+                        MdiStar(Modifier.size(24.px).fadeInAnimation())
+                    }
+                }
+                Box(Modifier.height(XXXSmallPadding))
+                Div(ModalDescriptionTextStyleCentered.toAttrs()) {
+                    SpanText(
+                        it.name,
+                        modifier = Modifier
+                            .color(palette.brand.text)
+                            .fadeInAnimation()
+                    )
                 }
             }
         }

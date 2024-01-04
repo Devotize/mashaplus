@@ -4,10 +4,13 @@ import androidx.compose.runtime.*
 import com.sychev.mashaplus.*
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Row
+import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.silk.components.icons.mdi.MdiArrowBackIos
+import com.varabyte.kobweb.silk.components.icons.mdi.MdiArrowForwardIos
 import com.varabyte.kobweb.silk.components.icons.mdi.MdiKeyboardArrowLeft
 import com.varabyte.kobweb.silk.components.icons.mdi.MdiKeyboardArrowRight
 import com.varabyte.kobweb.silk.components.style.ComponentStyle
@@ -28,6 +31,7 @@ val DotsIndicatorStyle by ComponentStyle {
 inline fun <reified T> Slider(
     modifier: Modifier = Modifier,
     items: List<T>,
+    hasDotsIndicator: Boolean = true,
     crossinline content: @Composable (T) -> Unit,
 ) {
     val sitePalette = ColorMode.current.toSitePalette()
@@ -76,21 +80,80 @@ inline fun <reified T> Slider(
                     MdiKeyboardArrowRight()
                 }
             }
-            Row(modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 1.1.cssRem).paddingInline { }) {
-                items.forEachIndexed { index, _ ->
-                    val selected = index == selectedIndex
-                    Box(
-                        modifier = DotsIndicatorStyle.toModifier()
-                            .borderRadius(100.percent, 100.percent)
-                            .border(1.px, style = LineStyle.Solid, color = DesignWhiteText)
-                            .background(
-                                if (selected) Colors.White else Colors.Transparent
-                            )
-                            .onClick {
-                                selectedIndex = index
-                            }
-                    )
-                    Box(Modifier.width(XXSmallPadding))
+            if (hasDotsIndicator) {
+                Row(modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 1.1.cssRem).paddingInline { }) {
+                    items.forEachIndexed { index, _ ->
+                        val selected = index == selectedIndex
+                        Box(
+                            modifier = DotsIndicatorStyle.toModifier()
+                                .borderRadius(100.percent, 100.percent)
+                                .border(1.px, style = LineStyle.Solid, color = DesignWhiteText)
+                                .background(
+                                    if (selected) Colors.White else Colors.Transparent
+                                )
+                                .onClick {
+                                    selectedIndex = index
+                                }
+                        )
+                        Box(Modifier.width(XXSmallPadding))
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+inline fun <reified T> SliderSimpleArrow(
+    modifier: Modifier = Modifier,
+    items: List<T>,
+    hasDotsIndicator: Boolean = true,
+    crossinline content: @Composable (T) -> Unit,
+) {
+    var selectedIndex by remember { mutableStateOf(0) }
+    key(selectedIndex) {
+        Box(modifier = modifier) {
+            items.getOrNull(selectedIndex)?.let {
+                content(it)
+            }
+            Row(Modifier.fillMaxWidth().align(Alignment.Center).padding(leftRight = MediumPadding)) {
+                Box(Modifier.onClick {
+                    if (selectedIndex == 0) {
+                        selectedIndex = items.lastIndex
+                    } else {
+                        selectedIndex--
+                    }
+                }) {
+                    MdiArrowBackIos()
+                }
+                Spacer()
+                Box(Modifier.onClick {
+                    if (selectedIndex == items.lastIndex) {
+                        selectedIndex = 0
+                    } else {
+                        selectedIndex++
+                    }
+                }) {
+                    MdiArrowForwardIos()
+                }
+            }
+            if (hasDotsIndicator) {
+                Row(modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 1.1.cssRem).paddingInline { }) {
+                    items.forEachIndexed { index, _ ->
+                        val selected = index == selectedIndex
+                        Box(
+                            modifier = DotsIndicatorStyle.toModifier()
+                                .borderRadius(100.percent, 100.percent)
+                                .border(1.px, style = LineStyle.Solid, color = DesignWhiteText)
+                                .background(
+                                    if (selected) Colors.White else Colors.Transparent
+                                )
+                                .onClick {
+                                    selectedIndex = index
+                                }
+                        )
+                        Box(Modifier.width(XXSmallPadding))
+                    }
                 }
             }
         }

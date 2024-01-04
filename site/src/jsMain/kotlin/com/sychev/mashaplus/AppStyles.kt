@@ -53,7 +53,7 @@ val HugeThinTextStyle by ComponentStyle.base {
         .fontFamily("Source Sans 3")
         .fontSize(2.3.cssRem)
         .textAlign(TextAlign.Center)
-        .lineHeight(1.5) //1.5x doesn't look as good on very large text
+        .lineHeight(1.5)
         .fontWeight(FontWeight.Thin)
 }
 
@@ -62,7 +62,7 @@ val SectionTitleStyle by ComponentStyle.base {
         .fontFamily("Source Sans 3")
         .fontSize(1.2.cssRem)
         .textAlign(TextAlign.Center)
-        .lineHeight(0.9) //1.5x doesn't look as good on very large text
+        .lineHeight(0.9)
         .fontWeight(FontWeight.ExtraBold)
 }
 
