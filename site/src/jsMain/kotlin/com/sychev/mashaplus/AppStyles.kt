@@ -152,4 +152,5 @@ val DefaultButtonVariant by ButtonStyle.addVariantBase {
         .padding(leftRight = MediumPadding, topBottom = XSmallPadding)
         .lineHeight(1.5)
         .backgroundColor(DesignSurfaceDark)
+        .borderRadius(0.9.cssRem, 0.9.cssRem)
 }

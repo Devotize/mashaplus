@@ -821,7 +821,7 @@ private fun VariousEventsSection() {
                 .toModifier().fadeInAnimation(),
         )
         Box(Modifier.height(LargePadding))
-        Box(modifier = Modifier.align(Alignment.CenterHorizontally)) {
+        Box(modifier = Modifier.align(Alignment.Start)) {
             Link("https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg") {
                 Button(ButtonStyle.toAttrs(DefaultButtonVariant)) {
                     Div(ButtonTextStyle.toAttrs()) {
