@@ -1,5 +1,6 @@
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
 import kotlinx.html.link
+import kotlin.time.Duration.Companion.seconds
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -25,7 +26,15 @@ kobweb {
                 )
             }
         }
+        export {
+            timeout = 120.seconds
+            enableTraces()
+        }
     }
+}
+
+rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin> {
+    rootProject.the<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension>().version = "1.22.21"
 }
 
 kotlin {
