@@ -10,6 +10,7 @@ import com.sychev.mashaplus.models.getMaleVocalists
 import com.sychev.mashaplus.models.getVocalistsCouples
 import com.sychev.mashaplus.pages.*
 import com.sychev.mashaplus.pages.main.widgets.*
+import com.sychev.mashaplus.utils.Resources
 import com.sychev.mashaplus.utils.VideoYT
 import com.sychev.mashaplus.utils.fadeInAnimation
 import com.sychev.mashaplus.utils.stubAnimation
@@ -57,7 +58,7 @@ fun MainScreenDesktop() {
                 }
                 Box(modifier = Modifier.fillMaxWidth()) {
                     Image(
-                        "/vocal_show.png",
+                        Resources.Images.vocal_show,
                         "Main photo",
                         MainPhotoStyle
                             .toModifier()
@@ -71,7 +72,7 @@ fun MainScreenDesktop() {
                     ) {
                         Div(ModalTitleTextStyle.toAttrs()) {
                             SpanText(
-                                "Яркость, блеск и целое музыкальное представление для вас и ваших гостей. Два блока — мировые хиты всех времен и любимые песни 90-ых в новой аранжировке от наших вокалистов и музыкантов, энергичные танцы и шикарные костюмы — вам точно нужно это прочувствовать!",
+                                Resources.Strings.yarkost_blesk,
                                 modifier = Modifier
                                     .color(palette.brand.greyText)
                                     .opacity(.8f)
@@ -92,14 +93,14 @@ fun MainScreenDesktop() {
                     ) {
                         Spacer()
                         VocalistWidget(
-                            "Вокалисты",
+                            Resources.Strings.vokalisty,
                             getMaleVocalists(),
                             modifier = Modifier,
                             sliderModifier = Modifier.width(420.px)
                         )
                         Box(Modifier.width(XXXLargePadding))
                         VocalistWidget(
-                            "Вокалистки",
+                            Resources.Strings.vokalistky,
                             getFemaleVocalists(),
                             modifier = Modifier,
                             sliderModifier = Modifier.width(420.px)
@@ -120,7 +121,7 @@ fun MainScreenDesktop() {
                                 ) {
                                     Div(ModalDescriptionTextStyle.toAttrs()) {
                                         SpanText(
-                                            "У вокалиста есть минимальный комплект оборудования, необходимый для подзвучивания",
+                                            Resources.Strings.minimalniy_komplekt,
                                             modifier = Modifier
                                                 .color(palette.brand.text)
                                         )
@@ -137,7 +138,7 @@ fun MainScreenDesktop() {
                                 ) {
                                     Div(ModalDescriptionTextStyle.toAttrs()) {
                                         SpanText(
-                                            "Количество блоков оговаривется заранее, возможны любые варианты",
+                                            Resources.Strings.kolichestvo_blokov,
                                             modifier = Modifier
                                                 .color(palette.brand.text)
                                         )
@@ -157,7 +158,7 @@ fun MainScreenDesktop() {
                         Spacer()
                         Div(HeadlineTextStyle.toAttrs()) {
                             SpanText(
-                                "Дуэт",
+                                Resources.Strings.duet,
                                 modifier = Modifier
                                     .color(palette.brand.text)
                                     .fadeInAnimation()
@@ -173,7 +174,7 @@ fun MainScreenDesktop() {
                         ) {
                             Div(ModalDescriptionTextStyleCentered.toAttrs()) {
                                 SpanText(
-                                    "Огромным приемуществом нашего проекта является взаимозаменяемость",
+                                    Resources.Strings.ogromnym_priemushestvom,
                                     modifier = Modifier
                                         .color(palette.brand.text)
                                 )
@@ -655,7 +656,7 @@ private fun ImageHeaderWithLogo() {
         }
         Box(modifier = Modifier.padding(XLargePadding).zIndex(2)) {
             Image(
-                "/masha_logo.png",
+                Resources.Images.masha_logo,
                 "Logo icon",
                 LogoStyle
                     .toModifier()
@@ -684,7 +685,7 @@ private fun ImageHeaderWithLogo() {
         ) {
             Div(MainTitleTextStyle.toAttrs()) {
                 SpanText(
-                    "Создай мероприятие по своим правилам",
+                    Resources.Strings.sozday_meropriyatie,
                     modifier = Modifier
                         .color(palette.brand.whiteText)
                         .fadeInAnimation()
@@ -693,7 +694,7 @@ private fun ImageHeaderWithLogo() {
             }
             Div(SubheadlineRegularStyle.toAttrs()) {
                 SpanText(
-                    "MASHA PLUS – музыкальный проект, который реализует все форматы\n живых выступлений. От соло-вокалистов до кавер бэнда",
+                    Resources.Strings.muzik_project,
                     modifier = Modifier
                         .whiteSpace(WhiteSpace.PreLine)
                         .color(palette.brand.whiteText)
@@ -705,7 +706,7 @@ private fun ImageHeaderWithLogo() {
             Button(ButtonStyle.toAttrs(OutlinedCircularButtonVariant)) {
                 Div(OutlineButtonTextStyle.toAttrs()) {
                     SpanText(
-                        "Оставить заявку",
+                        Resources.Strings.ostavit_zayavku,
                         modifier = Modifier
                             .color(palette.brand.whiteText)
                             .fillMaxWidth()

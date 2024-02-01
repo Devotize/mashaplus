@@ -567,7 +567,7 @@ fun ImageHeaderWithLogo() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                "/masha_logo.png",
+                Resources.Images.masha_logo,
                 "Logo icon",
                 LogoStyle.toModifier().fadeInAnimation()
             )
