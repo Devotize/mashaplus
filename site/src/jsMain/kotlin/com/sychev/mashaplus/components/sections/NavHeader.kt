@@ -3,23 +3,23 @@ package com.sychev.mashaplus.components.sections
 import androidx.compose.runtime.*
 import com.sychev.mashaplus.NavigationHeadlineTextStyle
 import com.sychev.mashaplus.components.widgets.IconButton
+import com.sychev.mashaplus.pages.LogoStyleSmall
 import com.sychev.mashaplus.toSitePalette
 import com.sychev.mashaplus.utils.fadeInAnimation
 import com.sychev.mashaplus.utils.stubAnimation
 import com.varabyte.kobweb.compose.css.functions.clamp
 import com.varabyte.kobweb.compose.dom.ElementTarget
-import com.varabyte.kobweb.compose.dom.ref
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.attrsModifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.animation.Keyframes
 import com.varabyte.kobweb.silk.components.animation.toAnimation
+import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.icons.CloseIcon
 import com.varabyte.kobweb.silk.components.icons.HamburgerIcon
 import com.varabyte.kobweb.silk.components.icons.MoonIcon
@@ -39,12 +39,9 @@ import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toAttrs
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
-import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import org.jetbrains.compose.web.attributes.AttrsScope
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
-import org.w3c.dom.HTMLDivElement
 
 val NavHeaderStyle by ComponentStyle.base {
     Modifier.fillMaxWidth().padding(1.cssRem)
@@ -160,57 +157,97 @@ fun NavHeader() {
         }
 
         Row(
-            Modifier.gap(1.5.cssRem).displayIfAtLeast(Breakpoint.LG),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier
+                .gap(4.5.cssRem)
+                .fillMaxWidth()
+                .displayIfAtLeast(Breakpoint.LG),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Div(NavigationHeadlineTextStyle.toAttrs {
-                ref { element ->
-                    element.onclick = {
-                        println("click click")
-                        element.scrollIntoView()
+            Row(
+                Modifier.gap(1.7.cssRem).weight(4),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.End,
+            ) {
+                Div(NavigationHeadlineTextStyle.toAttrs {
+                    ref { element ->
+                        element.onclick = {
+                            println("click click")
+                            element.scrollIntoView()
+                        }
+                        onDispose { /* ... */ }
                     }
-                    onDispose { /* ... */ }
+                }) {
+                    SpanText(
+                        "Контакты",
+                        modifier = Modifier
+                            .color(palette.brand.whiteText)
+                            .fadeInAnimation(),
+                    )
                 }
-            }) {
-                SpanText(
-                    "Контакты",
-                    modifier = Modifier
-                        .color(palette.brand.whiteText)
-                        .fadeInAnimation(),
-                )
+                Div(NavigationHeadlineTextStyle.toAttrs()) {
+                    SpanText(
+                        "Вокалист",
+                        modifier = Modifier
+                            .color(palette.brand.whiteText)
+                            .fadeInAnimation()
+                    )
+                }
+                Div(NavigationHeadlineTextStyle.toAttrs()) {
+                    SpanText(
+                        "Дуэт",
+                        modifier = Modifier
+                            .color(palette.brand.whiteText)
+                            .fadeInAnimation()
+                    )
+                }
+                Div(NavigationHeadlineTextStyle.toAttrs()) {
+                    SpanText(
+                        "Вокальное шоу",
+                        modifier = Modifier
+                            .color(palette.brand.whiteText)
+                            .fadeInAnimation()
+                    )
+                }
+                Div(NavigationHeadlineTextStyle.toAttrs()) {
+                    SpanText(
+                        "ULTIMA BAND",
+                        modifier = Modifier
+                            .color(palette.brand.whiteText)
+                            .fadeInAnimation()
+                    )
+                }
             }
-            Div(NavigationHeadlineTextStyle.toAttrs()) {
-                SpanText(
-                    "Вокалист",
-                    modifier = Modifier
-                        .color(palette.brand.whiteText)
-                        .fadeInAnimation()
-                )
-            }
-            Div(NavigationHeadlineTextStyle.toAttrs()) {
-                SpanText(
-                    "Дуэт",
-                    modifier = Modifier
-                        .color(palette.brand.whiteText)
-                        .fadeInAnimation()
-                )
-            }
-            Div(NavigationHeadlineTextStyle.toAttrs()) {
-                SpanText(
-                    "Вокальное шоу",
-                    modifier = Modifier
-                        .color(palette.brand.whiteText)
-                        .fadeInAnimation()
-                )
-            }
-            Div(NavigationHeadlineTextStyle.toAttrs()) {
-                SpanText(
-                    "ULTIMA BAND",
-                    modifier = Modifier
-                        .color(palette.brand.whiteText)
-                        .fadeInAnimation()
-                )
+            Row(
+                modifier = Modifier.gap(1.7.cssRem).weight(3),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Start,
+            ) {
+                Link("https://vk.com/masha_plus_band") {
+                    val imgResVK = if (ColorMode.current.isDark) {
+                        "/vk_logo.png"
+                    } else {
+                        "/vk_logo_black.png"
+                    }
+                    Image(
+                        imgResVK,
+                        "",
+                        LogoStyleSmall
+                            .toModifier(),
+                    )
+                }
+                Link("https://instagram.com/masha_plus_band?igshid=OGQ5ZDc2ODk2ZA==") {
+                    val imgResInst = if (ColorMode.current.isDark) {
+                        "/inst_logo.png"
+                    } else {
+                        "/inst_logo_black.png"
+                    }
+                    Image(
+                        imgResInst,
+                        "",
+                        LogoStyleSmall
+                            .toModifier(),
+                    )
+                }
             }
         }
     }
