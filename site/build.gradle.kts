@@ -21,7 +21,7 @@ kobweb {
                 link(rel = "preconnect", href = "https://fonts.googleapis.com")
                 link(rel = "preconnect", href = "https://fonts.gstatic.com") { attributes["crossorigin"] = "" }
                 link(
-                    href = "https://fonts.googleapis.com/css2?family=Source+Sans+3&display=swap",
+                    href = "https://fonts.googleapis.com/css2?family=Roboto&display=swap",
                     rel = "stylesheet"
                 )
             }

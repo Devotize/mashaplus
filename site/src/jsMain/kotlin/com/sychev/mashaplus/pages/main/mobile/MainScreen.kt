@@ -1,24 +1,20 @@
 package com.sychev.mashaplus.pages.main.mobile
 
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import com.sychev.mashaplus.*
 import com.sychev.mashaplus.components.widgets.Card
 import com.sychev.mashaplus.components.widgets.Divider
 import com.sychev.mashaplus.components.widgets.VocalistWidget
 import com.sychev.mashaplus.models.getFemaleVocalists
+import com.sychev.mashaplus.models.getMainPhotos
 import com.sychev.mashaplus.models.getMaleVocalists
 import com.sychev.mashaplus.models.getVocalistsCouples
-import com.sychev.mashaplus.pages.HeroContainerStyle
-import com.sychev.mashaplus.pages.LogoStyleSmall
-import com.sychev.mashaplus.pages.SectionContainerStyle
-import com.sychev.mashaplus.pages.main.widgets.ImageHeaderWithLogo
+import com.sychev.mashaplus.pages.*
+import com.sychev.mashaplus.pages.main.widgets.BottomPhotoGradientStyle
 import com.sychev.mashaplus.pages.main.widgets.MainPhotoStyle
 import com.sychev.mashaplus.pages.main.widgets.SectionPhotoStyle
 import com.sychev.mashaplus.pages.main.widgets.TestimonialsSection
-import com.sychev.mashaplus.utils.VideoYT
-import com.sychev.mashaplus.utils.fadeInAnimation
-import com.sychev.mashaplus.utils.slideLeftAnimation
-import com.sychev.mashaplus.utils.slideRightAnimation
+import com.sychev.mashaplus.utils.*
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -29,6 +25,7 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.navigation.OpenLinkStrategy
+import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.layout.breakpoint.displayUntil
@@ -38,9 +35,11 @@ import com.varabyte.kobweb.silk.components.style.toAttrs
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import kotlinx.coroutines.delay
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Button
 import org.jetbrains.compose.web.dom.Div
+import kotlin.time.Duration.Companion.seconds
 
 @Composable
 fun MainScreenMobile() {
@@ -498,5 +497,90 @@ private fun VideosSection() {
         ) {
             VideoYT("https://www.youtube.com/embed/aEh4p6dUbvU?si=sZIsdey5lwHZ-rBx")
         }
+    }
+}
+
+
+@Composable
+fun ImageHeaderWithLogo() {
+    Box(modifier = Modifier.fillMaxWidth()) {
+        val mainPhotos = getMainPhotos()
+        var mainPhoto by remember { mutableStateOf(mainPhotos.first()) }
+        var previousMainPhoto by remember { mutableStateOf<String?>(null) }
+        LaunchedEffect(true) {
+            var i = 1
+            while (true) {
+                delay(2.seconds)
+                mainPhoto = mainPhotos[i]
+                if (i == mainPhotos.lastIndex) {
+                    i = 0
+                } else {
+                    i++
+                }
+            }
+        }
+        previousMainPhoto?.let {
+            Image(
+                it,
+                "Main photo",
+                MainPhotoStyle
+                    .toModifier(),
+            )
+        }
+
+        key(mainPhoto) {
+            Image(
+                mainPhoto,
+                "Main photo",
+                MainPhotoStyle
+                    .toModifier()
+                    .animation(
+                        MainPhotoSlideInAnim.toAnimation(
+                            duration = 300.ms,
+                            timingFunction = AnimationTimingFunction.EaseIn,
+                            direction = AnimationDirection.Normal,
+                            fillMode = AnimationFillMode.Backwards,
+                        )
+                    )
+                    .onAnimationEnd {
+                        previousMainPhoto = mainPhoto
+                    },
+            )
+        }
+
+        val mainPhotoGradientRes = when (ColorMode.current) {
+            ColorMode.DARK -> "/main_image_gradient_dark.png"
+            ColorMode.LIGHT -> "/main_image_gradient_light.png"
+        }
+        Image(
+            mainPhotoGradientRes,
+            "gradient dark",
+            BottomPhotoGradientStyle.toModifier()
+                .align(Alignment.BottomCenter).stubAnimation(),
+        )
+        val palette = ColorMode.current.toSitePalette()
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter)
+                .zIndex(2f),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                "/masha_logo.png",
+                "Logo icon",
+                LogoStyle.toModifier().fadeInAnimation()
+            )
+            Div(MainTitleTextStyle.toAttrs()) {
+                SpanText(
+                    "Уникальный музыкальный проект, аналогов которого нет в Санкт-Петербурге.",
+                    modifier = Modifier
+                        .color(palette.brand.whiteText)
+                        .fadeInAnimation()
+                        .textShadow(offsetY = 1.px, offsetX = 1.px, blurRadius = 1.px, color = Colors.Black)
+                )
+            }
+        }
+
     }
 }
