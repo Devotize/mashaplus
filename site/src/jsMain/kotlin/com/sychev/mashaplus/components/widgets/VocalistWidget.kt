@@ -3,7 +3,7 @@ package com.sychev.mashaplus.components.widgets
 import androidx.compose.runtime.Composable
 import com.sychev.mashaplus.*
 import com.sychev.mashaplus.models.Vocalist
-import com.sychev.mashaplus.pages.SliderPhotoStyle
+import com.sychev.mashaplus.pages.main.widgets.SliderPhotoStyle
 import com.sychev.mashaplus.utils.fadeInAnimation
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column

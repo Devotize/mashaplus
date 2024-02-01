@@ -30,7 +30,7 @@ fun initSiteStyles(ctx: InitSilkContext) {
                 "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
                 "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "sans-serif", "Source Sans 3"
             )
-            .fontSize(18.px)
+            .fontSize(16.px)
             .lineHeight(1.5)
     }
 
@@ -73,11 +73,12 @@ val Headline2TextStyle by ComponentStyle.base {
         .textAlign(TextAlign.Start)
         .lineHeight(1.1)
 }
-val NumberHeadlineTextStyle by ComponentStyle.base {
+val NavigationHeadlineTextStyle by ComponentStyle.base {
     Modifier
         .fontFamily("Source Sans 3")
-        .fontSize(1.3.cssRem)
-        .textAlign(TextAlign.End)
+        .fontSize(0.9.cssRem)
+        .textAlign(TextAlign.Start)
+        .fontWeight(FontWeight.Thin)
         .lineHeight(1.1)
 }
 

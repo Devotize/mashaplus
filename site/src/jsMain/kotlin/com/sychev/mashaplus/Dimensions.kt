@@ -36,7 +36,7 @@ val LargePadding = 24.px
 /**
  * 32.px
  */
-val XLargePadding = 24.px
+val XLargePadding = 32.px
 
 /**
  * 48.px

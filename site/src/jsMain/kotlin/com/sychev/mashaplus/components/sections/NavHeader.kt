@@ -1,19 +1,21 @@
 package com.sychev.mashaplus.components.sections
 
 import androidx.compose.runtime.*
-import com.sychev.mashaplus.NumberHeadlineTextStyle
+import com.sychev.mashaplus.NavigationHeadlineTextStyle
 import com.sychev.mashaplus.components.widgets.IconButton
 import com.sychev.mashaplus.toSitePalette
 import com.sychev.mashaplus.utils.fadeInAnimation
 import com.sychev.mashaplus.utils.stubAnimation
 import com.varabyte.kobweb.compose.css.functions.clamp
 import com.varabyte.kobweb.compose.dom.ElementTarget
+import com.varabyte.kobweb.compose.dom.ref
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.attrsModifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.animation.Keyframes
@@ -37,9 +39,12 @@ import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toAttrs
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import org.jetbrains.compose.web.attributes.AttrsScope
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
+import org.w3c.dom.HTMLDivElement
 
 val NavHeaderStyle by ComponentStyle.base {
     Modifier.fillMaxWidth().padding(1.cssRem)
@@ -113,7 +118,11 @@ enum class SideMenuState {
 @Composable
 fun NavHeader() {
     val palette = ColorMode.current.toSitePalette()
-    Row(NavHeaderStyle.toModifier().fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+    Row(
+        NavHeaderStyle.toModifier().fillMaxWidth().zIndex(2),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
         Row(
             Modifier
                 .fillMaxWidth()
@@ -137,14 +146,13 @@ fun NavHeader() {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                ColorModeButton()
                 Spacer()
-                Div(NumberHeadlineTextStyle.toAttrs()) {
+                Div(NavigationHeadlineTextStyle.toAttrs()) {
                     SpanText(
                         "8 (931) 951-20-00",
                         modifier = Modifier
                             .color(palette.brand.whiteText)
-                            .fadeInAnimation()
+                            .fadeInAnimation(),
                     )
                 }
             }
@@ -154,12 +162,51 @@ fun NavHeader() {
         Row(
             Modifier.gap(1.5.cssRem).displayIfAtLeast(Breakpoint.LG),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
-            ColorModeButton()
-            Div(NumberHeadlineTextStyle.toAttrs()) {
+            Div(NavigationHeadlineTextStyle.toAttrs {
+                ref { element ->
+                    element.onclick = {
+                        println("click click")
+                        element.scrollIntoView()
+                    }
+                    onDispose { /* ... */ }
+                }
+            }) {
                 SpanText(
-                    "8 (931) 951-20-00",
+                    "Контакты",
+                    modifier = Modifier
+                        .color(palette.brand.whiteText)
+                        .fadeInAnimation(),
+                )
+            }
+            Div(NavigationHeadlineTextStyle.toAttrs()) {
+                SpanText(
+                    "Вокалист",
+                    modifier = Modifier
+                        .color(palette.brand.whiteText)
+                        .fadeInAnimation()
+                )
+            }
+            Div(NavigationHeadlineTextStyle.toAttrs()) {
+                SpanText(
+                    "Дуэт",
+                    modifier = Modifier
+                        .color(palette.brand.whiteText)
+                        .fadeInAnimation()
+                )
+            }
+            Div(NavigationHeadlineTextStyle.toAttrs()) {
+                SpanText(
+                    "Вокальное шоу",
+                    modifier = Modifier
+                        .color(palette.brand.whiteText)
+                        .fadeInAnimation()
+                )
+            }
+            Div(NavigationHeadlineTextStyle.toAttrs()) {
+                SpanText(
+                    "ULTIMA BAND",
                     modifier = Modifier
                         .color(palette.brand.whiteText)
                         .fadeInAnimation()
