@@ -4,6 +4,7 @@ import androidx.compose.runtime.*
 import com.sychev.mashaplus.NavigationHeadlineTextStyle
 import com.sychev.mashaplus.components.widgets.IconButton
 import com.sychev.mashaplus.pages.LogoStyleSmall
+import com.sychev.mashaplus.provider.ScrollToViewEventProvider
 import com.sychev.mashaplus.toSitePalette
 import com.sychev.mashaplus.utils.fadeInAnimation
 import com.sychev.mashaplus.utils.stubAnimation
@@ -171,8 +172,7 @@ fun NavHeader() {
                 Div(NavigationHeadlineTextStyle.toAttrs {
                     ref { element ->
                         element.onclick = {
-                            println("click click")
-                            element.scrollIntoView()
+                            ScrollToViewEventProvider.sendContactsScrollEvent()
                         }
                         onDispose { /* ... */ }
                     }

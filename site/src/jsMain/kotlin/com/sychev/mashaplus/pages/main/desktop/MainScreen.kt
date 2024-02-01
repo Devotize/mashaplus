@@ -10,12 +10,14 @@ import com.sychev.mashaplus.models.getMaleVocalists
 import com.sychev.mashaplus.models.getVocalistsCouples
 import com.sychev.mashaplus.pages.*
 import com.sychev.mashaplus.pages.main.widgets.*
+import com.sychev.mashaplus.provider.ScrollToViewEventProvider
 import com.sychev.mashaplus.utils.Resources
 import com.sychev.mashaplus.utils.VideoYT
 import com.sychev.mashaplus.utils.fadeInAnimation
 import com.sychev.mashaplus.utils.stubAnimation
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.WhiteSpace
+import com.varabyte.kobweb.compose.dom.ref
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
@@ -428,7 +430,14 @@ private fun VariousEventsSection() {
                 }
             }
             Spacer()
-            Column(Modifier.width(SectionPhotoWidthMD)) {
+            Column(
+                ref = ref {
+                    ScrollToViewEventProvider.setContactsScrollEvent {
+                        it.scrollIntoView()
+                    }
+                },
+                modifier = Modifier.width(SectionPhotoWidthMD)
+            ) {
                 Div(HeadlineTextStyle.toAttrs()) {
                     SpanText(
                         "Разнообразный состав",
