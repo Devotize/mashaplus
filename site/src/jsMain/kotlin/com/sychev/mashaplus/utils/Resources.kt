@@ -17,11 +17,20 @@ object Resources {
         const val muzik_project =
             "MASHA PLUS – музыкальный проект, который реализует все форматы\n живых выступлений. От соло-вокалистов до кавер бэнда"
         const val sozday_meropriyatie = "Создай мероприятие по своим правилам"
+        const val sostav_gruppy = "18  ВОКАЛИСТОВ  10  ИНСТРУМЕНТАЛИСТОВ  5  ЛЕТ"
+        const val nashi_yslygi = "НАШИ УСЛУГИ"
+        const val vacalnoye_show = "ВОКАЛЬНОЕ ШОУ"
+        const val duet_uppercase = "ДУЭТ"
+        const val ultima_band = "ULTIMA BAND"
     }
 
     object Images {
         const val vocal_show = "/vocal_show.png"
         const val masha_logo = "/masha_logo.png"
+        const val two_girls = "/two_girls.png"
+        const val three_girls = "/three_girls.png"
+        const val one_girl = "/one_girl.png"
+        const val band = "/band.png"
     }
 
 }

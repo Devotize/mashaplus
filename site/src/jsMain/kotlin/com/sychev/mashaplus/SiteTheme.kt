@@ -25,6 +25,8 @@ class SitePalette(
         val text: Color,
         val greyText: Color,
         val surface: Color,
+        val textReversed: Color,
+        val shadow: Color,
     )
 }
 
@@ -39,7 +41,9 @@ object SitePalettes {
             whiteText = DesignWhiteText,
             text = DesignTextLight,
             greyText = DesignGreyTextLight,
-            surface = DesignSurfaceLight
+            surface = DesignSurfaceLight,
+            textReversed = DesignTextDark,
+            shadow = DesignShadow,
         )
     )
     val dark = SitePalette(
@@ -52,7 +56,9 @@ object SitePalettes {
             whiteText = DesignWhiteText,
             text = DesignTextDark,
             greyText = DesignGreyTextDark,
-            surface = DesignSurfaceDark
+            surface = DesignSurfaceDark,
+            textReversed = DesignTextLight,
+            shadow = DesignShadow,
         )
     )
 }
@@ -81,6 +87,7 @@ val DesignSurfaceDark = Color.rgb(0x312a47)
 //shared
 val DesignWhiteText = Color.rgb(0xffffff)
 val DesignAccent = Color.rgb(0x5bf6f6)
+val DesignShadow = Color.rgb(0x5F38D9)
 
 //light
 val DesignSurfaceLight = Color.rgb(0xd9d5e6)

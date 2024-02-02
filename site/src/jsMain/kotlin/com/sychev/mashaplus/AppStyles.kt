@@ -6,6 +6,7 @@ import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
 import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.components.layout.HorizontalDividerStyle
@@ -75,14 +76,6 @@ val Headline2TextStyle by ComponentStyle.base {
         .textAlign(TextAlign.Start)
         .lineHeight(1.1)
 }
-val NavigationHeadlineTextStyle by ComponentStyle.base {
-    Modifier
-        .fontFamily(Fonts.MainFontName)
-        .fontSize(0.9.cssRem)
-        .textAlign(TextAlign.Start)
-        .fontWeight(FontWeight.Thin)
-        .lineHeight(1.1)
-}
 
 val ButtonTextStyle by ComponentStyle.base {
     Modifier
@@ -141,7 +134,17 @@ val DefaultButtonVariant by ButtonStyle.addVariantBase {
 }
 
 
-// New design text styles
+/* New design text styles */
+
+val NavigationHeadlineTextStyle by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(1.cssRem)
+        .textAlign(TextAlign.Start)
+        .fontWeight(FontWeight.Thin)
+        .lineHeight(1.1)
+}
+
 val MainTitleTextStyle by ComponentStyle {
     base {
         Modifier
@@ -154,28 +157,50 @@ val MainTitleTextStyle by ComponentStyle {
     Breakpoint.LG {
         Modifier
             .fontFamily(Fonts.MainFontName)
-            .fontSize(2.4.cssRem)
+            .fontSize(2.7.cssRem)
             .textAlign(TextAlign.Center)
             .fontWeight(FontWeight.ExtraBold)
             .color(colorMode.toPalette().color.toRgb())
     }
 }
 
-val SubheadlineRegularStyle by ComponentStyle {
+val SubheadlineRegularStyle by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
-        .fontSize(1.2.cssRem)
+        .fontSize(1.4.cssRem)
         .textAlign(TextAlign.Start)
         .fontWeight(FontWeight.Medium)
         .color(colorMode.toPalette().color.toRgb())
 }
 
-val OutlineButtonTextStyle by ComponentStyle {
+val TitleOutlinedStyle by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
+        .fontSize(2.5.cssRem)
         .textAlign(TextAlign.Center)
-        .color(colorMode.toPalette().color.toRgb())
+        .fontWeight(FontWeight.ExtraBold)
+        .styleModifier {
+            property("-webkit-text-fill-color", "transparent")
+            property("-webkit-text-stroke", "0.2px")
+        }
 }
+
+val TitleStyle by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(2.6.cssRem)
+        .textAlign(TextAlign.Center)
+        .fontWeight(FontWeight.ExtraBold)
+}
+
+val GritTextTitle by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(1.9.cssRem)
+        .textAlign(TextAlign.Center)
+        .fontWeight(FontWeight.Bold)
+}
+
 
 /* New design buttons */
 val OutlinedCircularButtonVariant by ButtonStyle.addVariantBase {
@@ -184,6 +209,13 @@ val OutlinedCircularButtonVariant by ButtonStyle.addVariantBase {
         .borderRadius(1.6.cssRem, 1.6.cssRem)
         .backgroundColor(Colors.Transparent)
         .border(width = 2.px, style = LineStyle.Solid, color = colorMode.toPalette().color.toRgb().copyf(alpha = 0.8f))
-        .fontSize(1.3.cssRem)
+        .fontSize(1.5.cssRem)
         .fontWeight(FontWeight.SemiBold)
+}
+
+val OutlineButtonTextStyle by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .textAlign(TextAlign.Center)
+        .color(colorMode.toPalette().color.toRgb())
 }

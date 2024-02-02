@@ -30,7 +30,9 @@ import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
 import com.varabyte.kobweb.silk.components.graphics.Image
+import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.breakpoint.displayIfAtLeast
+import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toAttrs
@@ -51,6 +53,9 @@ fun MainScreenDesktop() {
             Column(Modifier.gap(2.cssRem).width(100.percent)) {
                 val palette = ColorMode.current.toSitePalette()
                 ImageHeaderWithLogo()
+                MembersCountSection(modifier = Modifier.fillMaxWidth().padding(leftRight = XXXXXLargePadding))
+                Box(Modifier.height(XXXLargePadding))
+                OurServicesSections(modifier = Modifier.fillMaxWidth().padding(leftRight = XXXXXLargePadding))
                 Column(modifier = Modifier.padding(XXSmallPadding).fillMaxWidth()) {
                     FeaturesTopSection()
                     Divider(width = 100.percent)
@@ -318,6 +323,140 @@ fun MainScreenDesktop() {
                         Spacer()
                     }
                     Box(Modifier.height(MediumPadding))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun MembersCountSection(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier.gap(1.4.cssRem),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Div(TitleOutlinedStyle.toAttrs()) {
+            SpanText(
+                text = Resources.Strings.sostav_gruppy,
+                modifier = Modifier
+                    .fadeInAnimation()
+            )
+        }
+        Div(TitleOutlinedStyle.toAttrs()) {
+            SpanText(
+                Resources.Strings.sostav_gruppy,
+                modifier = Modifier
+                    .fadeInAnimation()
+                    .opacity(.6)
+            )
+        }
+        Div(TitleOutlinedStyle.toAttrs()) {
+            SpanText(
+                Resources.Strings.sostav_gruppy,
+                modifier = Modifier
+                    .fadeInAnimation()
+                    .opacity(.33)
+            )
+        }
+    }
+}
+
+@Composable
+fun OurServicesSections(modifier: Modifier = Modifier) {
+    val palette = ColorMode.current.toSitePalette()
+    Column(
+        modifier = modifier.gap(2.cssRem),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Div(TitleStyle.toAttrs()) {
+            SpanText(
+                Resources.Strings.nashi_yslygi,
+                modifier = Modifier
+                    .fadeInAnimation()
+            )
+        }
+        SimpleGrid(
+            numColumns = numColumns(4),
+            modifier = Modifier
+                .background(palette.brand.text)
+                .borderRadius(3.6.cssRem, 3.6.cssRem)
+                .boxShadow(
+                    offsetX = 1.px,
+                    offsetY = 1.px,
+                    blurRadius = 20.px,
+                    spreadRadius = 3.px,
+                    color = palette.brand.shadow,
+                    inset = false,
+                ),
+        ) {
+            Box(modifier = Modifier, contentAlignment = Alignment.Center) {
+                Div(GritTextTitle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.nashi_yslygi,
+                        modifier = Modifier
+                            .fadeInAnimation()
+                            .color(palette.brand.textReversed)
+                    )
+                }
+            }
+            Image(
+                Resources.Images.two_girls,
+                "Main photo",
+                WrapPhotoStyle
+                    .toModifier()
+                    .fadeInAnimation(),
+            )
+            Box(modifier = Modifier, contentAlignment = Alignment.Center) {
+                Div(GritTextTitle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.vacalnoye_show,
+                        modifier = Modifier
+                            .fadeInAnimation()
+                            .color(palette.brand.textReversed)
+                    )
+                }
+            }
+            Image(
+                Resources.Images.three_girls,
+                "Main photo",
+                WrapPhotoStyle
+                    .toModifier()
+                    .fadeInAnimation()
+                    .borderRadius(topRight = 3.6.cssRem),
+            )
+            Image(
+                Resources.Images.one_girl,
+                "Main photo",
+                WrapPhotoStyle
+                    .toModifier()
+                    .borderRadius(bottomLeft = 3.6.cssRem)
+                    .fadeInAnimation(),
+            )
+            Box(modifier = Modifier, contentAlignment = Alignment.Center) {
+                Div(GritTextTitle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.duet_uppercase,
+                        modifier = Modifier
+                            .fadeInAnimation()
+                            .color(palette.brand.textReversed)
+                    )
+                }
+            }
+            Image(
+                Resources.Images.band,
+                "Main photo",
+                WrapPhotoStyle
+                    .toModifier()
+                    .fadeInAnimation(),
+            )
+            Box(modifier = Modifier, contentAlignment = Alignment.Center) {
+                Div(GritTextTitle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.ultima_band,
+                        modifier = Modifier
+                            .fadeInAnimation()
+                            .color(palette.brand.textReversed)
+                    )
                 }
             }
         }

@@ -15,6 +15,7 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.icons.mdi.MdiStar
 import com.varabyte.kobweb.silk.components.style.ComponentStyle
+import com.varabyte.kobweb.silk.components.style.base
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toAttrs
 import com.varabyte.kobweb.silk.components.text.SpanText
@@ -72,6 +73,14 @@ val SliderPhotoStyle by ComponentStyle {
             .backgroundSize(BackgroundSize.Cover)
     }
     Breakpoint.LG { Modifier.fillMaxWidth().height(SliderPhotoHeightMD).objectFit(ObjectFit.Cover) }
+}
+
+val WrapPhotoStyle by ComponentStyle.base {
+    Modifier
+        .width(375.px)
+        .height(399.px)
+        .objectFit(ObjectFit.Cover)
+        .backgroundSize(BackgroundSize.Inherit)
 }
 
 @Composable
