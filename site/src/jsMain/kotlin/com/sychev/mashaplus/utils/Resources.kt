@@ -22,6 +22,7 @@ object Resources {
         const val vacalnoye_show = "ВОКАЛЬНОЕ ШОУ"
         const val duet_uppercase = "ДУЭТ"
         const val ultima_band = "ULTIMA BAND"
+        const val vokalistky_uppercase = "ВОКАЛИСТКИ"
     }
 
     object Images {
@@ -31,6 +32,16 @@ object Resources {
         const val three_girls = "/three_girls.png"
         const val one_girl = "/one_girl.png"
         const val band = "/band.png"
+        const val ula_silhouette = "/ula_silhouette.png"
+        const val tanya_silhouette = "/tanya_silhouette.png"
+        const val sasha_silhouette = "/sasha_silhouette.png"
+        const val liza_silhouette = "/liza_silhouette.png"
+        const val devochka_left = "/devochka_left.png"
+        const val devochka_right = "/devochka_right.png"
+        const val carousel_girl_1 = "/kto_ty.png"
+        const val carousel_girl_2 = "/empty_eyes.png"
+        const val carousel_girl_3 = "/paradise.png"
+        const val carousel_girl_4 = "/ya_eto_ya.png"
     }
 
 }

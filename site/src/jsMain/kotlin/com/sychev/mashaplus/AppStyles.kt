@@ -201,6 +201,14 @@ val GritTextTitle by ComponentStyle.base {
         .fontWeight(FontWeight.Bold)
 }
 
+val CarouselTextTitle by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(3.2.cssRem)
+        .textAlign(TextAlign.Center)
+        .fontWeight(FontWeight.ExtraBold)
+}
+
 
 /* New design buttons */
 val OutlinedCircularButtonVariant by ButtonStyle.addVariantBase {

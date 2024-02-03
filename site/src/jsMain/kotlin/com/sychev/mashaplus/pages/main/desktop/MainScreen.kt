@@ -26,6 +26,7 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
@@ -56,6 +57,7 @@ fun MainScreenDesktop() {
                 MembersCountSection(modifier = Modifier.fillMaxWidth().padding(leftRight = XXXXXLargePadding))
                 Box(Modifier.height(XXXLargePadding))
                 OurServicesSections(modifier = Modifier.fillMaxWidth().padding(leftRight = XXXXXLargePadding))
+                VocalistkySection(modifier = Modifier.fillMaxWidth().padding(leftRight = XXXLargePadding))
                 Column(modifier = Modifier.padding(XXSmallPadding).fillMaxWidth()) {
                     FeaturesTopSection()
                     Divider(width = 100.percent)
@@ -402,7 +404,7 @@ fun OurServicesSections(modifier: Modifier = Modifier) {
             Image(
                 Resources.Images.two_girls,
                 "Main photo",
-                WrapPhotoStyle
+                GridPhotoStyle
                     .toModifier()
                     .fadeInAnimation(),
             )
@@ -419,7 +421,7 @@ fun OurServicesSections(modifier: Modifier = Modifier) {
             Image(
                 Resources.Images.three_girls,
                 "Main photo",
-                WrapPhotoStyle
+                GridPhotoStyle
                     .toModifier()
                     .fadeInAnimation()
                     .borderRadius(topRight = 3.6.cssRem),
@@ -427,7 +429,7 @@ fun OurServicesSections(modifier: Modifier = Modifier) {
             Image(
                 Resources.Images.one_girl,
                 "Main photo",
-                WrapPhotoStyle
+                GridPhotoStyle
                     .toModifier()
                     .borderRadius(bottomLeft = 3.6.cssRem)
                     .fadeInAnimation(),
@@ -445,7 +447,7 @@ fun OurServicesSections(modifier: Modifier = Modifier) {
             Image(
                 Resources.Images.band,
                 "Main photo",
-                WrapPhotoStyle
+                GridPhotoStyle
                     .toModifier()
                     .fadeInAnimation(),
             )
@@ -459,6 +461,114 @@ fun OurServicesSections(modifier: Modifier = Modifier) {
                     )
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun VocalistkySection(modifier: Modifier) {
+    val palette = ColorMode.current.toSitePalette()
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
+    ) {
+        Div(CarouselTextTitle.toModifier().padding(right = XXLargePadding).toAttrs()) {
+            SpanText(
+                Resources.Strings.vokalistky_uppercase,
+                modifier = Modifier
+                    .fadeInAnimation()
+                    .color(palette.brand.text)
+            )
+        }
+        Box(modifier = Modifier.padding(bottom = carouselPhotoHeight * 2.5, left = carouselPhotoWidth.div(2))) {
+            Image(
+                Resources.Images.ula_silhouette,
+                "",
+                CarouselPhotoStyle
+                    .toModifier()
+                    .fadeInAnimation(),
+            )
+        }
+        Box(modifier = Modifier.padding(bottom = carouselPhotoHeight * 2.5, right = carouselPhotoWidth)) {
+            Image(
+                Resources.Images.tanya_silhouette,
+                "",
+                CarouselPhotoStyle
+                    .toModifier()
+                    .fadeInAnimation(),
+            )
+        }
+        Box(modifier = Modifier.padding(bottom = carouselPhotoHeight * 1.8, right = carouselPhotoWidth * 2.5)) {
+            Image(
+                Resources.Images.liza_silhouette,
+                "",
+                CarouselPhotoStyle
+                    .toModifier()
+                    .fadeInAnimation(),
+            )
+        }
+        Box(modifier = Modifier.padding(right = carouselPhotoWidth * 3.2)) {
+            Image(
+                Resources.Images.devochka_left,
+                "",
+                CarouselPhotoStyle
+                    .toModifier()
+                    .fadeInAnimation(),
+            )
+        }
+        Box(modifier = Modifier.padding(top = carouselPhotoHeight * 1.5, right = carouselPhotoWidth * 2.4)) {
+            Image(
+                Resources.Images.carousel_girl_1,
+                "",
+                CarouselPhotoStyle
+                    .toModifier()
+                    .fadeInAnimation(),
+            )
+        }
+        Box(modifier = Modifier.padding(top = carouselPhotoHeight * 2.5, right = carouselPhotoWidth)) {
+            Image(
+                Resources.Images.carousel_girl_4,
+                "",
+                CarouselPhotoStyle
+                    .toModifier()
+                    .fadeInAnimation(),
+            )
+        }
+        Box(modifier = Modifier.padding(top = carouselPhotoHeight * 2.1, left = carouselPhotoWidth.div(2.5))) {
+            Image(
+                Resources.Images.carousel_girl_3,
+                "",
+                CarouselPhotoStyle
+                    .toModifier()
+                    .fadeInAnimation(),
+            )
+        }
+        Box(modifier = Modifier.padding(top = carouselPhotoHeight * 1.6, left = carouselPhotoWidth.times(1.4))) {
+            Image(
+                Resources.Images.carousel_girl_2,
+                "",
+                CarouselPhotoStyle
+                    .toModifier()
+                    .fadeInAnimation(),
+            )
+        }
+        Box(modifier = Modifier.padding(top = carouselPhotoHeight.div(3), left = carouselPhotoWidth.times(2.3))) {
+            Image(
+                Resources.Images.devochka_right,
+                "",
+                CarouselPhotoStyle
+                    .toModifier()
+                    .fadeInAnimation(),
+            )
+        }
+        Box(modifier = Modifier.padding(bottom = carouselPhotoHeight * 1.5, left = carouselPhotoWidth.times(1.8))) {
+            Image(
+                Resources.Images.sasha_silhouette,
+                "",
+                CarouselPhotoStyle
+                    .toModifier()
+                    .fadeInAnimation(),
+            )
         }
     }
 }

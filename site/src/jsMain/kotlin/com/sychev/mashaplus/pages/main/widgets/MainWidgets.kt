@@ -75,12 +75,23 @@ val SliderPhotoStyle by ComponentStyle {
     Breakpoint.LG { Modifier.fillMaxWidth().height(SliderPhotoHeightMD).objectFit(ObjectFit.Cover) }
 }
 
-val WrapPhotoStyle by ComponentStyle.base {
+val GridPhotoStyle by ComponentStyle.base {
     Modifier
         .width(375.px)
         .height(399.px)
         .objectFit(ObjectFit.Cover)
         .backgroundSize(BackgroundSize.Inherit)
+}
+
+val carouselPhotoWidth = 285.px
+val carouselPhotoHeight = 365.px
+
+val CarouselPhotoStyle by ComponentStyle.base {
+    Modifier
+        .width(carouselPhotoWidth)
+        .height(carouselPhotoHeight)
+        .objectFit(ObjectFit.ScaleDown)
+        .backgroundSize(BackgroundSize.Cover)
 }
 
 @Composable
