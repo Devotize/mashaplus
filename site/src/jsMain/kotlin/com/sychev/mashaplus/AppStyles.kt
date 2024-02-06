@@ -142,7 +142,7 @@ val NavigationHeadlineTextStyle by ComponentStyle.base {
         .fontFamily(Fonts.MainFontName)
         .fontSize(1.cssRem)
         .textAlign(TextAlign.Start)
-        .fontWeight(FontWeight.Thin)
+        .fontWeight(FontWeight.Normal)
         .lineHeight(1.1)
 }
 
@@ -152,15 +152,15 @@ val MainTitleTextStyle by ComponentStyle {
             .fontFamily(Fonts.MainFontName)
             .fontSize(1.3.cssRem)
             .textAlign(TextAlign.Center)
-            .fontWeight(FontWeight.ExtraBold)
+            .fontWeight(FontWeight.Bold)
             .color(colorMode.toPalette().color.toRgb())
     }
     Breakpoint.LG {
         Modifier
             .fontFamily(Fonts.MainFontName)
             .fontSize(2.7.cssRem)
-            .textAlign(TextAlign.Center)
-            .fontWeight(FontWeight.ExtraBold)
+            .textAlign(TextAlign.Start)
+            .fontWeight(FontWeight.Bold)
             .color(colorMode.toPalette().color.toRgb())
     }
 }
@@ -170,7 +170,7 @@ val SubheadlineRegularStyle by ComponentStyle.base {
         .fontFamily(Fonts.MainFontName)
         .fontSize(1.4.cssRem)
         .textAlign(TextAlign.Start)
-        .fontWeight(FontWeight.Medium)
+        .fontWeight(FontWeight.Normal)
         .color(colorMode.toPalette().color.toRgb())
 }
 
@@ -202,6 +202,21 @@ val GritTextTitle by ComponentStyle.base {
         .fontWeight(FontWeight.Bold)
 }
 
+val SmallTitleStyle by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(1.cssRem)
+        .textAlign(TextAlign.Center)
+        .fontWeight(FontWeight.Light)
+}
+
+val HugeTextStyle by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(4.0.cssRem)
+        .textAlign(TextAlign.Center)
+}
+
 val CarouselTextTitle by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
@@ -218,12 +233,12 @@ val OutlinedCircularButtonVariant by ButtonStyle.addVariantBase {
         .borderRadius(1.6.cssRem, 1.6.cssRem)
         .backgroundImage(linearGradient(LinearGradient.Direction.ToRight, GradientLeft, GradientRight))
         .fontSize(1.5.cssRem)
-        .fontWeight(FontWeight.SemiBold)
 }
 
 val OutlineButtonTextStyle by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
         .textAlign(TextAlign.Center)
+        .fontWeight(FontWeight.Medium)
         .color(colorMode.toPalette().color.toRgb())
 }

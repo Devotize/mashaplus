@@ -3,6 +3,7 @@ package com.sychev.mashaplus.components.widgets
 import androidx.compose.runtime.Composable
 import com.sychev.mashaplus.XXSmallPadding
 import com.sychev.mashaplus.toSitePalette
+import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -20,16 +21,21 @@ fun Card(
     color: Color = ColorMode.current.toSitePalette().brand.surface,
     contentAlignment: Alignment.Horizontal = Alignment.CenterHorizontally,
     paddingValues: CSSLengthOrPercentageValue = XXSmallPadding,
+    borderRadius: CSSLengthOrPercentageValue = 1.5.cssRem,
     content: @Composable () -> Unit
 ) {
-    Column(
+    Box(
         modifier = modifier
-            .borderRadius(0.5.cssRem, 0.5.cssRem)
+            .borderRadius(borderRadius, borderRadius)
             .backgroundColor(color)
-            .padding(paddingValues),
-        horizontalAlignment = contentAlignment,
     ) {
-        content.invoke()
+        Column(
+            modifier = Modifier
+                .padding(paddingValues),
+            horizontalAlignment = contentAlignment,
+        ) {
+            content.invoke()
+        }
     }
 
 }

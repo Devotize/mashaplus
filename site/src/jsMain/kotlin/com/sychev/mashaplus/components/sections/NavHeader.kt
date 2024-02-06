@@ -216,6 +216,14 @@ fun NavHeader() {
                             .fadeInAnimation()
                     )
                 }
+                Div(NavigationHeadlineTextStyle.toAttrs()) {
+                    SpanText(
+                        "Репертуар",
+                        modifier = Modifier
+                            .color(palette.brand.whiteText)
+                            .fadeInAnimation()
+                    )
+                }
             }
             Row(
                 modifier = Modifier.gap(1.7.cssRem).weight(3),

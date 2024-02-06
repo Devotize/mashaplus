@@ -2,6 +2,7 @@ package com.sychev.mashaplus.pages.main.desktop
 
 import androidx.compose.runtime.Composable
 import com.sychev.mashaplus.*
+import com.sychev.mashaplus.components.widgets.Card
 import com.sychev.mashaplus.components.widgets.Divider
 import com.sychev.mashaplus.components.widgets.VocalistWidget
 import com.sychev.mashaplus.models.getFemaleVocalists
@@ -15,6 +16,7 @@ import com.sychev.mashaplus.utils.VideoYT
 import com.sychev.mashaplus.utils.fadeInAnimation
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.WhiteSpace
+import com.varabyte.kobweb.compose.css.functions.blur
 import com.varabyte.kobweb.compose.dom.ref
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -50,7 +52,6 @@ fun MainScreenDesktop() {
             Column(Modifier.gap(2.cssRem).width(100.percent)) {
                 val palette = ColorMode.current.toSitePalette()
                 ImageHeaderWithLogo()
-                MembersCountSection(modifier = Modifier.fillMaxWidth().padding(leftRight = XXXXXLargePadding))
                 Box(Modifier.height(XXXLargePadding))
                 OurServicesSections(modifier = Modifier.fillMaxWidth().padding(leftRight = XXXXXLargePadding))
                 VocalistkySection(modifier = Modifier.fillMaxWidth().padding(leftRight = XXXLargePadding))
@@ -329,32 +330,51 @@ fun MainScreenDesktop() {
 
 @Composable
 private fun MembersCountSection(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier.gap(1.4.cssRem),
-        horizontalAlignment = Alignment.CenterHorizontally
+
+    @Composable
+    fun TextWithNum(
+        title: String,
+        num: String
     ) {
-        Div(TitleOutlinedStyle.toAttrs()) {
-            SpanText(
-                text = Resources.Strings.sostav_gruppy,
-                modifier = Modifier
-                    .fadeInAnimation()
-            )
+        Column {
+            Div(SmallTitleStyle.toAttrs()) {
+                SpanText(
+                    text = title,
+                    modifier = Modifier
+                        .fadeInAnimation()
+                )
+            }
+            Div(HugeTextStyle.toAttrs()) {
+                SpanText(
+                    num,
+                    modifier = Modifier
+                        .fadeInAnimation()
+                )
+            }
         }
-        Div(TitleOutlinedStyle.toAttrs()) {
-            SpanText(
-                Resources.Strings.sostav_gruppy,
-                modifier = Modifier
-                    .fadeInAnimation()
-                    .opacity(.6)
-            )
-        }
-        Div(TitleOutlinedStyle.toAttrs()) {
-            SpanText(
-                Resources.Strings.sostav_gruppy,
-                modifier = Modifier
-                    .fadeInAnimation()
-                    .opacity(.33)
-            )
+    }
+    Box(modifier = modifier) {
+        Card(
+            modifier = Modifier.fillMaxWidth().backdropFilter(blur(10.px)),
+            color = MembersSectionCard,
+            paddingValues = XXXXLargePadding - XXLargePadding
+        ) {
+            Row(
+                modifier = Modifier.gap(5.5.cssRem),
+            ) {
+                TextWithNum(
+                    Resources.Strings.vokalisty,
+                    Resources.Strings.text_14
+                )
+                TextWithNum(
+                    Resources.Strings.instrymentalisty,
+                    Resources.Strings.text_10,
+                )
+                TextWithNum(
+                    Resources.Strings.let_text,
+                    Resources.Strings.text_5,
+                )
+            }
         }
     }
 }
@@ -878,7 +898,7 @@ private fun ImageHeaderWithLogo() {
                         fillMode = AnimationFillMode.Backwards,
                     )
                 )
-                .align(Alignment.CenterEnd),
+                .align(Alignment.TopEnd),
         )
         val palette = ColorMode.current.toSitePalette()
         Column(modifier = Modifier.fillMaxWidth().align(Alignment.TopCenter).zIndex(2f)) {
@@ -894,14 +914,15 @@ private fun ImageHeaderWithLogo() {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = XXXLargePadding, leftRight = XXXXXLargePadding)
-                    .gap(1.cssRem),
+                    .padding(top = XXLargePadding, leftRight = XXXXXLargePadding)
+                    .gap(2.2.cssRem),
                 horizontalAlignment = Alignment.Start
             ) {
                 Div(MainTitleTextStyle.toAttrs()) {
                     SpanText(
                         Resources.Strings.sozday_meropriyatie,
                         modifier = Modifier
+                            .whiteSpace(WhiteSpace.PreLine)
                             .color(palette.brand.whiteText)
                             .fadeInAnimation()
                             .textShadow(offsetY = 1.px, offsetX = 1.px, blurRadius = 1.px, color = Colors.Black)
@@ -930,8 +951,8 @@ private fun ImageHeaderWithLogo() {
                     }
                 }
             }
+            Box(Modifier.height(XXXXXLargePadding))
+            MembersCountSection(modifier = Modifier.fillMaxWidth().padding(leftRight = XXXXXLargePadding))
         }
-
-
     }
 }
