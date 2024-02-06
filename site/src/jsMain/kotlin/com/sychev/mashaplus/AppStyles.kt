@@ -3,6 +3,8 @@ package com.sychev.mashaplus
 import com.sychev.mashaplus.utils.Fonts
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
+import com.varabyte.kobweb.compose.css.functions.LinearGradient
+import com.varabyte.kobweb.compose.css.functions.linearGradient
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
@@ -20,7 +22,6 @@ import com.varabyte.kobweb.silk.init.registerStyleBase
 import com.varabyte.kobweb.silk.theme.colors.palette.color
 import com.varabyte.kobweb.silk.theme.colors.palette.toPalette
 import com.varabyte.kobweb.silk.theme.modifyComponentStyleBase
-import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
@@ -215,8 +216,7 @@ val OutlinedCircularButtonVariant by ButtonStyle.addVariantBase {
     Modifier
         .padding(topBottom = XSmallPadding, leftRight = LargePadding)
         .borderRadius(1.6.cssRem, 1.6.cssRem)
-        .backgroundColor(Colors.Transparent)
-        .border(width = 2.px, style = LineStyle.Solid, color = colorMode.toPalette().color.toRgb().copyf(alpha = 0.8f))
+        .backgroundImage(linearGradient(LinearGradient.Direction.ToRight, GradientLeft, GradientRight))
         .fontSize(1.5.cssRem)
         .fontWeight(FontWeight.SemiBold)
 }

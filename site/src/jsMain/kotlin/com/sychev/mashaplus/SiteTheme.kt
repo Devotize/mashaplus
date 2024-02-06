@@ -79,7 +79,7 @@ fun initTheme(ctx: InitSilkContext) {
 }
 
 //dark
-val DesignBackgroundDark = Color.rgb(0x1c1829)
+val DesignBackgroundDark = Color.rgb(0x141414)
 val DesignTextDark = Color.rgb(0xffffff)
 val DesignGreyTextDark = Color.rgb(0x828287)
 val DesignSurfaceDark = Color.rgb(0x312a47)
@@ -88,6 +88,8 @@ val DesignSurfaceDark = Color.rgb(0x312a47)
 val DesignWhiteText = Color.rgb(0xffffff)
 val DesignAccent = Color.rgb(0x5bf6f6)
 val DesignShadow = Color.rgb(0x5F38D9)
+val GradientLeft = Color.rgb(0xF4E76B)
+val GradientRight = Color.rgb(0x7448FF)
 
 //light
 val DesignSurfaceLight = Color.rgb(0xd9d5e6)

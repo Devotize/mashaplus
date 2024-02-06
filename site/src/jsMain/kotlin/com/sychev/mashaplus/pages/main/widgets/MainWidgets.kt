@@ -26,11 +26,12 @@ import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Div
 
 private val MainPhotoHeightBase = 320.px
-private val MainPhotoHeightMD = 720.px
+private val MainPhotoHeightLG = 1026.px
+private val MainPhotoWidthLG = 1078.px
 private val SliderPhotoHeightBase = 380.px
-private val SliderPhotoHeightMD = 620.px
+private val SliderPhotoHeightLG = 620.px
 private val SectionPhotoHeightBase = 245.px
-private val SectionPhotoHeightMD = 490.px
+private val SectionPhotoHeightLG = 490.px
 private val SectionPhotoWidthBase = 345.px
 val SectionPhotoWidthMD = 690.px
 
@@ -40,28 +41,27 @@ val SectionPhotoStyle by ComponentStyle {
             .borderRadius(0.9.cssRem, 0.9.cssRem)
     }
     Breakpoint.LG {
-        Modifier.height(SectionPhotoHeightMD).width(SectionPhotoWidthMD).objectFit(ObjectFit.Cover)
+        Modifier.height(SectionPhotoHeightLG).width(SectionPhotoWidthMD).objectFit(ObjectFit.Cover)
             .borderRadius(0.9.cssRem, 0.9.cssRem)
     }
 }
 
-
 val MainPhotoStyle by ComponentStyle {
     base { Modifier.fillMaxWidth().height(MainPhotoHeightBase).objectFit(ObjectFit.Cover) }
-    Breakpoint.LG { Modifier.fillMaxWidth().height(MainPhotoHeightMD).objectFit(ObjectFit.Cover) }
+    Breakpoint.LG { Modifier.width(MainPhotoWidthLG).height(MainPhotoHeightLG).objectFit(ObjectFit.Cover) }
 }
 
 val SecondaryPhotoStyle by ComponentStyle {
     base { Modifier.fillMaxWidth().height(MainPhotoHeightBase).objectFit(ObjectFit.Cover) }
     Breakpoint.LG {
-        Modifier.fillMaxWidth().height(MainPhotoHeightMD).objectFit(ObjectFit.Cover)
+        Modifier.fillMaxWidth().height(MainPhotoHeightLG).objectFit(ObjectFit.Cover)
             .padding(leftRight = XXXLargePadding)
     }
 }
 
 val BottomPhotoGradientStyle by ComponentStyle {
     base { Modifier.fillMaxWidth().height(MainPhotoHeightBase).objectFit(ObjectFit.Fill) }
-    Breakpoint.LG { Modifier.fillMaxWidth().height(MainPhotoHeightMD).objectFit(ObjectFit.Fill) }
+    Breakpoint.LG { Modifier.fillMaxWidth().height(MainPhotoHeightLG).objectFit(ObjectFit.Fill) }
 }
 
 val SliderPhotoStyle by ComponentStyle {
@@ -72,7 +72,7 @@ val SliderPhotoStyle by ComponentStyle {
             .objectFit(ObjectFit.Cover)
             .backgroundSize(BackgroundSize.Cover)
     }
-    Breakpoint.LG { Modifier.fillMaxWidth().height(SliderPhotoHeightMD).objectFit(ObjectFit.Cover) }
+    Breakpoint.LG { Modifier.fillMaxWidth().height(SliderPhotoHeightLG).objectFit(ObjectFit.Cover) }
 }
 
 val GridPhotoStyle by ComponentStyle.base {

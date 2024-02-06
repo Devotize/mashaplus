@@ -28,6 +28,7 @@ object Resources {
     object Images {
         const val vocal_show = "/vocal_show.png"
         const val masha_logo = "/masha_logo.png"
+        const val main_photo = "/main_photo.png"
         const val two_girls = "/two_girls.png"
         const val three_girls = "/three_girls.png"
         const val one_girl = "/one_girl.png"

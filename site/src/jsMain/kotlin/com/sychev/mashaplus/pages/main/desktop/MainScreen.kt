@@ -1,11 +1,10 @@
 package com.sychev.mashaplus.pages.main.desktop
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import com.sychev.mashaplus.*
 import com.sychev.mashaplus.components.widgets.Divider
 import com.sychev.mashaplus.components.widgets.VocalistWidget
 import com.sychev.mashaplus.models.getFemaleVocalists
-import com.sychev.mashaplus.models.getMainPhotos
 import com.sychev.mashaplus.models.getMaleVocalists
 import com.sychev.mashaplus.models.getVocalistsCouples
 import com.sychev.mashaplus.pages.*
@@ -14,7 +13,6 @@ import com.sychev.mashaplus.provider.ScrollToViewEventProvider
 import com.sychev.mashaplus.utils.Resources
 import com.sychev.mashaplus.utils.VideoYT
 import com.sychev.mashaplus.utils.fadeInAnimation
-import com.sychev.mashaplus.utils.stubAnimation
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.WhiteSpace
 import com.varabyte.kobweb.compose.dom.ref
@@ -40,11 +38,9 @@ import com.varabyte.kobweb.silk.components.style.toAttrs
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import kotlinx.coroutines.delay
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Button
 import org.jetbrains.compose.web.dom.Div
-import kotlin.time.Duration.Companion.seconds
 
 
 @Composable
@@ -869,110 +865,73 @@ private fun VideosSection() {
 @Composable
 private fun ImageHeaderWithLogo() {
     Box(modifier = Modifier.fillMaxWidth()) {
-        val mainPhotos = getMainPhotos()
-        var mainPhoto by remember { mutableStateOf(mainPhotos.first()) }
-        var previousMainPhoto by remember { mutableStateOf<String?>(null) }
-        LaunchedEffect(true) {
-            var i = 1
-            while (true) {
-                delay(2.seconds)
-                mainPhoto = mainPhotos[i]
-                if (i == mainPhotos.lastIndex) {
-                    i = 0
-                } else {
-                    i++
-                }
-            }
-        }
-        previousMainPhoto?.let {
-            Image(
-                it,
-                "Main photo",
-                MainPhotoStyle
-                    .toModifier(),
-            )
-        }
-
-        key(mainPhoto) {
-            Image(
-                mainPhoto,
-                "Main photo",
-                MainPhotoStyle
-                    .toModifier()
-                    .animation(
-                        MainPhotoSlideInAnim.toAnimation(
-                            duration = 300.ms,
-                            timingFunction = AnimationTimingFunction.EaseIn,
-                            direction = AnimationDirection.Normal,
-                            fillMode = AnimationFillMode.Backwards,
-                        )
-                    )
-                    .onAnimationEnd {
-                        previousMainPhoto = mainPhoto
-                    },
-            )
-        }
-        Box(modifier = Modifier.padding(XLargePadding).zIndex(2)) {
-            Image(
-                Resources.Images.masha_logo,
-                "Logo icon",
-                LogoStyle
-                    .toModifier()
-                    .fadeInAnimation()
-            )
-        }
-        val mainPhotoGradientRes = when (ColorMode.current) {
-            ColorMode.DARK -> "/main_image_gradient_dark.png"
-            ColorMode.LIGHT -> "/main_image_gradient_light.png"
-        }
         Image(
-            mainPhotoGradientRes,
-            "gradient dark",
-            BottomPhotoGradientStyle.toModifier()
-                .align(Alignment.BottomCenter).stubAnimation(),
+            Resources.Images.main_photo,
+            "Main photo",
+            MainPhotoStyle
+                .toModifier()
+                .animation(
+                    MainPhotoSlideInAnim.toAnimation(
+                        duration = 300.ms,
+                        timingFunction = AnimationTimingFunction.EaseIn,
+                        direction = AnimationDirection.Normal,
+                        fillMode = AnimationFillMode.Backwards,
+                    )
+                )
+                .align(Alignment.CenterEnd),
         )
         val palette = ColorMode.current.toSitePalette()
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.BottomCenter)
-                .padding(bottom = XXXXLargePadding, leftRight = XXXXXLargePadding)
-                .gap(1.cssRem)
-                .zIndex(2f),
-            horizontalAlignment = Alignment.Start
-        ) {
-            Div(MainTitleTextStyle.toAttrs()) {
-                SpanText(
-                    Resources.Strings.sozday_meropriyatie,
-                    modifier = Modifier
-                        .color(palette.brand.whiteText)
+        Column(modifier = Modifier.fillMaxWidth().align(Alignment.TopCenter).zIndex(2f)) {
+            Box(modifier = Modifier.padding(XLargePadding).zIndex(2)) {
+                Image(
+                    Resources.Images.masha_logo,
+                    "Logo icon",
+                    LogoStyle
+                        .toModifier()
                         .fadeInAnimation()
-                        .textShadow(offsetY = 1.px, offsetX = 1.px, blurRadius = 1.px, color = Colors.Black)
                 )
             }
-            Div(SubheadlineRegularStyle.toAttrs()) {
-                SpanText(
-                    Resources.Strings.muzik_project,
-                    modifier = Modifier
-                        .whiteSpace(WhiteSpace.PreLine)
-                        .color(palette.brand.whiteText)
-                        .fadeInAnimation()
-                        .textShadow(offsetY = 1.px, offsetX = 1.px, blurRadius = 1.px, color = Colors.Black)
-                )
-            }
-            Spacer()
-            Button(ButtonStyle.toAttrs(OutlinedCircularButtonVariant)) {
-                Div(OutlineButtonTextStyle.toAttrs()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = XXXLargePadding, leftRight = XXXXXLargePadding)
+                    .gap(1.cssRem),
+                horizontalAlignment = Alignment.Start
+            ) {
+                Div(MainTitleTextStyle.toAttrs()) {
                     SpanText(
-                        Resources.Strings.ostavit_zayavku,
+                        Resources.Strings.sozday_meropriyatie,
                         modifier = Modifier
                             .color(palette.brand.whiteText)
-                            .fillMaxWidth()
-                            .textAlign(TextAlign.Center)
+                            .fadeInAnimation()
+                            .textShadow(offsetY = 1.px, offsetX = 1.px, blurRadius = 1.px, color = Colors.Black)
                     )
+                }
+                Div(SubheadlineRegularStyle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.muzik_project,
+                        modifier = Modifier
+                            .whiteSpace(WhiteSpace.PreLine)
+                            .color(palette.brand.whiteText)
+                            .fadeInAnimation()
+                            .textShadow(offsetY = 1.px, offsetX = 1.px, blurRadius = 1.px, color = Colors.Black)
+                    )
+                }
+                Spacer()
+                Button(ButtonStyle.toAttrs(OutlinedCircularButtonVariant)) {
+                    Div(OutlineButtonTextStyle.toAttrs()) {
+                        SpanText(
+                            Resources.Strings.ostavit_zayavku,
+                            modifier = Modifier
+                                .color(palette.brand.textReversed)
+                                .fillMaxWidth()
+                                .textAlign(TextAlign.Center)
+                        )
+                    }
                 }
             }
         }
+
 
     }
 }
