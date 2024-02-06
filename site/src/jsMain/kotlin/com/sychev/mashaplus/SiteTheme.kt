@@ -91,11 +91,12 @@ val DesignShadow = Color.rgb(0x5F38D9)
 val GradientLeft = Color.rgb(0xF4E76B)
 val GradientRight = Color.rgb(0x7448FF)
 val MembersSectionCard = Color.argb(0x13d9d9d9)
+val DesignSurface = Color.rgb(0xd9d9d9)
 
 //light
 val DesignSurfaceLight = Color.rgb(0xd9d5e6)
 val DesignGreyTextLight = Color.rgb(0x343436)
-val DesignTextLight = Color.rgb(0x0e0c14)
+val DesignTextLight = Color.rgb(0x000000)
 val DesignBackgroundLight = Color.rgb(0xededed)
 
 

@@ -31,9 +31,7 @@ import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
 import com.varabyte.kobweb.silk.components.graphics.Image
-import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.breakpoint.displayIfAtLeast
-import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toAttrs
@@ -330,7 +328,6 @@ fun MainScreenDesktop() {
 
 @Composable
 private fun MembersCountSection(modifier: Modifier = Modifier) {
-
     @Composable
     fun TextWithNum(
         title: String,
@@ -382,99 +379,93 @@ private fun MembersCountSection(modifier: Modifier = Modifier) {
 @Composable
 fun OurServicesSections(modifier: Modifier = Modifier) {
     val palette = ColorMode.current.toSitePalette()
-    Column(
-        modifier = modifier.gap(2.cssRem),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Div(TitleStyle.toAttrs()) {
-            SpanText(
-                Resources.Strings.nashi_yslygi,
-                modifier = Modifier
-                    .fadeInAnimation()
+    Box(Modifier.fillMaxWidth()) {
+        Box(modifier = Modifier.padding(left = XXXXLargePadding - MediumPadding, top = LargePadding)) {
+            Image(
+                Resources.Images.clyaksa,
+                modifier = ClyaksImageStyle.toModifier()
             )
         }
-        SimpleGrid(
-            numColumns = numColumns(4),
-            modifier = Modifier
-                .background(palette.brand.text)
-                .borderRadius(3.6.cssRem, 3.6.cssRem)
-                .boxShadow(
-                    offsetX = 1.px,
-                    offsetY = 1.px,
-                    blurRadius = 20.px,
-                    spreadRadius = 3.px,
-                    color = palette.brand.shadow,
-                    inset = false,
-                ),
+        Box(
+            modifier = modifier,
         ) {
-            Box(modifier = Modifier, contentAlignment = Alignment.Center) {
-                Div(GritTextTitle.toAttrs()) {
-                    SpanText(
-                        Resources.Strings.nashi_yslygi,
-                        modifier = Modifier
-                            .fadeInAnimation()
-                            .color(palette.brand.textReversed)
-                    )
+            Column(Modifier.fillMaxWidth().gap(3.5.cssRem)) {
+                Box(
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Div(TitleStyle.toModifier().align(Alignment.TopEnd).toAttrs()) {
+                        SpanText(
+                            Resources.Strings.nashi_yslygi,
+                            modifier = Modifier
+                                .fadeInAnimation()
+                        )
+                    }
                 }
-            }
-            Image(
-                Resources.Images.two_girls,
-                "Main photo",
-                GridPhotoStyle
-                    .toModifier()
-                    .fadeInAnimation(),
-            )
-            Box(modifier = Modifier, contentAlignment = Alignment.Center) {
-                Div(GritTextTitle.toAttrs()) {
-                    SpanText(
-                        Resources.Strings.vacalnoye_show,
-                        modifier = Modifier
-                            .fadeInAnimation()
-                            .color(palette.brand.textReversed)
-                    )
-                }
-            }
-            Image(
-                Resources.Images.three_girls,
-                "Main photo",
-                GridPhotoStyle
-                    .toModifier()
-                    .fadeInAnimation()
-                    .borderRadius(topRight = 3.6.cssRem),
-            )
-            Image(
-                Resources.Images.one_girl,
-                "Main photo",
-                GridPhotoStyle
-                    .toModifier()
-                    .borderRadius(bottomLeft = 3.6.cssRem)
-                    .fadeInAnimation(),
-            )
-            Box(modifier = Modifier, contentAlignment = Alignment.Center) {
-                Div(GritTextTitle.toAttrs()) {
-                    SpanText(
-                        Resources.Strings.duet_uppercase,
-                        modifier = Modifier
-                            .fadeInAnimation()
-                            .color(palette.brand.textReversed)
-                    )
-                }
-            }
-            Image(
-                Resources.Images.band,
-                "Main photo",
-                GridPhotoStyle
-                    .toModifier()
-                    .fadeInAnimation(),
-            )
-            Box(modifier = Modifier, contentAlignment = Alignment.Center) {
-                Div(GritTextTitle.toAttrs()) {
-                    SpanText(
-                        Resources.Strings.ultima_band,
-                        modifier = Modifier
-                            .fadeInAnimation()
-                            .color(palette.brand.textReversed)
-                    )
+                val cardHeight = 408.px
+                Column(Modifier.fillMaxWidth().height(cardHeight.times(2.2))) {
+                    Row(modifier = Modifier.fillMaxWidth().weight(14)) {
+                        Card(
+                            modifier = Modifier.fillMaxHeight().weight(25),
+                            color = DesignSurface,
+                            paddingValues = XXXXLargePadding - XXLargePadding
+                        ) {
+                            Div(GritTextTitle.toAttrs()) {
+                                SpanText(
+                                    Resources.Strings.ultima_band,
+                                    modifier = Modifier
+                                        .color(palette.brand.textReversed)
+                                        .fadeInAnimation()
+                                )
+                            }
+                        }
+                        Box(Modifier.weight(1.5))
+                        Card(
+                            modifier = Modifier.fillMaxHeight().weight(3),
+                            color = DesignSurface,
+                            paddingValues = XXXXLargePadding - XXLargePadding
+                        ) {
+                            Div(GritTextTitle.toAttrs()) {
+                                SpanText(
+                                    Resources.Strings.duet_uppercase,
+                                    modifier = Modifier
+                                        .color(palette.brand.textReversed)
+                                        .fadeInAnimation()
+                                )
+                            }
+                        }
+                    }
+                    Box(Modifier.fillMaxWidth().weight(1.5))
+                    Row(modifier = Modifier.fillMaxWidth().weight(14)) {
+                        Card(
+                            modifier = Modifier.fillMaxHeight().weight(3),
+                            color = DesignSurface,
+                            paddingValues = XXXXLargePadding - XXLargePadding
+                        ) {
+                            Div(GritTextTitle.toAttrs()) {
+                                SpanText(
+                                    Resources.Strings.vokalisty_uppercase,
+                                    modifier = Modifier
+                                        .color(palette.brand.textReversed)
+                                        .fadeInAnimation()
+                                )
+                            }
+                        }
+                        Box(Modifier.fillMaxHeight().weight(1.5))
+                        Card(
+                            modifier = Modifier.fillMaxHeight().weight(25),
+                            color = DesignSurface,
+                            paddingValues = XXXXLargePadding - XXLargePadding
+                        ) {
+                            Div(GritTextTitle.toAttrs()) {
+                                SpanText(
+                                    Resources.Strings.vacalnoye_show,
+                                    modifier = Modifier
+                                        .color(palette.brand.textReversed)
+                                        .fadeInAnimation()
+                                )
+                            }
+                        }
+                    }
                 }
             }
         }

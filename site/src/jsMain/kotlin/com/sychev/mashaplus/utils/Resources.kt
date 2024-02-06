@@ -7,6 +7,7 @@ object Resources {
         const val yarkost_blesk =
             "Яркость, блеск и целое музыкальное представление для вас и ваших гостей. Два блока — мировые хиты всех времен и любимые песни 90-ых в новой аранжировке от наших вокалистов и музыкантов, энергичные танцы и шикарные костюмы — вам точно нужно это прочувствовать!"
         const val vokalisty = "Вокалисты"
+        const val vokalisty_uppercase = "ВОКАЛИСТЫ"
         const val vokalistky = "Вокалистки"
         const val minimalniy_komplekt =
             "У вокалиста есть минимальный комплект оборудования, необходимый для подзвучивания"
@@ -48,6 +49,7 @@ object Resources {
         const val carousel_girl_2 = "/empty_eyes.png"
         const val carousel_girl_3 = "/paradise.png"
         const val carousel_girl_4 = "/ya_eto_ya.png"
+        const val clyaksa = "/clyaksa.png"
     }
 
 }

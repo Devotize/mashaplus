@@ -75,6 +75,14 @@ val SliderPhotoStyle by ComponentStyle {
     Breakpoint.LG { Modifier.fillMaxWidth().height(SliderPhotoHeightLG).objectFit(ObjectFit.Cover) }
 }
 
+val ClyaksImageStyle by ComponentStyle.base {
+    Modifier
+        .width(285.px)
+        .height(230.px)
+        .objectFit(ObjectFit.Cover)
+        .backgroundSize(BackgroundSize.Inherit)
+}
+
 val GridPhotoStyle by ComponentStyle.base {
     Modifier
         .width(375.px)

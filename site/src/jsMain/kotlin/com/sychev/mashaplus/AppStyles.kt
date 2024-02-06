@@ -189,9 +189,9 @@ val TitleOutlinedStyle by ComponentStyle.base {
 val TitleStyle by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
-        .fontSize(2.6.cssRem)
+        .fontSize(2.4.cssRem)
         .textAlign(TextAlign.Center)
-        .fontWeight(FontWeight.ExtraBold)
+        .fontWeight(FontWeight.Bold)
 }
 
 val GritTextTitle by ComponentStyle.base {
