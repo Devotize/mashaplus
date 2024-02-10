@@ -1,10 +1,32 @@
 package com.sychev.mashaplus.models
 
+import com.sychev.mashaplus.utils.Resources
+
 data class Vocalist(
     val name: String = "",
     val imgRes: String,
 )
 
+val vokalistkyList = listOf(
+    Vocalist(Resources.Strings.liza_ionovoa, Resources.Images.liza_vok),
+    Vocalist(Resources.Strings.yla, Resources.Images.yla_vok),
+    Vocalist(Resources.Strings.ula_lank, Resources.Images.ula_vok),
+    Vocalist(Resources.Strings.natalya_molodojen, Resources.Images.natalya_vok),
+    Vocalist(Resources.Strings.milana, Resources.Images.milana_vok),
+    Vocalist(Resources.Strings.elena, Resources.Images.elena_vok),
+    Vocalist(Resources.Strings.dora, Resources.Images.dora_vok),
+    Vocalist(Resources.Strings.alya, Resources.Images.alya_vok),
+    Vocalist(Resources.Strings.alina_viera, Resources.Images.alina_vok),
+    Vocalist(Resources.Strings.jia, Resources.Images.djia_vok),
+)
+val vokalistyList = listOf(
+    Vocalist(Resources.Strings.andrey, Resources.Images.andrey_vok),
+    Vocalist(Resources.Strings.ilya, Resources.Images.ilya_vok),
+    Vocalist(Resources.Strings.ilya_star, Resources.Images.ilay_star_vok),
+    Vocalist(Resources.Strings.marat, Resources.Images.marat_vok),
+)
+
+@Deprecated("old design")
 fun getMaleVocalists() = listOf(
     Vocalist(
         name = "Андрей Махо",
@@ -24,6 +46,7 @@ fun getMaleVocalists() = listOf(
     ),
 )
 
+@Deprecated("old design")
 fun getFemaleVocalists() = listOf(
     Vocalist(
         name = "Аля",
@@ -71,6 +94,7 @@ fun getFemaleVocalists() = listOf(
     ),
 )
 
+@Deprecated("old design")
 fun getVocalistsCouples() = listOf(
     Vocalist(
         imgRes = "/alina_ilya.png"

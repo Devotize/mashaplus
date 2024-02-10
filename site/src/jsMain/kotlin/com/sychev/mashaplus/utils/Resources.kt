@@ -29,6 +29,20 @@ object Resources {
         const val vokalistky_uppercase = "ВОКАЛИСТКИ"
         const val instrymentalisty = "Инструменталисты"
         const val let_text = "Лет"
+        const val liza_ionovoa = "ЛИЗА\nИОНОВА"
+        const val natalya_molodojen = "НАТАЛЬЯ\nМОЛОДОЖЁН"
+        const val ula_lank = "ЮЛИЯ ЛАНК"
+        const val jia = "ДЖИА"
+        const val alina_viera = "АЛИНА\nВИЕРА"
+        const val yla = "УЛА"
+        const val elena = "ЕЛЕНА\nВЕСКРЕСЕНСКАЯ"
+        const val milana = "МИЛАНА"
+        const val alya = "АЛЯ"
+        const val dora = "ДОРА"
+        const val andrey = "АНДРЕЙ \nМАХОРИН"
+        const val ilya = "ИЛЬЯ\nОКУЛОВ"
+        const val ilya_star = "ИЛЬЯ \nСТАРЧИКОВ"
+        const val marat = "МАРАТ"
     }
 
     object Images {
@@ -50,6 +64,20 @@ object Resources {
         const val carousel_girl_3 = "/paradise.png"
         const val carousel_girl_4 = "/ya_eto_ya.png"
         const val clyaksa = "/clyaksa.png"
+        const val liza_vok = "/liza_vok.png"
+        const val yla_vok = "/yla_vok.png"
+        const val ula_vok = "/ula_vok.png"
+        const val natalya_vok = "/natalya_vok.png"
+        const val milana_vok = "/milana_vok.png"
+        const val elena_vok = "/elena_vok.png"
+        const val dora_vok = "/dora_vok.png"
+        const val alya_vok = "/alya_vok.png"
+        const val alina_vok = "/alina_vok.png"
+        const val djia_vok = "/djia_vok.png"
+        const val andrey_vok = "/andrey_vok.png"
+        const val ilya_vok = "/ilya_vok.png"
+        const val ilay_star_vok = "/ilya_starchikov_vok.png"
+        const val marat_vok = "/marat_vok.png"
     }
 
 }

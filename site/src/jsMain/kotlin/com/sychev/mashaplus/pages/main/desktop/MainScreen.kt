@@ -5,27 +5,26 @@ import com.sychev.mashaplus.*
 import com.sychev.mashaplus.components.widgets.Card
 import com.sychev.mashaplus.components.widgets.Divider
 import com.sychev.mashaplus.components.widgets.VocalistWidget
-import com.sychev.mashaplus.models.getFemaleVocalists
-import com.sychev.mashaplus.models.getMaleVocalists
-import com.sychev.mashaplus.models.getVocalistsCouples
+import com.sychev.mashaplus.models.*
 import com.sychev.mashaplus.pages.*
 import com.sychev.mashaplus.pages.main.widgets.*
 import com.sychev.mashaplus.provider.ScrollToViewEventProvider
 import com.sychev.mashaplus.utils.Resources
 import com.sychev.mashaplus.utils.VideoYT
 import com.sychev.mashaplus.utils.fadeInAnimation
+import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.WhiteSpace
+import com.varabyte.kobweb.compose.css.functions.LinearGradient
 import com.varabyte.kobweb.compose.css.functions.blur
+import com.varabyte.kobweb.compose.css.functions.linearGradient
 import com.varabyte.kobweb.compose.dom.ref
-import com.varabyte.kobweb.compose.foundation.layout.Box
-import com.varabyte.kobweb.compose.foundation.layout.Column
-import com.varabyte.kobweb.compose.foundation.layout.Row
-import com.varabyte.kobweb.compose.foundation.layout.Spacer
+import com.varabyte.kobweb.compose.foundation.layout.*
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.animation.toAnimation
@@ -52,7 +51,18 @@ fun MainScreenDesktop() {
                 ImageHeaderWithLogo()
                 Box(Modifier.height(XXXLargePadding))
                 OurServicesSections(modifier = Modifier.fillMaxWidth().padding(leftRight = XXXXXLargePadding))
-                VocalistkySection(modifier = Modifier.fillMaxWidth().padding(leftRight = XXXLargePadding))
+                Box(Modifier.height(XXXLargePadding))
+                VocalistySection(
+                    modifier = Modifier.fillMaxWidth(),
+                    Resources.Strings.vokalistky_uppercase,
+                    vokalistkyList
+                )
+                Box(Modifier.height(XXXXXLargePadding))
+                VocalistySection(
+                    modifier = Modifier.fillMaxWidth(),
+                    Resources.Strings.vokalisty_uppercase,
+                    vokalistyList
+                )
                 Column(modifier = Modifier.padding(XXSmallPadding).fillMaxWidth()) {
                     FeaturesTopSection()
                     Divider(width = 100.percent)
@@ -473,111 +483,66 @@ fun OurServicesSections(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun VocalistkySection(modifier: Modifier) {
-    val palette = ColorMode.current.toSitePalette()
-    Box(
-        modifier = modifier,
-        contentAlignment = Alignment.Center
+private fun VocalistySection(modifier: Modifier, title: String, list: List<Vocalist>) {
+    Column(
+        modifier = modifier.gap(4.5.cssRem),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Div(CarouselTextTitle.toModifier().padding(right = XXLargePadding).toAttrs()) {
+        Div(TitleStyle.toAttrs()) {
             SpanText(
-                Resources.Strings.vokalistky_uppercase,
+                title,
                 modifier = Modifier
                     .fadeInAnimation()
-                    .color(palette.brand.text)
             )
         }
-        Box(modifier = Modifier.padding(bottom = carouselPhotoHeight * 2.5, left = carouselPhotoWidth.div(2))) {
+        Row(
+            modifier = Modifier
+                .overflow(Overflow.Scroll)
+                .gap(3.cssRem)
+                .styleModifier {
+                    property("display", "-webkit-box")
+                },
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Box(Modifier.padding(XXLargePadding))
+            list.forEach {
+                VocalistCard(Modifier, it.name, it.imgRes)
+            }
+            Box(Modifier.padding(XXLargePadding))
+        }
+    }
+}
+
+@Composable
+private fun VocalistCard(modifier: Modifier, name: String, photoRes: String) {
+    Column(modifier.gap(2.5.cssRem)) {
+        Box(
+            modifier = Modifier,
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            val cardWidth = 334.px
+            val cardHeight = 430.px
+            Card(
+                modifier = Modifier.width(cardWidth).height(cardHeight)
+                    .backgroundImage(linearGradient(LinearGradient.Direction.ToRight, GradientLeft, GradientRight)),
+            ) {}
             Image(
-                Resources.Images.ula_silhouette,
-                "",
-                CarouselPhotoStyle
-                    .toModifier()
-                    .fadeInAnimation(),
+                photoRes,
+                "Main photo",
+                PersonWithCardPhotoStyle
+                    .toModifier().fadeInAnimation(),
             )
         }
-        Box(modifier = Modifier.padding(bottom = carouselPhotoHeight * 2.5, right = carouselPhotoWidth)) {
-            Image(
-                Resources.Images.tanya_silhouette,
-                "",
-                CarouselPhotoStyle
-                    .toModifier()
-                    .fadeInAnimation(),
-            )
-        }
-        Box(modifier = Modifier.padding(bottom = carouselPhotoHeight * 1.8, right = carouselPhotoWidth * 2.5)) {
-            Image(
-                Resources.Images.liza_silhouette,
-                "",
-                CarouselPhotoStyle
-                    .toModifier()
-                    .fadeInAnimation(),
-            )
-        }
-        Box(modifier = Modifier.padding(right = carouselPhotoWidth * 3.2)) {
-            Image(
-                Resources.Images.devochka_left,
-                "",
-                CarouselPhotoStyle
-                    .toModifier()
-                    .fadeInAnimation(),
-            )
-        }
-        Box(modifier = Modifier.padding(top = carouselPhotoHeight * 1.5, right = carouselPhotoWidth * 2.4)) {
-            Image(
-                Resources.Images.carousel_girl_1,
-                "",
-                CarouselPhotoStyle
-                    .toModifier()
-                    .fadeInAnimation(),
-            )
-        }
-        Box(modifier = Modifier.padding(top = carouselPhotoHeight * 2.5, right = carouselPhotoWidth)) {
-            Image(
-                Resources.Images.carousel_girl_4,
-                "",
-                CarouselPhotoStyle
-                    .toModifier()
-                    .fadeInAnimation(),
-            )
-        }
-        Box(modifier = Modifier.padding(top = carouselPhotoHeight * 2.1, left = carouselPhotoWidth.div(2.5))) {
-            Image(
-                Resources.Images.carousel_girl_3,
-                "",
-                CarouselPhotoStyle
-                    .toModifier()
-                    .fadeInAnimation(),
-            )
-        }
-        Box(modifier = Modifier.padding(top = carouselPhotoHeight * 1.6, left = carouselPhotoWidth.times(1.4))) {
-            Image(
-                Resources.Images.carousel_girl_2,
-                "",
-                CarouselPhotoStyle
-                    .toModifier()
-                    .fadeInAnimation(),
-            )
-        }
-        Box(modifier = Modifier.padding(top = carouselPhotoHeight.div(3), left = carouselPhotoWidth.times(2.3))) {
-            Image(
-                Resources.Images.devochka_right,
-                "",
-                CarouselPhotoStyle
-                    .toModifier()
-                    .fadeInAnimation(),
-            )
-        }
-        Box(modifier = Modifier.padding(bottom = carouselPhotoHeight * 1.5, left = carouselPhotoWidth.times(1.8))) {
-            Image(
-                Resources.Images.sasha_silhouette,
-                "",
-                CarouselPhotoStyle
-                    .toModifier()
-                    .fadeInAnimation(),
+        Div(GritTextTitle.toAttrs()) {
+            SpanText(
+                name,
+                modifier = Modifier
+                    .fadeInAnimation()
+                    .whiteSpace(WhiteSpace.PreLine)
             )
         }
     }
+
 }
 
 @Composable

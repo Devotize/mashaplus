@@ -91,6 +91,22 @@ val GridPhotoStyle by ComponentStyle.base {
         .backgroundSize(BackgroundSize.Inherit)
 }
 
+val personWithCardPhotoWidth = 334.px
+val personWithCardPhotoHeight = 449.px
+
+val PersonWithCardPhotoStyle by ComponentStyle.base {
+    Modifier
+        .width(personWithCardPhotoWidth)
+        .height(personWithCardPhotoHeight)
+        .objectFit(ObjectFit.Fill)
+        .backgroundSize(BackgroundSize.Inherit)
+}
+val WrapPhotoStyle by ComponentStyle.base {
+    Modifier
+        .objectFit(ObjectFit.Cover)
+        .backgroundSize(BackgroundSize.Inherit)
+}
+
 val carouselPhotoWidth = 285.px
 val carouselPhotoHeight = 365.px
 

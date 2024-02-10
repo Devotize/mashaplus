@@ -198,7 +198,7 @@ val GritTextTitle by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
         .fontSize(1.9.cssRem)
-        .textAlign(TextAlign.Center)
+        .textAlign(TextAlign.Start)
         .fontWeight(FontWeight.Bold)
 }
 
