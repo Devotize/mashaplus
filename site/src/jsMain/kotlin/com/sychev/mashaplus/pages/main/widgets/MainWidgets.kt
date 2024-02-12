@@ -82,6 +82,20 @@ val ClyaksImageStyle by ComponentStyle.base {
         .objectFit(ObjectFit.Cover)
         .backgroundSize(BackgroundSize.Inherit)
 }
+val Clyaks2ImageStyle by ComponentStyle.base {
+    Modifier
+        .width(276.px)
+        .height(252.px)
+        .objectFit(ObjectFit.Cover)
+        .backgroundSize(BackgroundSize.Inherit)
+}
+
+val ArrowImageStyle by ComponentStyle.base {
+    Modifier
+        .size(60.px)
+        .objectFit(ObjectFit.Cover)
+        .backgroundSize(BackgroundSize.Inherit)
+}
 
 val GridPhotoStyle by ComponentStyle.base {
     Modifier

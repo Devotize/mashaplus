@@ -104,11 +104,13 @@ inline fun <reified T> Slider(
 }
 
 @Composable
-inline fun <reified T> SliderSimpleArrow(
+fun <T> SliderSimpleArrow(
     modifier: Modifier = Modifier,
     items: List<T>,
     hasDotsIndicator: Boolean = true,
-    crossinline content: @Composable (T) -> Unit,
+    leftArrow: (@Composable () -> Unit)? = null,
+    rightArrow: (@Composable () -> Unit)? = null,
+    content: @Composable (T) -> Unit,
 ) {
     var selectedIndex by remember { mutableStateOf(0) }
     key(selectedIndex) {
@@ -124,7 +126,7 @@ inline fun <reified T> SliderSimpleArrow(
                         selectedIndex--
                     }
                 }) {
-                    MdiArrowBackIos()
+                    leftArrow?.invoke() ?: MdiArrowBackIos()
                 }
                 Spacer()
                 Box(Modifier.onClick {
@@ -134,7 +136,7 @@ inline fun <reified T> SliderSimpleArrow(
                         selectedIndex++
                     }
                 }) {
-                    MdiArrowForwardIos()
+                    rightArrow?.invoke() ?: MdiArrowForwardIos()
                 }
             }
             if (hasDotsIndicator) {

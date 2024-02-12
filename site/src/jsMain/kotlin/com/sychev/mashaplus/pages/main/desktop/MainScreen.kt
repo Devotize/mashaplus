@@ -4,8 +4,10 @@ import androidx.compose.runtime.Composable
 import com.sychev.mashaplus.*
 import com.sychev.mashaplus.components.widgets.Card
 import com.sychev.mashaplus.components.widgets.Divider
-import com.sychev.mashaplus.components.widgets.VocalistWidget
-import com.sychev.mashaplus.models.*
+import com.sychev.mashaplus.components.widgets.SliderSimpleArrow
+import com.sychev.mashaplus.models.Vocalist
+import com.sychev.mashaplus.models.vokalistkyList
+import com.sychev.mashaplus.models.vokalistyList
 import com.sychev.mashaplus.pages.*
 import com.sychev.mashaplus.pages.main.widgets.*
 import com.sychev.mashaplus.provider.ScrollToViewEventProvider
@@ -30,9 +32,7 @@ import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
 import com.varabyte.kobweb.silk.components.graphics.Image
-import com.varabyte.kobweb.silk.components.layout.breakpoint.displayIfAtLeast
 import com.varabyte.kobweb.silk.components.navigation.Link
-import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toAttrs
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
@@ -51,7 +51,7 @@ fun MainScreenDesktop() {
                 ImageHeaderWithLogo()
                 Box(Modifier.height(XXXLargePadding))
                 OurServicesSections(modifier = Modifier.fillMaxWidth().padding(leftRight = XXXXXLargePadding))
-                Box(Modifier.height(XXXLargePadding))
+                Box(Modifier.height(XXXXLargePadding))
                 VocalistySection(
                     modifier = Modifier.fillMaxWidth(),
                     Resources.Strings.vokalistky_uppercase,
@@ -63,206 +63,10 @@ fun MainScreenDesktop() {
                     Resources.Strings.vokalisty_uppercase,
                     vokalistyList
                 )
-                Column(modifier = Modifier.padding(XXSmallPadding).fillMaxWidth()) {
-                    FeaturesTopSection()
-                    Divider(width = 100.percent)
-                    Box(Modifier.height(XXLargePadding))
-                    VideosSection()
-                    Box(Modifier.height(XXLargePadding + XSmallPadding))
-                }
-                Box(modifier = Modifier.fillMaxWidth()) {
-                    Image(
-                        Resources.Images.vocal_show,
-                        "Main photo",
-                        MainPhotoStyle
-                            .toModifier()
-                            .fadeInAnimation(),
-                    )
-                    Box(
-                        modifier = Modifier
-                            .width(820.px)
-                            .padding(LargePadding).align(Alignment.TopStart)
-                            .align(Alignment.BottomCenter)
-                    ) {
-                        Div(ModalTitleTextStyle.toAttrs()) {
-                            SpanText(
-                                Resources.Strings.yarkost_blesk,
-                                modifier = Modifier
-                                    .color(palette.brand.greyText)
-                                    .opacity(.8f)
-                                    .fadeInAnimation()
-                                    .textShadow(
-                                        offsetY = .5.px,
-                                        offsetX = .5.px,
-                                        blurRadius = 1.px,
-                                        color = Colors.White
-                                    )
-                            )
-                        }
-                    }
-                }
-                Column(modifier = Modifier.width(100.percent)) {
-                    Row(
-                        modifier = Modifier.width(100.percent),
-                    ) {
-                        Spacer()
-                        VocalistWidget(
-                            Resources.Strings.vokalisty,
-                            getMaleVocalists(),
-                            modifier = Modifier,
-                            sliderModifier = Modifier.width(420.px)
-                        )
-                        Box(Modifier.width(XXXLargePadding))
-                        VocalistWidget(
-                            Resources.Strings.vokalistky,
-                            getFemaleVocalists(),
-                            modifier = Modifier,
-                            sliderModifier = Modifier.width(420.px)
-                        )
-                        Spacer()
-                    }
-                    Row(Modifier.fillMaxWidth()) {
-                        Spacer()
-                        Box(modifier = Modifier.padding(leftRight = XXLargePadding, top = XSmallPadding)) {
-                            Column(
-                                modifier = Modifier.borderRadius(0.5.cssRem, 0.5.cssRem)
-                                    .border(1.px, LineStyle.Solid, palette.brand.text)
-                            ) {
-                                Box(
-                                    modifier = Modifier.fillMaxWidth()
-                                        .padding(leftRight = LargePadding, top = XSmallPadding)
-                                        .fadeInAnimation()
-                                ) {
-                                    Div(ModalDescriptionTextStyle.toAttrs()) {
-                                        SpanText(
-                                            Resources.Strings.minimalniy_komplekt,
-                                            modifier = Modifier
-                                                .color(palette.brand.text)
-                                        )
-                                    }
-                                }
-                                Box(
-                                    modifier = Modifier.fillMaxWidth()
-                                        .padding(
-                                            leftRight = LargePadding,
-                                            top = XSmallPadding,
-                                            bottom = XXXSmallPadding
-                                        )
-                                        .fadeInAnimation()
-                                ) {
-                                    Div(ModalDescriptionTextStyle.toAttrs()) {
-                                        SpanText(
-                                            Resources.Strings.kolichestvo_blokov,
-                                            modifier = Modifier
-                                                .color(palette.brand.text)
-                                        )
-                                    }
-                                }
-                                Box(modifier = Modifier.height(XSmallPadding))
-                            }
-                        }
-                        Spacer()
-                    }
-                }
-                Box(modifier = Modifier.fillMaxWidth().padding(XXSmallPadding)) {
-                    Divider(width = 100.percent)
-                }
-                Column(Modifier.fillMaxWidth()) {
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Spacer()
-                        Div(HeadlineTextStyle.toAttrs()) {
-                            SpanText(
-                                Resources.Strings.duet,
-                                modifier = Modifier
-                                    .color(palette.brand.text)
-                                    .fadeInAnimation()
-                            )
-                        }
-                        Spacer()
-                    }
-                    Row(Modifier.fillMaxWidth()) {
-                        Spacer()
-                        Box(
-                            modifier = Modifier.padding(leftRight = XXLargePadding, top = XSmallPadding)
-                                .fadeInAnimation()
-                        ) {
-                            Div(ModalDescriptionTextStyleCentered.toAttrs()) {
-                                SpanText(
-                                    Resources.Strings.ogromnym_priemushestvom,
-                                    modifier = Modifier
-                                        .color(palette.brand.text)
-                                )
-                            }
-                        }
-                        Spacer()
-                    }
-                    Box(Modifier.height(MediumPadding))
-                    Column(modifier = Modifier.fillMaxWidth()) {
-                        VocalistWidget(null, getVocalistsCouples(), sliderModifier = Modifier.width(620.px))
-                    }
-                    Row(Modifier.fillMaxWidth()) {
-                        Spacer()
-                        Box(modifier = Modifier.padding(leftRight = XXLargePadding, top = XSmallPadding)) {
-                            Column(
-                                modifier = Modifier.borderRadius(0.5.cssRem, 0.5.cssRem)
-                                    .border(1.px, LineStyle.Solid, palette.brand.text)
-                            ) {
-                                Box(
-                                    modifier = Modifier.fillMaxWidth()
-                                        .padding(leftRight = LargePadding, top = XSmallPadding)
-                                        .fadeInAnimation()
-                                ) {
-                                    Div(ModalDescriptionTextStyle.toAttrs()) {
-                                        SpanText(
-                                            "Есть возможность выбрать репертуар и внешний вид вокалистов специально под ваше мероприятие (заранее)",
-                                            modifier = Modifier
-                                                .color(palette.brand.text)
-                                        )
-                                    }
-                                }
-                                Box(modifier = Modifier.height(XSmallPadding))
-                            }
-                        }
-                        Spacer()
-                    }
-                }
-                Box(modifier = Modifier.fillMaxWidth().padding(XXSmallPadding)) {
-                    Divider(width = 100.percent)
-                }
-                VariousEventsSection()
-                TestimonialsSection(Modifier.fillMaxWidth().padding(leftRight = LargePadding))
-                Column(modifier = Modifier.fillMaxWidth().backgroundColor(palette.brand.background)) {
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Spacer()
-                        Div(HeadlineTextStyle.toAttrs()) {
-                            SpanText(
-                                "Остались вопросы?",
-                                modifier = Modifier
-                                    .color(palette.brand.text)
-                                    .fadeInAnimation()
-                            )
-                        }
-                        Spacer()
-                    }
-                    Box(Modifier.height(MediumPadding))
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Spacer()
-                        Link("https://vk.com/masha_plus_band?w=app6013442_-218638803%2523form_id%253D1") {
-                            Button(ButtonStyle.toAttrs(DefaultButtonVariant)) {
-                                Div(ButtonTextStyle.toAttrs()) {
-                                    SpanText(
-                                        "Оставить заявку",
-                                        modifier = Modifier
-                                            .color(palette.brand.whiteText)
-                                            .fillMaxWidth()
-                                            .textAlign(TextAlign.Center)
-                                    )
-                                }
-                            }
-                        }
-                        Spacer()
-                    }
-                }
+                Box(Modifier.height(XXXXXLargePadding))
+                DuetsSection(Modifier.fillMaxWidth().padding(leftRight = XXXXLargePadding))
+                Box(Modifier.height(XXXXLargePadding))
+                VideosSection(Modifier.fillMaxWidth())
                 Box(Modifier.height(MediumPadding))
                 Column(modifier = Modifier.fillMaxWidth().backgroundColor(palette.brand.surface)) {
                     Box(Modifier.height(MediumPadding))
@@ -775,65 +579,41 @@ private fun VariousEventsSection() {
 }
 
 @Composable
-private fun VideosSection() {
-    val palette = ColorMode.current.toSitePalette()
-    Column(modifier = SectionContainerStyle.toModifier().fillMaxWidth().displayIfAtLeast(Breakpoint.LG)) {
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Column(modifier = Modifier.width(460.px)) {
-                Div(SectionTitleStyle.toAttrs()) {
-                    SpanText(
-                        "Коллектив молодых, ярких вокалистов",
-                        modifier = Modifier
-                            .color(palette.brand.text)
-                            .fadeInAnimation()
-                    )
-                }
-                Box(Modifier.height(48.px))
-                Div(Headline2TextStyle.toAttrs()) {
-                    SpanText(
-                        "Концерный формат выступлений",
-                        modifier = Modifier
-                            .color(palette.brand.text)
-                            .fadeInAnimation()
-                    )
-                }
-            }
-            Spacer()
-            Box(
+private fun VideosSection(modifier: Modifier) {
+    Column(
+        modifier = modifier.gap(3.5.cssRem),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Div(TitleStyle.toAttrs()) {
+            SpanText(
+                Resources.Strings.ultima_band,
                 modifier = Modifier
                     .fadeInAnimation()
-            ) {
-                VideoYT("https://www.youtube.com/embed/_c2B9DN_khg?si=eVhKkAczzjP_Afsm")
-            }
+            )
         }
-        Box(Modifier.height(XXXXLargePadding))
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Box(
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fadeInAnimation(),
+            contentAlignment = Alignment.Center
+        ) {
+            VideoYT("https://www.youtube.com/embed/_c2B9DN_khg?si=eVhKkAczzjP_Afsm")
+        }
+        Box(Modifier.height(XXXLargePadding))
+        Div(TitleStyle.toAttrs()) {
+            SpanText(
+                Resources.Strings.vacalnoye_show,
                 modifier = Modifier
                     .fadeInAnimation()
-            ) {
-                VideoYT("https://www.youtube.com/embed/aEh4p6dUbvU?si=sZIsdey5lwHZ-rBx")
-            }
-            Spacer()
-            Column(modifier = Modifier.width(460.px)) {
-                Div(SectionTitleStyle.toAttrs()) {
-                    SpanText(
-                        "Мы можем устроить любой праздник",
-                        modifier = Modifier
-                            .color(palette.brand.text)
-                            .fadeInAnimation()
-                    )
-                }
-                Box(Modifier.height(48.px))
-                Div(Headline2TextStyle.toAttrs()) {
-                    SpanText(
-                        "Широкий репертуар: от лаунжа до современных композиций",
-                        modifier = Modifier
-                            .color(palette.brand.text)
-                            .fadeInAnimation()
-                    )
-                }
-            }
+            )
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fadeInAnimation(),
+            contentAlignment = Alignment.Center
+        ) {
+            VideoYT("https://www.youtube.com/embed/aEh4p6dUbvU?si=sZIsdey5lwHZ-rBx")
         }
     }
 }
@@ -909,6 +689,111 @@ private fun ImageHeaderWithLogo() {
             }
             Box(Modifier.height(XXXXXLargePadding))
             MembersCountSection(modifier = Modifier.fillMaxWidth().padding(leftRight = XXXXXLargePadding))
+        }
+    }
+}
+
+@Composable
+private fun DuetsSection(modifier: Modifier) {
+    Box(modifier = modifier) {
+        Image(
+            Resources.Images.clyaksa_2,
+            modifier = Clyaks2ImageStyle.toModifier().align(Alignment.TopEnd)
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(top = XXXXLargePadding),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Column(modifier = Modifier.gap(3.5.cssRem)) {
+                Div(TitleStyle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.duet_uppercase,
+                        modifier = Modifier
+                            .fadeInAnimation()
+                    )
+                }
+                Div(SubheadlineRegularStyle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.princip_constryktora,
+                        modifier = Modifier
+                            .whiteSpace(WhiteSpace.PreLine)
+                            .fadeInAnimation()
+                    )
+                }
+                @Composable
+                fun tripleDuetsColumn(duets: List<String>) {
+                    Column {
+                        duets.forEach {
+                            Div(SubheadlineBoldStyle.toAttrs()) {
+                                SpanText(
+                                    it,
+                                    modifier = Modifier
+                                        .whiteSpace(WhiteSpace.PreLine)
+                                        .fadeInAnimation()
+                                )
+                            }
+                        }
+                    }
+                }
+                Row(Modifier.gap(2.5.cssRem)) {
+                    tripleDuetsColumn(
+                        listOf(
+                            Resources.Strings.sasha_plus_alya,
+                            Resources.Strings.lena_plus_liza,
+                            Resources.Strings.ula_plus_yla
+                        )
+                    )
+                    tripleDuetsColumn(
+                        listOf(
+                            Resources.Strings.ilya_plus_andrey,
+                            Resources.Strings.dora_plus_alina,
+                            Resources.Strings.marat_plus_yla
+                        )
+                    )
+                    tripleDuetsColumn(
+                        listOf(
+                            Resources.Strings.milana_plus_jia,
+                            Resources.Strings.lena_plus_andrey,
+                            Resources.Strings.alya_plus_diana
+                        )
+                    )
+                }
+            }
+            Column(modifier = Modifier.padding(right = XLargePadding)) {
+                SliderSimpleArrow(
+                    modifier = Modifier,
+                    hasDotsIndicator = false,
+                    items = listOf(1), //STUB
+                    leftArrow = {
+                        Image(
+                            Resources.Images.arrow_left,
+                            "Main photo",
+                            ArrowImageStyle
+                                .toModifier()
+                                .fadeInAnimation(),
+                        )
+                    },
+                    rightArrow = {
+                        Image(
+                            Resources.Images.arrow_right,
+                            "Main photo",
+                            ArrowImageStyle
+                                .toModifier()
+                                .fadeInAnimation(),
+                        )
+                    }
+                ) {
+                    Box(Modifier.padding(leftRight = XXXLargePadding + XXLargePadding)) {
+                        Card(
+                            modifier = Modifier.width(543.px).height(696.px),
+                            color = DesignSurface,
+                        ) {
+
+                        }
+                    }
+                }
+            }
         }
     }
 }

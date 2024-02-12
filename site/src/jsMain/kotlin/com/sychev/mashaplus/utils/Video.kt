@@ -1,10 +1,10 @@
 package com.sychev.mashaplus.utils
 
 import androidx.compose.runtime.Composable
+import com.sychev.mashaplus.XXXXLargePadding
+import com.varabyte.kobweb.compose.css.BoxSizing
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
-import com.varabyte.kobweb.compose.ui.modifiers.height
-import com.varabyte.kobweb.compose.ui.modifiers.width
+import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.style.ComponentStyle
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toAttrs
@@ -17,7 +17,8 @@ val VideoFrameStyle by ComponentStyle {
         Modifier.height(180.px).width(320.px)
     }
     Breakpoint.LG {
-        Modifier.height(410.px).width(720.px).borderRadius(0.9.cssRem, 0.9.cssRem)
+        Modifier.width(1340.px).height(690.px).boxSizing(BoxSizing.BorderBox).borderRadius(0.9.cssRem, 0.9.cssRem)
+            .padding(leftRight = XXXXLargePadding)
     }
 }
 
@@ -47,8 +48,6 @@ fun VideoYT(
     loop: Boolean = true
 ) {
     Iframe(attrs = VideoFrameStyle.toAttrs {
-        attr("width", "320")
-        attr("height", "180")
         val fullLinkSB = StringBuilder()
         fullLinkSB.append(sourceEmbedLink)
         if (autoplay) fullLinkSB.append("&autoplay=1")

@@ -43,6 +43,17 @@ object Resources {
         const val ilya = "ИЛЬЯ\nОКУЛОВ"
         const val ilya_star = "ИЛЬЯ \nСТАРЧИКОВ"
         const val marat = "МАРАТ"
+        const val princip_constryktora =
+            "Мы работаем по принципу конструктора, когда каждый\nзаказчик может составить дуэт из любых понравившихся\nвокалистов. А так же из вокалистов и инструменталистов "
+        const val sasha_plus_alya = "САША + АЛЯ"
+        const val lena_plus_liza = "ЛЕНА + ЛИЗА"
+        const val ula_plus_yla = "ЮЛЯ + УЛА"
+        const val ilya_plus_andrey = "ИЛЬЯ + АНДРЕЙ"
+        const val dora_plus_alina = "ДОРА + АЛИНА"
+        const val marat_plus_yla = "МАРАТ  + УЛА"
+        const val milana_plus_jia = "МИЛАНА + ДЖИА"
+        const val lena_plus_andrey = "ЛЕНА + АНДРЕЙ"
+        const val alya_plus_diana = "АЛЯ + ДИАНА"
     }
 
     object Images {
@@ -78,6 +89,9 @@ object Resources {
         const val ilya_vok = "/ilya_vok.png"
         const val ilay_star_vok = "/ilya_starchikov_vok.png"
         const val marat_vok = "/marat_vok.png"
+        const val clyaksa_2 = "/clyaksa_2.png"
+        const val arrow_left = "/arrow_left.png"
+        const val arrow_right = "/arrow_right.png"
     }
 
 }

@@ -173,6 +173,14 @@ val SubheadlineRegularStyle by ComponentStyle.base {
         .fontWeight(FontWeight.Normal)
         .color(colorMode.toPalette().color.toRgb())
 }
+val SubheadlineBoldStyle by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(1.4.cssRem)
+        .textAlign(TextAlign.Start)
+        .fontWeight(FontWeight.SemiBold)
+        .color(colorMode.toPalette().color.toRgb())
+}
 
 val TitleOutlinedStyle by ComponentStyle.base {
     Modifier
