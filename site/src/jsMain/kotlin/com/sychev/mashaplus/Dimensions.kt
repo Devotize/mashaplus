@@ -1,6 +1,7 @@
 package com.sychev.mashaplus
 
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.vw
 
 
 /**
@@ -54,6 +55,11 @@ val XXXLargePadding = 64.px
 val XXXXLargePadding = 128.px
 
 /**
- * 256.px default for side margin
+ * 256.px
  */
 val XXXXXLargePadding = 256.px
+
+/**
+ * default for side margin
+ */
+val LeftRightPadding = 6.vw

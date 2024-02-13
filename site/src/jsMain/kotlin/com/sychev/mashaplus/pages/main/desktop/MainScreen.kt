@@ -56,7 +56,7 @@ fun MainScreenDesktop() {
             Column(Modifier.gap(2.cssRem).width(100.percent)) {
                 ImageHeaderWithLogo()
                 Box(Modifier.height(XXXLargePadding))
-                OurServicesSections(modifier = Modifier.fillMaxWidth().padding(leftRight = XXXXXLargePadding))
+                OurServicesSections(modifier = Modifier.fillMaxWidth().padding(leftRight = LeftRightPadding))
                 Box(Modifier.height(XXXXLargePadding))
                 Box(ref = ref {
                     ScrollToViewEventProvider.setVocalistScrollEvent {
@@ -75,7 +75,7 @@ fun MainScreenDesktop() {
                     vokalistyList
                 )
                 Box(Modifier.height(XXXXXLargePadding))
-                DuetsSection(Modifier.fillMaxWidth().padding(leftRight = XXXXLargePadding))
+                DuetsSection(Modifier.fillMaxWidth().padding(leftRight = LeftRightPadding))
                 Box(Modifier.height(XXXXLargePadding))
                 VideosSection(Modifier.fillMaxWidth())
                 Box(Modifier.height(XXXXXLargePadding))
@@ -378,7 +378,7 @@ private fun ImageHeaderWithLogo() {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = XXLargePadding, leftRight = XXXXXLargePadding)
+                    .padding(top = XXLargePadding, leftRight = LeftRightPadding)
                     .gap(2.2.cssRem),
                 horizontalAlignment = Alignment.Start
             ) {
