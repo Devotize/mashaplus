@@ -162,30 +162,26 @@ fun OurServicesSections(modifier: Modifier = Modifier) {
                 }
                 val cardHeight = 45.cssRem
                 Column(Modifier.fillMaxWidth().height(cardHeight)) {
-                    Row(modifier = Modifier.fillMaxWidth().weight(14)) {
+                    @Composable
+                    fun ServiceCard(text: String, weight: Int) {
+                        var showBackgroundShadow by remember { mutableStateOf(false) }
                         Card(
-                            modifier = Modifier.fillMaxHeight().weight(25),
+                            modifier = Modifier.fillMaxHeight().weight(weight)
+                                .onMouseEnter { showBackgroundShadow = true }
+                                .onMouseLeave { showBackgroundShadow = false }
+                                .boxShadow(
+                                    offsetX = 1.px,
+                                    offsetY = 1.px,
+                                    blurRadius = 5.px,
+                                    spreadRadius = 5.px,
+                                    color = if (showBackgroundShadow) DesignShadow else Colors.Transparent
+                                ),
                             color = DesignSurface,
                             paddingValues = XXXXLargePadding - XXLargePadding
                         ) {
                             Div(GritTextTitle.toAttrs()) {
                                 SpanText(
-                                    Resources.Strings.ultima_band,
-                                    modifier = Modifier
-                                        .color(palette.brand.textReversed)
-                                        .fadeInAnimation()
-                                )
-                            }
-                        }
-                        Box(Modifier.weight(1.5))
-                        Card(
-                            modifier = Modifier.fillMaxHeight().weight(3),
-                            color = DesignSurface,
-                            paddingValues = XXXXLargePadding - XXLargePadding
-                        ) {
-                            Div(GritTextTitle.toAttrs()) {
-                                SpanText(
-                                    Resources.Strings.duet_uppercase,
+                                    text,
                                     modifier = Modifier
                                         .color(palette.brand.textReversed)
                                         .fadeInAnimation()
@@ -193,37 +189,16 @@ fun OurServicesSections(modifier: Modifier = Modifier) {
                             }
                         }
                     }
+                    Row(modifier = Modifier.fillMaxWidth().weight(14)) {
+                        ServiceCard(Resources.Strings.ultima_band, 25)
+                        Box(Modifier.weight(1.5))
+                        ServiceCard(Resources.Strings.duet_uppercase, 3)
+                    }
                     Box(Modifier.fillMaxWidth().weight(1.5))
                     Row(modifier = Modifier.fillMaxWidth().weight(14)) {
-                        Card(
-                            modifier = Modifier.fillMaxHeight().weight(3),
-                            color = DesignSurface,
-                            paddingValues = XXXXLargePadding - XXLargePadding
-                        ) {
-                            Div(GritTextTitle.toAttrs()) {
-                                SpanText(
-                                    Resources.Strings.vokalisty_uppercase,
-                                    modifier = Modifier
-                                        .color(palette.brand.textReversed)
-                                        .fadeInAnimation()
-                                )
-                            }
-                        }
+                        ServiceCard(Resources.Strings.vokalisty_uppercase, 3)
                         Box(Modifier.fillMaxHeight().weight(1.5))
-                        Card(
-                            modifier = Modifier.fillMaxHeight().weight(25),
-                            color = DesignSurface,
-                            paddingValues = XXXXLargePadding - XXLargePadding
-                        ) {
-                            Div(GritTextTitle.toAttrs()) {
-                                SpanText(
-                                    Resources.Strings.vacalnoye_show,
-                                    modifier = Modifier
-                                        .color(palette.brand.textReversed)
-                                        .fadeInAnimation()
-                                )
-                            }
-                        }
+                        ServiceCard(Resources.Strings.vacalnoye_show, 25)
                     }
                 }
             }
