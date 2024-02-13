@@ -11,6 +11,7 @@ import com.sychev.mashaplus.utils.fadeInAnimation
 import com.sychev.mashaplus.utils.stubAnimation
 import com.varabyte.kobweb.compose.css.functions.clamp
 import com.varabyte.kobweb.compose.dom.ElementTarget
+import com.varabyte.kobweb.compose.dom.ref
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
@@ -171,60 +172,105 @@ fun NavHeader() {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.End,
             ) {
-                Div(NavigationHeadlineTextStyle.toAttrs {
-                    ref { element ->
+                Link(
+                    path = "",
+                    openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                    openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                    ref = ref { element ->
                         element.onclick = {
                             ScrollToViewEventProvider.sendContactsScrollEvent()
                         }
-                        onDispose { /* ... */ }
+                    }) {
+                    Div(NavigationHeadlineTextStyle.toAttrs()) {
+                        SpanText(
+                            "Контакты",
+                            modifier = Modifier
+                                .color(palette.brand.whiteText)
+                                .fadeInAnimation(),
+                        )
                     }
-                }) {
-                    SpanText(
-                        "Контакты",
-                        modifier = Modifier
-                            .color(palette.brand.whiteText)
-                            .fadeInAnimation(),
-                    )
                 }
-                Div(NavigationHeadlineTextStyle.toAttrs()) {
-                    SpanText(
-                        "Вокалист",
-                        modifier = Modifier
-                            .color(palette.brand.whiteText)
-                            .fadeInAnimation()
-                    )
+                Link(
+                    path = "",
+                    openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                    openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                    ref = ref { element ->
+                        element.onclick = {
+                            ScrollToViewEventProvider.sendVocalistScrollEvent()
+                        }
+                    }) {
+                    Div(NavigationHeadlineTextStyle.toAttrs()) {
+                        SpanText(
+                            "Вокалист",
+                            modifier = Modifier
+                                .color(palette.brand.whiteText)
+                                .fadeInAnimation()
+                        )
+                    }
                 }
-                Div(NavigationHeadlineTextStyle.toAttrs()) {
-                    SpanText(
-                        "Дуэт",
-                        modifier = Modifier
-                            .color(palette.brand.whiteText)
-                            .fadeInAnimation()
-                    )
+                Link(
+                    path = "",
+                    openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                    openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                    ref = ref { element ->
+                        element.onclick = {
+                            ScrollToViewEventProvider.sendDuetScrollEvent()
+                        }
+                    }) {
+                    Div(NavigationHeadlineTextStyle.toAttrs()) {
+                        SpanText(
+                            "Дуэт",
+                            modifier = Modifier
+                                .color(palette.brand.whiteText)
+                                .fadeInAnimation()
+                        )
+                    }
                 }
-                Div(NavigationHeadlineTextStyle.toAttrs()) {
-                    SpanText(
-                        "Вокальное шоу",
-                        modifier = Modifier
-                            .color(palette.brand.whiteText)
-                            .fadeInAnimation()
-                    )
+                Link(
+                    path = "",
+                    openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                    openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                    ref = ref { element ->
+                        element.onclick = {
+                            ScrollToViewEventProvider.sendVocalShowScrollEvent()
+                        }
+                    }) {
+                    Div(NavigationHeadlineTextStyle.toAttrs()) {
+                        SpanText(
+                            "Вокальное шоу",
+                            modifier = Modifier
+                                .color(palette.brand.whiteText)
+                                .fadeInAnimation()
+                        )
+                    }
                 }
-                Div(NavigationHeadlineTextStyle.toAttrs()) {
-                    SpanText(
-                        "ULTIMA BAND",
-                        modifier = Modifier
-                            .color(palette.brand.whiteText)
-                            .fadeInAnimation()
-                    )
+                Link(
+                    path = "",
+                    openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                    openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                    ref = ref { element ->
+                        element.onclick = {
+                            ScrollToViewEventProvider.sendUltimaBandScrollEvent()
+                        }
+                    }) {
+                    Div(NavigationHeadlineTextStyle.toAttrs()) {
+                        SpanText(
+                            "ULTIMA BAND",
+                            modifier = Modifier
+                                .color(palette.brand.whiteText)
+                                .fadeInAnimation()
+                        )
+                    }
                 }
-                Div(NavigationHeadlineTextStyle.toAttrs()) {
-                    SpanText(
-                        "Репертуар",
-                        modifier = Modifier
-                            .color(palette.brand.whiteText)
-                            .fadeInAnimation()
-                    )
+                Link("https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg") {
+                    Div(NavigationHeadlineTextStyle.toAttrs()) {
+                        SpanText(
+                            "Репертуар",
+                            modifier = Modifier
+                                .color(palette.brand.whiteText)
+                                .fadeInAnimation()
+                        )
+                    }
                 }
             }
             Row(

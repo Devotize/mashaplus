@@ -60,7 +60,7 @@ object Resources {
         const val bolshe_o_nas = "Больше о нас"
         const val vvedite_nomer_telefona_hint = "Введите номер телефона"
         const val jiviye_vystuplenya = "ЖИВЫЕ ВЫСТУПЛЕНИЯ"
-        const val repertuar = "РЕПЕРТУАР"
+        const val repertuar_uppercase = "РЕПЕРТУАР"
         const val tseni = "ЦЕНЫ"
         const val vajniye_voprosy = "ВАЖНЫЕ ВОПРОСЫ"
     }

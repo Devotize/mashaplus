@@ -3,12 +3,14 @@ package com.sychev.mashaplus.pages.main.desktop
 import androidx.compose.runtime.*
 import com.sychev.mashaplus.*
 import com.sychev.mashaplus.components.widgets.Card
-import com.sychev.mashaplus.components.widgets.Divider
 import com.sychev.mashaplus.components.widgets.SliderSimpleArrow
 import com.sychev.mashaplus.models.Vocalist
 import com.sychev.mashaplus.models.vokalistkyList
 import com.sychev.mashaplus.models.vokalistyList
-import com.sychev.mashaplus.pages.*
+import com.sychev.mashaplus.pages.HeroContainerStyle
+import com.sychev.mashaplus.pages.LogoStyle
+import com.sychev.mashaplus.pages.LogoStyleSmall
+import com.sychev.mashaplus.pages.MainPhotoSlideInAnim
 import com.sychev.mashaplus.pages.main.widgets.*
 import com.sychev.mashaplus.provider.ScrollToViewEventProvider
 import com.sychev.mashaplus.utils.Resources
@@ -52,11 +54,15 @@ fun MainScreenDesktop() {
     Row(HeroContainerStyle.toModifier()) {
         Box(modifier = Modifier.fillMaxWidth()) {
             Column(Modifier.gap(2.cssRem).width(100.percent)) {
-                val palette = ColorMode.current.toSitePalette()
                 ImageHeaderWithLogo()
                 Box(Modifier.height(XXXLargePadding))
                 OurServicesSections(modifier = Modifier.fillMaxWidth().padding(leftRight = XXXXXLargePadding))
                 Box(Modifier.height(XXXXLargePadding))
+                Box(ref = ref {
+                    ScrollToViewEventProvider.setVocalistScrollEvent {
+                        it.scrollIntoView()
+                    }
+                })
                 VocalistySection(
                     modifier = Modifier.fillMaxWidth(),
                     Resources.Strings.vokalistky_uppercase,
@@ -289,235 +295,6 @@ private fun VocalistCard(modifier: Modifier, name: String, photoRes: String) {
 }
 
 @Composable
-private fun FeaturesTopSection() {
-    val palette = ColorMode.current.toSitePalette()
-    Row(
-        Modifier.padding(top = XXXXLargePadding, left = XXXXLargePadding * 1.5, right = XLargePadding).fillMaxWidth()
-    ) {
-        Box(Modifier.width(660.px)) {
-            Div(SectionTitleStyle.toAttrs()) {
-                SpanText(
-                    "О нас",
-                    modifier = Modifier
-                        .color(palette.brand.text)
-                        .fadeInAnimation()
-                )
-            }
-        }
-        Spacer()
-        Column(modifier = Modifier) {
-            Div(Headline2TextStyle.toAttrs()) {
-                SpanText(
-                    "Masha+» – это не просто музыкальный проект, это волшебное слияние талантливых вокалистов и музыкантов, создающих атмосферу, которая словно воплощает в себе саму суть ваших мечтаний.",
-                    modifier = Modifier
-                        .color(palette.brand.text)
-                        .fadeInAnimation()
-                )
-            }
-            Box(Modifier.height(48.px))
-            Row(Modifier.fillMaxWidth()) {
-                Box(Modifier.width(40.percent)) {
-                    Div(ModalDescriptionTextStyle.toAttrs()) {
-                        SpanText(
-                            "Каждый заказчик сам может выбрать себе исполнителей на свой праздник. Мы - не просто агенство с подборкой незнакомых вокалистов, мы - коллестив, где все знают друг друга и много лет работают вместе",
-                            modifier = Modifier
-                                .color(palette.brand.text)
-                        )
-                    }
-                }
-                Box(Modifier.width(XXXLargePadding))
-                Box(Modifier.width(45.percent).padding()) {
-                    Div(ModalDescriptionTextStyle.toAttrs()) {
-                        SpanText(
-                            "От уютного вечера в ресторане до свадеб и юбилеев, а также выступления на концертных площадках города и за его пределами. Репертуар наших артистов весьма широк! Вы можете насладиться своим ужином под ненавязчивый лаунж или же зарядиться качевыми треками.",
-                            modifier = Modifier
-                                .color(palette.brand.text)
-                        )
-                    }
-                }
-            }
-        }
-    }
-    Box(Modifier.height(XLargePadding))
-}
-
-@Composable
-private fun VariousEventsSection() {
-    val palette = ColorMode.current.toSitePalette()
-    Column(modifier = SectionContainerStyle.toModifier().fillMaxWidth()) {
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Column(modifier = Modifier.width(460.px)) {
-                Div(SectionTitleStyle.toAttrs()) {
-                    SpanText(
-                        "Разнообразные события",
-                        modifier = Modifier
-                            .color(palette.brand.text)
-                            .fadeInAnimation()
-                    )
-                }
-                Box(Modifier.height(48.px))
-                Div(Headline2TextStyle.toAttrs()) {
-                    SpanText(
-                        "Наши профессиональные музыканты – это не просто исполнители, а хранители музыкальной магии, готовые воплотить вашу музыкальную фантазию в неповторимый момент.",
-                        modifier = Modifier
-                            .color(palette.brand.text)
-                            .fadeInAnimation()
-                    )
-                }
-                Box(Modifier.height(48.px))
-                Div(ModalDescriptionTextStyle.toAttrs()) {
-                    SpanText(
-                        "Последний звонок, последний урок, вручение аттестатов... Наша команда готова сделать ваш выпускной неповторимым. Особенный ведущий, эмоциональный диджей и талантливые вокалисты создадут вечер, который запомнится на всю жизнь. Доверьтесь нам и создайте самую невероятную ночь вашего выпускного!",
-                        modifier = Modifier
-                            .color(palette.brand.text)
-                    )
-                }
-            }
-            Spacer()
-            Image(
-                "/club_dance.png",
-                "Main photo",
-                SectionPhotoStyle
-                    .toModifier().fadeInAnimation(),
-            )
-        }
-        Box(Modifier.height(XXXXLargePadding))
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Column(modifier = Modifier.width(460.px)) {
-                Div(SectionTitleStyle.toAttrs()) {
-                    SpanText(
-                        "Исполнители",
-                        modifier = Modifier
-                            .color(palette.brand.text)
-                            .fadeInAnimation()
-                    )
-                }
-            }
-            Spacer()
-            Column(
-                ref = ref {
-                    ScrollToViewEventProvider.setContactsScrollEvent {
-                        it.scrollIntoView()
-                    }
-                },
-                modifier = Modifier.width(SectionPhotoWidthMD)
-            ) {
-                Div(HeadlineTextStyle.toAttrs()) {
-                    SpanText(
-                        "Разнообразный состав",
-                        modifier = Modifier
-                            .color(palette.brand.text)
-                            .fadeInAnimation()
-                    )
-                }
-                Box(Modifier.height(XXXLargePadding))
-                Div(ModalDescriptionTextStyle.toAttrs()) {
-                    SpanText(
-                        "Активные и молодые музыканты",
-                        modifier = Modifier
-                            .color(palette.brand.text)
-                            .fadeInAnimation()
-                    )
-                }
-                Box(Modifier.height(XXXLargePadding))
-                Row(Modifier.fillMaxWidth()) {
-                    Column {
-                        Divider(310.px)
-                        Box(Modifier.height(XXSmallPadding))
-                        Div(HugeThinTextStyle.toAttrs()) {
-                            SpanText(
-                                "13",
-                                modifier = Modifier
-                                    .color(palette.brand.text)
-                                    .fadeInAnimation()
-                            )
-                        }
-                        Box(Modifier.height(XXXXSmallPadding))
-                        Div(ModalDescriptionTextStyle.toAttrs()) {
-                            SpanText(
-                                "Профессиональных вокалистов",
-                                modifier = Modifier
-                                    .color(palette.brand.text)
-                                    .fadeInAnimation()
-                            )
-                        }
-                    }
-                    Spacer()
-                    Column {
-                        Divider(310.px)
-                        Box(Modifier.height(XXSmallPadding))
-                        Div(HugeThinTextStyle.toAttrs()) {
-                            SpanText(
-                                "10",
-                                modifier = Modifier
-                                    .color(palette.brand.text)
-                                    .fadeInAnimation()
-                            )
-                        }
-                        Box(Modifier.height(XXXXSmallPadding))
-                        Div(ModalDescriptionTextStyle.toAttrs()) {
-                            SpanText(
-                                "Инструменталистов",
-                                modifier = Modifier
-                                    .color(palette.brand.text)
-                                    .fadeInAnimation()
-                            )
-                        }
-                    }
-                }
-            }
-        }
-        Box(Modifier.height(XXXXLargePadding))
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Image(
-                "/repertoire.png",
-                "Main photo",
-                SectionPhotoStyle
-                    .toModifier().fadeInAnimation(),
-            )
-            Spacer()
-            Column(modifier = Modifier.width(460.px)) {
-                Div(SectionTitleStyle.toAttrs()) {
-                    SpanText(
-                        "Широкий репертуар",
-                        modifier = Modifier
-                            .color(palette.brand.text)
-                            .fadeInAnimation()
-                    )
-                }
-                Box(Modifier.height(48.px))
-                Div(Headline2TextStyle.toAttrs()) {
-                    SpanText(
-                        "У каждого из наших вокалистов огромный репертуар и " +
-                                "большое количество интересных аранжировок, так же " +
-                                "мы можем выучить какую-то композицию лично для вас",
-                        modifier = Modifier
-                            .color(palette.brand.text)
-                            .fadeInAnimation()
-                    )
-                }
-                Box(Modifier.height(48.px))
-                Box(modifier = Modifier.align(Alignment.Start)) {
-                    Link("https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg") {
-                        Button(ButtonStyle.toAttrs(DefaultButtonVariant)) {
-                            Div(ButtonTextStyle.toAttrs()) {
-                                SpanText(
-                                    "Посмотреть репертуар",
-                                    modifier = Modifier
-                                        .color(palette.brand.whiteText)
-                                        .fillMaxWidth()
-                                        .textAlign(TextAlign.Center)
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
 private fun VideosSection(modifier: Modifier) {
     Column(
         modifier = modifier.gap(3.5.cssRem),
@@ -527,14 +304,19 @@ private fun VideosSection(modifier: Modifier) {
             SpanText(
                 Resources.Strings.ultima_band,
                 modifier = Modifier
-                    .fadeInAnimation()
+                    .fadeInAnimation(),
+                ref = ref {
+                    ScrollToViewEventProvider.setUltimaBandSectionEvent {
+                        it.scrollIntoView()
+                    }
+                }
             )
         }
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .fadeInAnimation(),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
         ) {
             VideoYT("https://www.youtube.com/embed/_c2B9DN_khg?si=eVhKkAczzjP_Afsm")
         }
@@ -543,14 +325,19 @@ private fun VideosSection(modifier: Modifier) {
             SpanText(
                 Resources.Strings.vacalnoye_show,
                 modifier = Modifier
-                    .fadeInAnimation()
+                    .fadeInAnimation(),
+                ref = ref {
+                    ScrollToViewEventProvider.setVocalShowSectionEvent {
+                        it.scrollIntoView()
+                    }
+                }
             )
         }
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .fadeInAnimation(),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
         ) {
             VideoYT("https://www.youtube.com/embed/aEh4p6dUbvU?si=sZIsdey5lwHZ-rBx")
         }
@@ -634,7 +421,14 @@ private fun ImageHeaderWithLogo() {
 
 @Composable
 private fun DuetsSection(modifier: Modifier) {
-    Box(modifier = modifier) {
+    Box(
+        modifier = modifier,
+        ref = ref {
+            ScrollToViewEventProvider.setDuetSectionEvent {
+                it.scrollIntoView()
+            }
+        }
+    ) {
         Image(
             Resources.Images.clyaksa_2,
             modifier = Clyaks2ImageStyle.toModifier().align(Alignment.TopEnd)
@@ -745,6 +539,11 @@ fun BottomSection(modifier: Modifier) {
     Row(
         modifier = modifier.padding(XXXLargePadding),
         horizontalArrangement = Arrangement.SpaceBetween,
+        ref = ref {
+            ScrollToViewEventProvider.setContactsScrollEvent {
+                it.scrollIntoView()
+            }
+        }
     ) {
         Column(
             modifier = Modifier.gap(1.5.cssRem),
@@ -890,7 +689,7 @@ fun BottomSection(modifier: Modifier) {
             Box(Modifier.height(XSmallPadding))
             Div(SmallRegularTextStyle.toAttrs()) {
                 SpanText(
-                    Resources.Strings.repertuar,
+                    Resources.Strings.repertuar_uppercase,
                     modifier = Modifier
                         .whiteSpace(WhiteSpace.PreLine)
                         .fadeInAnimation()
