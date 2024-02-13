@@ -246,18 +246,20 @@ private fun VocalistySection(modifier: Modifier, title: String, list: List<Vocal
         }
         Row(
             modifier = Modifier
+                .fillMaxWidth()
                 .overflow(Overflow.Scroll)
                 .gap(3.cssRem)
                 .styleModifier {
                     property("display", "-webkit-box")
+                    property("-webkit-box-pack", "center")
                 },
             horizontalArrangement = Arrangement.Center
         ) {
-            Box(Modifier.padding(XXLargePadding))
+            Box(Modifier.width(XXLargePadding))
             list.forEach {
                 VocalistCard(Modifier, it.name, it.imgRes)
             }
-            Box(Modifier.padding(XXLargePadding))
+            Box(Modifier.width(XXLargePadding))
         }
     }
 }
@@ -401,15 +403,17 @@ private fun ImageHeaderWithLogo() {
                     )
                 }
                 Spacer()
-                Button(ButtonStyle.toAttrs(OutlinedGradientCircularButtonVariant)) {
-                    Div(OutlineButtonTextStyle.toAttrs()) {
-                        SpanText(
-                            Resources.Strings.ostavit_zayavku,
-                            modifier = Modifier
-                                .color(palette.brand.textReversed)
-                                .fillMaxWidth()
-                                .textAlign(TextAlign.Center)
-                        )
+                Link("https://vk.com/masha_plus_band") {
+                    Button(ButtonStyle.toAttrs(OutlinedGradientCircularButtonVariant)) {
+                        Div(OutlineButtonTextStyle.toAttrs()) {
+                            SpanText(
+                                Resources.Strings.ostavit_zayavku,
+                                modifier = Modifier
+                                    .color(palette.brand.textReversed)
+                                    .fillMaxWidth()
+                                    .textAlign(TextAlign.Center)
+                            )
+                        }
                     }
                 }
             }
@@ -687,13 +691,18 @@ fun BottomSection(modifier: Modifier) {
                 )
             }
             Box(Modifier.height(XSmallPadding))
-            Div(SmallRegularTextStyle.toAttrs()) {
-                SpanText(
-                    Resources.Strings.repertuar_uppercase,
-                    modifier = Modifier
-                        .whiteSpace(WhiteSpace.PreLine)
-                        .fadeInAnimation()
-                )
+            Link(
+                path = "https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg",
+                modifier = Modifier.color(DesignWhiteText),
+            ) {
+                Div(SmallRegularTextStyle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.repertuar_uppercase,
+                        modifier = Modifier
+                            .whiteSpace(WhiteSpace.PreLine)
+                            .fadeInAnimation()
+                    )
+                }
             }
             Box(Modifier.height(XSmallPadding))
             Div(SmallRegularTextStyle.toAttrs()) {
