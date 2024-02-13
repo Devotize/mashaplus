@@ -235,12 +235,19 @@ val CarouselTextTitle by ComponentStyle.base {
 
 
 /* New design buttons */
-val OutlinedCircularButtonVariant by ButtonStyle.addVariantBase {
+val OutlinedGradientCircularButtonVariant by ButtonStyle.addVariantBase {
     Modifier
         .padding(topBottom = XSmallPadding, leftRight = LargePadding)
         .borderRadius(1.6.cssRem, 1.6.cssRem)
         .backgroundImage(linearGradient(LinearGradient.Direction.ToRight, GradientLeft, GradientRight))
         .fontSize(1.5.cssRem)
+}
+val OutlinedCircularButtonVariant by ButtonStyle.addVariantBase {
+    Modifier
+        .padding(topBottom = XSmallPadding, leftRight = LargePadding)
+        .borderRadius(1.6.cssRem, 1.6.cssRem)
+        .backgroundColor(DesignWhiteText)
+        .fontSize(0.9.cssRem)
 }
 
 val OutlineButtonTextStyle by ComponentStyle.base {
@@ -248,5 +255,12 @@ val OutlineButtonTextStyle by ComponentStyle.base {
         .fontFamily(Fonts.MainFontName)
         .textAlign(TextAlign.Center)
         .fontWeight(FontWeight.Medium)
+        .color(colorMode.toPalette().color.toRgb())
+}
+val OutlineButtonTextSmallStyle by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .textAlign(TextAlign.Center)
+        .fontWeight(FontWeight.Bold)
         .color(colorMode.toPalette().color.toRgb())
 }

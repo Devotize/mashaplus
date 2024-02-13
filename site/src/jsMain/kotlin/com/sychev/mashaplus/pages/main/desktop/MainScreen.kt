@@ -1,6 +1,6 @@
 package com.sychev.mashaplus.pages.main.desktop
 
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import com.sychev.mashaplus.*
 import com.sychev.mashaplus.components.widgets.Card
 import com.sychev.mashaplus.components.widgets.Divider
@@ -14,6 +14,7 @@ import com.sychev.mashaplus.provider.ScrollToViewEventProvider
 import com.sychev.mashaplus.utils.Resources
 import com.sychev.mashaplus.utils.VideoYT
 import com.sychev.mashaplus.utils.fadeInAnimation
+import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.WhiteSpace
@@ -28,15 +29,18 @@ import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.toAttrs
-import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
+import com.varabyte.kobweb.silk.components.forms.Input
+import com.varabyte.kobweb.silk.components.forms.InputDefaults
+import com.varabyte.kobweb.silk.components.forms.InputSize
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.style.toAttrs
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import org.jetbrains.compose.web.attributes.InputType
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Button
 import org.jetbrains.compose.web.dom.Div
@@ -67,74 +71,8 @@ fun MainScreenDesktop() {
                 DuetsSection(Modifier.fillMaxWidth().padding(leftRight = XXXXLargePadding))
                 Box(Modifier.height(XXXXLargePadding))
                 VideosSection(Modifier.fillMaxWidth())
-                Box(Modifier.height(MediumPadding))
-                Column(modifier = Modifier.fillMaxWidth().backgroundColor(palette.brand.surface)) {
-                    Box(Modifier.height(MediumPadding))
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Spacer()
-                        Div(SubheadlineBoldTextStyle.toAttrs()) {
-                            SpanText(
-                                "Музыкальный проект \"Маша+\"",
-                                modifier = Modifier
-                                    .color(palette.brand.text)
-                                    .fadeInAnimation()
-                            )
-                        }
-                        Spacer()
-                    }
-                    Box(Modifier.height(MediumPadding))
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Spacer()
-                        Link("https://vk.com/masha_plus_band") {
-                            val imgResVK = if (ColorMode.current.isDark) {
-                                "/vk_logo.png"
-                            } else {
-                                "/vk_logo_black.png"
-                            }
-                            Image(
-                                imgResVK,
-                                "",
-                                LogoStyleSmall
-                                    .toModifier(),
-                            )
-                        }
-                        Box(Modifier.width(XXSmallPadding))
-                        Link("https://instagram.com/masha_plus_band?igshid=OGQ5ZDc2ODk2ZA==") {
-                            val imgResInst = if (ColorMode.current.isDark) {
-                                "/inst_logo.png"
-                            } else {
-                                "/inst_logo_black.png"
-                            }
-                            Image(
-                                imgResInst,
-                                "",
-                                LogoStyleSmall
-                                    .toModifier(),
-                            )
-                        }
-                        Spacer()
-                    }
-                    Box(Modifier.height(XXSmallPadding))
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Spacer()
-                        Link(
-                            "tel:+79319512000",
-                            openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
-                            openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE
-                        ) {
-                            Div(SubheadlineBoldTextStyle.toAttrs()) {
-                                SpanText(
-                                    "8 (931) 951-20-00",
-                                    modifier = Modifier
-                                        .color(palette.brand.text)
-                                        .fadeInAnimation()
-                                )
-                            }
-                        }
-                        Spacer()
-                    }
-                    Box(Modifier.height(MediumPadding))
-                }
+                Box(Modifier.height(XXXXXLargePadding))
+                BottomSection(Modifier.fillMaxWidth())
             }
         }
     }
@@ -675,7 +613,7 @@ private fun ImageHeaderWithLogo() {
                     )
                 }
                 Spacer()
-                Button(ButtonStyle.toAttrs(OutlinedCircularButtonVariant)) {
+                Button(ButtonStyle.toAttrs(OutlinedGradientCircularButtonVariant)) {
                     Div(OutlineButtonTextStyle.toAttrs()) {
                         SpanText(
                             Resources.Strings.ostavit_zayavku,
@@ -793,6 +731,147 @@ private fun DuetsSection(modifier: Modifier) {
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun BottomSection(modifier: Modifier) {
+    val palette = ColorMode.current.toSitePalette()
+    //Divider
+    Box(Modifier.fillMaxWidth().height(4.px).backgroundColor(DesignDivider))
+    Row(
+        modifier = modifier.padding(XXXLargePadding),
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        Column(
+            modifier = Modifier.gap(1.5.cssRem),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                Resources.Images.masha_logo,
+                "Logo icon",
+                LogoStyle
+                    .toModifier()
+                    .fadeInAnimation()
+            )
+            Row(
+                modifier = Modifier.gap(1.5.cssRem),
+            ) {
+                Link("https://vk.com/masha_plus_band") {
+                    val imgResVK = if (ColorMode.current.isDark) {
+                        "/vk_logo.png"
+                    } else {
+                        "/vk_logo_black.png"
+                    }
+                    Image(
+                        imgResVK,
+                        "",
+                        LogoStyleSmall
+                            .toModifier(),
+                    )
+                }
+                Link("https://instagram.com/masha_plus_band?igshid=OGQ5ZDc2ODk2ZA==") {
+                    val imgResInst = if (ColorMode.current.isDark) {
+                        "/inst_logo.png"
+                    } else {
+                        "/inst_logo_black.png"
+                    }
+                    Image(
+                        imgResInst,
+                        "",
+                        LogoStyleSmall
+                            .toModifier(),
+                    )
+                }
+                Link("https://instagram.com/masha_plus_band?igshid=OGQ5ZDc2ODk2ZA==") {
+                    val imgResInst = Resources.Images.ic_phone
+                    Image(
+                        imgResInst,
+                        "",
+                        LogoStyleSmall
+                            .toModifier(),
+                    )
+                }
+            }
+
+            Div(SubheadlineRegularStyle.toAttrs()) {
+                SpanText(
+                    Resources.Strings.spb,
+                    modifier = Modifier
+                        .whiteSpace(WhiteSpace.PreLine)
+                        .fontWeight(FontWeight.Light)
+                        .fadeInAnimation()
+                )
+            }
+        }
+        Column {
+            Div(GritTextTitle.toAttrs()) {
+                SpanText(
+                    Resources.Strings.ostavte_nomer,
+                    modifier = Modifier
+                        .whiteSpace(WhiteSpace.PreLine)
+                        .fadeInAnimation()
+                )
+            }
+            var inputText by remember { mutableStateOf("") }
+            val inputPrefix = remember { "+7 " }
+            var inFocus by remember { mutableStateOf(false) }
+            val numberThreshold = remember { 10 }
+            var isValid by remember { mutableStateOf(true) }
+            Box(Modifier.height(XXLargePadding))
+            Input(
+                modifier = Modifier
+                    .width(364.px)
+                    .padding(LargePadding)
+                    .borderRadius(1.9.cssRem, 1.9.cssRem)
+                    .onFocusIn {
+                        inFocus = true
+                    }
+                    .onFocusOut {
+                        isValid = inputText.length == numberThreshold || inputText.isEmpty()
+                        inFocus = false
+                    },
+                type = InputType.Tel,
+                value = if (inputText.isNotEmpty() || inFocus) {
+                    inputPrefix + inputText
+                } else {
+                    ""
+                },
+                onValueChanged = { input ->
+                    if (input == inputPrefix.trim()) return@Input
+                    val plainNumber = input.removePrefix(inputPrefix).filter { it.isDigit() }
+                    if (plainNumber.length > numberThreshold) return@Input
+                    inputText = plainNumber
+                },
+                placeholder = Resources.Strings.vvedite_nomer_telefona_hint,
+                spellCheck = InputDefaults.SpellCheck,
+                focusBorderColor = DesignWhiteText,
+                size = InputSize.LG,
+                valid = isValid
+            )
+            Box(Modifier.height(LargePadding))
+            Button(ButtonStyle.toAttrs(OutlinedCircularButtonVariant)) {
+                Div(OutlineButtonTextSmallStyle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.otpravit,
+                        modifier = Modifier
+                            .color(palette.brand.textReversed)
+                            .fillMaxWidth()
+                            .textAlign(TextAlign.Center)
+                    )
+                }
+            }
+        }
+        Column {
+            Div(GritTextTitle.toAttrs()) {
+                SpanText(
+                    Resources.Strings.bolshe_o_nas,
+                    modifier = Modifier
+                        .whiteSpace(WhiteSpace.PreLine)
+                        .fadeInAnimation()
+                )
             }
         }
     }

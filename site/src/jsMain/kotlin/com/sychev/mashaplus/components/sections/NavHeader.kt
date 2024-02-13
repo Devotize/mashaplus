@@ -6,6 +6,7 @@ import com.sychev.mashaplus.components.widgets.IconButton
 import com.sychev.mashaplus.pages.LogoStyleSmall
 import com.sychev.mashaplus.provider.ScrollToViewEventProvider
 import com.sychev.mashaplus.toSitePalette
+import com.sychev.mashaplus.utils.Resources
 import com.sychev.mashaplus.utils.fadeInAnimation
 import com.sychev.mashaplus.utils.stubAnimation
 import com.varabyte.kobweb.compose.css.functions.clamp
@@ -249,6 +250,15 @@ fun NavHeader() {
                     } else {
                         "/inst_logo_black.png"
                     }
+                    Image(
+                        imgResInst,
+                        "",
+                        LogoStyleSmall
+                            .toModifier(),
+                    )
+                }
+                Link("https://instagram.com/masha_plus_band?igshid=OGQ5ZDc2ODk2ZA==") {
+                    val imgResInst = Resources.Images.ic_phone
                     Image(
                         imgResInst,
                         "",

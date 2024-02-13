@@ -92,6 +92,7 @@ val GradientLeft = Color.rgb(0xF4E76B)
 val GradientRight = Color.rgb(0x7448FF)
 val MembersSectionCard = Color.argb(0x13d9d9d9)
 val DesignSurface = Color.rgb(0xd9d9d9)
+val DesignDivider = Color.argb(0x1fffcccc)
 
 //light
 val DesignSurfaceLight = Color.rgb(0xd9d5e6)

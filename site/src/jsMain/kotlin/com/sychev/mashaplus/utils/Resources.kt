@@ -15,6 +15,7 @@ object Resources {
         const val duet = "Дуэт"
         const val ogromnym_priemushestvom = "Огромным приемуществом нашего проекта является взаимозаменяемость"
         const val ostavit_zayavku = "Оставить заявку"
+        const val otpravit = "Отправить"
         const val muzik_project =
             "MASHA PLUS – музыкальный проект, который реализует все форматы\n живых выступлений. От соло-вокалистов до кавер бэнда"
         const val sozday_meropriyatie = "Создай мероприятие по своим\nправилам"
@@ -54,6 +55,10 @@ object Resources {
         const val milana_plus_jia = "МИЛАНА + ДЖИА"
         const val lena_plus_andrey = "ЛЕНА + АНДРЕЙ"
         const val alya_plus_diana = "АЛЯ + ДИАНА"
+        const val spb = "г. Санкт - Петербург"
+        const val ostavte_nomer = "Оставьте свой номер, создадим\nваше мероприятие вместе"
+        const val bolshe_o_nas = "Больше о нас"
+        const val vvedite_nomer_telefona_hint = "Введите номер телефона"
     }
 
     object Images {
@@ -92,6 +97,7 @@ object Resources {
         const val clyaksa_2 = "/clyaksa_2.png"
         const val arrow_left = "/arrow_left.png"
         const val arrow_right = "/arrow_right.png"
+        const val ic_phone = "/ic_phone.png"
     }
 
 }
