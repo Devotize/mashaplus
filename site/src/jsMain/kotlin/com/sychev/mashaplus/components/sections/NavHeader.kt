@@ -1,6 +1,7 @@
 package com.sychev.mashaplus.components.sections
 
 import androidx.compose.runtime.*
+import com.sychev.mashaplus.DesignWhiteText
 import com.sychev.mashaplus.NavigationHeadlineTextStyle
 import com.sychev.mashaplus.components.widgets.IconButton
 import com.sychev.mashaplus.pages.LogoStyleSmall
@@ -174,6 +175,7 @@ fun NavHeader() {
             ) {
                 Link(
                     path = "",
+                    modifier = Modifier.color(DesignWhiteText),
                     openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
                     openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
                     ref = ref { element ->
@@ -192,6 +194,7 @@ fun NavHeader() {
                 }
                 Link(
                     path = "",
+                    modifier = Modifier.color(DesignWhiteText),
                     openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
                     openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
                     ref = ref { element ->
@@ -210,6 +213,7 @@ fun NavHeader() {
                 }
                 Link(
                     path = "",
+                    modifier = Modifier.color(DesignWhiteText),
                     openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
                     openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
                     ref = ref { element ->
@@ -228,6 +232,7 @@ fun NavHeader() {
                 }
                 Link(
                     path = "",
+                    modifier = Modifier.color(DesignWhiteText),
                     openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
                     openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
                     ref = ref { element ->
@@ -246,6 +251,7 @@ fun NavHeader() {
                 }
                 Link(
                     path = "",
+                    modifier = Modifier.color(DesignWhiteText),
                     openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
                     openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
                     ref = ref { element ->
@@ -262,7 +268,10 @@ fun NavHeader() {
                         )
                     }
                 }
-                Link("https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg") {
+                Link(
+                    path = "https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg",
+                    modifier = Modifier.color(DesignWhiteText),
+                ) {
                     Div(NavigationHeadlineTextStyle.toAttrs()) {
                         SpanText(
                             "Репертуар",
