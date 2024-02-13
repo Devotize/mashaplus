@@ -378,13 +378,19 @@ private fun ImageHeaderWithLogo() {
                     )
                 }
                 Spacer()
-                Link("https://vk.com/masha_plus_band") {
-                    Button(ButtonStyle.toAttrs(OutlinedGradientCircularButtonVariant)) {
+                var isInMouse by remember { mutableStateOf(false) }
+                Link(
+                    "https://vk.com/masha_plus_band",
+                    modifier = Modifier
+                        .onMouseEnter { isInMouse = true }
+                        .onMouseLeave { isInMouse = false }
+                ) {
+                    Button(ButtonStyle.toAttrs(if (isInMouse) OutlinedGradientCircularButtonVariant else GradientCircularButtonVariant)) {
                         Div(OutlineButtonTextStyle.toAttrs()) {
                             SpanText(
                                 Resources.Strings.ostavit_zayavku,
                                 modifier = Modifier
-                                    .color(palette.brand.textReversed)
+                                    .color(if (isInMouse) palette.brand.text else palette.brand.textReversed)
                                     .fillMaxWidth()
                                     .textAlign(TextAlign.Center)
                             )

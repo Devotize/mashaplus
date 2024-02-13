@@ -22,6 +22,7 @@ import com.varabyte.kobweb.silk.init.registerStyleBase
 import com.varabyte.kobweb.silk.theme.colors.palette.color
 import com.varabyte.kobweb.silk.theme.colors.palette.toPalette
 import com.varabyte.kobweb.silk.theme.modifyComponentStyleBase
+import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
@@ -243,12 +244,20 @@ val SmallRegularTextStyle by ComponentStyle.base {
 
 
 /* New design buttons */
+val GradientCircularButtonVariant by ButtonStyle.addVariantBase {
+    Modifier
+        .padding(topBottom = XSmallPadding, leftRight = LargePadding)
+        .borderRadius(1.6.cssRem, 1.6.cssRem)
+        .backgroundImage(linearGradient(LinearGradient.Direction.ToRight, GradientLeft, GradientRight))
+        .fontSize(1.5.cssRem)
+}
 val OutlinedGradientCircularButtonVariant by ButtonStyle.addVariantBase {
     Modifier
         .padding(topBottom = XSmallPadding, leftRight = LargePadding)
         .borderRadius(1.6.cssRem, 1.6.cssRem)
         .backgroundImage(linearGradient(LinearGradient.Direction.ToRight, GradientLeft, GradientRight))
         .fontSize(1.5.cssRem)
+        .outline(2.px, LineStyle.Solid, Colors.White)
 }
 val OutlinedCircularButtonVariant by ButtonStyle.addVariantBase {
     Modifier
