@@ -19,6 +19,7 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.animation.Keyframes
 import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.components.graphics.Image
@@ -257,7 +258,11 @@ fun NavHeader() {
                             .toModifier(),
                     )
                 }
-                Link("https://instagram.com/masha_plus_band?igshid=OGQ5ZDc2ODk2ZA==") {
+                Link(
+                    "tel:+79319512000",
+                    openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                    openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE
+                ) {
                     val imgResInst = Resources.Images.ic_phone
                     Image(
                         imgResInst,

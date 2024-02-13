@@ -29,6 +29,7 @@ import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.toAttrs
+import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
 import com.varabyte.kobweb.silk.components.forms.Input
@@ -785,7 +786,11 @@ fun BottomSection(modifier: Modifier) {
                             .toModifier(),
                     )
                 }
-                Link("https://instagram.com/masha_plus_band?igshid=OGQ5ZDc2ODk2ZA==") {
+                Link(
+                    "tel:+79319512000",
+                    openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                    openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE
+                ) {
                     val imgResInst = Resources.Images.ic_phone
                     Image(
                         imgResInst,
@@ -868,6 +873,42 @@ fun BottomSection(modifier: Modifier) {
             Div(GritTextTitle.toAttrs()) {
                 SpanText(
                     Resources.Strings.bolshe_o_nas,
+                    modifier = Modifier
+                        .whiteSpace(WhiteSpace.PreLine)
+                        .fadeInAnimation()
+                )
+            }
+            Box(Modifier.height(XXXLargePadding + LargePadding))
+            Div(SmallRegularTextStyle.toAttrs()) {
+                SpanText(
+                    Resources.Strings.jiviye_vystuplenya,
+                    modifier = Modifier
+                        .whiteSpace(WhiteSpace.PreLine)
+                        .fadeInAnimation()
+                )
+            }
+            Box(Modifier.height(XSmallPadding))
+            Div(SmallRegularTextStyle.toAttrs()) {
+                SpanText(
+                    Resources.Strings.repertuar,
+                    modifier = Modifier
+                        .whiteSpace(WhiteSpace.PreLine)
+                        .fadeInAnimation()
+                )
+            }
+            Box(Modifier.height(XSmallPadding))
+            Div(SmallRegularTextStyle.toAttrs()) {
+                SpanText(
+                    Resources.Strings.tseni,
+                    modifier = Modifier
+                        .whiteSpace(WhiteSpace.PreLine)
+                        .fadeInAnimation()
+                )
+            }
+            Box(Modifier.height(XSmallPadding))
+            Div(SmallRegularTextStyle.toAttrs()) {
+                SpanText(
+                    Resources.Strings.vajniye_voprosy,
                     modifier = Modifier
                         .whiteSpace(WhiteSpace.PreLine)
                         .fadeInAnimation()

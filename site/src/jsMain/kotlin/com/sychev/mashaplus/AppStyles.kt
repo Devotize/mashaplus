@@ -233,6 +233,14 @@ val CarouselTextTitle by ComponentStyle.base {
         .fontWeight(FontWeight.ExtraBold)
 }
 
+val SmallRegularTextStyle by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(0.9.cssRem)
+        .textAlign(TextAlign.Start)
+        .fontWeight(FontWeight.Normal)
+}
+
 
 /* New design buttons */
 val OutlinedGradientCircularButtonVariant by ButtonStyle.addVariantBase {
