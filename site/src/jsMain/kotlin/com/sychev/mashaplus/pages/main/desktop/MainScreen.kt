@@ -160,8 +160,8 @@ fun OurServicesSections(modifier: Modifier = Modifier) {
                         )
                     }
                 }
-                val cardHeight = 408.px
-                Column(Modifier.fillMaxWidth().height(cardHeight.times(2.2))) {
+                val cardHeight = 45.cssRem
+                Column(Modifier.fillMaxWidth().height(cardHeight)) {
                     Row(modifier = Modifier.fillMaxWidth().weight(14)) {
                         Card(
                             modifier = Modifier.fillMaxHeight().weight(25),
