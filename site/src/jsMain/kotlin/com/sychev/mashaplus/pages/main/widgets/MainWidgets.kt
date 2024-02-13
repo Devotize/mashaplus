@@ -26,8 +26,8 @@ import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Div
 
 private val MainPhotoHeightBase = 320.px
-private val MainPhotoHeightLG = 1026.px
-private val MainPhotoWidthLG = 1078.px
+private val MainPhotoHeightLG = 60.cssRem
+private val MainPhotoWidthLG = 60.cssRem
 private val SliderPhotoHeightBase = 380.px
 private val SliderPhotoHeightLG = 620.px
 private val SectionPhotoHeightBase = 245.px
@@ -48,7 +48,7 @@ val SectionPhotoStyle by ComponentStyle {
 
 val MainPhotoStyle by ComponentStyle {
     base { Modifier.fillMaxWidth().height(MainPhotoHeightBase).objectFit(ObjectFit.Cover) }
-    Breakpoint.LG { Modifier.width(MainPhotoWidthLG).height(MainPhotoHeightLG).objectFit(ObjectFit.Cover) }
+    Breakpoint.LG { Modifier.width(MainPhotoHeightLG).height(MainPhotoWidthLG).objectFit(ObjectFit.Cover) }
 }
 
 val SecondaryPhotoStyle by ComponentStyle {
