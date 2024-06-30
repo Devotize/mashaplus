@@ -7,6 +7,8 @@ object Resources {
         const val yarkost_blesk =
             "Яркость, блеск и целое музыкальное представление для вас и ваших гостей. Два блока — мировые хиты всех времен и любимые песни 90-ых в новой аранжировке от наших вокалистов и музыкантов, энергичные танцы и шикарные костюмы — вам точно нужно это прочувствовать!"
         const val vokalisty = "Вокалисты"
+        const val vokalist = "Вокалист"
+        const val kontakty = "Контакты"
         const val vokalisty_uppercase = "ВОКАЛИСТЫ"
         const val vokalistky = "Вокалистки"
         const val minimalniy_komplekt =
@@ -24,7 +26,9 @@ object Resources {
         const val text_10 = "10"
         const val text_5 = "5"
         const val nashi_yslygi = "НАШИ УСЛУГИ"
-        const val vacalnoye_show = "ВОКАЛЬНОЕ ШОУ"
+        const val vacalnoye_show_uppercase = "ВОКАЛЬНОЕ ШОУ"
+        const val vacalnoye_show = "Вокальное шоу"
+        const val repertuar = "Репертуар"
         const val duet_uppercase = "ДУЭТ"
         const val ultima_band = "ULTIMA BAND"
         const val vokalistky_uppercase = "ВОКАЛИСТКИ"
@@ -63,6 +67,20 @@ object Resources {
         const val repertuar_uppercase = "РЕПЕРТУАР"
         const val tseni = "ЦЕНЫ"
         const val vajniye_voprosy = "ВАЖНЫЕ ВОПРОСЫ"
+        const val created_by1 =
+            "Музыкальный проект был создан 5 лет назад "
+        const val created_by2 = "Марией Борониной"
+        const val created_by3 = " - певицей, педагогом по эстрадному вокалу, бэк - вокалисткой "
+        const val created_by4 = "Татьяны Булановой"
+        const val bak_vocalistka = "Бэк-вокалистка: "
+        const val bak_vocalistka_desc =
+            "Татьяны Булановой, Федора Чистякова и гр. “Ноль”, гр. “КАФЕ”, \"SPb PINK FLOYD show\", “Братья Жемчужные” и др"
+        const val studio_bak_vocal = "Студийный бэк вокал: "
+        const val studio_bak_vocal_desc = "Александр Розенбаум, \"Тараканы\", \"Король и шут\", Юлия Михальчик."
+        const val bolee_ten = "Более 10 лет "
+        const val bolee_ten_desc =
+            "работы в production studion на радиостанциях: \" Русское радио\", \"Эрмитаж\", \"Эльдорадио\", \"Европа плюс\", \"Радио Модерн\", \"Радио Шансон\""
+        const val partners_titple = "ПОДДЕРЖИВАЕМ СОТРУДНИЧЕСТВО С РЕСТОРАНАМИ УЖЕ НЕСКОЛЬКО ЛЕТ:"
     }
 
     object Images {
@@ -83,7 +101,7 @@ object Resources {
         const val carousel_girl_2 = "/empty_eyes.png"
         const val carousel_girl_3 = "/paradise.png"
         const val carousel_girl_4 = "/ya_eto_ya.png"
-        const val clyaksa = "/clyaksa.png"
+        const val clyaksa1 = "/clyaksa.png"
         const val liza_vok = "/liza_vok.png"
         const val yla_vok = "/yla_vok.png"
         const val ula_vok = "/ula_vok.png"
@@ -102,6 +120,15 @@ object Resources {
         const val arrow_left = "/arrow_left.png"
         const val arrow_right = "/arrow_right.png"
         const val ic_phone = "/ic_phone.png"
+        const val maria_boronina = "/maria_boronina.png"
+        const val partner_bahroma_logo = "/partner_bahroma_logo.png"
+        const val partner_feromon_logo = "/partner_feromon_logo.png"
+        const val partner_grill_house_logo = "/partner_grill_house_logo.png"
+        const val partner_hochy_harcho_logo = "/partner_hachy_harcho_logo.png"
+        const val partner_kind_gruzin_logo = "/partner_kind_gruzin_logo.png"
+        const val partner_mamaliga_logo = "/partner_mamaliga_logo.png"
+        const val partner_peperoni_logo = "/partner_peperoni_logo.png"
+        const val partner_vse_horosho_logo = "/partner_vse_horosho_logo.png"
     }
 
 }

@@ -10,6 +10,7 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
+import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.css.CSSLengthOrPercentageValue
@@ -31,6 +32,7 @@ fun Card(
     ) {
         Column(
             modifier = Modifier
+                .fillMaxWidth()
                 .padding(paddingValues),
             horizontalAlignment = contentAlignment,
         ) {

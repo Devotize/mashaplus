@@ -169,7 +169,7 @@ fun NavHeader() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Row(
-                Modifier.gap(1.7.cssRem).weight(4),
+                Modifier.gap(2.7.cssRem).weight(4),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.End,
             ) {
@@ -185,7 +185,7 @@ fun NavHeader() {
                     }) {
                     Div(NavigationHeadlineTextStyle.toAttrs()) {
                         SpanText(
-                            "Контакты",
+                            Resources.Strings.kontakty,
                             modifier = Modifier
                                 .color(palette.brand.whiteText)
                                 .fadeInAnimation(),
@@ -204,7 +204,7 @@ fun NavHeader() {
                     }) {
                     Div(NavigationHeadlineTextStyle.toAttrs()) {
                         SpanText(
-                            "Вокалист",
+                            Resources.Strings.vokalist,
                             modifier = Modifier
                                 .color(palette.brand.whiteText)
                                 .fadeInAnimation()
@@ -242,7 +242,7 @@ fun NavHeader() {
                     }) {
                     Div(NavigationHeadlineTextStyle.toAttrs()) {
                         SpanText(
-                            "Вокальное шоу",
+                            Resources.Strings.vacalnoye_show,
                             modifier = Modifier
                                 .color(palette.brand.whiteText)
                                 .fadeInAnimation()
@@ -274,7 +274,7 @@ fun NavHeader() {
                 ) {
                     Div(NavigationHeadlineTextStyle.toAttrs()) {
                         SpanText(
-                            "Репертуар",
+                            Resources.Strings.repertuar,
                             modifier = Modifier
                                 .color(palette.brand.whiteText)
                                 .fadeInAnimation()

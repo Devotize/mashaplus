@@ -22,10 +22,7 @@ import com.varabyte.kobweb.silk.init.registerStyleBase
 import com.varabyte.kobweb.silk.theme.colors.palette.color
 import com.varabyte.kobweb.silk.theme.colors.palette.toPalette
 import com.varabyte.kobweb.silk.theme.modifyComponentStyleBase
-import org.jetbrains.compose.web.css.LineStyle
-import org.jetbrains.compose.web.css.cssRem
-import org.jetbrains.compose.web.css.percent
-import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.*
 
 @InitSilk
 fun initSiteStyles(ctx: InitSilkContext) {
@@ -183,6 +180,33 @@ val SubheadlineBoldStyle by ComponentStyle.base {
         .color(colorMode.toPalette().color.toRgb())
 }
 
+val CreatorTextStyle by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(2.3.vw)
+        .textAlign(TextAlign.Start)
+        .fontWeight(FontWeight.Normal)
+        .lineHeight(2.5.vw)
+        .color(colorMode.toPalette().color.toRgb())
+}
+
+val CreatorCardTextStyle by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(1.9.cssRem)
+        .textAlign(TextAlign.Start)
+        .fontWeight(FontWeight.Normal)
+        .color(colorMode.toPalette().color.toRgb())
+}
+
+val PartnersTitleTextStyle by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(2.3.vh)
+        .textAlign(TextAlign.Start)
+        .fontWeight(FontWeight.Bold)
+}
+
 val TitleOutlinedStyle by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
@@ -198,16 +222,16 @@ val TitleOutlinedStyle by ComponentStyle.base {
 val TitleStyle by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
-        .fontSize(2.4.cssRem)
+        .fontSize(4.2.vh)
         .textAlign(TextAlign.Center)
         .fontWeight(FontWeight.Bold)
 }
 
-val GritTextTitle by ComponentStyle.base {
+val GridTextTitle by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
-        .fontSize(1.9.cssRem)
-        .textAlign(TextAlign.Start)
+        .fontSize(2.4.vh)
+        .textAlign(TextAlign.Center)
         .fontWeight(FontWeight.Bold)
 }
 

@@ -21,8 +21,7 @@ import com.varabyte.kobweb.silk.components.style.toAttrs
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import org.jetbrains.compose.web.css.cssRem
-import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
 
 private val MainPhotoHeightBase = 320.px
@@ -77,9 +76,9 @@ val SliderPhotoStyle by ComponentStyle {
 
 val ClyaksImageStyle by ComponentStyle.base {
     Modifier
-        .width(285.px)
-        .height(230.px)
-        .objectFit(ObjectFit.Cover)
+        .width(17.4.vw)
+        .height(20.vh)
+        .objectFit(ObjectFit.Contain)
         .backgroundSize(BackgroundSize.Inherit)
 }
 val Clyaks2ImageStyle by ComponentStyle.base {
@@ -120,6 +119,19 @@ val WrapPhotoStyle by ComponentStyle.base {
         .objectFit(ObjectFit.Cover)
         .backgroundSize(BackgroundSize.Inherit)
 }
+val FillPhotoStyle by ComponentStyle.base {
+    Modifier
+        .fillMaxWidth()
+        .fillMaxHeight()
+        .objectFit(ObjectFit.Cover)
+}
+
+val InsidePhotoStyle by ComponentStyle.base {
+    Modifier
+        .fillMaxWidth()
+        .fillMaxHeight()
+        .objectFit(ObjectFit.Contain)
+}
 
 val carouselPhotoWidth = 285.px
 val carouselPhotoHeight = 365.px
@@ -130,6 +142,24 @@ val CarouselPhotoStyle by ComponentStyle.base {
         .height(carouselPhotoHeight)
         .objectFit(ObjectFit.ScaleDown)
         .backgroundSize(BackgroundSize.Cover)
+}
+
+val OurServicesGridStyle by ComponentStyle.base {
+    Modifier
+        .gap(rowGap = 4.6.vh, columnGap = 5.5.vw)
+        .width(100.percent)
+}
+
+val CreatorSectionGridStyle by ComponentStyle.base {
+    Modifier
+        .gap(2.cssRem)
+        .width(100.percent)
+}
+
+val PartnersSectionGridStyle by ComponentStyle.base {
+    Modifier
+        .gap(rowGap = 1.vh, columnGap = 1.vw)
+        .width(100.percent)
 }
 
 @Composable

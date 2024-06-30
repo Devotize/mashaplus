@@ -56,7 +56,9 @@ fun MainScreenDesktop() {
             Column(Modifier.gap(2.cssRem).width(100.percent)) {
                 ImageHeaderWithLogo()
                 Box(Modifier.height(XXXLargePadding))
-                OurServicesSections(modifier = Modifier.fillMaxWidth().padding(leftRight = LeftRightPadding))
+                OurServices(modifier = Modifier.fillMaxWidth().padding(leftRight = LeftRightPadding))
+                Box(Modifier.height(XXLargePadding))
+                CreatorSection(modifier = Modifier.fillMaxWidth().padding(leftRight = LeftRightPadding))
                 Box(Modifier.height(XXXXLargePadding))
                 Box(ref = ref {
                     ScrollToViewEventProvider.setVocalistScrollEvent {
@@ -77,6 +79,7 @@ fun MainScreenDesktop() {
                 Box(Modifier.height(XXXXXLargePadding))
                 DuetsSection(Modifier.fillMaxWidth().padding(leftRight = LeftRightPadding))
                 Box(Modifier.height(XXXXLargePadding))
+                PartnersSection(Modifier.fillMaxWidth().padding(leftRight = LeftRightPadding))
                 VideosSection(Modifier.fillMaxWidth())
                 Box(Modifier.height(XXXXXLargePadding))
                 BottomSection(Modifier.fillMaxWidth())
@@ -136,71 +139,320 @@ private fun MembersCountSection(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun OurServicesSections(modifier: Modifier = Modifier) {
+fun OurServices(modifier: Modifier = Modifier) {
     val palette = ColorMode.current.toSitePalette()
     Box(Modifier.fillMaxWidth()) {
-        Box(modifier = Modifier.padding(left = XXXXLargePadding - MediumPadding, top = LargePadding)) {
+        Box(modifier = Modifier.padding(left = LargePadding, top = LargePadding)) {
             Image(
-                Resources.Images.clyaksa,
+                Resources.Images.clyaksa1,
                 modifier = ClyaksImageStyle.toModifier()
             )
         }
-        Box(
-            modifier = modifier,
+        Column(modifier.fillMaxWidth().gap(3.5.cssRem)) {
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Div(TitleStyle.toModifier().align(Alignment.TopEnd).toAttrs()) {
+                    SpanText(
+                        Resources.Strings.nashi_yslygi,
+                        modifier = Modifier
+                            .fadeInAnimation()
+                    )
+                }
+            }
+            Div(
+                OurServicesGridStyle.toModifier()
+                    .grid {
+                        rows {
+                            repeat(2) { size(1.fr) }
+                        }
+                        columns {
+                            repeat(4) { size(1.fr) }
+                        }
+                    }
+                    .toAttrs()
+            ) {
+                GridCell(1, 1, 3, 1) {
+                    ShadowedCard(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.CenterHorizontally,
+                        paddingValues = 1.9.vh,
+                    ) {
+                        Div(GridTextTitle.toAttrs()) {
+                            SpanText(
+                                Resources.Strings.ultima_band,
+                                modifier = Modifier
+                                    .color(palette.brand.textReversed)
+                                    .fadeInAnimation()
+                            )
+                        }
+                    }
+                }
+                GridCell(1, 4, 1, 1) {
+                    ShadowedCard(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.CenterHorizontally,
+                        paddingValues = 1.9.vh,
+                    ) {
+                        Div(GridTextTitle.toAttrs()) {
+                            SpanText(
+                                Resources.Strings.duet_uppercase,
+                                modifier = Modifier
+                                    .color(palette.brand.textReversed)
+                                    .fadeInAnimation()
+                            )
+                        }
+                    }
+                }
+                GridCell(2, 1, 2, 1) {
+                    ShadowedCard(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.CenterHorizontally,
+                        paddingValues = 1.9.vh,
+                    ) {
+                        Div(GridTextTitle.toAttrs()) {
+                            SpanText(
+                                Resources.Strings.vokalisty_uppercase,
+                                modifier = Modifier
+                                    .color(palette.brand.textReversed)
+                                    .fadeInAnimation()
+                            )
+                        }
+                    }
+                }
+                GridCell(2, 3, 2, 1) {
+                    ShadowedCard(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.CenterHorizontally,
+                        paddingValues = 1.9.vh,
+                    ) {
+                        Div(GridTextTitle.toAttrs()) {
+                            SpanText(
+                                Resources.Strings.vacalnoye_show_uppercase,
+                                modifier = Modifier
+                                    .color(palette.brand.textReversed)
+                                    .fadeInAnimation()
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun CreatorSection(modifier: Modifier) {
+    val palette = ColorMode.current.toSitePalette()
+    Box(modifier) {
+        Div(
+            CreatorSectionGridStyle.toModifier()
+                .grid {
+                    rows {
+                        repeat(10) { size(1.fr) }
+                    }
+                    columns {
+                        repeat(3) { size(1.fr) }
+                    }
+                }
+                .toAttrs()
         ) {
-            Column(Modifier.fillMaxWidth().gap(3.5.cssRem)) {
-                Box(
-                    modifier = Modifier.fillMaxWidth(),
+            GridCell(3, 1, 2, 3) {
+                Div(CreatorTextStyle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.created_by1,
+                        modifier = Modifier
+                            .color(palette.brand.text)
+                            .fadeInAnimation()
+                    )
+                    SpanText(
+                        Resources.Strings.created_by2,
+                        modifier = Modifier
+                            .fontWeight(FontWeight.Bold)
+                            .color(palette.brand.text)
+                            .fadeInAnimation()
+                    )
+                    SpanText(
+                        Resources.Strings.created_by3,
+                        modifier = Modifier
+                            .color(palette.brand.text)
+                            .fadeInAnimation()
+                    )
+                    SpanText(
+                        Resources.Strings.created_by4,
+                        modifier = Modifier
+                            .color(DesignYellow)
+                            .fontWeight(FontWeight.Bold)
+                            .fadeInAnimation()
+                    )
+                }
+            }
+            GridCell(1, 3, 1, 8) {
+                Image(
+                    Resources.Images.maria_boronina,
+                    "null",
+                    FillPhotoStyle
+                        .toModifier().fadeInAnimation(),
+                )
+            }
+            GridCell(8, 1, 1, 3) {
+                ShadowedCard(
+                    Modifier.fillMaxSize()
+                        .padding(topBottom = 2.2.cssRem, leftRight = 1.1.cssRem),
                 ) {
-                    Div(TitleStyle.toModifier().align(Alignment.TopEnd).toAttrs()) {
+                    Div(CreatorCardTextStyle.toAttrs()) {
                         SpanText(
-                            Resources.Strings.nashi_yslygi,
+                            Resources.Strings.bak_vocalistka,
                             modifier = Modifier
+                                .fontWeight(FontWeight.Bold)
+                                .color(palette.brand.textReversed)
+                                .fadeInAnimation()
+                        )
+                        SpanText(
+                            Resources.Strings.bak_vocalistka_desc,
+                            modifier = Modifier
+                                .color(palette.brand.textReversed)
                                 .fadeInAnimation()
                         )
                     }
                 }
-                val cardHeight = 45.cssRem
-                Column(Modifier.fillMaxWidth().height(cardHeight)) {
-                    @Composable
-                    fun ServiceCard(text: String, weight: Int) {
-                        var showBackgroundShadow by remember { mutableStateOf(false) }
-                        Card(
-                            modifier = Modifier.fillMaxHeight().weight(weight)
-                                .onMouseEnter { showBackgroundShadow = true }
-                                .onMouseLeave { showBackgroundShadow = false }
-                                .boxShadow(
-                                    offsetX = 1.px,
-                                    offsetY = 1.px,
-                                    blurRadius = 5.px,
-                                    spreadRadius = 5.px,
-                                    color = if (showBackgroundShadow) DesignShadow else Colors.Transparent
-                                ),
-                            color = DesignSurface,
-                            paddingValues = XXXXLargePadding - XXLargePadding
-                        ) {
-                            Div(GritTextTitle.toAttrs()) {
-                                SpanText(
-                                    text,
-                                    modifier = Modifier
-                                        .color(palette.brand.textReversed)
-                                        .fadeInAnimation()
-                                )
-                            }
-                        }
-                    }
-                    Row(modifier = Modifier.fillMaxWidth().weight(14)) {
-                        ServiceCard(Resources.Strings.ultima_band, 25)
-                        Box(Modifier.weight(1.5))
-                        ServiceCard(Resources.Strings.duet_uppercase, 3)
-                    }
-                    Box(Modifier.fillMaxWidth().weight(1.5))
-                    Row(modifier = Modifier.fillMaxWidth().weight(14)) {
-                        ServiceCard(Resources.Strings.vokalisty_uppercase, 3)
-                        Box(Modifier.fillMaxHeight().weight(1.5))
-                        ServiceCard(Resources.Strings.vacalnoye_show, 25)
+            }
+            GridCell(8, 2, 1, 3) {
+                ShadowedCard(
+                    Modifier.fillMaxSize()
+                        .padding(topBottom = 2.2.cssRem, leftRight = 1.1.cssRem),
+                ) {
+                    Div(CreatorCardTextStyle.toAttrs()) {
+                        SpanText(
+                            Resources.Strings.studio_bak_vocal,
+                            modifier = Modifier
+                                .fontWeight(FontWeight.Bold)
+                                .color(palette.brand.textReversed)
+                                .fadeInAnimation()
+                        )
+                        SpanText(
+                            Resources.Strings.studio_bak_vocal_desc,
+                            modifier = Modifier
+                                .color(palette.brand.textReversed)
+                                .fadeInAnimation()
+                        )
                     }
                 }
+            }
+            GridCell(8, 3, 1, 3) {
+                ShadowedCard(
+                    Modifier.fillMaxSize()
+                        .padding(topBottom = 2.2.cssRem, leftRight = 1.1.cssRem),
+                ) {
+                    Div(CreatorCardTextStyle.toAttrs()) {
+                        SpanText(
+                            Resources.Strings.bolee_ten,
+                            modifier = Modifier
+                                .fontWeight(FontWeight.Bold)
+                                .color(palette.brand.textReversed)
+                                .fadeInAnimation()
+                        )
+                        SpanText(
+                            Resources.Strings.bolee_ten_desc,
+                            modifier = Modifier
+                                .color(palette.brand.textReversed)
+                                .fadeInAnimation()
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun PartnersSection(modifier: Modifier) {
+    Column(modifier = modifier) {
+        Div(CreatorCardTextStyle.toAttrs()) {
+            SpanText(
+                Resources.Strings.partners_titple,
+                modifier = Modifier
+                    .color(DesignYellow)
+                    .fadeInAnimation()
+            )
+        }
+
+        Div(
+            PartnersSectionGridStyle.toModifier()
+                .padding(top = XXLargePadding)
+                .grid {
+                    rows {
+                        repeat(8) { size(.3.fr) }
+                    }
+                    columns {
+                        repeat(13) { size(.3.fr) }
+                    }
+                }
+                .toAttrs()
+        ) {
+            GridCell(1, 1, 3, 3) {
+                Image(
+                    src = Resources.Images.partner_bahroma_logo,
+                    description = "null",
+                    modifier = InsidePhotoStyle
+                        .toModifier().fadeInAnimation(),
+                )
+            }
+            GridCell(1, 6, 3, 3) {
+                Image(
+                    src = Resources.Images.partner_mamaliga_logo,
+                    description = "null",
+                    modifier = InsidePhotoStyle
+                        .toModifier().fadeInAnimation(),
+                )
+            }
+            GridCell(1, 11, 3, 3) {
+                Image(
+                    src = Resources.Images.partner_feromon_logo,
+                    description = "null",
+                    modifier = InsidePhotoStyle
+                        .toModifier().fadeInAnimation(),
+                )
+            }
+            GridCell(3, 3, 2, 3) {
+                Image(
+                    src = Resources.Images.partner_peperoni_logo,
+                    description = "null",
+                    modifier = InsidePhotoStyle
+                        .toModifier().fadeInAnimation(),
+                )
+            }
+            GridCell(4, 6, 2, 3) {
+                Image(
+                    src = Resources.Images.partner_hochy_harcho_logo,
+                    description = "null",
+                    modifier = InsidePhotoStyle
+                        .toModifier().fadeInAnimation(),
+                )
+            }
+            GridCell(3, 9, 3, 3) {
+                Image(
+                    src = Resources.Images.partner_kind_gruzin_logo,
+                    description = "null",
+                    modifier = InsidePhotoStyle
+                        .toModifier().fadeInAnimation(),
+                )
+            }
+            GridCell(5, 1, 4, 3) {
+                Image(
+                    src = Resources.Images.partner_vse_horosho_logo,
+                    description = "null",
+                    modifier = InsidePhotoStyle
+                        .toModifier().fadeInAnimation(),
+                )
+            }
+            GridCell(5, 10, 4, 3) {
+                Image(
+                    src = Resources.Images.partner_grill_house_logo,
+                    description = "null",
+                    modifier = InsidePhotoStyle
+                        .toModifier().fadeInAnimation(),
+                )
             }
         }
     }
@@ -259,7 +511,7 @@ private fun VocalistCard(modifier: Modifier, name: String, photoRes: String) {
                     .toModifier().fadeInAnimation(),
             )
         }
-        Div(GritTextTitle.toAttrs()) {
+        Div(GridTextTitle.toAttrs()) {
             SpanText(
                 name,
                 modifier = Modifier
@@ -300,7 +552,7 @@ private fun VideosSection(modifier: Modifier) {
         Box(Modifier.height(XXXLargePadding))
         Div(TitleStyle.toAttrs()) {
             SpanText(
-                Resources.Strings.vacalnoye_show,
+                Resources.Strings.vacalnoye_show_uppercase,
                 modifier = Modifier
                     .fadeInAnimation(),
                 ref = ref {
@@ -596,7 +848,7 @@ fun BottomSection(modifier: Modifier) {
             }
         }
         Column {
-            Div(GritTextTitle.toAttrs()) {
+            Div(GridTextTitle.toAttrs()) {
                 SpanText(
                     Resources.Strings.ostavte_nomer,
                     modifier = Modifier
@@ -654,7 +906,7 @@ fun BottomSection(modifier: Modifier) {
             }
         }
         Column {
-            Div(GritTextTitle.toAttrs()) {
+            Div(GridTextTitle.toAttrs()) {
                 SpanText(
                     Resources.Strings.bolshe_o_nas,
                     modifier = Modifier
