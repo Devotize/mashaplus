@@ -46,8 +46,18 @@ val SectionPhotoStyle by ComponentStyle {
 }
 
 val MainPhotoStyle by ComponentStyle {
-    base { Modifier.fillMaxWidth().height(MainPhotoHeightBase).objectFit(ObjectFit.Cover) }
-    Breakpoint.LG { Modifier.width(MainPhotoHeightLG).height(MainPhotoWidthLG).objectFit(ObjectFit.Cover) }
+    Breakpoint.SM {
+        Modifier.width(22.cssRem).objectFit(ObjectFit.Cover)
+    }
+    Breakpoint.MD {
+        Modifier.width(31.cssRem).objectFit(ObjectFit.Cover)
+    }
+    Breakpoint.LG {
+        Modifier.width(42.cssRem).objectFit(ObjectFit.Cover)
+    }
+    Breakpoint.XL {
+        Modifier.width(63.cssRem).objectFit(ObjectFit.Cover)
+    }
 }
 
 val SecondaryPhotoStyle by ComponentStyle {
@@ -92,7 +102,7 @@ val Clyaks2ImageStyle by ComponentStyle.base {
 val ArrowImageStyle by ComponentStyle.base {
     Modifier
         .size(60.px)
-        .objectFit(ObjectFit.Cover)
+        .objectFit(ObjectFit.Contain)
         .backgroundSize(BackgroundSize.Inherit)
 }
 
@@ -126,10 +136,21 @@ val FillPhotoStyle by ComponentStyle.base {
         .objectFit(ObjectFit.Cover)
 }
 
+val CreatorPhotoStyle by ComponentStyle.base {
+    Modifier
+        .height(535.px)
+        .objectFit(ObjectFit.Cover)
+}
+
 val InsidePhotoStyle by ComponentStyle.base {
     Modifier
         .fillMaxWidth()
         .fillMaxHeight()
+        .objectFit(ObjectFit.Contain)
+}
+
+val DuetPhotoStyle by ComponentStyle.base {
+    Modifier
         .objectFit(ObjectFit.Contain)
 }
 
@@ -157,6 +178,12 @@ val CreatorSectionGridStyle by ComponentStyle.base {
 }
 
 val PartnersSectionGridStyle by ComponentStyle.base {
+    Modifier
+        .gap(rowGap = 1.vh, columnGap = 1.vw)
+        .width(100.percent)
+}
+
+val DuetSectionGridStyle by ComponentStyle.base {
     Modifier
         .gap(rowGap = 1.vh, columnGap = 1.vw)
         .width(100.percent)
@@ -194,11 +221,11 @@ fun TestimonialsSection(modifier: Modifier = Modifier) {
             modifier = Modifier.fillMaxWidth().padding(leftRight = sidePadding),
             items = testimonials,
             hasDotsIndicator = false
-        ) {
+        ) { value, index ->
             Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                 Div(ModalDescriptionTextStyleCentered.toAttrs()) {
                     SpanText(
-                        it.text,
+                        value.text,
                         modifier = Modifier
                             .color(palette.brand.text)
                             .fadeInAnimation()
@@ -213,7 +240,7 @@ fun TestimonialsSection(modifier: Modifier = Modifier) {
                 Box(Modifier.height(XXXSmallPadding))
                 Div(ModalDescriptionTextStyleCentered.toAttrs()) {
                     SpanText(
-                        it.name,
+                        value.name,
                         modifier = Modifier
                             .color(palette.brand.text)
                             .fadeInAnimation()

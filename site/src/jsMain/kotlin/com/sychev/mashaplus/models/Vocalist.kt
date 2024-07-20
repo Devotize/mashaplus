@@ -26,6 +26,17 @@ val vokalistyList = listOf(
     Vocalist(Resources.Strings.marat, Resources.Images.marat_vok),
 )
 
+val duetList = listOf(
+    Resources.Images.duet_1,
+    Resources.Images.duet_2,
+    Resources.Images.duet_3,
+    Resources.Images.duet_4,
+    Resources.Images.duet_5,
+    Resources.Images.duet_6,
+    Resources.Images.duet_7,
+    Resources.Images.duet_8,
+)
+
 @Deprecated("old design")
 fun getMaleVocalists() = listOf(
     Vocalist(

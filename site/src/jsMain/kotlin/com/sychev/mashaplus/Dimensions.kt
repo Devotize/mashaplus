@@ -62,4 +62,4 @@ val XXXXXLargePadding = 256.px
 /**
  * default for side margin
  */
-val LeftRightPadding = 6.vw
+val LeftRightPadding = 10.vw

@@ -183,17 +183,16 @@ val SubheadlineBoldStyle by ComponentStyle.base {
 val CreatorTextStyle by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
-        .fontSize(2.3.vw)
+        .fontSize(1.7.cssRem)
         .textAlign(TextAlign.Start)
         .fontWeight(FontWeight.Normal)
-        .lineHeight(2.5.vw)
         .color(colorMode.toPalette().color.toRgb())
 }
 
 val CreatorCardTextStyle by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
-        .fontSize(1.9.cssRem)
+        .fontSize(1.4.cssRem)
         .textAlign(TextAlign.Start)
         .fontWeight(FontWeight.Normal)
         .color(colorMode.toPalette().color.toRgb())
@@ -256,6 +255,14 @@ val CarouselTextTitle by ComponentStyle.base {
         .fontSize(3.2.cssRem)
         .textAlign(TextAlign.Center)
         .fontWeight(FontWeight.ExtraBold)
+}
+
+val BottomCaptionTitle by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(2.1.cssRem)
+        .textAlign(TextAlign.Start)
+        .fontWeight(FontWeight.Bold)
 }
 
 val SmallRegularTextStyle by ComponentStyle.base {

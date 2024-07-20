@@ -5,6 +5,7 @@ import com.sychev.mashaplus.*
 import com.sychev.mashaplus.components.widgets.Card
 import com.sychev.mashaplus.components.widgets.SliderSimpleArrow
 import com.sychev.mashaplus.models.Vocalist
+import com.sychev.mashaplus.models.duetList
 import com.sychev.mashaplus.models.vokalistkyList
 import com.sychev.mashaplus.models.vokalistyList
 import com.sychev.mashaplus.pages.HeroContainerStyle
@@ -249,7 +250,7 @@ fun CreatorSection(modifier: Modifier) {
             CreatorSectionGridStyle.toModifier()
                 .grid {
                     rows {
-                        repeat(10) { size(1.fr) }
+                        repeat(8) { size(1.fr) }
                     }
                     columns {
                         repeat(3) { size(1.fr) }
@@ -257,7 +258,7 @@ fun CreatorSection(modifier: Modifier) {
                 }
                 .toAttrs()
         ) {
-            GridCell(3, 1, 2, 3) {
+            GridCell(2, 1, 2, 3) {
                 Div(CreatorTextStyle.toAttrs()) {
                     SpanText(
                         Resources.Strings.created_by1,
@@ -291,11 +292,11 @@ fun CreatorSection(modifier: Modifier) {
                 Image(
                     Resources.Images.maria_boronina,
                     "null",
-                    FillPhotoStyle
+                    CreatorPhotoStyle
                         .toModifier().fadeInAnimation(),
                 )
             }
-            GridCell(8, 1, 1, 3) {
+            GridCell(6, 1, 1, 3) {
                 ShadowedCard(
                     Modifier.fillMaxSize()
                         .padding(topBottom = 2.2.cssRem, leftRight = 1.1.cssRem),
@@ -317,7 +318,7 @@ fun CreatorSection(modifier: Modifier) {
                     }
                 }
             }
-            GridCell(8, 2, 1, 3) {
+            GridCell(6, 2, 1, 3) {
                 ShadowedCard(
                     Modifier.fillMaxSize()
                         .padding(topBottom = 2.2.cssRem, leftRight = 1.1.cssRem),
@@ -339,7 +340,7 @@ fun CreatorSection(modifier: Modifier) {
                     }
                 }
             }
-            GridCell(8, 3, 1, 3) {
+            GridCell(6, 3, 1, 3) {
                 ShadowedCard(
                     Modifier.fillMaxSize()
                         .padding(topBottom = 2.2.cssRem, leftRight = 1.1.cssRem),
@@ -650,7 +651,7 @@ private fun ImageHeaderWithLogo() {
                     }
                 }
             }
-            Box(Modifier.height(XXXXXLargePadding))
+            Box(Modifier.height(XXXXLargePadding))
             MembersCountSection(modifier = Modifier.fillMaxWidth().padding(leftRight = XXXXXLargePadding))
         }
     }
@@ -658,109 +659,113 @@ private fun ImageHeaderWithLogo() {
 
 @Composable
 private fun DuetsSection(modifier: Modifier) {
-    Box(
-        modifier = modifier,
-        ref = ref {
-            ScrollToViewEventProvider.setDuetSectionEvent {
-                it.scrollIntoView()
+    Div(
+        DuetSectionGridStyle.toModifier()
+            .grid {
+                rows {
+                    repeat(1) { size(1.fr) }
+                }
+                columns {
+                    repeat(5) { size(1.fr) }
+                }
             }
-        }
+            .toAttrs()
     ) {
-        Image(
-            Resources.Images.clyaksa_2,
-            modifier = Clyaks2ImageStyle.toModifier().align(Alignment.TopEnd)
-        )
-        Row(
-            modifier = Modifier.fillMaxWidth().padding(top = XXXXLargePadding),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Column(modifier = Modifier.gap(3.5.cssRem)) {
-                Div(TitleStyle.toAttrs()) {
-                    SpanText(
-                        Resources.Strings.duet_uppercase,
-                        modifier = Modifier
-                            .fadeInAnimation()
-                    )
+        GridCell(1, 1, 3, 1) {
+            Box(
+                modifier = modifier,
+                ref = ref {
+                    ScrollToViewEventProvider.setDuetSectionEvent {
+                        it.scrollIntoView()
+                    }
                 }
-                Div(SubheadlineRegularStyle.toAttrs()) {
-                    SpanText(
-                        Resources.Strings.princip_constryktora,
-                        modifier = Modifier
-                            .whiteSpace(WhiteSpace.PreLine)
-                            .fadeInAnimation()
-                    )
-                }
-                @Composable
-                fun tripleDuetsColumn(duets: List<String>) {
-                    Column {
-                        duets.forEach {
-                            Div(SubheadlineBoldStyle.toAttrs()) {
-                                SpanText(
-                                    it,
-                                    modifier = Modifier
-                                        .whiteSpace(WhiteSpace.PreLine)
-                                        .fadeInAnimation()
-                                )
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(top = XXXXLargePadding),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Column(modifier = Modifier.gap(3.5.cssRem)) {
+                        Div(TitleStyle.toAttrs()) {
+                            SpanText(
+                                Resources.Strings.duet_uppercase,
+                                modifier = Modifier
+                                    .fadeInAnimation()
+                            )
+                        }
+                        Div(SubheadlineRegularStyle.toAttrs()) {
+                            SpanText(
+                                Resources.Strings.princip_constryktora,
+                                modifier = Modifier
+                                    .whiteSpace(WhiteSpace.PreLine)
+                                    .fadeInAnimation()
+                            )
+                        }
+                        @Composable
+                        fun tripleDuetsColumn(duets: List<String>) {
+                            Column {
+                                duets.forEach {
+                                    Div(SubheadlineBoldStyle.toAttrs()) {
+                                        SpanText(
+                                            it,
+                                            modifier = Modifier
+                                                .whiteSpace(WhiteSpace.PreLine)
+                                                .fadeInAnimation()
+                                        )
+                                    }
+                                }
                             }
                         }
+                        Row(Modifier.gap(2.5.cssRem)) {
+                            tripleDuetsColumn(
+                                listOf(
+                                    Resources.Strings.sasha_plus_alya,
+                                    Resources.Strings.lena_plus_liza,
+                                    Resources.Strings.ula_plus_yla
+                                )
+                            )
+                            tripleDuetsColumn(
+                                listOf(
+                                    Resources.Strings.ilya_plus_andrey,
+                                    Resources.Strings.dora_plus_alina,
+                                    Resources.Strings.marat_plus_yla
+                                )
+                            )
+                            tripleDuetsColumn(
+                                listOf(
+                                    Resources.Strings.milana_plus_jia,
+                                    Resources.Strings.lena_plus_andrey,
+                                    Resources.Strings.alya_plus_diana
+                                )
+                            )
+                        }
                     }
-                }
-                Row(Modifier.gap(2.5.cssRem)) {
-                    tripleDuetsColumn(
-                        listOf(
-                            Resources.Strings.sasha_plus_alya,
-                            Resources.Strings.lena_plus_liza,
-                            Resources.Strings.ula_plus_yla
-                        )
-                    )
-                    tripleDuetsColumn(
-                        listOf(
-                            Resources.Strings.ilya_plus_andrey,
-                            Resources.Strings.dora_plus_alina,
-                            Resources.Strings.marat_plus_yla
-                        )
-                    )
-                    tripleDuetsColumn(
-                        listOf(
-                            Resources.Strings.milana_plus_jia,
-                            Resources.Strings.lena_plus_andrey,
-                            Resources.Strings.alya_plus_diana
-                        )
-                    )
                 }
             }
-            Column(modifier = Modifier.padding(right = XLargePadding)) {
+        }
+        GridCell(1, 4, 2, 1) {
+            Box(modifier = Modifier.padding(right = XXXXLargePadding)) {
+                Image(
+                    Resources.Images.clyaksa_2,
+                    modifier = Clyaks2ImageStyle.toModifier()
+                        .padding(right = XXLargePadding)
+                        .align(Alignment.TopEnd)
+                )
                 SliderSimpleArrow(
-                    modifier = Modifier,
+                    modifier = Modifier.align(Alignment.CenterEnd),
                     hasDotsIndicator = false,
-                    items = listOf(1), //STUB
-                    leftArrow = {
+                    items = duetList,
+                ) { value, _ ->
+                    Box(
+                        Modifier
+                            .align(Alignment.Center)
+                    ) {
                         Image(
-                            Resources.Images.arrow_left,
-                            "Main photo",
-                            ArrowImageStyle
-                                .toModifier()
-                                .fadeInAnimation(),
+                            src = value,
+                            description = "null",
+                            modifier = DuetPhotoStyle
+                                .toModifier().fadeInAnimation(),
                         )
-                    },
-                    rightArrow = {
-                        Image(
-                            Resources.Images.arrow_right,
-                            "Main photo",
-                            ArrowImageStyle
-                                .toModifier()
-                                .fadeInAnimation(),
-                        )
-                    }
-                ) {
-                    Box(Modifier.padding(leftRight = XXXLargePadding + XXLargePadding)) {
-                        Card(
-                            modifier = Modifier.width(543.px).height(696.px),
-                            color = DesignSurface,
-                        ) {
-
-                        }
                     }
                 }
             }
@@ -848,7 +853,7 @@ fun BottomSection(modifier: Modifier) {
             }
         }
         Column {
-            Div(GridTextTitle.toAttrs()) {
+            Div(BottomCaptionTitle.toAttrs()) {
                 SpanText(
                     Resources.Strings.ostavte_nomer,
                     modifier = Modifier

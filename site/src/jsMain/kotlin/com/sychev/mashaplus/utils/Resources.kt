@@ -49,7 +49,7 @@ object Resources {
         const val ilya_star = "ИЛЬЯ \nСТАРЧИКОВ"
         const val marat = "МАРАТ"
         const val princip_constryktora =
-            "Мы работаем по принципу конструктора, когда каждый\nзаказчик может составить дуэт из любых понравившихся\nвокалистов. А так же из вокалистов и инструменталистов "
+            "Мы работаем по принципу конструктора, когда каждый заказчик может составить дуэт из любых понравившихся вокалистов. А так же из вокалистов и инструменталистов "
         const val sasha_plus_alya = "САША + АЛЯ"
         const val lena_plus_liza = "ЛЕНА + ЛИЗА"
         const val ula_plus_yla = "ЮЛЯ + УЛА"
@@ -119,6 +119,8 @@ object Resources {
         const val clyaksa_2 = "/clyaksa_2.png"
         const val arrow_left = "/arrow_left.png"
         const val arrow_right = "/arrow_right.png"
+        const val arrow_left_painted = "/arrow_left_painted.png"
+        const val arrow_right_painted = "/arrow_right_painted.png"
         const val ic_phone = "/ic_phone.png"
         const val maria_boronina = "/maria_boronina.png"
         const val partner_bahroma_logo = "/partner_bahroma_logo.png"
@@ -129,6 +131,14 @@ object Resources {
         const val partner_mamaliga_logo = "/partner_mamaliga_logo.png"
         const val partner_peperoni_logo = "/partner_peperoni_logo.png"
         const val partner_vse_horosho_logo = "/partner_vse_horosho_logo.png"
+        const val duet_1 = "/duet_1.png"
+        const val duet_2 = "/duet_2.png"
+        const val duet_3 = "/duet_3.png"
+        const val duet_4 = "/duet_4.png"
+        const val duet_5 = "/duet_5.png"
+        const val duet_6 = "/duet_6.png"
+        const val duet_7 = "/duet_7.png"
+        const val duet_8 = "/duet_8.png"
     }
 
 }
