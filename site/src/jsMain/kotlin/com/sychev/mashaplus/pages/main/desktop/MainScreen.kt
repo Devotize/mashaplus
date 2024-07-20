@@ -17,13 +17,11 @@ import com.sychev.mashaplus.provider.ScrollToViewEventProvider
 import com.sychev.mashaplus.utils.Resources
 import com.sychev.mashaplus.utils.VideoYT
 import com.sychev.mashaplus.utils.fadeInAnimation
-import com.varabyte.kobweb.compose.css.FontWeight
-import com.varabyte.kobweb.compose.css.Overflow
-import com.varabyte.kobweb.compose.css.TextAlign
-import com.varabyte.kobweb.compose.css.WhiteSpace
+import com.varabyte.kobweb.compose.css.*
 import com.varabyte.kobweb.compose.css.functions.LinearGradient
 import com.varabyte.kobweb.compose.css.functions.blur
 import com.varabyte.kobweb.compose.css.functions.linearGradient
+import com.varabyte.kobweb.compose.dom.ElementRefScope
 import com.varabyte.kobweb.compose.dom.ref
 import com.varabyte.kobweb.compose.foundation.layout.*
 import com.varabyte.kobweb.compose.ui.Alignment
@@ -48,6 +46,9 @@ import org.jetbrains.compose.web.attributes.InputType
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Button
 import org.jetbrains.compose.web.dom.Div
+import org.w3c.dom.Element
+import org.w3c.dom.HTMLElement
+import org.w3c.dom.ScrollToOptions
 
 
 @Composable
@@ -66,13 +67,13 @@ fun MainScreenDesktop() {
                         it.scrollIntoView()
                     }
                 })
-                VocalistySection(
+                VocalistsSection(
                     modifier = Modifier.fillMaxWidth(),
                     Resources.Strings.vokalistky_uppercase,
                     vokalistkyList
                 )
                 Box(Modifier.height(XXXXXLargePadding))
-                VocalistySection(
+                VocalistsSection(
                     modifier = Modifier.fillMaxWidth(),
                     Resources.Strings.vokalisty_uppercase,
                     vokalistyList
@@ -460,7 +461,7 @@ fun PartnersSection(modifier: Modifier) {
 }
 
 @Composable
-private fun VocalistySection(modifier: Modifier, title: String, list: List<Vocalist>) {
+private fun VocalistsSection(modifier: Modifier, title: String, list: List<Vocalist>) {
     Column(
         modifier = modifier.gap(4.5.cssRem),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -472,31 +473,126 @@ private fun VocalistySection(modifier: Modifier, title: String, list: List<Vocal
                     .fadeInAnimation()
             )
         }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .overflow(Overflow.Scroll)
-                .gap(3.cssRem)
-                .styleModifier {
-                    property("display", "-webkit-box")
-                    property("-webkit-box-pack", "center")
-                },
-            horizontalArrangement = Arrangement.Center
+        Div(
+            PartnersSectionGridStyle.toModifier()
+                .grid {
+                    rows {
+                        repeat(1) { size(1.fr) }
+                    }
+                    columns {
+                        repeat(10) { size(1.fr) }
+                    }
+                }
+                .toAttrs()
         ) {
-            Box(Modifier.width(XXLargePadding))
-            list.forEach {
-                VocalistCard(Modifier, it.name, it.imgRes)
+            val itemsLeftPoints = remember { mutableStateListOf<Double>() }
+            var currentPosition by remember { mutableStateOf(0) }
+            var rowElement by remember { mutableStateOf<Element?>(null) }
+            GridCell(1, 1, 1, 1) {
+                Box(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    Image(
+                        src = Resources.Images.arrow_left,
+                        description = "Main photo",
+                        modifier = ArrowImageStyle
+                            .toModifier()
+                            .align(Alignment.Center)
+                            .fadeInAnimation(),
+                        ref = ref { element ->
+                            element.onclick = {
+                                val index = if (currentPosition == 0) {
+                                    0
+                                } else {
+                                    --currentPosition
+                                }
+                                itemsLeftPoints[index].let {
+                                    rowElement?.scrollTo(
+                                        ScrollToOptions(it)
+                                    )
+                                }
+                            }
+                        }
+                    )
+                }
             }
-            Box(Modifier.width(XXLargePadding))
+            GridCell(1, 2, 8, 1) {
+                ScrollToViewEventProvider
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .overflow(Overflow.Hidden)
+                        .gap(3.cssRem)
+                        .scrollBehavior(ScrollBehavior.Smooth)
+                        .styleModifier {
+                            property("display", "-webkit-box")
+                            property("-webkit-box-pack", "center")
+                        },
+                    horizontalArrangement = Arrangement.Center,
+                    ref = ref {
+                        rowElement = it
+                    }
+                ) {
+                    list.forEachIndexed { index, vocalist ->
+                        VocalistCard(
+                            Modifier,
+                            vocalist.name,
+                            vocalist.imgRes,
+                            ref = ref { element ->
+                                val rect = element.getBoundingClientRect()
+                                if (index == 0) {
+                                    itemsLeftPoints.add(0.0)
+                                } else {
+                                    itemsLeftPoints.add(rect.left)
+                                }
+                            }
+                        )
+                    }
+                }
+            }
+            GridCell(1, 10, 1, 1) {
+                Box(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    Image(
+                        src = Resources.Images.arrow_right,
+                        description = "Main photo",
+                        modifier = ArrowImageStyle
+                            .toModifier()
+                            .align(Alignment.Center)
+                            .fadeInAnimation(),
+                        ref = ref { element ->
+                            element.onclick = {
+                                val index = if (list.lastIndex == currentPosition + 2) {
+                                    list.lastIndex
+                                } else {
+                                    ++currentPosition
+                                }
+                                itemsLeftPoints[index].let {
+                                    rowElement?.scrollTo(
+                                        ScrollToOptions(it)
+                                    )
+                                }
+                            }
+                        }
+                    )
+                }
+            }
         }
     }
 }
 
 @Composable
-private fun VocalistCard(modifier: Modifier, name: String, photoRes: String) {
+private fun VocalistCard(
+    modifier: Modifier,
+    name: String,
+    photoRes: String,
+    ref: ElementRefScope<HTMLElement>? = null
+) {
     Column(modifier.gap(2.5.cssRem)) {
         Box(
             modifier = Modifier,
+            ref = ref,
             contentAlignment = Alignment.BottomCenter
         ) {
             val cardWidth = 334.px

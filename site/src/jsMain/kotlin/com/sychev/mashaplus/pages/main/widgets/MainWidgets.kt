@@ -189,6 +189,12 @@ val DuetSectionGridStyle by ComponentStyle.base {
         .width(100.percent)
 }
 
+val VocalistsSectionGridStyle by ComponentStyle.base {
+    Modifier
+        .gap(rowGap = 1.vh, columnGap = 1.vw)
+        .width(100.percent)
+}
+
 @Composable
 fun TestimonialsSection(modifier: Modifier = Modifier) {
     val palette = ColorMode.current.toSitePalette()
