@@ -60,6 +60,12 @@ val MainPhotoStyle by ComponentStyle {
     }
 }
 
+val MainPhotoStyleMobile by ComponentStyle {
+    base {
+        Modifier.width(100.percent).objectFit(ObjectFit.Contain).scale(1.2f)
+    }
+}
+
 val SecondaryPhotoStyle by ComponentStyle {
     base { Modifier.fillMaxWidth().height(MainPhotoHeightBase).objectFit(ObjectFit.Cover) }
     Breakpoint.LG {
@@ -91,6 +97,12 @@ val ClyaksImageStyle by ComponentStyle.base {
         .objectFit(ObjectFit.Contain)
         .backgroundSize(BackgroundSize.Inherit)
 }
+val ClyaksImageStyleMobile by ComponentStyle.base {
+    Modifier
+        .width(30.4.vw)
+        .objectFit(ObjectFit.Contain)
+        .backgroundSize(BackgroundSize.Inherit)
+}
 val Clyaks2ImageStyle by ComponentStyle.base {
     Modifier
         .width(276.px)
@@ -99,9 +111,38 @@ val Clyaks2ImageStyle by ComponentStyle.base {
         .backgroundSize(BackgroundSize.Inherit)
 }
 
+val Clyaks2ImageLaptop by ComponentStyle.base {
+    Modifier
+        .width(176.px)
+        .height(152.px)
+        .objectFit(ObjectFit.Cover)
+        .backgroundSize(BackgroundSize.Inherit)
+}
+
+val Clyaks2ImageStyleMobile by ComponentStyle.base {
+    Modifier
+        .width(176.px)
+        .objectFit(ObjectFit.Contain)
+        .backgroundSize(BackgroundSize.Inherit)
+}
+
 val ArrowImageStyle by ComponentStyle.base {
     Modifier
         .size(60.px)
+        .objectFit(ObjectFit.Contain)
+        .backgroundSize(BackgroundSize.Inherit)
+}
+
+val ArrowImageStyleMobile by ComponentStyle.base {
+    Modifier
+        .size(30.px)
+        .objectFit(ObjectFit.Contain)
+        .backgroundSize(BackgroundSize.Inherit)
+}
+
+val ArrowImageStyleLaptop by ComponentStyle.base {
+    Modifier
+        .size(45.px)
         .objectFit(ObjectFit.Contain)
         .backgroundSize(BackgroundSize.Inherit)
 }
@@ -117,6 +158,9 @@ val GridPhotoStyle by ComponentStyle.base {
 val personWithCardPhotoWidth = 334.px
 val personWithCardPhotoHeight = 449.px
 
+val personWithCardPhotoWidthLaptop = 248.px
+val personWithCardPhotoHeightLaptop = 360.px
+
 val PersonWithCardPhotoStyle by ComponentStyle.base {
     Modifier
         .width(personWithCardPhotoWidth)
@@ -124,6 +168,22 @@ val PersonWithCardPhotoStyle by ComponentStyle.base {
         .objectFit(ObjectFit.Fill)
         .backgroundSize(BackgroundSize.Inherit)
 }
+
+val PersonWithCardPhotoStyleMobile by ComponentStyle.base {
+    Modifier
+        .width(100.percent)
+        .objectFit(ObjectFit.Contain)
+        .backgroundSize(BackgroundSize.Inherit)
+}
+
+val PersonWithCardPhotoStyleLaptop by ComponentStyle.base {
+    Modifier
+        .width(personWithCardPhotoWidthLaptop)
+        .height(personWithCardPhotoHeightLaptop)
+        .objectFit(ObjectFit.Contain)
+        .backgroundSize(BackgroundSize.Inherit)
+}
+
 val WrapPhotoStyle by ComponentStyle.base {
     Modifier
         .objectFit(ObjectFit.Cover)
@@ -142,6 +202,18 @@ val CreatorPhotoStyle by ComponentStyle.base {
         .objectFit(ObjectFit.Cover)
 }
 
+val CreatorPhotoStyleMobile by ComponentStyle.base {
+    Modifier
+        .width(100.percent)
+        .objectFit(ObjectFit.Contain)
+}
+
+val CreatorPhotoStyleLaptop by ComponentStyle.base {
+    Modifier
+        .height(400.px)
+        .objectFit(ObjectFit.ScaleDown)
+}
+
 val InsidePhotoStyle by ComponentStyle.base {
     Modifier
         .fillMaxWidth()
@@ -151,6 +223,18 @@ val InsidePhotoStyle by ComponentStyle.base {
 
 val DuetPhotoStyle by ComponentStyle.base {
     Modifier
+        .objectFit(ObjectFit.Contain)
+}
+
+val DuetPhotoStyleMobile by ComponentStyle.base {
+    Modifier
+        .width(100.percent)
+        .objectFit(ObjectFit.Contain)
+}
+
+val DuetPhotoStylLaptop by ComponentStyle.base {
+    Modifier
+        .height(520.px)
         .objectFit(ObjectFit.Contain)
 }
 
@@ -174,6 +258,11 @@ val OurServicesGridStyle by ComponentStyle.base {
 val CreatorSectionGridStyle by ComponentStyle.base {
     Modifier
         .gap(2.cssRem)
+        .width(100.percent)
+}
+
+val CreatorSectionGridStyleLaptop by ComponentStyle.base {
+    Modifier
         .width(100.percent)
 }
 
@@ -227,7 +316,7 @@ fun TestimonialsSection(modifier: Modifier = Modifier) {
             modifier = Modifier.fillMaxWidth().padding(leftRight = sidePadding),
             items = testimonials,
             hasDotsIndicator = false
-        ) { value, index ->
+        ) { value, _ ->
             Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                 Div(ModalDescriptionTextStyleCentered.toAttrs()) {
                     SpanText(

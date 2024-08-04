@@ -148,8 +148,8 @@ val MainTitleTextStyle by ComponentStyle {
     base {
         Modifier
             .fontFamily(Fonts.MainFontName)
-            .fontSize(1.3.cssRem)
-            .textAlign(TextAlign.Center)
+            .fontSize(1.4.cssRem)
+            .textAlign(TextAlign.Start)
             .fontWeight(FontWeight.Bold)
             .color(colorMode.toPalette().color.toRgb())
     }
@@ -163,18 +163,61 @@ val MainTitleTextStyle by ComponentStyle {
     }
 }
 
-val SubheadlineRegularStyle by ComponentStyle.base {
-    Modifier
-        .fontFamily(Fonts.MainFontName)
-        .fontSize(1.4.cssRem)
-        .textAlign(TextAlign.Start)
-        .fontWeight(FontWeight.Normal)
-        .color(colorMode.toPalette().color.toRgb())
+val SubheadlineRegularStyle by ComponentStyle {
+    base {
+        Modifier
+            .fontFamily(Fonts.MainFontName)
+            .fontSize(1.4.cssRem)
+            .textAlign(TextAlign.Start)
+            .fontWeight(FontWeight.Normal)
+            .color(colorMode.toPalette().color.toRgb())
+    }
 }
+
+val SubheadlineRegularStyleMobile by ComponentStyle {
+    base {
+        Modifier
+            .fontFamily(Fonts.MainFontName)
+            .fontSize(1.cssRem)
+            .textAlign(TextAlign.Start)
+            .fontWeight(FontWeight.Light)
+            .color(colorMode.toPalette().color.toRgb())
+    }
+}
+
+val SubheadlineRegularStyleLaptop by ComponentStyle {
+    base {
+        Modifier
+            .fontFamily(Fonts.MainFontName)
+            .fontSize(1.cssRem)
+            .textAlign(TextAlign.Start)
+            .fontWeight(FontWeight.Light)
+            .color(colorMode.toPalette().color.toRgb())
+    }
+}
+
 val SubheadlineBoldStyle by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
         .fontSize(1.4.cssRem)
+        .textAlign(TextAlign.Start)
+        .fontWeight(FontWeight.SemiBold)
+        .color(colorMode.toPalette().color.toRgb())
+}
+
+val SubheadlineBoldStyleMobile by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(1.1.cssRem)
+        .textAlign(TextAlign.Start)
+        .fontWeight(FontWeight.SemiBold)
+        .color(colorMode.toPalette().color.toRgb())
+}
+
+val SubheadlineBoldStyleLaptop by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(0.8.cssRem)
         .textAlign(TextAlign.Start)
         .fontWeight(FontWeight.SemiBold)
         .color(colorMode.toPalette().color.toRgb())
@@ -189,10 +232,46 @@ val CreatorTextStyle by ComponentStyle.base {
         .color(colorMode.toPalette().color.toRgb())
 }
 
+val CreatorTextStyleMobile by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(1.2.cssRem)
+        .textAlign(TextAlign.Start)
+        .fontWeight(FontWeight.Normal)
+        .color(colorMode.toPalette().color.toRgb())
+}
+
 val CreatorCardTextStyle by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
         .fontSize(1.4.cssRem)
+        .textAlign(TextAlign.Start)
+        .fontWeight(FontWeight.Normal)
+        .color(colorMode.toPalette().color.toRgb())
+}
+
+val CreatorTextStyleLaptop by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(0.9.cssRem)
+        .textAlign(TextAlign.Start)
+        .fontWeight(FontWeight.Normal)
+        .color(colorMode.toPalette().color.toRgb())
+}
+
+val PartnersTitleTextStyleMobile by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(1.2.cssRem)
+        .textAlign(TextAlign.Center)
+        .fontWeight(FontWeight.Normal)
+        .color(colorMode.toPalette().color.toRgb())
+}
+
+val CreatorCardTextStyleMobile by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(1.cssRem)
         .textAlign(TextAlign.Start)
         .fontWeight(FontWeight.Normal)
         .color(colorMode.toPalette().color.toRgb())
@@ -226,7 +305,30 @@ val TitleStyle by ComponentStyle.base {
         .fontWeight(FontWeight.Bold)
 }
 
+val TitleStyleMobile by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(3.2.vh)
+        .textAlign(TextAlign.Center)
+        .fontWeight(FontWeight.Bold)
+}
+
 val GridTextTitle by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(2.4.vh)
+        .textAlign(TextAlign.Center)
+        .fontWeight(FontWeight.Bold)
+}
+
+val VocalistTextTitle by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(2.4.vh)
+        .textAlign(TextAlign.Start)
+        .fontWeight(FontWeight.Bold)
+}
+val VocalistTextTitleMobile by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
         .fontSize(2.4.vh)
@@ -265,12 +367,63 @@ val BottomCaptionTitle by ComponentStyle.base {
         .fontWeight(FontWeight.Bold)
 }
 
+val BottomCaptionTitleMobile by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(1.4.cssRem)
+        .textAlign(TextAlign.Start)
+        .fontWeight(FontWeight.Bold)
+}
+
+val BottomCaptionTitleLaptop by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(1.4.cssRem)
+        .textAlign(TextAlign.Start)
+        .fontWeight(FontWeight.Bold)
+}
+
 val SmallRegularTextStyle by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
         .fontSize(0.9.cssRem)
         .textAlign(TextAlign.Start)
         .fontWeight(FontWeight.Normal)
+}
+
+val BottomPromoItemTextStyle by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(1.2.cssRem)
+        .textAlign(TextAlign.Center)
+        .fontWeight(FontWeight.Light)
+}
+
+val OutlineButtonTextStyle by ComponentStyle {
+    base {
+        Modifier
+            .fontFamily(Fonts.MainFontName)
+            .textAlign(TextAlign.Center)
+            .fontWeight(FontWeight.Medium)
+            .color(colorMode.toPalette().color.toRgb())
+    }
+}
+val OutlineButtonTextStyleMobile by ComponentStyle {
+    base {
+        Modifier
+            .fontSize(1.4.cssRem)
+            .fontFamily(Fonts.MainFontName)
+            .textAlign(TextAlign.Center)
+            .fontWeight(FontWeight.Medium)
+            .color(colorMode.toPalette().color.toRgb())
+    }
+}
+val OutlineButtonTextSmallStyle by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .textAlign(TextAlign.Center)
+        .fontWeight(FontWeight.Bold)
+        .color(colorMode.toPalette().color.toRgb())
 }
 
 
@@ -298,17 +451,10 @@ val OutlinedCircularButtonVariant by ButtonStyle.addVariantBase {
         .fontSize(0.9.cssRem)
 }
 
-val OutlineButtonTextStyle by ComponentStyle.base {
+val OutlinedCircularButtonVariantMobile by ButtonStyle.addVariantBase {
     Modifier
-        .fontFamily(Fonts.MainFontName)
-        .textAlign(TextAlign.Center)
-        .fontWeight(FontWeight.Medium)
-        .color(colorMode.toPalette().color.toRgb())
-}
-val OutlineButtonTextSmallStyle by ComponentStyle.base {
-    Modifier
-        .fontFamily(Fonts.MainFontName)
-        .textAlign(TextAlign.Center)
-        .fontWeight(FontWeight.Bold)
-        .color(colorMode.toPalette().color.toRgb())
+        .padding(topBottom = XSmallPadding, leftRight = XXXLargePadding)
+        .borderRadius(1.8.cssRem, 1.8.cssRem)
+        .backgroundColor(DesignWhiteText)
+        .fontSize(1.1.cssRem)
 }

@@ -3,584 +3,916 @@ package com.sychev.mashaplus.pages.main.mobile
 import androidx.compose.runtime.*
 import com.sychev.mashaplus.*
 import com.sychev.mashaplus.components.widgets.Card
-import com.sychev.mashaplus.components.widgets.Divider
-import com.sychev.mashaplus.components.widgets.VocalistWidget
-import com.sychev.mashaplus.models.getFemaleVocalists
-import com.sychev.mashaplus.models.getMainPhotos
-import com.sychev.mashaplus.models.getMaleVocalists
-import com.sychev.mashaplus.models.getVocalistsCouples
-import com.sychev.mashaplus.pages.*
-import com.sychev.mashaplus.pages.main.widgets.BottomPhotoGradientStyle
-import com.sychev.mashaplus.pages.main.widgets.MainPhotoStyle
-import com.sychev.mashaplus.pages.main.widgets.SectionPhotoStyle
-import com.sychev.mashaplus.pages.main.widgets.TestimonialsSection
-import com.sychev.mashaplus.utils.*
+import com.sychev.mashaplus.components.widgets.SliderSimpleArrow
+import com.sychev.mashaplus.models.Vocalist
+import com.sychev.mashaplus.models.duetList
+import com.sychev.mashaplus.models.vocalistkyList
+import com.sychev.mashaplus.models.vocalistyList
+import com.sychev.mashaplus.pages.HeroContainerStyle
+import com.sychev.mashaplus.pages.LogoStyle
+import com.sychev.mashaplus.pages.LogoStyleSmall
+import com.sychev.mashaplus.pages.MainPhotoSlideInAnim
+import com.sychev.mashaplus.pages.main.widgets.*
+import com.sychev.mashaplus.provider.ScrollToViewEventProvider
+import com.sychev.mashaplus.utils.Resources
+import com.sychev.mashaplus.utils.VideoFrameStyleMobile
+import com.sychev.mashaplus.utils.VideoYT
+import com.sychev.mashaplus.utils.fadeInAnimation
+import com.varabyte.kobweb.compose.css.FontWeight
+import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.TextAlign
+import com.varabyte.kobweb.compose.css.WhiteSpace
+import com.varabyte.kobweb.compose.css.functions.LinearGradient
+import com.varabyte.kobweb.compose.css.functions.blur
+import com.varabyte.kobweb.compose.css.functions.linearGradient
+import com.varabyte.kobweb.compose.dom.ElementRefScope
+import com.varabyte.kobweb.compose.dom.ref
+import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
-import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
+import com.varabyte.kobweb.silk.components.forms.Input
+import com.varabyte.kobweb.silk.components.forms.InputDefaults
+import com.varabyte.kobweb.silk.components.forms.InputSize
 import com.varabyte.kobweb.silk.components.graphics.Image
-import com.varabyte.kobweb.silk.components.layout.breakpoint.displayUntil
 import com.varabyte.kobweb.silk.components.navigation.Link
-import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toAttrs
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import kotlinx.coroutines.delay
+import org.jetbrains.compose.web.attributes.InputType
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Button
 import org.jetbrains.compose.web.dom.Div
-import kotlin.time.Duration.Companion.seconds
+import org.w3c.dom.HTMLElement
 
 @Composable
 fun MainScreenMobile() {
     Row(HeroContainerStyle.toModifier()) {
         Box(modifier = Modifier.fillMaxWidth()) {
-            Column(Modifier.gap(2.cssRem).width(100.percent)) {
-                val palette = ColorMode.current.toSitePalette()
-                ImageHeaderWithLogo()
-                Column(modifier = Modifier.padding(XXSmallPadding).fillMaxWidth()) {
-                    FeaturesTopSection(modifier = Modifier.fillMaxWidth())
-                    Divider(width = 100.percent)
-                    Box(Modifier.height(XXLargePadding))
-                    VideosSection()
-                    Box(Modifier.height(XXLargePadding + XSmallPadding))
-                }
-                Box(modifier = Modifier.fillMaxWidth()) {
-                    Image(
-                        "/vocal_show.png",
-                        "Main photo",
-                        MainPhotoStyle
-                            .toModifier()
-                            .fadeInAnimation(),
-                    )
-                    Box(
-                        modifier = Modifier.padding(LargePadding)
-                            .align(Alignment.TopStart)
-                    ) {
-                        Div(ModalDescriptionTextStyle.toAttrs()) {
-                            SpanText(
-                                "Яркость, блеск и целое музыкальное представление для вас и ваших гостей. Два блока — мировые хиты всех времен и любимые песни 90-ых в новой аранжировке от наших вокалистов и музыкантов, энергичные танцы и шикарные костюмы — вам точно нужно это прочувствовать!",
-                                modifier = Modifier
-                                    .color(palette.brand.greyText)
-                                    .opacity(.8f)
-                                    .fadeInAnimation()
-                                    .textShadow(
-                                        offsetY = .5.px,
-                                        offsetX = .5.px,
-                                        blurRadius = 1.px,
-                                        color = Colors.White
-                                    )
-                            )
-                        }
-                    }
-                }
-                Column(modifier = Modifier.width(100.percent)) {
-                    Column(modifier = Modifier.width(100.percent)) {
-                        VocalistWidget("Вокалисты", getMaleVocalists())
-                        Box(Modifier.height(XLargePadding))
-                        VocalistWidget("Вокалистки", getFemaleVocalists())
-                    }
-                    Row(Modifier.fillMaxWidth()) {
-                        Spacer()
-                        Box(modifier = Modifier.padding(leftRight = XXLargePadding, top = XSmallPadding)) {
-                            Column(
-                                modifier = Modifier.borderRadius(0.5.cssRem, 0.5.cssRem)
-                                    .border(1.px, LineStyle.Solid, palette.brand.text)
-                            ) {
-                                Box(
-                                    modifier = Modifier.fillMaxWidth()
-                                        .padding(leftRight = LargePadding, top = XSmallPadding)
-                                        .fadeInAnimation()
-                                ) {
-                                    Div(ModalDescriptionTextStyle.toAttrs()) {
-                                        SpanText(
-                                            "У вокалиста есть минимальный комплект оборудования, необходимый для подзвучивания",
-                                            modifier = Modifier
-                                                .color(palette.brand.text)
-                                        )
-                                    }
-                                }
-                                Box(
-                                    modifier = Modifier.fillMaxWidth()
-                                        .padding(
-                                            leftRight = LargePadding,
-                                            top = XSmallPadding,
-                                            bottom = XXXSmallPadding
-                                        )
-                                        .fadeInAnimation()
-                                ) {
-                                    Div(ModalDescriptionTextStyle.toAttrs()) {
-                                        SpanText(
-                                            "Количество блоков оговаривется заранее, возможны любые варианты",
-                                            modifier = Modifier
-                                                .color(palette.brand.text)
-                                        )
-                                    }
-                                }
-                                Box(modifier = Modifier.height(XSmallPadding))
-                            }
-                        }
-                        Spacer()
-                    }
-                }
-                Box(modifier = Modifier.fillMaxWidth().padding(XXSmallPadding)) {
-                    Divider(width = 100.percent)
-                }
-                Column(Modifier.fillMaxWidth()) {
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Spacer()
-                        Div(HeadlineTextStyle.toAttrs()) {
-                            SpanText(
-                                "Дуэт",
-                                modifier = Modifier
-                                    .color(palette.brand.text)
-                                    .fadeInAnimation()
-                            )
-                        }
-                        Spacer()
-                    }
-                    Row(Modifier.fillMaxWidth()) {
-                        Spacer()
-                        Box(
-                            modifier = Modifier.padding(leftRight = XXLargePadding, top = XSmallPadding)
-                                .fadeInAnimation()
-                        ) {
-                            Div(ModalDescriptionTextStyleCentered.toAttrs()) {
-                                SpanText(
-                                    "Огромным приемуществом нашего проекта является взаимозаменяемость",
-                                    modifier = Modifier
-                                        .color(palette.brand.text)
-                                )
-                            }
-                        }
-                        Spacer()
-                    }
-                    Box(Modifier.height(MediumPadding))
-                    Column(modifier = Modifier.fillMaxWidth()) {
-                        VocalistWidget(null, getVocalistsCouples())
-                    }
-                    Row(Modifier.fillMaxWidth()) {
-                        Spacer()
-                        Box(modifier = Modifier.padding(leftRight = XXLargePadding, top = XSmallPadding)) {
-                            Column(
-                                modifier = Modifier.borderRadius(0.5.cssRem, 0.5.cssRem)
-                                    .border(1.px, LineStyle.Solid, palette.brand.text)
-                            ) {
-                                Box(
-                                    modifier = Modifier.fillMaxWidth()
-                                        .padding(leftRight = LargePadding, top = XSmallPadding)
-                                        .fadeInAnimation()
-                                ) {
-                                    Div(ModalDescriptionTextStyle.toAttrs()) {
-                                        SpanText(
-                                            "Есть возможность выбрать репертуар и внешний вид вокалистов специально под ваше мероприятие (заранее)",
-                                            modifier = Modifier
-                                                .color(palette.brand.text)
-                                        )
-                                    }
-                                }
-                                Box(modifier = Modifier.height(XSmallPadding))
-                            }
-                        }
-                        Spacer()
-                    }
-                }
-                Box(modifier = Modifier.fillMaxWidth().padding(XXSmallPadding)) {
-                    Divider(width = 100.percent)
-                }
-                VariousEventsSection()
-                TestimonialsSection(Modifier.fillMaxWidth().padding(leftRight = LargePadding))
-                Column(modifier = Modifier.fillMaxWidth().backgroundColor(palette.brand.background)) {
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Spacer()
-                        Div(HeadlineTextStyle.toAttrs()) {
-                            SpanText(
-                                "Остались вопросы?",
-                                modifier = Modifier
-                                    .color(palette.brand.text)
-                                    .fadeInAnimation()
-                            )
-                        }
-                        Spacer()
-                    }
-                    Box(Modifier.height(MediumPadding))
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Spacer()
-                        Link("https://api.whatsapp.com/send/?phone=%2B79052629514&text&type=phone_number&app_absent=0") {
-                            Button(ButtonStyle.toAttrs(DefaultButtonVariant)) {
-                                Div(ButtonTextStyle.toAttrs()) {
-                                    SpanText(
-                                        "Оставить заявку",
-                                        modifier = Modifier
-                                            .color(palette.brand.whiteText)
-                                            .fillMaxWidth()
-                                            .textAlign(TextAlign.Center)
-                                    )
-                                }
-                            }
-                        }
-                        Spacer()
-                    }
-                }
-                Box(Modifier.height(MediumPadding))
-                Column(modifier = Modifier.fillMaxWidth().backgroundColor(palette.brand.surface)) {
-                    Box(Modifier.height(MediumPadding))
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Spacer()
-                        Div(SubheadlineBoldTextStyle.toAttrs()) {
-                            SpanText(
-                                "Музыкальный проект \"Маша+\"",
-                                modifier = Modifier
-                                    .color(palette.brand.text)
-                                    .fadeInAnimation()
-                            )
-                        }
-                        Spacer()
-                    }
-                    Box(Modifier.height(MediumPadding))
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Spacer()
-                        Link("https://vk.com/masha_plus_band") {
-                            val imgResVK = if (ColorMode.current.isDark) {
-                                "/vk_logo.png"
-                            } else {
-                                "/vk_logo_black.png"
-                            }
-                            Image(
-                                imgResVK,
-                                "",
-                                LogoStyleSmall
-                                    .toModifier(),
-                            )
-                        }
-                        Box(Modifier.width(XXSmallPadding))
-                        Link("https://instagram.com/masha_plus_band?igshid=OGQ5ZDc2ODk2ZA==") {
-                            val imgResInst = if (ColorMode.current.isDark) {
-                                "/inst_logo.png"
-                            } else {
-                                "/inst_logo_black.png"
-                            }
-                            Image(
-                                imgResInst,
-                                "",
-                                LogoStyleSmall
-                                    .toModifier(),
-                            )
-                        }
-                        Spacer()
-                    }
-                    Box(Modifier.height(XXSmallPadding))
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Spacer()
-                        Link(
-                            "tel:+79319512000",
-                            openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
-                            openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE
-                        ) {
-                            Div(SubheadlineBoldTextStyle.toAttrs()) {
-                                SpanText(
-                                    "8 (931) 951-20-00",
-                                    modifier = Modifier
-                                        .color(palette.brand.text)
-                                        .fadeInAnimation()
-                                )
-                            }
-                        }
-                        Spacer()
-                    }
-                    Box(Modifier.height(MediumPadding))
-                }
+            Column(Modifier.gap(2.cssRem).width(100.percent).padding(top = 2.2.cssRem)) {
+                val leftRightMarginDefault = remember { 1.5.cssRem }
+                HeaderMobile(modifier = Modifier.fillMaxWidth().padding(leftRight = leftRightMarginDefault))
+                OurServicesMobile(modifier = Modifier.fillMaxWidth().padding(leftRight = 2.2.cssRem))
+                CreatedBySectionMobile(modifier = Modifier.fillMaxWidth().padding(leftRight = leftRightMarginDefault))
+                VocalistsSectionMobile(
+                    modifier = Modifier.fillMaxWidth().padding(leftRight = leftRightMarginDefault),
+                    title = Resources.Strings.vocalistky_uppercase,
+                    list = vocalistkyList,
+                )
+                VocalistsSectionMobile(
+                    modifier = Modifier.fillMaxWidth().padding(leftRight = leftRightMarginDefault),
+                    title = Resources.Strings.vocalisty_uppercase,
+                    list = vocalistyList,
+                )
+                DuetSectionMobile(Modifier.fillMaxWidth().padding(leftRight = leftRightMarginDefault))
+                PartnersSectionMobile(modifier = Modifier.fillMaxWidth().padding(leftRight = leftRightMarginDefault))
+                VideosSectionMobile(Modifier.fillMaxWidth())
+                Box(Modifier.fillMaxWidth().height(4.px).backgroundColor(DesignBottomDivider))
+                BottomSectionMobile(modifier = Modifier.fillMaxWidth().padding(leftRight = leftRightMarginDefault))
             }
         }
     }
 }
 
 @Composable
-private fun VariousEventsSection() {
+private fun HeaderMobile(
+    modifier: Modifier,
+) {
     val palette = ColorMode.current.toSitePalette()
-    Column(modifier = SectionContainerStyle.toModifier()) {
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Spacer()
-            Div(HeadlineTextStyle.toAttrs()) {
-                SpanText(
-                    "Разнообразные события",
-                    modifier = Modifier
-                        .color(palette.brand.text)
-                        .fadeInAnimation()
-                )
-            }
-            Spacer()
-        }
-        Box(Modifier.height(LargePadding))
-        Image(
-            "/club_dance.png",
-            "Main photo",
-            SectionPhotoStyle
-                .toModifier().fadeInAnimation(),
-        )
-        Box(Modifier.height(LargePadding))
-        Div(Headline2TextStyle.toAttrs()) {
-            SpanText(
-                "Идеальный выпускной",
-                modifier = Modifier
-                    .color(palette.brand.text)
-                    .fadeInAnimation()
-            )
-        }
-        Box(
-            modifier = Modifier.fillMaxWidth().padding(top = XSmallPadding)
-                .fadeInAnimation()
-        ) {
-            Div(ModalDescriptionTextStyle.toAttrs()) {
-                SpanText(
-                    "Последний звонок, последний урок, вручение аттестатов... Наша команда готова сделать ваш выпускной неповторимым. Особенный ведущий, эмоциональный диджей и талантливые вокалисты создадут вечер, который запомнится на всю жизнь. Доверьтесь нам и создайте самую невероятную ночь вашего выпускного!",
-                    modifier = Modifier
-                        .color(palette.brand.text)
-                )
-            }
-        }
-        Box(Modifier.height(XXLargePadding * 1.5))
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Spacer()
-            Div(HeadlineTextStyle.toAttrs()) {
-                SpanText(
-                    "Широкий репертуар",
-                    modifier = Modifier
-                        .color(palette.brand.text)
-                        .fadeInAnimation()
-                )
-            }
-            Spacer()
-        }
-        Box(Modifier.height(LargePadding))
-        Image(
-            "/repertoire.png",
-            "Main photo",
-            SectionPhotoStyle
-                .toModifier().fadeInAnimation(),
-        )
-        Box(Modifier.height(LargePadding))
-        Box(modifier = Modifier.align(Alignment.Start)) {
-            Link("https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg") {
-                Button(ButtonStyle.toAttrs(DefaultButtonVariant)) {
-                    Div(ButtonTextStyle.toAttrs()) {
-                        SpanText(
-                            "Посмотреть репертуар",
-                            modifier = Modifier
-                                .color(palette.brand.whiteText)
-                                .fillMaxWidth()
-                                .textAlign(TextAlign.Center)
-                        )
-                    }
-                }
-            }
-        }
-        Box(
-            modifier = Modifier.fillMaxWidth().padding(top = XSmallPadding)
-                .fadeInAnimation()
-        ) {
-            Div(ModalDescriptionTextStyle.toAttrs()) {
-                SpanText(
-                    "Репертуар наших артистов весьма широк! Вы можете насладиться своим ужином под ненавязчивый лаунж или же зарядиться качевыми треками.\n" +
-                            "Полный плейлист наших вокалистов смотрите в прикрепленном файле. И не спешите расстраиваться, если не увидите в нем свой любимый трек — ребята с удовольствием выучат его ради вас и вашего праздника! \uD83D\uDE09",
-                    modifier = Modifier
-                        .color(palette.brand.text)
-                )
-            }
-        }
-        Box(Modifier.height(XXLargePadding))
-    }
-}
-
-
-@Composable
-private fun FeaturesTopSection(modifier: Modifier) {
-    val palette = ColorMode.current.toSitePalette()
-    Column(modifier = modifier) {
-        Card(modifier = Modifier.width(245.px).slideRightAnimation()) {
-            Div(ModalTitleTextStyle.toAttrs()) {
-                SpanText(
-                    "Принцип конструктора",
-                    modifier = Modifier.color(palette.brand.text)
-                )
-            }
-            Div(ModalDescriptionTextStyleCentered.toAttrs()) {
-                SpanText(
-                    "Каждый заказчик сам может выбрать себе исполнителей на свой праздник",
-                    modifier = Modifier.color(palette.brand.greyText)
-                )
-            }
-        }
-        Box(modifier = Modifier.height(XXSmallPadding))
-        Card(modifier = Modifier.width(245.px).slideLeftAnimation().align(Alignment.End)) {
-            Div(ModalTitleTextStyle.toAttrs()) {
-                SpanText(
-                    "Разнообразный состав",
-                    modifier = Modifier.color(palette.brand.text)
-                )
-            }
-            Div(ModalDescriptionTextStyleCentered.toAttrs()) {
-                SpanText(
-                    "В активе музпроекта 15 профессиональных вокалистов и 10 инструменталистов",
-                    modifier = Modifier.color(palette.brand.greyText)
-                )
-            }
-        }
-        Box(modifier = Modifier.height(XXSmallPadding))
-        Card(modifier = Modifier.width(245.px).slideRightAnimation()) {
-            Div(ModalTitleTextStyle.toAttrs()) {
-                SpanText(
-                    "Формат мероприятий",
-                    modifier = Modifier.color(palette.brand.text)
-                )
-            }
-            Div(ModalDescriptionTextStyleCentered.toAttrs()) {
-                SpanText(
-                    "От уютного вечера в ресторане до свадеб и юбилеев, а также выступления на концертных площадках города и за его пределами",
-                    modifier = Modifier.color(palette.brand.greyText)
-                )
-            }
-        }
-        Box(Modifier.height(XLargePadding))
-    }
-    Box(Modifier.height(XLargePadding))
-}
-
-@Composable
-private fun VideosSection() {
-    val palette = ColorMode.current.toSitePalette()
-    Column(modifier = Modifier.fillMaxWidth().displayUntil(Breakpoint.LG)) {
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Spacer()
-            Div(HeadlineTextStyle.toAttrs()) {
-                SpanText(
-                    "Коллектив молодых, ярких вокалистов",
-                    modifier = Modifier
-                        .color(palette.brand.text)
-                        .align(Alignment.CenterVertically)
-                )
-            }
-            Spacer()
-        }
-        Box(
-            modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = XLargePadding)
-                .fadeInAnimation()
-        ) {
-            VideoYT("https://www.youtube.com/embed/_c2B9DN_khg?si=eVhKkAczzjP_Afsm")
-        }
-        Box(Modifier.height((XXLargePadding + XSmallPadding) * 2))
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Spacer()
-            Div(HeadlineTextStyle.toAttrs()) {
-                SpanText(
-                    "Мы можем устроить любой праздник",
-                    modifier = Modifier
-                        .color(palette.brand.text)
-                        .align(Alignment.CenterVertically)
-                )
-            }
-            Spacer()
-        }
-        Box(
-            modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = XLargePadding)
-                .fadeInAnimation()
-        ) {
-            VideoYT("https://www.youtube.com/embed/aEh4p6dUbvU?si=sZIsdey5lwHZ-rBx")
-        }
-    }
-}
-
-
-@Composable
-fun ImageHeaderWithLogo() {
-    Box(modifier = Modifier.fillMaxWidth()) {
-        val mainPhotos = getMainPhotos()
-        var mainPhoto by remember { mutableStateOf(mainPhotos.first()) }
-        var previousMainPhoto by remember { mutableStateOf<String?>(null) }
-        LaunchedEffect(true) {
-            var i = 1
-            while (true) {
-                delay(2.seconds)
-                mainPhoto = mainPhotos[i]
-                if (i == mainPhotos.lastIndex) {
-                    i = 0
-                } else {
-                    i++
-                }
-            }
-        }
-        previousMainPhoto?.let {
-            Image(
-                it,
-                "Main photo",
-                MainPhotoStyle
-                    .toModifier(),
-            )
-        }
-
-        key(mainPhoto) {
-            Image(
-                mainPhoto,
-                "Main photo",
-                MainPhotoStyle
-                    .toModifier()
-                    .animation(
-                        MainPhotoSlideInAnim.toAnimation(
-                            duration = 300.ms,
-                            timingFunction = AnimationTimingFunction.EaseIn,
-                            direction = AnimationDirection.Normal,
-                            fillMode = AnimationFillMode.Backwards,
-                        )
-                    )
-                    .onAnimationEnd {
-                        previousMainPhoto = mainPhoto
-                    },
-            )
-        }
-
-        val mainPhotoGradientRes = when (ColorMode.current) {
-            ColorMode.DARK -> "/main_image_gradient_dark.png"
-            ColorMode.LIGHT -> "/main_image_gradient_light.png"
-        }
-        Image(
-            mainPhotoGradientRes,
-            "gradient dark",
-            BottomPhotoGradientStyle.toModifier()
-                .align(Alignment.BottomCenter).stubAnimation(),
-        )
-        val palette = ColorMode.current.toSitePalette()
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.BottomCenter)
-                .zIndex(2f),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Image(
-                Resources.Images.masha_logo,
-                "Logo icon",
-                LogoStyle.toModifier().fadeInAnimation()
-            )
+    Column(modifier = modifier.overflow(Overflow.Hidden)) {
+        Row(modifier = Modifier.width(80.percent)) {
             Div(MainTitleTextStyle.toAttrs()) {
                 SpanText(
-                    "Уникальный музыкальный проект, аналогов которого нет в Санкт-Петербурге.",
+                    Resources.Strings.sozday_meropriyatie,
                     modifier = Modifier
+                        .whiteSpace(WhiteSpace.PreLine)
                         .color(palette.brand.whiteText)
                         .fadeInAnimation()
                         .textShadow(offsetY = 1.px, offsetX = 1.px, blurRadius = 1.px, color = Colors.Black)
                 )
             }
         }
+        Box(Modifier.height(1.2.cssRem))
+        Div(SubheadlineRegularStyleMobile.toAttrs()) {
+            SpanText(
+                Resources.Strings.muzik_project,
+                modifier = Modifier
+                    .whiteSpace(WhiteSpace.PreLine)
+                    .color(palette.brand.whiteText)
+                    .fadeInAnimation()
+                    .textShadow(offsetY = 1.px, offsetX = 1.px, blurRadius = 1.px, color = Colors.Black)
+            )
+        }
+        Box(Modifier.height(3.cssRem))
+        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+            var isInMouse by remember { mutableStateOf(false) }
+            Link(
+                "https://vk.com/masha_plus_band",
+                modifier = Modifier
+                    .onMouseEnter { isInMouse = true }
+                    .onMouseLeave { isInMouse = false }
+            ) {
+                Button(ButtonStyle.toAttrs(if (isInMouse) OutlinedGradientCircularButtonVariant else GradientCircularButtonVariant)) {
+                    Div(OutlineButtonTextStyleMobile.toAttrs()) {
+                        SpanText(
+                            Resources.Strings.ostavit_zayavku,
+                            modifier = Modifier
+                                .color(if (isInMouse) palette.brand.text else palette.brand.textReversed)
+                                .fillMaxWidth()
+                                .textAlign(TextAlign.Center)
+                                .padding(leftRight = 2.cssRem)
+                        )
+                    }
+                }
+            }
+        }
+        Box(Modifier.height(3.cssRem))
+        Image(
+            Resources.Images.main_photo_mobile,
+            "Main photo",
+            MainPhotoStyleMobile
+                .toModifier()
+                .animation(
+                    MainPhotoSlideInAnim.toAnimation(
+                        duration = 300.ms,
+                        timingFunction = AnimationTimingFunction.EaseIn,
+                        direction = AnimationDirection.Normal,
+                        fillMode = AnimationFillMode.Backwards,
+                    )
+                ),
+        )
+        Box(Modifier.height(4.cssRem))
+        Box(Modifier.fillMaxWidth().padding(leftRight = 4.cssRem)) {
+            Card(
+                modifier = Modifier.fillMaxWidth().backdropFilter(blur(10.px)),
+                color = MembersSectionCardMobile,
+                paddingValues = 1.5.cssRem,
+                borderRadius = 2.5.cssRem
+            ) {
+                @Composable
+                fun TextWithNum(
+                    title: String,
+                    num: String
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Div(SmallTitleStyle.toAttrs()) {
+                            SpanText(
+                                text = "${title}: ",
+                                modifier = Modifier
+                                    .fadeInAnimation()
+                            )
+                        }
+                        Div(SmallTitleStyle.toAttrs()) {
+                            SpanText(
+                                num,
+                                modifier = Modifier
+                                    .fadeInAnimation()
+                            )
+                        }
+                    }
+                }
+                Column(
+                    modifier = Modifier.gap(1.cssRem),
+                ) {
+                    TextWithNum(
+                        Resources.Strings.instrymentalisty,
+                        Resources.Strings.text_10,
+                    )
+                    TextWithNum(
+                        Resources.Strings.let_text,
+                        Resources.Strings.text_5,
+                    )
+                    TextWithNum(
+                        Resources.Strings.vocalisty,
+                        Resources.Strings.text_14
+                    )
+                }
+            }
+        }
+    }
+}
 
+@Composable
+private fun OurServicesMobile(modifier: Modifier) {
+    val palette = ColorMode.current.toSitePalette()
+    Box(modifier = Modifier.fillMaxWidth()) {
+        Image(
+            Resources.Images.clyaksa1,
+            modifier = ClyaksImageStyleMobile.toModifier().padding(top = 4.cssRem, left = 0.2.cssRem).rotateZ(20.grad)
+                .zIndex(0)
+        )
+        Column(
+            modifier = modifier.gap(2.cssRem).zIndex(1),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Div(TitleStyleMobile.toModifier().toAttrs()) {
+                SpanText(
+                    Resources.Strings.nashi_yslygi,
+                    modifier = Modifier
+                        .fadeInAnimation()
+                )
+            }
+            Box(modifier = Modifier.height(1.cssRem))
+            ShadowedCard(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.CenterHorizontally,
+                paddingValues = 1.3.vh,
+            ) {
+                Div(GridTextTitle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.ultima_band,
+                        modifier = Modifier
+                            .color(palette.brand.textReversed)
+                            .fadeInAnimation()
+                    )
+                }
+            }
+            ShadowedCard(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.CenterHorizontally,
+                paddingValues = 1.3.vh,
+            ) {
+                Div(GridTextTitle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.vocalisty_uppercase,
+                        modifier = Modifier
+                            .color(palette.brand.textReversed)
+                            .fadeInAnimation()
+                    )
+                }
+            }
+            ShadowedCard(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.CenterHorizontally,
+                paddingValues = 1.3.vh,
+            ) {
+                Div(GridTextTitle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.vocalnoye_show_uppercase,
+                        modifier = Modifier
+                            .color(palette.brand.textReversed)
+                            .fadeInAnimation()
+                    )
+                }
+            }
+            ShadowedCard(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.CenterHorizontally,
+                paddingValues = 1.3.vh,
+            ) {
+                Div(GridTextTitle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.duet_uppercase,
+                        modifier = Modifier
+                            .color(palette.brand.textReversed)
+                            .fadeInAnimation()
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun CreatedBySectionMobile(modifier: Modifier) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        val palette = ColorMode.current.toSitePalette()
+        Box(Modifier.height(2.cssRem))
+        Div(CreatorTextStyleMobile.toAttrs()) {
+            SpanText(
+                Resources.Strings.created_by1,
+                modifier = Modifier
+                    .color(palette.brand.text)
+                    .fadeInAnimation()
+            )
+            SpanText(
+                Resources.Strings.created_by2,
+                modifier = Modifier
+                    .fontWeight(FontWeight.Bold)
+                    .color(palette.brand.text)
+                    .fadeInAnimation()
+            )
+            SpanText(
+                Resources.Strings.created_by3,
+                modifier = Modifier
+                    .color(palette.brand.text)
+                    .fadeInAnimation()
+            )
+            SpanText(
+                Resources.Strings.created_by4,
+                modifier = Modifier
+                    .color(DesignYellow)
+                    .fontWeight(FontWeight.Bold)
+                    .fadeInAnimation()
+            )
+        }
+        Box(Modifier.height(1.cssRem))
+        Image(
+            Resources.Images.maria_boronina,
+            "null",
+            CreatorPhotoStyleMobile
+                .toModifier()
+                .padding(leftRight = 2.cssRem)
+                .fadeInAnimation(),
+        )
+        ShadowedCard(
+            Modifier.fillMaxSize()
+                .padding(topBottom = 1.2.cssRem, leftRight = 0.5.cssRem),
+            borderRadius = 3.1.vh,
+        ) {
+            Div(CreatorCardTextStyleMobile.toAttrs()) {
+                SpanText(
+                    Resources.Strings.bak_vocalistka,
+                    modifier = Modifier
+                        .fontWeight(FontWeight.Bold)
+                        .color(palette.brand.textReversed)
+                        .fadeInAnimation()
+                )
+                SpanText(
+                    Resources.Strings.bak_vocalistka_desc,
+                    modifier = Modifier
+                        .color(palette.brand.textReversed)
+                        .fadeInAnimation()
+                )
+            }
+        }
+        Box(Modifier.height(0.9.cssRem))
+        ShadowedCard(
+            Modifier.fillMaxSize()
+                .padding(topBottom = 1.2.cssRem, leftRight = 0.5.cssRem),
+            borderRadius = 3.1.vh,
+        ) {
+            Div(CreatorCardTextStyleMobile.toAttrs()) {
+                SpanText(
+                    Resources.Strings.studio_bak_vocal,
+                    modifier = Modifier
+                        .fontWeight(FontWeight.Bold)
+                        .color(palette.brand.textReversed)
+                        .fadeInAnimation()
+                )
+                SpanText(
+                    Resources.Strings.studio_bak_vocal_desc,
+                    modifier = Modifier
+                        .color(palette.brand.textReversed)
+                        .fadeInAnimation()
+                )
+            }
+        }
+        Box(Modifier.height(0.9.cssRem))
+        ShadowedCard(
+            Modifier.fillMaxSize()
+                .padding(topBottom = 1.2.cssRem, leftRight = 0.5.cssRem),
+            borderRadius = 3.1.vh,
+        ) {
+            Div(CreatorCardTextStyleMobile.toAttrs()) {
+                SpanText(
+                    Resources.Strings.bolee_ten,
+                    modifier = Modifier
+                        .fontWeight(FontWeight.Bold)
+                        .color(palette.brand.textReversed)
+                        .fadeInAnimation()
+                )
+                SpanText(
+                    Resources.Strings.bolee_ten_desc,
+                    modifier = Modifier
+                        .color(palette.brand.textReversed)
+                        .fadeInAnimation()
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun VocalistsSectionMobile(
+    modifier: Modifier,
+    title: String,
+    list: List<Vocalist>
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Div(TitleStyleMobile.toAttrs()) {
+            SpanText(
+                title,
+                modifier = Modifier
+                    .fadeInAnimation()
+            )
+        }
+        var selectedIndex by remember { mutableStateOf(0) }
+        Box(Modifier.height(1.5.cssRem))
+        SliderSimpleArrow(
+            modifier = Modifier,
+            hasDotsIndicator = false,
+            leftArrow = {
+                Image(
+                    if (selectedIndex > 0) Resources.Images.arrow_left_painted else Resources.Images.arrow_left,
+                    "Main photo",
+                    ArrowImageStyleMobile
+                        .toModifier()
+                        .fadeInAnimation(),
+                )
+            },
+            rightArrow = {
+                Image(
+                    if (selectedIndex < list.lastIndex) Resources.Images.arrow_right_painted else Resources.Images.arrow_right,
+                    "Main photo",
+                    ArrowImageStyleMobile
+                        .toModifier()
+                        .fadeInAnimation(),
+                )
+            },
+            items = list,
+        ) { value, index ->
+            selectedIndex = index
+            Column(
+                Modifier,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                VocalistCardMobile(
+                    Modifier.padding(leftRight = 2.5.cssRem),
+                    value.name,
+                    value.imgRes,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun VocalistCardMobile(
+    modifier: Modifier,
+    name: String,
+    photoRes: String,
+    ref: ElementRefScope<HTMLElement>? = null
+) {
+    Column(
+        modifier = modifier.gap(2.cssRem),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Box(
+            modifier = Modifier,
+            ref = ref,
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            val cardHeight = 360.px
+            Card(
+                modifier = Modifier.width(100.percent).height(cardHeight)
+                    .backgroundImage(linearGradient(LinearGradient.Direction.ToRight, GradientLeft, GradientRight)),
+                borderRadius = 3.5.cssRem,
+            ) {}
+            Image(
+                photoRes,
+                "Main photo",
+                PersonWithCardPhotoStyleMobile
+                    .toModifier().fadeInAnimation(),
+            )
+        }
+        Div(VocalistTextTitleMobile.toAttrs()) {
+            SpanText(
+                name,
+                modifier = Modifier
+                    .fadeInAnimation()
+                    .whiteSpace(WhiteSpace.PreLine)
+            )
+        }
+    }
+}
+
+@Composable
+private fun DuetSectionMobile(modifier: Modifier) {
+    Column(
+        modifier = modifier.gap(1.8.cssRem),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Box(modifier.height(0.5.cssRem))
+        Div(TitleStyleMobile.toAttrs()) {
+            SpanText(
+                Resources.Strings.duet_uppercase,
+                modifier = Modifier
+                    .fadeInAnimation()
+            )
+        }
+        Div(SubheadlineRegularStyleMobile.toAttrs()) {
+            SpanText(
+                Resources.Strings.princip_constryktora,
+                modifier = Modifier
+                    .whiteSpace(WhiteSpace.PreLine)
+                    .fadeInAnimation()
+            )
+        }
+        Box(modifier = Modifier) {
+            Image(
+                Resources.Images.clyaksa_2,
+                modifier = Clyaks2ImageStyleMobile.toModifier()
+                    .padding(right = XXLargePadding, top = XXLargePadding)
+                    .align(Alignment.TopEnd)
+            )
+            var selectedIndex by remember { mutableStateOf(0) }
+            SliderSimpleArrow(
+                modifier = Modifier,
+                hasDotsIndicator = false,
+                leftArrow = {
+                    Image(
+                        if (selectedIndex > 0) Resources.Images.arrow_left_painted else Resources.Images.arrow_left,
+                        "Main photo",
+                        ArrowImageStyleMobile
+                            .toModifier()
+                            .fadeInAnimation(),
+                    )
+                },
+                rightArrow = {
+                    Image(
+                        if (selectedIndex < duetList.lastIndex) Resources.Images.arrow_right_painted else Resources.Images.arrow_right,
+                        "Main photo",
+                        ArrowImageStyleMobile
+                            .toModifier()
+                            .fadeInAnimation(),
+                    )
+                },
+                items = duetList,
+            ) { value, index ->
+                selectedIndex = index
+                Column(
+                    Modifier,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Image(
+                        src = value,
+                        description = "null",
+                        modifier = DuetPhotoStyleMobile
+                            .toModifier()
+                            .padding(leftRight = 1.5.cssRem)
+                            .fadeInAnimation(),
+                    )
+                }
+            }
+        }
+        @Composable
+        fun DoubleDuetsColumn(duets: List<String>) {
+            Column {
+                duets.forEach {
+                    Div(SubheadlineBoldStyleMobile.toAttrs()) {
+                        SpanText(
+                            it,
+                            modifier = Modifier
+                                .whiteSpace(WhiteSpace.PreLine)
+                                .fadeInAnimation()
+                        )
+                    }
+                }
+            }
+        }
+        Row(
+            Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            DoubleDuetsColumn(
+                listOf(
+                    Resources.Strings.sasha_plus_alya,
+                    Resources.Strings.lena_plus_liza,
+                    Resources.Strings.ula_plus_yla
+                )
+            )
+            DoubleDuetsColumn(
+                listOf(
+                    Resources.Strings.milana_plus_jia,
+                    Resources.Strings.lena_plus_andrey,
+                    Resources.Strings.alya_plus_diana
+                )
+            )
+        }
+
+    }
+}
+
+@Composable
+private fun PartnersSectionMobile(
+    modifier: Modifier
+) {
+    Column(
+        modifier = modifier.gap(1.8.cssRem),
+    ) {
+        Box(Modifier.height(1.cssRem))
+        Div(PartnersTitleTextStyleMobile.toAttrs()) {
+            SpanText(
+                Resources.Strings.partners_title,
+                modifier = Modifier
+                    .color(DesignYellow)
+                    .fadeInAnimation()
+            )
+        }
+        Div(
+            PartnersSectionGridStyle.toModifier()
+                .grid {
+                    rows {
+                        repeat(8) { size(.3.fr) }
+                    }
+                    columns {
+                        repeat(13) { size(.3.fr) }
+                    }
+                }
+                .toAttrs()
+        ) {
+            GridCell(1, 1, 3, 3) {
+                Image(
+                    src = Resources.Images.partner_bahroma_logo,
+                    description = "null",
+                    modifier = InsidePhotoStyle
+                        .toModifier().fadeInAnimation(),
+                )
+            }
+            GridCell(1, 6, 3, 3) {
+                Image(
+                    src = Resources.Images.partner_mamaliga_logo,
+                    description = "null",
+                    modifier = InsidePhotoStyle
+                        .toModifier().fadeInAnimation(),
+                )
+            }
+            GridCell(1, 11, 3, 3) {
+                Image(
+                    src = Resources.Images.partner_feromon_logo,
+                    description = "null",
+                    modifier = InsidePhotoStyle
+                        .toModifier().fadeInAnimation(),
+                )
+            }
+            GridCell(3, 3, 2, 3) {
+                Image(
+                    src = Resources.Images.partner_peperoni_logo,
+                    description = "null",
+                    modifier = InsidePhotoStyle
+                        .toModifier().fadeInAnimation(),
+                )
+            }
+            GridCell(4, 6, 2, 3) {
+                Image(
+                    src = Resources.Images.partner_hochy_harcho_logo,
+                    description = "null",
+                    modifier = InsidePhotoStyle
+                        .toModifier().fadeInAnimation(),
+                )
+            }
+            GridCell(3, 9, 3, 3) {
+                Image(
+                    src = Resources.Images.partner_kind_gruzin_logo,
+                    description = "null",
+                    modifier = InsidePhotoStyle
+                        .toModifier().fadeInAnimation(),
+                )
+            }
+            GridCell(5, 1, 4, 3) {
+                Image(
+                    src = Resources.Images.partner_vse_horosho_logo,
+                    description = "null",
+                    modifier = InsidePhotoStyle
+                        .toModifier().fadeInAnimation(),
+                )
+            }
+            GridCell(5, 10, 4, 3) {
+                Image(
+                    src = Resources.Images.partner_grill_house_logo,
+                    description = "null",
+                    modifier = InsidePhotoStyle
+                        .toModifier().fadeInAnimation(),
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun VideosSectionMobile(modifier: Modifier) {
+    Column(
+        modifier = modifier.gap(3.5.cssRem),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Div(TitleStyleMobile.toAttrs()) {
+            SpanText(
+                Resources.Strings.ultima_band,
+                modifier = Modifier
+                    .fadeInAnimation(),
+                ref = ref {
+                    ScrollToViewEventProvider.setUltimaBandSectionEvent {
+                        it.scrollIntoView()
+                    }
+                }
+            )
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fadeInAnimation(),
+            contentAlignment = Alignment.Center,
+        ) {
+            VideoYT("https://www.youtube.com/embed/_c2B9DN_khg?si=eVhKkAczzjP_Afsm", style = VideoFrameStyleMobile)
+        }
+        Div(TitleStyleMobile.toAttrs()) {
+            SpanText(
+                Resources.Strings.vocalnoye_show_uppercase,
+                modifier = Modifier
+                    .fadeInAnimation(),
+                ref = ref {
+                    ScrollToViewEventProvider.setVocalShowSectionEvent {
+                        it.scrollIntoView()
+                    }
+                }
+            )
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fadeInAnimation(),
+            contentAlignment = Alignment.Center,
+        ) {
+            VideoYT("https://www.youtube.com/embed/aEh4p6dUbvU?si=sZIsdey5lwHZ-rBx", style = VideoFrameStyleMobile)
+        }
+    }
+}
+
+@Composable
+private fun BottomSectionMobile(
+    modifier: Modifier,
+) {
+    val palette = ColorMode.current.toSitePalette()
+    Column(
+        modifier = modifier.gap(0.2.cssRem),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Div(BottomCaptionTitleMobile.toAttrs()) {
+            SpanText(
+                Resources.Strings.ostavte_nomer,
+                modifier = Modifier
+                    .whiteSpace(WhiteSpace.PreLine)
+                    .fadeInAnimation()
+            )
+        }
+        var inputText by remember { mutableStateOf("") }
+        val inputPrefix = remember { "+7 " }
+        var inFocus by remember { mutableStateOf(false) }
+        val numberThreshold = remember { 10 }
+        var isValid by remember { mutableStateOf(true) }
+        Box(Modifier.height(1.3.cssRem))
+        Input(
+            modifier = Modifier
+                .width(324.px)
+                .padding(LargePadding)
+                .borderRadius(1.9.cssRem, 1.9.cssRem)
+                .onFocusIn {
+                    inFocus = true
+                }
+                .onFocusOut {
+                    isValid = inputText.length == numberThreshold || inputText.isEmpty()
+                    inFocus = false
+                },
+            type = InputType.Tel,
+            value = if (inputText.isNotEmpty() || inFocus) {
+                inputPrefix + inputText
+            } else {
+                ""
+            },
+            onValueChanged = { input ->
+                if (input == inputPrefix.trim()) return@Input
+                val plainNumber = input.removePrefix(inputPrefix).filter { it.isDigit() }
+                if (plainNumber.length > numberThreshold) return@Input
+                inputText = plainNumber
+            },
+            placeholder = Resources.Strings.vvedite_nomer_telefona_hint,
+            spellCheck = InputDefaults.SpellCheck,
+            focusBorderColor = DesignWhiteText,
+            size = InputSize.LG,
+            valid = isValid
+        )
+        Box(Modifier.height(1.1.cssRem))
+        Button(ButtonStyle.toAttrs(OutlinedCircularButtonVariantMobile)) {
+            Div(OutlineButtonTextSmallStyle.toAttrs()) {
+                SpanText(
+                    Resources.Strings.otpravit,
+                    modifier = Modifier
+                        .color(palette.brand.textReversed)
+                        .fillMaxWidth()
+                        .textAlign(TextAlign.Center)
+                )
+            }
+        }
+        Box(Modifier.height(1.8.cssRem))
+        Div(BottomPromoItemTextStyle.toAttrs()) {
+            SpanText(
+                Resources.Strings.photo,
+                modifier = Modifier
+                    .color(palette.brand.text)
+                    .fillMaxWidth()
+                    .textAlign(TextAlign.Center)
+            )
+        }
+        Div(BottomPromoItemTextStyle.toAttrs()) {
+            SpanText(
+                Resources.Strings.live_perfomances,
+                modifier = Modifier
+                    .color(palette.brand.text)
+                    .fillMaxWidth()
+                    .textAlign(TextAlign.Center)
+            )
+        }
+        Div(BottomPromoItemTextStyle.toAttrs()) {
+            SpanText(
+                Resources.Strings.repertuar_uppercase,
+                modifier = Modifier
+                    .color(palette.brand.text)
+                    .fillMaxWidth()
+                    .textAlign(TextAlign.Center)
+            )
+        }
+        Div(BottomPromoItemTextStyle.toAttrs()) {
+            SpanText(
+                Resources.Strings.prices,
+                modifier = Modifier
+                    .color(palette.brand.text)
+                    .fillMaxWidth()
+                    .textAlign(TextAlign.Center)
+            )
+        }
+        Div(BottomPromoItemTextStyle.toAttrs()) {
+            SpanText(
+                Resources.Strings.important_questions,
+                modifier = Modifier
+                    .color(palette.brand.text)
+                    .fillMaxWidth()
+                    .textAlign(TextAlign.Center)
+            )
+        }
+        Row(
+            modifier = Modifier.gap(1.5.cssRem),
+        ) {
+            Link("https://vk.com/masha_plus_band") {
+                val imgResVK = if (ColorMode.current.isDark) {
+                    "/vk_logo.png"
+                } else {
+                    "/vk_logo_black.png"
+                }
+                Image(
+                    imgResVK,
+                    "",
+                    LogoStyleSmall
+                        .toModifier(),
+                )
+            }
+            Link("https://instagram.com/masha_plus_band?igshid=OGQ5ZDc2ODk2ZA==") {
+                val imgResInst = if (ColorMode.current.isDark) {
+                    "/inst_logo.png"
+                } else {
+                    "/inst_logo_black.png"
+                }
+                Image(
+                    imgResInst,
+                    "",
+                    LogoStyleSmall
+                        .toModifier(),
+                )
+            }
+            Link(
+                "tel:+79319512000",
+                openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE
+            ) {
+                val imgResInst = Resources.Images.ic_phone
+                Image(
+                    imgResInst,
+                    "",
+                    LogoStyleSmall
+                        .toModifier(),
+                )
+            }
+        }
+        Div(SubheadlineRegularStyle.toAttrs()) {
+            SpanText(
+                Resources.Strings.spb,
+                modifier = Modifier
+                    .whiteSpace(WhiteSpace.PreLine)
+                    .fontWeight(FontWeight.Light)
+                    .fadeInAnimation()
+            )
+        }
+        Image(
+            Resources.Images.masha_logo,
+            "Logo icon",
+            LogoStyle
+                .toModifier()
+                .fadeInAnimation()
+        )
     }
 }

@@ -44,12 +44,13 @@ import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toAttrs
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
 
 val NavHeaderStyle by ComponentStyle.base {
-    Modifier.fillMaxWidth().padding(1.cssRem)
+    Modifier.fillMaxWidth().padding(top = 2.5.cssRem, right = 1.cssRem)
 }
 
 @Composable
@@ -95,7 +96,7 @@ private fun CloseButton(onClick: () -> Unit) {
 
 val SideMenuSlideInAnim by Keyframes {
     from {
-        Modifier.translateX((-100).percent)
+        Modifier.translateX((100).percent)
     }
 
     to {
@@ -130,7 +131,7 @@ fun NavHeader() {
                 .fillMaxWidth()
                 .fontSize(1.5.cssRem)
                 .gap(1.cssRem)
-                .displayUntil(Breakpoint.LG)
+                .displayUntil(Breakpoint.MD)
                 .stubAnimation(),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -143,33 +144,39 @@ fun NavHeader() {
                     onAnimationEnd = { if (menuState == SideMenuState.CLOSING) menuState = SideMenuState.CLOSED }
                 )
             }
-            Row(
-                Modifier.width(100.percent),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
+            if (
+                menuState == SideMenuState.CLOSED
             ) {
-                Spacer()
-                Div(NavigationHeadlineTextStyle.toAttrs()) {
-                    SpanText(
-                        "8 (931) 951-20-00",
-                        modifier = Modifier
-                            .color(palette.brand.whiteText)
-                            .fadeInAnimation(),
+                Row(
+                    Modifier.width(100.percent),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Spacer()
+                    Image(
+                        modifier = Modifier.onClick {
+                            menuState = SideMenuState.OPEN
+                        },
+                        src = Resources.Images.ic_menu,
                     )
                 }
             }
-
         }
-
+        val bp = rememberBreakpoint()
         Row(
             modifier = Modifier
                 .gap(4.5.cssRem)
                 .fillMaxWidth()
-                .displayIfAtLeast(Breakpoint.LG),
-            verticalAlignment = Alignment.CenterVertically
+                .displayIfAtLeast(Breakpoint.MD),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
+            val rowGap = if (bp > Breakpoint.LG) {
+                2.7.cssRem
+            } else {
+                1.cssRem
+            }
             Row(
-                Modifier.gap(2.7.cssRem).weight(4),
+                Modifier.gap(rowGap).weight(4),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.End,
             ) {
@@ -204,7 +211,7 @@ fun NavHeader() {
                     }) {
                     Div(NavigationHeadlineTextStyle.toAttrs()) {
                         SpanText(
-                            Resources.Strings.vokalist,
+                            Resources.Strings.vocalist,
                             modifier = Modifier
                                 .color(palette.brand.whiteText)
                                 .fadeInAnimation()
@@ -343,21 +350,21 @@ private fun SideMenu(menuState: SideMenuState, close: () -> Unit, onAnimationEnd
                 Modifier
                     .fillMaxHeight()
                     .width(clamp(8.cssRem, 33.percent, 10.cssRem))
-                    .align(Alignment.CenterStart)
+                    .align(Alignment.CenterEnd)
                     // Close button will appear roughly over the hamburger button, so the user can close
                     // things without moving their finger / cursor much.
                     .padding(top = 1.cssRem, leftRight = 1.cssRem)
                     .gap(1.5.cssRem)
-                    .backgroundColor(ColorMode.current.toSitePalette().nearBackground)
+                    .backgroundColor(ColorMode.current.toSitePalette().brand.background)
                     .animation(
                         SideMenuSlideInAnim.toAnimation(
                             duration = 200.ms,
                             timingFunction = if (menuState == SideMenuState.OPEN) AnimationTimingFunction.EaseOut else AnimationTimingFunction.EaseIn,
                             direction = if (menuState == SideMenuState.OPEN) AnimationDirection.Normal else AnimationDirection.Reverse,
-                            fillMode = AnimationFillMode.Forwards
+                            fillMode = AnimationFillMode.Backwards
                         )
                     )
-                    .borderRadius(topRight = 2.cssRem)
+                    .borderRadius(topLeft = 2.cssRem)
                     .onClick { it.stopPropagation() }
                     .onAnimationEnd { onAnimationEnd() },
                 horizontalAlignment = Alignment.Start
@@ -365,7 +372,7 @@ private fun SideMenu(menuState: SideMenuState, close: () -> Unit, onAnimationEnd
                 CloseButton(onClick = { close() })
                 Column(
                     Modifier.padding(right = 0.75.cssRem).gap(1.5.cssRem).fontSize(1.4.cssRem),
-                    horizontalAlignment = Alignment.Start
+                    horizontalAlignment = Alignment.End
                 ) {
                     MenuItems()
                 }

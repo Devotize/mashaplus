@@ -6,10 +6,10 @@ object Resources {
     object Strings {
         const val yarkost_blesk =
             "Яркость, блеск и целое музыкальное представление для вас и ваших гостей. Два блока — мировые хиты всех времен и любимые песни 90-ых в новой аранжировке от наших вокалистов и музыкантов, энергичные танцы и шикарные костюмы — вам точно нужно это прочувствовать!"
-        const val vokalisty = "Вокалисты"
-        const val vokalist = "Вокалист"
+        const val vocalisty = "Вокалисты"
+        const val vocalist = "Вокалист"
         const val kontakty = "Контакты"
-        const val vokalisty_uppercase = "ВОКАЛИСТЫ"
+        const val vocalisty_uppercase = "ВОКАЛИСТЫ"
         const val vokalistky = "Вокалистки"
         const val minimalniy_komplekt =
             "У вокалиста есть минимальный комплект оборудования, необходимый для подзвучивания"
@@ -19,19 +19,19 @@ object Resources {
         const val ostavit_zayavku = "Оставить заявку"
         const val otpravit = "Отправить"
         const val muzik_project =
-            "MASHA PLUS – музыкальный проект, который реализует все форматы\n живых выступлений. От соло-вокалистов до кавер бэнда"
-        const val sozday_meropriyatie = "Создай мероприятие по своим\nправилам"
+            "MASHA PLUS – музыкальный проект, который реализует все форматы живых выступлений. От соло-вокалистов до кавер бэнда"
+        const val sozday_meropriyatie = "Создай мероприятие по своим правилам"
         const val sostav_gruppy = "18  ВОКАЛИСТОВ  10  ИНСТРУМЕНТАЛИСТОВ  5  ЛЕТ"
-        const val text_14 = "14"
+        const val text_14 = "15"
         const val text_10 = "10"
         const val text_5 = "5"
         const val nashi_yslygi = "НАШИ УСЛУГИ"
-        const val vacalnoye_show_uppercase = "ВОКАЛЬНОЕ ШОУ"
+        const val vocalnoye_show_uppercase = "ВОКАЛЬНОЕ ШОУ"
         const val vacalnoye_show = "Вокальное шоу"
         const val repertuar = "Репертуар"
         const val duet_uppercase = "ДУЭТ"
         const val ultima_band = "ULTIMA BAND"
-        const val vokalistky_uppercase = "ВОКАЛИСТКИ"
+        const val vocalistky_uppercase = "ВОКАЛИСТКИ"
         const val instrymentalisty = "Инструменталисты"
         const val let_text = "Лет"
         const val liza_ionovoa = "ЛИЗА\nИОНОВА"
@@ -60,13 +60,13 @@ object Resources {
         const val lena_plus_andrey = "ЛЕНА + АНДРЕЙ"
         const val alya_plus_diana = "АЛЯ + ДИАНА"
         const val spb = "г. Санкт - Петербург"
-        const val ostavte_nomer = "Оставьте свой номер, создадим\nваше мероприятие вместе"
+        const val ostavte_nomer = "Оставьте свой номер, создадим ваше мероприятие вместе"
         const val bolshe_o_nas = "Больше о нас"
         const val vvedite_nomer_telefona_hint = "Введите номер телефона"
         const val jiviye_vystuplenya = "ЖИВЫЕ ВЫСТУПЛЕНИЯ"
         const val repertuar_uppercase = "РЕПЕРТУАР"
-        const val tseni = "ЦЕНЫ"
-        const val vajniye_voprosy = "ВАЖНЫЕ ВОПРОСЫ"
+        const val prices = "ЦЕНЫ"
+        const val important_questions = "ВАЖНЫЕ ВОПРОСЫ"
         const val created_by1 =
             "Музыкальный проект был создан 5 лет назад "
         const val created_by2 = "Марией Борониной"
@@ -80,13 +80,16 @@ object Resources {
         const val bolee_ten = "Более 10 лет "
         const val bolee_ten_desc =
             "работы в production studion на радиостанциях: \" Русское радио\", \"Эрмитаж\", \"Эльдорадио\", \"Европа плюс\", \"Радио Модерн\", \"Радио Шансон\""
-        const val partners_titple = "ПОДДЕРЖИВАЕМ СОТРУДНИЧЕСТВО С РЕСТОРАНАМИ УЖЕ НЕСКОЛЬКО ЛЕТ:"
+        const val partners_title = "ПОДДЕРЖИВАЕМ СОТРУДНИЧЕСТВО С РЕСТОРАНАМИ УЖЕ НЕСКОЛЬКО ЛЕТ:"
+        const val photo = "ФОТО"
+        const val live_perfomances = "ЖИВЫЕ ВЫСТУПЛЕНИЯ"
     }
 
     object Images {
         const val vocal_show = "/vocal_show.png"
         const val masha_logo = "/masha_logo.png"
         const val main_photo = "/main_photo.png"
+        const val main_photo_mobile = "/main_photo_mobile.png"
         const val two_girls = "/two_girls.png"
         const val three_girls = "/three_girls.png"
         const val one_girl = "/one_girl.png"
@@ -102,6 +105,7 @@ object Resources {
         const val carousel_girl_3 = "/paradise.png"
         const val carousel_girl_4 = "/ya_eto_ya.png"
         const val clyaksa1 = "/clyaksa.png"
+        const val clyaksa_2 = "/clyaksa_2.png"
         const val liza_vok = "/liza_vok.png"
         const val yla_vok = "/yla_vok.png"
         const val ula_vok = "/ula_vok.png"
@@ -116,7 +120,6 @@ object Resources {
         const val ilya_vok = "/ilya_vok.png"
         const val ilay_star_vok = "/ilya_starchikov_vok.png"
         const val marat_vok = "/marat_vok.png"
-        const val clyaksa_2 = "/clyaksa_2.png"
         const val arrow_left = "/arrow_left.png"
         const val arrow_right = "/arrow_right.png"
         const val arrow_left_painted = "/arrow_left_painted.png"
@@ -139,6 +142,7 @@ object Resources {
         const val duet_6 = "/duet_6.png"
         const val duet_7 = "/duet_7.png"
         const val duet_8 = "/duet_8.png"
+        const val ic_menu = "/menu.png"
     }
 
 }

@@ -13,11 +13,21 @@ import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Iframe
 
 val VideoFrameStyle by ComponentStyle {
+    Breakpoint.LG {
+        Modifier.width(1340.px).height(690.px).boxSizing(BoxSizing.BorderBox).borderRadius(0.9.cssRem, 0.9.cssRem)
+            .padding(leftRight = XXXXLargePadding)
+    }
+}
+
+val VideoFrameStyleMobile by ComponentStyle {
     base {
         Modifier.height(180.px).width(320.px)
     }
-    Breakpoint.LG {
-        Modifier.width(1340.px).height(690.px).boxSizing(BoxSizing.BorderBox).borderRadius(0.9.cssRem, 0.9.cssRem)
+}
+
+val VideoFrameStyleLaptop by ComponentStyle {
+    base {
+        Modifier.width(890.px).height(420.px).boxSizing(BoxSizing.BorderBox).borderRadius(0.9.cssRem, 0.9.cssRem)
             .padding(leftRight = XXXXLargePadding)
     }
 }
@@ -45,9 +55,10 @@ fun VideoVK(
 fun VideoYT(
     sourceEmbedLink: String,
     autoplay: Boolean = true,
-    loop: Boolean = true
+    loop: Boolean = true,
+    style: ComponentStyle? = null
 ) {
-    Iframe(attrs = VideoFrameStyle.toAttrs {
+    Iframe(attrs = (style ?: VideoFrameStyle).toAttrs {
         val fullLinkSB = StringBuilder()
         fullLinkSB.append(sourceEmbedLink)
         if (autoplay) fullLinkSB.append("&autoplay=1")

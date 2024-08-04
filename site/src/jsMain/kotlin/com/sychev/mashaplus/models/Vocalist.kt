@@ -7,7 +7,7 @@ data class Vocalist(
     val imgRes: String,
 )
 
-val vokalistkyList = listOf(
+val vocalistkyList = listOf(
     Vocalist(Resources.Strings.liza_ionovoa, Resources.Images.liza_vok),
     Vocalist(Resources.Strings.yla, Resources.Images.yla_vok),
     Vocalist(Resources.Strings.ula_lank, Resources.Images.ula_vok),
@@ -19,7 +19,7 @@ val vokalistkyList = listOf(
     Vocalist(Resources.Strings.alina_viera, Resources.Images.alina_vok),
     Vocalist(Resources.Strings.jia, Resources.Images.djia_vok),
 )
-val vokalistyList = listOf(
+val vocalistyList = listOf(
     Vocalist(Resources.Strings.andrey, Resources.Images.andrey_vok),
     Vocalist(Resources.Strings.ilya, Resources.Images.ilya_vok),
     Vocalist(Resources.Strings.ilya_star, Resources.Images.ilay_star_vok),

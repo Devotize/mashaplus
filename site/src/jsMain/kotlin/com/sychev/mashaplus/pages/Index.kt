@@ -5,6 +5,7 @@ import com.sychev.mashaplus.LargePadding
 import com.sychev.mashaplus.XXXXLargePadding
 import com.sychev.mashaplus.components.layouts.PageLayout
 import com.sychev.mashaplus.pages.main.desktop.MainScreenDesktop
+import com.sychev.mashaplus.pages.main.laptop.MainScreenLaptop
 import com.sychev.mashaplus.pages.main.mobile.MainScreenMobile
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
@@ -33,10 +34,18 @@ val VideoStyle by ComponentStyle.base {
 fun HomePage() {
     PageLayout("Home") {
         val bp = rememberBreakpoint()
-        if (bp > Breakpoint.LG) {
-            MainScreenDesktop()
-        } else {
-            MainScreenMobile()
+        when {
+            bp < Breakpoint.MD -> {
+                MainScreenMobile()
+            }
+
+            bp < Breakpoint.XL -> {
+                MainScreenLaptop()
+            }
+
+            else -> {
+                MainScreenDesktop()
+            }
         }
     }
 }
