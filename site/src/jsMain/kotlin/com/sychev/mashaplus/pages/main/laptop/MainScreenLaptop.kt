@@ -4,6 +4,7 @@ import androidx.compose.runtime.*
 import com.sychev.mashaplus.*
 import com.sychev.mashaplus.components.widgets.Card
 import com.sychev.mashaplus.components.widgets.SliderSimpleArrow
+import com.sychev.mashaplus.http.RequestSender
 import com.sychev.mashaplus.models.Vocalist
 import com.sychev.mashaplus.models.duetList
 import com.sychev.mashaplus.models.vocalistkyList
@@ -45,6 +46,7 @@ import com.varabyte.kobweb.silk.components.style.toAttrs
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import kotlinx.browser.window
 import org.jetbrains.compose.web.attributes.InputType
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Button
@@ -355,7 +357,7 @@ private fun VocalistCardLaptop(
             contentAlignment = Alignment.BottomCenter
         ) {
             val cardWidth = 238.px
-            val cardHeight = 304.px
+            val cardHeight = 268.px
             Card(
                 modifier = Modifier.width(cardWidth).height(cardHeight)
                     .backgroundImage(linearGradient(LinearGradient.Direction.ToRight, GradientLeft, GradientRight)),
@@ -641,7 +643,24 @@ fun BottomSectionLaptop(modifier: Modifier) {
                 valid = isValid
             )
             Box(Modifier.height(LargePadding))
-            Button(ButtonStyle.toAttrs(OutlinedCircularButtonVariant)) {
+            Button(
+                ButtonStyle.toAttrs(OutlinedCircularButtonVariant) {
+                    onClick {
+                        if (isValid) {
+                            RequestSender.sendTgMessage(
+                                inputPrefix + inputText,
+                                onSuccess = {
+                                    window.alert("Номер телефона отправлен")
+                                    inputText = ""
+                                },
+                                onError = {
+                                    window.alert("Произошла ошибка при отправке телефона")
+                                }
+                            )
+                        }
+                    }
+                },
+            ) {
                 Div(OutlineButtonTextSmallStyle.toAttrs()) {
                     SpanText(
                         Resources.Strings.otpravit,
@@ -663,13 +682,18 @@ fun BottomSectionLaptop(modifier: Modifier) {
                 )
             }
             Box(Modifier.height(XXXLargePadding + LargePadding))
-            Div(SmallRegularTextStyle.toAttrs()) {
-                SpanText(
-                    Resources.Strings.jiviye_vystuplenya,
-                    modifier = Modifier
-                        .whiteSpace(WhiteSpace.PreLine)
-                        .fadeInAnimation()
-                )
+            Link(
+                "https://vk.com/masha_plus_band",
+                modifier = Modifier.color(DesignWhiteText)
+            ) {
+                Div(SmallRegularTextStyle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.jiviye_vystuplenya,
+                        modifier = Modifier
+                            .whiteSpace(WhiteSpace.PreLine)
+                            .fadeInAnimation()
+                    )
+                }
             }
             Box(Modifier.height(XSmallPadding))
             Link(
@@ -686,22 +710,32 @@ fun BottomSectionLaptop(modifier: Modifier) {
                 }
             }
             Box(Modifier.height(XSmallPadding))
-            Div(SmallRegularTextStyle.toAttrs()) {
-                SpanText(
-                    Resources.Strings.prices,
-                    modifier = Modifier
-                        .whiteSpace(WhiteSpace.PreLine)
-                        .fadeInAnimation()
-                )
+            Link(
+                "https://vk.com/masha_plus_band",
+                modifier = Modifier.color(DesignWhiteText)
+            ) {
+                Div(SmallRegularTextStyle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.prices,
+                        modifier = Modifier
+                            .whiteSpace(WhiteSpace.PreLine)
+                            .fadeInAnimation()
+                    )
+                }
             }
             Box(Modifier.height(XSmallPadding))
-            Div(SmallRegularTextStyle.toAttrs()) {
-                SpanText(
-                    Resources.Strings.important_questions,
-                    modifier = Modifier
-                        .whiteSpace(WhiteSpace.PreLine)
-                        .fadeInAnimation()
-                )
+            Link(
+                "https://vk.com/masha_plus_band",
+                modifier = Modifier.color(DesignWhiteText)
+            ) {
+                Div(SmallRegularTextStyle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.important_questions,
+                        modifier = Modifier
+                            .whiteSpace(WhiteSpace.PreLine)
+                            .fadeInAnimation()
+                    )
+                }
             }
         }
     }

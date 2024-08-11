@@ -9,21 +9,23 @@ data class Vocalist(
 
 val vocalistkyList = listOf(
     Vocalist(Resources.Strings.liza_ionovoa, Resources.Images.liza_vok),
-    Vocalist(Resources.Strings.yla, Resources.Images.yla_vok),
-    Vocalist(Resources.Strings.ula_lank, Resources.Images.ula_vok),
-    Vocalist(Resources.Strings.natalya_molodojen, Resources.Images.natalya_vok),
-    Vocalist(Resources.Strings.milana, Resources.Images.milana_vok),
     Vocalist(Resources.Strings.elena, Resources.Images.elena_vok),
+    Vocalist(Resources.Strings.ula_lank, Resources.Images.ula_vok),
     Vocalist(Resources.Strings.dora, Resources.Images.dora_vok),
-    Vocalist(Resources.Strings.alya, Resources.Images.alya_vok),
-    Vocalist(Resources.Strings.alina_viera, Resources.Images.alina_vok),
+    Vocalist(Resources.Strings.natalya_molodojen, Resources.Images.natalya_vok),
+    Vocalist(Resources.Strings.diana, Resources.Images.diana_vok),
+    Vocalist(Resources.Strings.milana, Resources.Images.milana_vok),
     Vocalist(Resources.Strings.jia, Resources.Images.djia_vok),
+    Vocalist(Resources.Strings.alya, Resources.Images.alya_vok),
+    Vocalist(Resources.Strings.nastya, Resources.Images.nastya_vok),
+    Vocalist(Resources.Strings.polya, Resources.Images.polya_vok),
 )
 val vocalistyList = listOf(
     Vocalist(Resources.Strings.andrey, Resources.Images.andrey_vok),
     Vocalist(Resources.Strings.ilya, Resources.Images.ilya_vok),
     Vocalist(Resources.Strings.ilya_star, Resources.Images.ilay_star_vok),
     Vocalist(Resources.Strings.marat, Resources.Images.marat_vok),
+    Vocalist(Resources.Strings.roman, Resources.Images.roman_vok),
 )
 
 val duetList = listOf(

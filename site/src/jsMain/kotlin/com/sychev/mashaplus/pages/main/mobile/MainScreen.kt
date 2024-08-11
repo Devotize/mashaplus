@@ -403,7 +403,12 @@ private fun VocalistsSectionMobile(
 ) {
     Column(
         modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        ref = ref {
+            ScrollToViewEventProvider.setVocalistScrollEvent {
+                it.scrollIntoView()
+            }
+        }
     ) {
         Div(TitleStyleMobile.toAttrs()) {
             SpanText(
@@ -497,6 +502,11 @@ private fun DuetSectionMobile(modifier: Modifier) {
     Column(
         modifier = modifier.gap(1.8.cssRem),
         horizontalAlignment = Alignment.CenterHorizontally,
+        ref = ref {
+            ScrollToViewEventProvider.setDuetSectionEvent {
+                it.scrollIntoView()
+            }
+        }
     ) {
         Box(modifier.height(0.5.cssRem))
         Div(TitleStyleMobile.toAttrs()) {
@@ -751,7 +761,12 @@ private fun BottomSectionMobile(
     val palette = ColorMode.current.toSitePalette()
     Column(
         modifier = modifier.gap(0.2.cssRem),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        ref = ref {
+            ScrollToViewEventProvider.setContactsScrollEvent {
+                it.scrollIntoView()
+            }
+        }
     ) {
         Div(BottomCaptionTitleMobile.toAttrs()) {
             SpanText(
@@ -810,50 +825,75 @@ private fun BottomSectionMobile(
             }
         }
         Box(Modifier.height(1.8.cssRem))
-        Div(BottomPromoItemTextStyle.toAttrs()) {
-            SpanText(
-                Resources.Strings.photo,
-                modifier = Modifier
-                    .color(palette.brand.text)
-                    .fillMaxWidth()
-                    .textAlign(TextAlign.Center)
-            )
+        Link(
+            path = "https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg",
+            modifier = Modifier.color(DesignWhiteText),
+        ) {
+            Div(BottomPromoItemTextStyle.toAttrs()) {
+                SpanText(
+                    Resources.Strings.photo,
+                    modifier = Modifier
+                        .color(palette.brand.text)
+                        .fillMaxWidth()
+                        .textAlign(TextAlign.Center)
+                )
+            }
         }
-        Div(BottomPromoItemTextStyle.toAttrs()) {
-            SpanText(
-                Resources.Strings.live_perfomances,
-                modifier = Modifier
-                    .color(palette.brand.text)
-                    .fillMaxWidth()
-                    .textAlign(TextAlign.Center)
-            )
+        Link(
+            path = "https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg",
+            modifier = Modifier.color(DesignWhiteText),
+        ) {
+            Div(BottomPromoItemTextStyle.toAttrs()) {
+                SpanText(
+                    Resources.Strings.live_perfomances,
+                    modifier = Modifier
+                        .color(palette.brand.text)
+                        .fillMaxWidth()
+                        .textAlign(TextAlign.Center)
+                )
+            }
         }
-        Div(BottomPromoItemTextStyle.toAttrs()) {
-            SpanText(
-                Resources.Strings.repertuar_uppercase,
-                modifier = Modifier
-                    .color(palette.brand.text)
-                    .fillMaxWidth()
-                    .textAlign(TextAlign.Center)
-            )
+        Link(
+            path = "https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg",
+            modifier = Modifier.color(DesignWhiteText)
+        ) {
+            Div(BottomPromoItemTextStyle.toAttrs()) {
+                SpanText(
+                    Resources.Strings.repertuar_uppercase,
+                    modifier = Modifier
+                        .color(palette.brand.text)
+                        .fillMaxWidth()
+                        .textAlign(TextAlign.Center)
+                )
+            }
         }
-        Div(BottomPromoItemTextStyle.toAttrs()) {
-            SpanText(
-                Resources.Strings.prices,
-                modifier = Modifier
-                    .color(palette.brand.text)
-                    .fillMaxWidth()
-                    .textAlign(TextAlign.Center)
-            )
+        Link(
+            "https://vk.com/masha_plus_band",
+            modifier = Modifier.color(DesignWhiteText)
+        ) {
+            Div(BottomPromoItemTextStyle.toAttrs()) {
+                SpanText(
+                    Resources.Strings.prices,
+                    modifier = Modifier
+                        .color(palette.brand.text)
+                        .fillMaxWidth()
+                        .textAlign(TextAlign.Center)
+                )
+            }
         }
-        Div(BottomPromoItemTextStyle.toAttrs()) {
-            SpanText(
-                Resources.Strings.important_questions,
-                modifier = Modifier
-                    .color(palette.brand.text)
-                    .fillMaxWidth()
-                    .textAlign(TextAlign.Center)
-            )
+        Link(
+            "https://vk.com/masha_plus_band",
+            modifier = Modifier.color(DesignWhiteText)
+        ) {
+            Div(BottomPromoItemTextStyle.toAttrs()) {
+                SpanText(
+                    Resources.Strings.important_questions,
+                    modifier = Modifier
+                        .color(palette.brand.text)
+                        .fillMaxWidth()
+                        .textAlign(TextAlign.Center)
+                )
+            }
         }
         Row(
             modifier = Modifier.gap(1.5.cssRem),

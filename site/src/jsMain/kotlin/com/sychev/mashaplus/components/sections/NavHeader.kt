@@ -4,6 +4,7 @@ import androidx.compose.runtime.*
 import com.sychev.mashaplus.DesignWhiteText
 import com.sychev.mashaplus.NavigationHeadlineTextStyle
 import com.sychev.mashaplus.components.widgets.IconButton
+import com.sychev.mashaplus.pages.LogoStyle
 import com.sychev.mashaplus.pages.LogoStyleSmall
 import com.sychev.mashaplus.provider.ScrollToViewEventProvider
 import com.sychev.mashaplus.toSitePalette
@@ -349,7 +350,7 @@ private fun SideMenu(menuState: SideMenuState, close: () -> Unit, onAnimationEnd
             Column(
                 Modifier
                     .fillMaxHeight()
-                    .width(clamp(8.cssRem, 33.percent, 10.cssRem))
+                    .width(clamp(16.cssRem, 33.percent, 30.cssRem))
                     .align(Alignment.CenterEnd)
                     // Close button will appear roughly over the hamburger button, so the user can close
                     // things without moving their finger / cursor much.
@@ -371,10 +372,130 @@ private fun SideMenu(menuState: SideMenuState, close: () -> Unit, onAnimationEnd
             ) {
                 CloseButton(onClick = { close() })
                 Column(
-                    Modifier.padding(right = 0.75.cssRem).gap(1.5.cssRem).fontSize(1.4.cssRem),
-                    horizontalAlignment = Alignment.End
+                    Modifier.fillMaxWidth().padding(right = 0.75.cssRem).gap(1.5.cssRem).fontSize(1.4.cssRem),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    MenuItems()
+                    val palette = ColorMode.current.toSitePalette()
+                    Link(
+                        path = "",
+                        modifier = Modifier.color(DesignWhiteText),
+                        openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                        openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                        ref = ref { element ->
+                            element.onclick = {
+                                ScrollToViewEventProvider.sendContactsScrollEvent()
+                                close()
+                            }
+                        }) {
+                        Div(NavigationHeadlineTextStyle.toAttrs()) {
+                            SpanText(
+                                Resources.Strings.kontakty,
+                                modifier = Modifier
+                                    .color(palette.brand.whiteText)
+                                    .fadeInAnimation(),
+                            )
+                        }
+                    }
+                    Link(
+                        path = "",
+                        modifier = Modifier.color(DesignWhiteText),
+                        openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                        openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                        ref = ref { element ->
+                            element.onclick = {
+                                ScrollToViewEventProvider.sendVocalistScrollEvent()
+                                close()
+                            }
+                        }) {
+                        Div(NavigationHeadlineTextStyle.toAttrs()) {
+                            SpanText(
+                                Resources.Strings.vocalist,
+                                modifier = Modifier
+                                    .color(palette.brand.whiteText)
+                                    .fadeInAnimation()
+                            )
+                        }
+                    }
+                    Link(
+                        path = "",
+                        modifier = Modifier.color(DesignWhiteText),
+                        openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                        openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                        ref = ref { element ->
+                            element.onclick = {
+                                ScrollToViewEventProvider.sendDuetScrollEvent()
+                                close()
+                            }
+                        }) {
+                        Div(NavigationHeadlineTextStyle.toAttrs()) {
+                            SpanText(
+                                "Дуэт",
+                                modifier = Modifier
+                                    .color(palette.brand.whiteText)
+                                    .fadeInAnimation()
+                            )
+                        }
+                    }
+                    Link(
+                        path = "",
+                        modifier = Modifier.color(DesignWhiteText),
+                        openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                        openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                        ref = ref { element ->
+                            element.onclick = {
+                                ScrollToViewEventProvider.sendVocalShowScrollEvent()
+                                close()
+                            }
+                        }) {
+                        Div(NavigationHeadlineTextStyle.toAttrs()) {
+                            SpanText(
+                                Resources.Strings.vacalnoye_show,
+                                modifier = Modifier
+                                    .color(palette.brand.whiteText)
+                                    .fadeInAnimation()
+                            )
+                        }
+                    }
+                    Link(
+                        path = "",
+                        modifier = Modifier.color(DesignWhiteText),
+                        openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                        openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+                        ref = ref { element ->
+                            element.onclick = {
+                                ScrollToViewEventProvider.sendUltimaBandScrollEvent()
+                                close()
+                            }
+                        }) {
+                        Div(NavigationHeadlineTextStyle.toAttrs()) {
+                            SpanText(
+                                "ULTIMA BAND",
+                                modifier = Modifier
+                                    .color(palette.brand.whiteText)
+                                    .fadeInAnimation()
+                            )
+                        }
+                    }
+                    Link(
+                        path = "https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg",
+                        modifier = Modifier.color(DesignWhiteText),
+                    ) {
+                        Div(NavigationHeadlineTextStyle.toAttrs()) {
+                            SpanText(
+                                Resources.Strings.repertuar,
+                                modifier = Modifier
+                                    .color(palette.brand.whiteText)
+                                    .fadeInAnimation()
+                            )
+                        }
+                    }
+                    Image(
+                        Resources.Images.masha_logo,
+                        "Logo icon",
+                        LogoStyle
+                            .toModifier()
+                            .fadeInAnimation()
+                    )
                 }
             }
         }

@@ -155,18 +155,14 @@ val GridPhotoStyle by ComponentStyle.base {
         .backgroundSize(BackgroundSize.Inherit)
 }
 
-val personWithCardPhotoWidth = 334.px
-val personWithCardPhotoHeight = 449.px
+val personWithCardPhotoHeight = 488.px
 
-val personWithCardPhotoWidthLaptop = 248.px
-val personWithCardPhotoHeightLaptop = 360.px
+val personWithCardPhotoHeightLaptop = 320.px
 
 val PersonWithCardPhotoStyle by ComponentStyle.base {
     Modifier
-        .width(personWithCardPhotoWidth)
         .height(personWithCardPhotoHeight)
-        .objectFit(ObjectFit.Fill)
-        .backgroundSize(BackgroundSize.Inherit)
+        .objectFit(ObjectFit.Contain)
 }
 
 val PersonWithCardPhotoStyleMobile by ComponentStyle.base {
@@ -178,7 +174,6 @@ val PersonWithCardPhotoStyleMobile by ComponentStyle.base {
 
 val PersonWithCardPhotoStyleLaptop by ComponentStyle.base {
     Modifier
-        .width(personWithCardPhotoWidthLaptop)
         .height(personWithCardPhotoHeightLaptop)
         .objectFit(ObjectFit.Contain)
         .backgroundSize(BackgroundSize.Inherit)

@@ -1015,13 +1015,18 @@ fun BottomSection(modifier: Modifier) {
                 )
             }
             Box(Modifier.height(XXXLargePadding + LargePadding))
-            Div(SmallRegularTextStyle.toAttrs()) {
-                SpanText(
-                    Resources.Strings.jiviye_vystuplenya,
-                    modifier = Modifier
-                        .whiteSpace(WhiteSpace.PreLine)
-                        .fadeInAnimation()
-                )
+            Link(
+                "https://vk.com/masha_plus_band",
+                modifier = Modifier.color(DesignWhiteText)
+            ) {
+                Div(SmallRegularTextStyle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.jiviye_vystuplenya,
+                        modifier = Modifier
+                            .whiteSpace(WhiteSpace.PreLine)
+                            .fadeInAnimation()
+                    )
+                }
             }
             Box(Modifier.height(XSmallPadding))
             Link(
@@ -1038,22 +1043,32 @@ fun BottomSection(modifier: Modifier) {
                 }
             }
             Box(Modifier.height(XSmallPadding))
-            Div(SmallRegularTextStyle.toAttrs()) {
-                SpanText(
-                    Resources.Strings.prices,
-                    modifier = Modifier
-                        .whiteSpace(WhiteSpace.PreLine)
-                        .fadeInAnimation()
-                )
+            Link(
+                "https://vk.com/masha_plus_band",
+                modifier = Modifier.color(DesignWhiteText)
+            ) {
+                Div(SmallRegularTextStyle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.prices,
+                        modifier = Modifier
+                            .whiteSpace(WhiteSpace.PreLine)
+                            .fadeInAnimation()
+                    )
+                }
             }
             Box(Modifier.height(XSmallPadding))
-            Div(SmallRegularTextStyle.toAttrs()) {
-                SpanText(
-                    Resources.Strings.important_questions,
-                    modifier = Modifier
-                        .whiteSpace(WhiteSpace.PreLine)
-                        .fadeInAnimation()
-                )
+            Link(
+                "https://vk.com/masha_plus_band",
+                modifier = Modifier.color(DesignWhiteText)
+            ) {
+                Div(SmallRegularTextStyle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.important_questions,
+                        modifier = Modifier
+                            .whiteSpace(WhiteSpace.PreLine)
+                            .fadeInAnimation()
+                    )
+                }
             }
         }
     }
