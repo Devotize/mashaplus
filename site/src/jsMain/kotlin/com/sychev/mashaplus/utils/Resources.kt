@@ -87,6 +87,7 @@ object Resources {
         const val partners_title = "ПОДДЕРЖИВАЕМ СОТРУДНИЧЕСТВО С РЕСТОРАНАМИ УЖЕ НЕСКОЛЬКО ЛЕТ:"
         const val photo = "ФОТО"
         const val live_perfomances = "ЖИВЫЕ ВЫСТУПЛЕНИЯ"
+        const val phone_num = "+7 (931) 951-20-00"
     }
 
     object Images {

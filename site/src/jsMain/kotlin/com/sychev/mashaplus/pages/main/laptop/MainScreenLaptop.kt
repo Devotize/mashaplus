@@ -559,7 +559,7 @@ fun BottomSectionLaptop(modifier: Modifier) {
                             .toModifier(),
                     )
                 }
-                Link("https://instagram.com/masha_plus_band?igshid=OGQ5ZDc2ODk2ZA==") {
+                Link("https://www.instagram.com/masha_plus_band?igsh=cnNhY3JqNnZxMWc1&utm_source=qr") {
                     val imgResInst = if (ColorMode.current.isDark) {
                         "/inst_logo.png"
                     } else {
@@ -573,17 +573,35 @@ fun BottomSectionLaptop(modifier: Modifier) {
                     )
                 }
                 Link(
-                    "tel:+79319512000",
+                    "",
                     openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
-                    openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE
+                    openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
                 ) {
-                    val imgResInst = Resources.Images.ic_phone
+                    var showPhone by remember { mutableStateOf(false) }
                     Image(
-                        imgResInst,
+                        Resources.Images.ic_phone,
                         "",
                         LogoStyleSmall
-                            .toModifier(),
+                            .toModifier()
+                            .onClick {
+                                window.alert("Номер телефона скопирован")
+                                window.navigator.clipboard.writeText(Resources.Strings.phone_num)
+                            }
+                            .onMouseEnter { showPhone = true }
+                            .onMouseLeave { showPhone = false },
                     )
+                    if (showPhone) {
+                        Box(modifier = Modifier.position(Position.Absolute)) {
+                            Div(SmallRegularTextStyle.toModifier().toAttrs()) {
+                                SpanText(
+                                    text = Resources.Strings.phone_num,
+                                    modifier = Modifier
+                                        .color(palette.brand.whiteText)
+                                        .fadeInAnimation()
+                                )
+                            }
+                        }
+                    }
                 }
             }
 

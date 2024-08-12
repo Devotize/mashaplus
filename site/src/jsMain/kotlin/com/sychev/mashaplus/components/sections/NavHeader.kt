@@ -3,9 +3,11 @@ package com.sychev.mashaplus.components.sections
 import androidx.compose.runtime.*
 import com.sychev.mashaplus.DesignWhiteText
 import com.sychev.mashaplus.NavigationHeadlineTextStyle
+import com.sychev.mashaplus.SmallRegularTextStyle
 import com.sychev.mashaplus.components.widgets.IconButton
 import com.sychev.mashaplus.pages.LogoStyle
 import com.sychev.mashaplus.pages.LogoStyleSmall
+import com.sychev.mashaplus.pages.main.widgets.ShadowedLink
 import com.sychev.mashaplus.provider.ScrollToViewEventProvider
 import com.sychev.mashaplus.toSitePalette
 import com.sychev.mashaplus.utils.Resources
@@ -14,14 +16,12 @@ import com.sychev.mashaplus.utils.stubAnimation
 import com.varabyte.kobweb.compose.css.functions.clamp
 import com.varabyte.kobweb.compose.dom.ElementTarget
 import com.varabyte.kobweb.compose.dom.ref
-import com.varabyte.kobweb.compose.foundation.layout.Arrangement
-import com.varabyte.kobweb.compose.foundation.layout.Column
-import com.varabyte.kobweb.compose.foundation.layout.Row
-import com.varabyte.kobweb.compose.foundation.layout.Spacer
+import com.varabyte.kobweb.compose.foundation.layout.*
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.animation.Keyframes
 import com.varabyte.kobweb.silk.components.animation.toAnimation
@@ -47,6 +47,7 @@ import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import kotlinx.browser.window
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
 
@@ -181,7 +182,7 @@ fun NavHeader() {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.End,
             ) {
-                Link(
+                ShadowedLink(
                     path = "",
                     modifier = Modifier.color(DesignWhiteText),
                     openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
@@ -200,7 +201,7 @@ fun NavHeader() {
                         )
                     }
                 }
-                Link(
+                ShadowedLink(
                     path = "",
                     modifier = Modifier.color(DesignWhiteText),
                     openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
@@ -219,7 +220,7 @@ fun NavHeader() {
                         )
                     }
                 }
-                Link(
+                ShadowedLink(
                     path = "",
                     modifier = Modifier.color(DesignWhiteText),
                     openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
@@ -238,7 +239,7 @@ fun NavHeader() {
                         )
                     }
                 }
-                Link(
+                ShadowedLink(
                     path = "",
                     modifier = Modifier.color(DesignWhiteText),
                     openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
@@ -257,7 +258,7 @@ fun NavHeader() {
                         )
                     }
                 }
-                Link(
+                ShadowedLink(
                     path = "",
                     modifier = Modifier.color(DesignWhiteText),
                     openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
@@ -276,7 +277,7 @@ fun NavHeader() {
                         )
                     }
                 }
-                Link(
+                ShadowedLink(
                     path = "https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg",
                     modifier = Modifier.color(DesignWhiteText),
                 ) {
@@ -308,7 +309,7 @@ fun NavHeader() {
                             .toModifier(),
                     )
                 }
-                Link("https://instagram.com/masha_plus_band?igshid=OGQ5ZDc2ODk2ZA==") {
+                Link("https://www.instagram.com/masha_plus_band?igsh=cnNhY3JqNnZxMWc1&utm_source=qr") {
                     val imgResInst = if (ColorMode.current.isDark) {
                         "/inst_logo.png"
                     } else {
@@ -322,17 +323,35 @@ fun NavHeader() {
                     )
                 }
                 Link(
-                    "tel:+79319512000",
+                    "",
                     openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
-                    openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE
+                    openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
                 ) {
-                    val imgResInst = Resources.Images.ic_phone
+                    var showPhone by remember { mutableStateOf(false) }
                     Image(
-                        imgResInst,
+                        Resources.Images.ic_phone,
                         "",
                         LogoStyleSmall
-                            .toModifier(),
+                            .toModifier()
+                            .onClick {
+                                window.alert("Номер телефона скопирован")
+                                window.navigator.clipboard.writeText(Resources.Strings.phone_num)
+                            }
+                            .onMouseEnter { showPhone = true }
+                            .onMouseLeave { showPhone = false },
                     )
+                    if (showPhone) {
+                        Box(modifier = Modifier.position(Position.Absolute)) {
+                            Div(SmallRegularTextStyle.toModifier().toAttrs()) {
+                                SpanText(
+                                    text = Resources.Strings.phone_num,
+                                    modifier = Modifier
+                                        .color(palette.brand.whiteText)
+                                        .fadeInAnimation()
+                                )
+                            }
+                        }
+                    }
                 }
             }
         }

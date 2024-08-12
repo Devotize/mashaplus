@@ -167,7 +167,7 @@ val SubheadlineRegularStyle by ComponentStyle {
     base {
         Modifier
             .fontFamily(Fonts.MainFontName)
-            .fontSize(1.4.cssRem)
+            .fontSize(1.6.cssRem)
             .textAlign(TextAlign.Start)
             .fontWeight(FontWeight.Normal)
             .color(colorMode.toPalette().color.toRgb())
@@ -316,7 +316,7 @@ val TitleStyleMobile by ComponentStyle.base {
 val GridTextTitle by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
-        .fontSize(2.4.vh)
+        .fontSize(2.1.cssRem)
         .textAlign(TextAlign.Center)
         .fontWeight(FontWeight.Bold)
 }

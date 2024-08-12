@@ -911,7 +911,7 @@ private fun BottomSectionMobile(
                         .toModifier(),
                 )
             }
-            Link("https://instagram.com/masha_plus_band?igshid=OGQ5ZDc2ODk2ZA==") {
+            Link("https://www.instagram.com/masha_plus_band?igsh=cnNhY3JqNnZxMWc1&utm_source=qr") {
                 val imgResInst = if (ColorMode.current.isDark) {
                     "/inst_logo.png"
                 } else {

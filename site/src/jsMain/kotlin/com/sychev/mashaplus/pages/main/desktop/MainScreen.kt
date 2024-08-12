@@ -42,6 +42,7 @@ import com.varabyte.kobweb.silk.components.style.toAttrs
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import kotlinx.browser.window
 import org.jetbrains.compose.web.attributes.InputType
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Button
@@ -176,7 +177,9 @@ fun OurServices(modifier: Modifier = Modifier) {
             ) {
                 GridCell(1, 1, 3, 1) {
                     ShadowedCard(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth().onClick {
+                            ScrollToViewEventProvider.sendUltimaBandScrollEvent()
+                        },
                         contentAlignment = Alignment.CenterHorizontally,
                         paddingValues = 1.9.vh,
                     ) {
@@ -192,7 +195,9 @@ fun OurServices(modifier: Modifier = Modifier) {
                 }
                 GridCell(1, 4, 1, 1) {
                     ShadowedCard(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth().onClick {
+                            ScrollToViewEventProvider.sendDuetScrollEvent()
+                        },
                         contentAlignment = Alignment.CenterHorizontally,
                         paddingValues = 1.9.vh,
                     ) {
@@ -208,7 +213,9 @@ fun OurServices(modifier: Modifier = Modifier) {
                 }
                 GridCell(2, 1, 2, 1) {
                     ShadowedCard(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth().onClick {
+                            ScrollToViewEventProvider.sendVocalistScrollEvent()
+                        },
                         contentAlignment = Alignment.CenterHorizontally,
                         paddingValues = 1.9.vh,
                     ) {
@@ -224,7 +231,8 @@ fun OurServices(modifier: Modifier = Modifier) {
                 }
                 GridCell(2, 3, 2, 1) {
                     ShadowedCard(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth()
+                            .onClick { ScrollToViewEventProvider.sendVocalShowScrollEvent() },
                         contentAlignment = Alignment.CenterHorizontally,
                         paddingValues = 1.9.vh,
                     ) {
@@ -677,6 +685,7 @@ fun ImageHeaderWithLogo() {
             "Main photo",
             MainPhotoStyle
                 .toModifier()
+                .padding(right = 2.5.vw)
                 .animation(
                     MainPhotoSlideInAnim.toAnimation(
                         duration = 300.ms,
@@ -717,7 +726,8 @@ fun ImageHeaderWithLogo() {
                 }
                 Div(SubheadlineRegularStyle.toAttrs()) {
                     SpanText(
-                        Resources.Strings.muzik_project.replace("форматы живых", "форматы\nживых"),
+                        Resources.Strings.muzik_project.replace("выступлений.", "выступлений.\n")
+                            .replace("который ", "который\n"),
                         modifier = Modifier
                             .whiteSpace(WhiteSpace.PreLine)
                             .color(palette.brand.whiteText)
@@ -727,7 +737,7 @@ fun ImageHeaderWithLogo() {
                 }
                 Spacer()
                 var isInMouse by remember { mutableStateOf(false) }
-                Link(
+                ShadowedLink(
                     "https://vk.com/masha_plus_band",
                     modifier = Modifier
                         .onMouseEnter { isInMouse = true }
@@ -747,7 +757,9 @@ fun ImageHeaderWithLogo() {
                 }
             }
             Box(Modifier.height(XXXXLargePadding))
-            MembersCountSection(modifier = Modifier.fillMaxWidth().padding(leftRight = XXXXXLargePadding))
+            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                MembersCountSection(modifier = Modifier.width(70.percent))
+            }
         }
     }
 }
@@ -853,6 +865,7 @@ private fun DuetsSection(modifier: Modifier) {
                 ) { value, _ ->
                     Box(
                         Modifier
+                            .minWidth(500.px).minHeight(740.px)
                             .align(Alignment.Center)
                     ) {
                         Image(
@@ -876,6 +889,7 @@ fun BottomSection(modifier: Modifier) {
     Row(
         modifier = modifier.padding(XXXLargePadding),
         horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.Bottom,
         ref = ref {
             ScrollToViewEventProvider.setContactsScrollEvent {
                 it.scrollIntoView()
@@ -909,7 +923,7 @@ fun BottomSection(modifier: Modifier) {
                             .toModifier(),
                     )
                 }
-                Link("https://instagram.com/masha_plus_band?igshid=OGQ5ZDc2ODk2ZA==") {
+                Link("https://www.instagram.com/masha_plus_band?igsh=cnNhY3JqNnZxMWc1&utm_source=qr") {
                     val imgResInst = if (ColorMode.current.isDark) {
                         "/inst_logo.png"
                     } else {
@@ -923,17 +937,35 @@ fun BottomSection(modifier: Modifier) {
                     )
                 }
                 Link(
-                    "tel:+79319512000",
+                    "",
                     openInternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
-                    openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE
+                    openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
                 ) {
-                    val imgResInst = Resources.Images.ic_phone
+                    var showPhone by remember { mutableStateOf(false) }
                     Image(
-                        imgResInst,
+                        Resources.Images.ic_phone,
                         "",
                         LogoStyleSmall
-                            .toModifier(),
+                            .toModifier()
+                            .onClick {
+                                window.alert("Номер телефона скопирован")
+                                window.navigator.clipboard.writeText(Resources.Strings.phone_num)
+                            }
+                            .onMouseEnter { showPhone = true }
+                            .onMouseLeave { showPhone = false },
                     )
+                    if (showPhone) {
+                        Box(modifier = Modifier.position(Position.Absolute)) {
+                            Div(SmallRegularTextStyle.toModifier().toAttrs()) {
+                                SpanText(
+                                    text = Resources.Strings.phone_num,
+                                    modifier = Modifier
+                                        .color(palette.brand.whiteText)
+                                        .fadeInAnimation()
+                                )
+                            }
+                        }
+                    }
                 }
             }
 
@@ -1006,17 +1038,22 @@ fun BottomSection(modifier: Modifier) {
             }
         }
         Column {
-            Div(GridTextTitle.toAttrs()) {
-                SpanText(
-                    Resources.Strings.bolshe_o_nas,
-                    modifier = Modifier
-                        .whiteSpace(WhiteSpace.PreLine)
-                        .fadeInAnimation()
-                )
+            ShadowedLink(
+                "https://vk.com/album-218638803_304260826",
+                modifier = Modifier.color(DesignWhiteText)
+            ) {
+                Div(SmallRegularTextStyle.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.photo,
+                        modifier = Modifier
+                            .whiteSpace(WhiteSpace.PreLine)
+                            .fadeInAnimation()
+                    )
+                }
             }
-            Box(Modifier.height(XXXLargePadding + LargePadding))
-            Link(
-                "https://vk.com/masha_plus_band",
+            Box(Modifier.height(XSmallPadding))
+            ShadowedLink(
+                "https://t.me/masha_plus_portfolio",
                 modifier = Modifier.color(DesignWhiteText)
             ) {
                 Div(SmallRegularTextStyle.toAttrs()) {
@@ -1029,8 +1066,8 @@ fun BottomSection(modifier: Modifier) {
                 }
             }
             Box(Modifier.height(XSmallPadding))
-            Link(
-                path = "https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg",
+            ShadowedLink(
+                path = "https://drive.google.com/drive/folders/1-0Tf-QdBAP7xsra3CpC1r8hhNZJYMDgH",
                 modifier = Modifier.color(DesignWhiteText),
             ) {
                 Div(SmallRegularTextStyle.toAttrs()) {
@@ -1043,7 +1080,7 @@ fun BottomSection(modifier: Modifier) {
                 }
             }
             Box(Modifier.height(XSmallPadding))
-            Link(
+            ShadowedLink(
                 "https://vk.com/masha_plus_band",
                 modifier = Modifier.color(DesignWhiteText)
             ) {
@@ -1057,8 +1094,8 @@ fun BottomSection(modifier: Modifier) {
                 }
             }
             Box(Modifier.height(XSmallPadding))
-            Link(
-                "https://vk.com/masha_plus_band",
+            ShadowedLink(
+                "https://m.vk.com/@masha_plus_band-samoe-vremya-otvetit-na-chastye-voprosy",
                 modifier = Modifier.color(DesignWhiteText)
             ) {
                 Div(SmallRegularTextStyle.toAttrs()) {
