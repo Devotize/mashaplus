@@ -5,7 +5,6 @@ import com.sychev.mashaplus.DesignWhiteText
 import com.sychev.mashaplus.XXSmallPadding
 import com.sychev.mashaplus.pages.main.widgets.ArrowImageStyle
 import com.sychev.mashaplus.utils.Resources
-import com.sychev.mashaplus.utils.fadeInAnimation
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.foundation.layout.Spacer
@@ -56,7 +55,6 @@ fun <T> SliderSimpleArrow(
                     "Main photo",
                     ArrowImageStyle
                         .toModifier()
-                        .fadeInAnimation(),
                 )
             }
             Spacer()
@@ -72,7 +70,6 @@ fun <T> SliderSimpleArrow(
                     "Main photo",
                     ArrowImageStyle
                         .toModifier()
-                        .fadeInAnimation(),
                 )
             }
         }

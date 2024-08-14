@@ -1,4 +1,4 @@
-package com.sychev.mashaplus.pages.main.laptop
+package com.sychev.mashaplus.pages.main.hybrid
 
 import androidx.compose.runtime.*
 import com.sychev.mashaplus.*
@@ -12,30 +12,29 @@ import com.sychev.mashaplus.models.vocalistyList
 import com.sychev.mashaplus.pages.HeroContainerStyle
 import com.sychev.mashaplus.pages.LogoStyle
 import com.sychev.mashaplus.pages.LogoStyleSmall
-import com.sychev.mashaplus.pages.main.desktop.ImageHeaderWithLogo
-import com.sychev.mashaplus.pages.main.desktop.OurServices
+import com.sychev.mashaplus.pages.MainPhotoSlideInAnim
 import com.sychev.mashaplus.pages.main.desktop.PartnersSection
 import com.sychev.mashaplus.pages.main.widgets.*
 import com.sychev.mashaplus.provider.ScrollToViewEventProvider
 import com.sychev.mashaplus.utils.Resources
-import com.sychev.mashaplus.utils.VideoFrameStyleLaptop
+import com.sychev.mashaplus.utils.VideoFrameStyleHybrid
 import com.sychev.mashaplus.utils.VideoYT
 import com.sychev.mashaplus.utils.fadeInAnimation
 import com.varabyte.kobweb.compose.css.*
 import com.varabyte.kobweb.compose.css.functions.LinearGradient
+import com.varabyte.kobweb.compose.css.functions.blur
 import com.varabyte.kobweb.compose.css.functions.linearGradient
 import com.varabyte.kobweb.compose.dom.ElementRefScope
 import com.varabyte.kobweb.compose.dom.ref
-import com.varabyte.kobweb.compose.foundation.layout.Arrangement
-import com.varabyte.kobweb.compose.foundation.layout.Box
-import com.varabyte.kobweb.compose.foundation.layout.Column
-import com.varabyte.kobweb.compose.foundation.layout.Row
+import com.varabyte.kobweb.compose.foundation.layout.*
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.navigation.OpenLinkStrategy
+import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
 import com.varabyte.kobweb.silk.components.forms.Input
 import com.varabyte.kobweb.silk.components.forms.InputDefaults
@@ -56,64 +55,305 @@ import org.w3c.dom.HTMLElement
 import org.w3c.dom.ScrollToOptions
 
 @Composable
-fun MainScreenLaptop() {
+fun MainScreenHybrid() {
     Row(HeroContainerStyle.toModifier()) {
         Box(modifier = Modifier.fillMaxWidth()) {
             Column(Modifier.gap(2.cssRem).width(100.percent)) {
-                ImageHeaderWithLogo()
+                ImageHeaderWithLogoHybrid()
                 Box(Modifier.height(XXXLargePadding))
-                OurServices(modifier = Modifier.fillMaxWidth().padding(leftRight = LeftRightPadding))
+                OurServicesHybrid(modifier = Modifier.fillMaxWidth().padding(leftRight = LeftRightPadding))
                 Box(Modifier.height(XXLargePadding))
-                CreatorSectionLaptop(modifier = Modifier.fillMaxWidth().padding(leftRight = LeftRightPadding))
+                CreatorSectionHybrid(modifier = Modifier.fillMaxWidth().padding(leftRight = LeftRightPadding))
                 Box(Modifier.height(XXLargePadding))
                 Box(ref = ref {
                     ScrollToViewEventProvider.setVocalistScrollEvent {
                         it.scrollIntoView()
                     }
                 })
-                VocalistsSectionLaptop(
+                VocalistsSectionHybrid(
                     modifier = Modifier.fillMaxWidth(),
                     Resources.Strings.vocalistky_uppercase,
                     vocalistkyList
                 )
                 Box(Modifier.height(XXXLargePadding))
-                VocalistsSectionLaptop(
+                VocalistsSectionHybrid(
                     modifier = Modifier.fillMaxWidth(),
                     Resources.Strings.vocalisty_uppercase,
                     vocalistyList
                 )
                 Box(Modifier.height(XXXLargePadding))
-                DuetsSectionLaptop(Modifier.fillMaxWidth().padding(leftRight = LeftRightPadding))
+                DuetsSectionHybrid(Modifier.fillMaxWidth().padding(leftRight = LeftRightPadding))
                 Box(Modifier.height(XXXLargePadding))
                 PartnersSection(Modifier.fillMaxWidth().padding(leftRight = LeftRightPadding))
-                VideosSectionLaptop(Modifier.fillMaxWidth())
+                VideosSectionHybrid(Modifier.fillMaxWidth())
                 Box(Modifier.height(XXXLargePadding))
-                BottomSectionLaptop(Modifier.fillMaxWidth())
+                BottomSectionHybrid(Modifier.fillMaxWidth())
             }
         }
     }
 }
 
 @Composable
-private fun CreatorSectionLaptop(modifier: Modifier) {
+private fun ImageHeaderWithLogoHybrid() {
+    Box(modifier = Modifier.fillMaxWidth()) {
+        Image(
+            Resources.Images.main_photo,
+            "Main photo",
+            MainPhotoStyle
+                .toModifier()
+                .padding(top = 16.cssRem)
+                .animation(
+                    MainPhotoSlideInAnim.toAnimation(
+                        duration = 300.ms,
+                        timingFunction = AnimationTimingFunction.EaseIn,
+                        direction = AnimationDirection.Normal,
+                        fillMode = AnimationFillMode.Backwards,
+                    )
+                )
+                .align(Alignment.TopEnd),
+        )
+        val palette = ColorMode.current.toSitePalette()
+        Column(modifier = Modifier.fillMaxWidth().align(Alignment.TopCenter).zIndex(2f)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = XXLargePadding, leftRight = LeftRightPadding)
+                    .gap(2.2.cssRem),
+                horizontalAlignment = Alignment.Start
+            ) {
+                Div(MainTitleTextStyleHybrid.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.sozday_meropriyatie.replace("по своим", "по\nсвоим"),
+                        modifier = Modifier
+                            .whiteSpace(WhiteSpace.PreLine)
+                            .color(palette.brand.whiteText)
+                            .fadeInAnimation()
+                            .textShadow(offsetY = 1.px, offsetX = 1.px, blurRadius = 1.px, color = Colors.Black)
+                    )
+                }
+                Div(SubheadlineRegularStyleHybrid.toAttrs()) {
+                    SpanText(
+                        Resources.Strings.muzik_project.replace("выступлений.", "выступлений.\n")
+                            .replace("который ", "который\n"),
+                        modifier = Modifier
+                            .whiteSpace(WhiteSpace.PreLine)
+                            .color(palette.brand.whiteText)
+                            .fadeInAnimation()
+                            .textShadow(offsetY = 1.px, offsetX = 1.px, blurRadius = 1.px, color = Colors.Black)
+                    )
+                }
+                Spacer()
+                var isInMouse by remember { mutableStateOf(false) }
+                ShadowedLink(
+                    "https://vk.com/masha_plus_band",
+                    modifier = Modifier
+                        .onMouseEnter { isInMouse = true }
+                        .onMouseLeave { isInMouse = false }
+                ) {
+                    Button(ButtonStyle.toAttrs(if (isInMouse) OutlinedGradientCircularButtonVariant else GradientCircularButtonVariant)) {
+                        Div(OutlineButtonTextStyle.toAttrs()) {
+                            SpanText(
+                                Resources.Strings.ostavit_zayavku,
+                                modifier = Modifier
+                                    .color(if (isInMouse) palette.brand.text else palette.brand.textReversed)
+                                    .fillMaxWidth()
+                                    .textAlign(TextAlign.Center)
+                            )
+                        }
+                    }
+                }
+            }
+            Box(Modifier.height(16.cssRem))
+            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                MembersCountSectionHybrid(modifier = Modifier.width(78.percent))
+            }
+        }
+    }
+}
+
+@Composable
+fun OurServicesHybrid(modifier: Modifier = Modifier) {
+    val palette = ColorMode.current.toSitePalette()
+    Box(Modifier.fillMaxWidth()) {
+        Box(modifier = Modifier.padding(left = LargePadding, top = LargePadding)) {
+            Image(
+                Resources.Images.clyaksa1,
+                modifier = ClyaksImageStyle.toModifier()
+            )
+        }
+        Column(modifier.fillMaxWidth().gap(3.5.cssRem)) {
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Div(TitleStyleHybrid.toModifier().align(Alignment.TopEnd).toAttrs()) {
+                    SpanText(
+                        Resources.Strings.nashi_yslygi,
+                        modifier = Modifier
+                            .fadeInAnimation()
+                    )
+                }
+            }
+            Div(
+                OurServicesGridStyle.toModifier()
+                    .grid {
+                        rows {
+                            repeat(2) { size(1.fr) }
+                        }
+                        columns {
+                            repeat(4) { size(1.fr) }
+                        }
+                    }
+                    .toAttrs()
+            ) {
+                GridCell(1, 1, 3, 1) {
+                    ShadowedCard(
+                        modifier = Modifier.fillMaxWidth().onClick {
+                            ScrollToViewEventProvider.sendUltimaBandScrollEvent()
+                        },
+                        contentAlignment = Alignment.CenterHorizontally,
+                        paddingValues = 1.9.vh,
+                        borderRadius = 2.cssRem,
+                    ) {
+                        Div(GridTextTitleHybrid.toAttrs()) {
+                            SpanText(
+                                Resources.Strings.ultima_band,
+                                modifier = Modifier
+                                    .color(palette.brand.textReversed)
+                                    .fadeInAnimation()
+                            )
+                        }
+                    }
+                }
+                GridCell(1, 4, 1, 1) {
+                    ShadowedCard(
+                        modifier = Modifier.fillMaxWidth().onClick {
+                            ScrollToViewEventProvider.sendDuetScrollEvent()
+                        },
+                        contentAlignment = Alignment.CenterHorizontally,
+                        paddingValues = 1.9.vh,
+                        borderRadius = 2.cssRem,
+                    ) {
+                        Div(GridTextTitleHybrid.toAttrs()) {
+                            SpanText(
+                                Resources.Strings.duet_uppercase,
+                                modifier = Modifier
+                                    .color(palette.brand.textReversed)
+                                    .fadeInAnimation()
+                            )
+                        }
+                    }
+                }
+                GridCell(2, 1, 2, 1) {
+                    ShadowedCard(
+                        modifier = Modifier.fillMaxWidth().onClick {
+                            ScrollToViewEventProvider.sendVocalistScrollEvent()
+                        },
+                        contentAlignment = Alignment.CenterHorizontally,
+                        paddingValues = 1.9.vh,
+                        borderRadius = 2.cssRem,
+                    ) {
+                        Div(GridTextTitleHybrid.toAttrs()) {
+                            SpanText(
+                                Resources.Strings.vocalisty_uppercase,
+                                modifier = Modifier
+                                    .color(palette.brand.textReversed)
+                                    .fadeInAnimation()
+                            )
+                        }
+                    }
+                }
+                GridCell(2, 3, 2, 1) {
+                    ShadowedCard(
+                        modifier = Modifier.fillMaxWidth()
+                            .onClick { ScrollToViewEventProvider.sendVocalShowScrollEvent() },
+                        contentAlignment = Alignment.CenterHorizontally,
+                        paddingValues = 1.9.vh,
+                        borderRadius = 2.cssRem,
+                    ) {
+                        Div(GridTextTitleHybrid.toAttrs()) {
+                            SpanText(
+                                Resources.Strings.vocalnoye_show_uppercase,
+                                modifier = Modifier
+                                    .color(palette.brand.textReversed)
+                                    .fadeInAnimation()
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun MembersCountSectionHybrid(modifier: Modifier = Modifier) {
+    @Composable
+    fun TextWithNum(
+        title: String,
+        num: String
+    ) {
+        Column {
+            Div(SmallTitleStyle.toAttrs()) {
+                SpanText(
+                    text = title,
+                    modifier = Modifier
+                        .fadeInAnimation()
+                )
+            }
+            Div(HugeTextStyle.toAttrs()) {
+                SpanText(
+                    num,
+                    modifier = Modifier
+                        .fadeInAnimation()
+                )
+            }
+        }
+    }
+    Box(modifier = modifier) {
+        Card(
+            modifier = Modifier.fillMaxWidth().backdropFilter(blur(10.px)),
+            color = MembersSectionCard,
+            paddingValues = 2.cssRem,
+            borderRadius = 2.1.cssRem
+        ) {
+            Row(
+                modifier = Modifier.gap(5.5.cssRem),
+            ) {
+                TextWithNum(
+                    Resources.Strings.vocalisty,
+                    Resources.Strings.text_14
+                )
+                TextWithNum(
+                    Resources.Strings.instrymentalisty,
+                    Resources.Strings.text_10,
+                )
+                TextWithNum(
+                    Resources.Strings.let_text,
+                    Resources.Strings.text_5,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun CreatorSectionHybrid(modifier: Modifier) {
     val palette = ColorMode.current.toSitePalette()
     Box(modifier) {
         Div(
             CreatorSectionGridStyleLaptop.toModifier()
                 .grid {
-                    auto {
-                        rows {
-                            repeat(5) { size(1.fr) }
-                        }
-                        columns {
-                            repeat(6) { size(1.fr) }
-                        }
+                    rows {
+                        repeat(4) { size(1.fr) }
                     }
-
+                    columns {
+                        repeat(7) { size(1.fr) }
+                    }
                 }
+                .gap(2.cssRem)
                 .toAttrs()
         ) {
-            GridCell(1, 1, 4, 2) {
+            GridCell(1, 1, 7, 2) {
                 Div(CreatorTextStyleMobile.toAttrs()) {
                     SpanText(
                         Resources.Strings.created_by1,
@@ -151,10 +391,11 @@ private fun CreatorSectionLaptop(modifier: Modifier) {
                         .toModifier().fadeInAnimation(),
                 )
             }
-            GridCell(3, 1, 4, 1) {
+            GridCell(2, 1, 5, 1) {
                 ShadowedCard(
                     Modifier.fillMaxSize()
                         .padding(topBottom = 0.4.cssRem, leftRight = 1.1.cssRem),
+                    borderRadius = 2.cssRem,
                 ) {
                     Div(CreatorTextStyleLaptop.toAttrs()) {
                         SpanText(
@@ -173,10 +414,11 @@ private fun CreatorSectionLaptop(modifier: Modifier) {
                     }
                 }
             }
-            GridCell(4, 2, 4, 1) {
+            GridCell(3, 3, 5, 1) {
                 ShadowedCard(
                     Modifier.fillMaxSize()
                         .padding(topBottom = 0.4.cssRem, leftRight = 1.1.cssRem),
+                    borderRadius = 2.cssRem,
                 ) {
                     Div(CreatorTextStyleLaptop.toAttrs()) {
                         SpanText(
@@ -195,10 +437,11 @@ private fun CreatorSectionLaptop(modifier: Modifier) {
                     }
                 }
             }
-            GridCell(5, 3, 4, 1) {
+            GridCell(4, 1, 5, 1) {
                 ShadowedCard(
                     Modifier.fillMaxSize()
                         .padding(topBottom = 0.4.cssRem, leftRight = 1.1.cssRem),
+                    borderRadius = 2.cssRem,
                 ) {
                     Div(CreatorTextStyleLaptop.toAttrs()) {
                         SpanText(
@@ -222,7 +465,7 @@ private fun CreatorSectionLaptop(modifier: Modifier) {
 }
 
 @Composable
-private fun VocalistsSectionLaptop(modifier: Modifier, title: String, list: List<Vocalist>) {
+private fun VocalistsSectionHybrid(modifier: Modifier, title: String, list: List<Vocalist>) {
     Column(
         modifier = modifier.gap(4.5.cssRem),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -382,20 +625,42 @@ private fun VocalistCardLaptop(
 }
 
 @Composable
-private fun DuetsSectionLaptop(modifier: Modifier) {
+private fun DuetsSectionHybrid(modifier: Modifier) {
+    Column(modifier = modifier.gap(3.5.cssRem)) {
+        Div(TitleStyle.toAttrs()) {
+            SpanText(
+                Resources.Strings.duet_uppercase,
+                modifier = Modifier
+                    .fadeInAnimation()
+            )
+        }
+        Div(SubheadlineRegularStyleLaptop.toAttrs()) {
+            SpanText(
+                Resources.Strings.princip_constryktora
+                    .replace("когда ", "когда\n")
+                    .replace("любых ", "любых\n")
+                    .replace("вокалистов ", "вокалистов\n"),
+                modifier = Modifier
+                    .whiteSpace(WhiteSpace.PreLine)
+                    .fadeInAnimation()
+            )
+        }
+    }
     Div(
-        DuetSectionGridStyle.toModifier()
+        DuetSectionGridStyleHybrid.toModifier()
             .grid {
-                rows {
-                    repeat(1) { size(1.fr) }
-                }
-                columns {
-                    repeat(5) { size(1.fr) }
+                auto {
+                    rows {
+                        repeat(2) { size(1.fr) }
+                    }
+                    columns {
+                        repeat(8) { size(1.fr) }
+                    }
                 }
             }
             .toAttrs()
     ) {
-        GridCell(1, 1, 3, 1) {
+        GridCell(1, 1, 4, 1) {
             Box(
                 modifier = modifier,
                 ref = ref {
@@ -405,31 +670,16 @@ private fun DuetsSectionLaptop(modifier: Modifier) {
                 }
             ) {
                 Row(
-                    modifier = Modifier.fillMaxWidth().padding(top = XXXXLargePadding),
+                    modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Column(modifier = Modifier.gap(3.5.cssRem)) {
-                        Div(TitleStyle.toAttrs()) {
-                            SpanText(
-                                Resources.Strings.duet_uppercase,
-                                modifier = Modifier
-                                    .fadeInAnimation()
-                            )
-                        }
-                        Div(SubheadlineRegularStyleLaptop.toAttrs()) {
-                            SpanText(
-                                Resources.Strings.princip_constryktora,
-                                modifier = Modifier
-                                    .whiteSpace(WhiteSpace.PreLine)
-                                    .fadeInAnimation()
-                            )
-                        }
                         @Composable
                         fun tripleDuetsColumn(duets: List<String>) {
                             Column {
                                 duets.forEach {
-                                    Div(SubheadlineBoldStyleLaptop.toAttrs()) {
+                                    Div(SubheadlineBoldStyleHybrid.toAttrs()) {
                                         SpanText(
                                             it,
                                             modifier = Modifier
@@ -450,13 +700,6 @@ private fun DuetsSectionLaptop(modifier: Modifier) {
                             )
                             tripleDuetsColumn(
                                 listOf(
-                                    Resources.Strings.ilya_plus_andrey,
-                                    Resources.Strings.dora_plus_alina,
-                                    Resources.Strings.marat_plus_yla
-                                )
-                            )
-                            tripleDuetsColumn(
-                                listOf(
                                     Resources.Strings.milana_plus_jia,
                                     Resources.Strings.lena_plus_andrey,
                                     Resources.Strings.alya_plus_diana
@@ -467,8 +710,8 @@ private fun DuetsSectionLaptop(modifier: Modifier) {
                 }
             }
         }
-        GridCell(1, 4, 2, 1) {
-            Box(modifier = Modifier.padding(right = XXLargePadding)) {
+        GridCell(1, 4, 2, 2) {
+            Box(modifier = Modifier) {
                 Image(
                     Resources.Images.clyaksa_2,
                     modifier = Clyaks2ImageLaptop.toModifier()
@@ -519,7 +762,7 @@ private fun DuetsSectionLaptop(modifier: Modifier) {
 }
 
 @Composable
-fun BottomSectionLaptop(modifier: Modifier) {
+fun BottomSectionHybrid(modifier: Modifier) {
     val palette = ColorMode.current.toSitePalette()
     //Divider
     Box(Modifier.fillMaxWidth().height(3.px).backgroundColor(DesignDivider))
@@ -767,7 +1010,7 @@ fun BottomSectionLaptop(modifier: Modifier) {
 }
 
 @Composable
-fun VideosSectionLaptop(modifier: Modifier) {
+fun VideosSectionHybrid(modifier: Modifier) {
     Column(
         modifier = modifier.gap(3.5.cssRem),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -775,8 +1018,7 @@ fun VideosSectionLaptop(modifier: Modifier) {
         Div(TitleStyle.toAttrs()) {
             SpanText(
                 Resources.Strings.ultima_band,
-                modifier = Modifier
-                    .fadeInAnimation(),
+                modifier = Modifier,
                 ref = ref {
                     ScrollToViewEventProvider.setUltimaBandSectionEvent {
                         it.scrollIntoView()
@@ -786,11 +1028,10 @@ fun VideosSectionLaptop(modifier: Modifier) {
         }
         Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .fadeInAnimation(),
+                .fillMaxWidth(),
             contentAlignment = Alignment.Center,
         ) {
-            VideoYT("https://www.youtube.com/embed/B2peeQmgBKA?si=HeJUlueJ8IHm8MK1", style = VideoFrameStyleLaptop)
+            VideoYT("https://www.youtube.com/embed/B2peeQmgBKA?si=HeJUlueJ8IHm8MK1", style = VideoFrameStyleHybrid)
         }
         Box(Modifier.height(XXXLargePadding))
         Div(TitleStyle.toAttrs()) {
@@ -811,7 +1052,7 @@ fun VideosSectionLaptop(modifier: Modifier) {
                 .fadeInAnimation(),
             contentAlignment = Alignment.Center,
         ) {
-            VideoYT("https://www.youtube.com/embed/nXraKPsLyXc?si=b38wiQvWQFHYYqRR", style = VideoFrameStyleLaptop)
+            VideoYT("https://www.youtube.com/embed/nXraKPsLyXc?si=b38wiQvWQFHYYqRR", style = VideoFrameStyleHybrid)
         }
     }
 }

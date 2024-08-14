@@ -53,6 +53,8 @@ import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Button
 import org.jetbrains.compose.web.dom.Div
 import org.w3c.dom.HTMLElement
+import org.w3c.dom.events.Event
+import org.w3c.dom.events.EventListener
 
 @Composable
 fun MainScreenMobile() {
@@ -151,9 +153,9 @@ private fun HeaderMobile(
                 ),
         )
         Box(Modifier.height(4.cssRem))
-        Box(Modifier.fillMaxWidth().padding(leftRight = 4.cssRem)) {
+        Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
             Card(
-                modifier = Modifier.fillMaxWidth().backdropFilter(blur(10.px)),
+                modifier = Modifier.backdropFilter(blur(10.px)),
                 color = MembersSectionCardMobile,
                 paddingValues = 1.5.cssRem,
                 borderRadius = 2.5.cssRem
@@ -211,7 +213,7 @@ private fun OurServicesMobile(modifier: Modifier) {
                 .zIndex(0)
         )
         Column(
-            modifier = modifier.gap(2.cssRem).zIndex(1),
+            modifier = modifier.gap(1.2.cssRem).zIndex(1),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Div(TitleStyleMobile.toModifier().toAttrs()) {
@@ -225,9 +227,10 @@ private fun OurServicesMobile(modifier: Modifier) {
             ShadowedCard(
                 modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.CenterHorizontally,
-                paddingValues = 1.3.vh,
+                paddingValues = 0.6.cssRem,
+                borderRadius = 2.cssRem,
             ) {
-                Div(GridTextTitle.toAttrs()) {
+                Div(GridTextTitleMobile.toAttrs()) {
                     SpanText(
                         Resources.Strings.ultima_band,
                         modifier = Modifier
@@ -239,9 +242,10 @@ private fun OurServicesMobile(modifier: Modifier) {
             ShadowedCard(
                 modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.CenterHorizontally,
-                paddingValues = 1.3.vh,
+                paddingValues = 0.6.cssRem,
+                borderRadius = 2.cssRem,
             ) {
-                Div(GridTextTitle.toAttrs()) {
+                Div(GridTextTitleMobile.toAttrs()) {
                     SpanText(
                         Resources.Strings.vocalisty_uppercase,
                         modifier = Modifier
@@ -253,9 +257,10 @@ private fun OurServicesMobile(modifier: Modifier) {
             ShadowedCard(
                 modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.CenterHorizontally,
-                paddingValues = 1.3.vh,
+                paddingValues = 0.6.cssRem,
+                borderRadius = 2.cssRem,
             ) {
-                Div(GridTextTitle.toAttrs()) {
+                Div(GridTextTitleMobile.toAttrs()) {
                     SpanText(
                         Resources.Strings.vocalnoye_show_uppercase,
                         modifier = Modifier
@@ -267,9 +272,10 @@ private fun OurServicesMobile(modifier: Modifier) {
             ShadowedCard(
                 modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.CenterHorizontally,
-                paddingValues = 1.3.vh,
+                paddingValues = 0.6.cssRem,
+                borderRadius = 2.cssRem,
             ) {
-                Div(GridTextTitle.toAttrs()) {
+                Div(GridTextTitleMobile.toAttrs()) {
                     SpanText(
                         Resources.Strings.duet_uppercase,
                         modifier = Modifier
@@ -330,7 +336,7 @@ private fun CreatedBySectionMobile(modifier: Modifier) {
         ShadowedCard(
             Modifier.fillMaxSize()
                 .padding(topBottom = 1.2.cssRem, leftRight = 0.5.cssRem),
-            borderRadius = 3.1.vh,
+            borderRadius = 1.8.cssRem,
         ) {
             Div(CreatorCardTextStyleMobile.toAttrs()) {
                 SpanText(
@@ -352,7 +358,7 @@ private fun CreatedBySectionMobile(modifier: Modifier) {
         ShadowedCard(
             Modifier.fillMaxSize()
                 .padding(topBottom = 1.2.cssRem, leftRight = 0.5.cssRem),
-            borderRadius = 3.1.vh,
+            borderRadius = 1.8.cssRem,
         ) {
             Div(CreatorCardTextStyleMobile.toAttrs()) {
                 SpanText(
@@ -374,7 +380,7 @@ private fun CreatedBySectionMobile(modifier: Modifier) {
         ShadowedCard(
             Modifier.fillMaxSize()
                 .padding(topBottom = 1.2.cssRem, leftRight = 0.5.cssRem),
-            borderRadius = 3.1.vh,
+            borderRadius = 1.8.cssRem,
         ) {
             Div(CreatorCardTextStyleMobile.toAttrs()) {
                 SpanText(
@@ -462,7 +468,7 @@ private fun VocalistCardMobile(
     modifier: Modifier,
     name: String,
     photoRes: String,
-    ref: ElementRefScope<HTMLElement>? = null
+    ref: ElementRefScope<HTMLElement>? = null,
 ) {
     Column(
         modifier = modifier.gap(2.cssRem),
@@ -473,25 +479,33 @@ private fun VocalistCardMobile(
             ref = ref,
             contentAlignment = Alignment.BottomCenter
         ) {
-            val cardHeight = 360.px
+            var cardHeight by remember { mutableStateOf(0) }
             Card(
-                modifier = Modifier.width(100.percent).height(cardHeight)
+                modifier = Modifier.width(100.percent).height(cardHeight.px)
                     .backgroundImage(linearGradient(LinearGradient.Direction.ToRight, GradientLeft, GradientRight)),
-                borderRadius = 3.5.cssRem,
+                borderRadius = 3.2.cssRem,
             ) {}
             Image(
                 photoRes,
                 "Main photo",
                 PersonWithCardPhotoStyleMobile
-                    .toModifier().fadeInAnimation(),
+                    .toModifier()
+                    .fadeInAnimation(),
+                ref = ref {
+                    it.addEventListener("load", object : EventListener {
+                        override fun handleEvent(event: Event) {
+                            cardHeight = (it.offsetHeight * 0.85).toInt()
+                        }
+                    })
+                }
             )
         }
         Div(VocalistTextTitleMobile.toAttrs()) {
             SpanText(
                 name,
                 modifier = Modifier
-                    .fadeInAnimation()
                     .whiteSpace(WhiteSpace.PreLine)
+                    .fadeInAnimation()
             )
         }
     }
@@ -729,7 +743,7 @@ fun VideosSectionMobile(modifier: Modifier) {
                 .fadeInAnimation(),
             contentAlignment = Alignment.Center,
         ) {
-            VideoYT("https://www.youtube.com/embed/_c2B9DN_khg?si=eVhKkAczzjP_Afsm", style = VideoFrameStyleMobile)
+            VideoYT("https://www.youtube.com/embed/v=B2peeQmgBKA&si=dEGQ3i11mxYBJsZO", style = VideoFrameStyleMobile)
         }
         Div(TitleStyleMobile.toAttrs()) {
             SpanText(
@@ -749,7 +763,7 @@ fun VideosSectionMobile(modifier: Modifier) {
                 .fadeInAnimation(),
             contentAlignment = Alignment.Center,
         ) {
-            VideoYT("https://www.youtube.com/embed/aEh4p6dUbvU?si=sZIsdey5lwHZ-rBx", style = VideoFrameStyleMobile)
+            VideoYT("https://www.youtube.com/embed/nXraKPsLyXc?si=b38wiQvWQFHYYqRR", style = VideoFrameStyleMobile)
         }
     }
 }
@@ -784,7 +798,7 @@ private fun BottomSectionMobile(
         Box(Modifier.height(1.3.cssRem))
         Input(
             modifier = Modifier
-                .width(324.px)
+                .width(90.percent)
                 .padding(LargePadding)
                 .borderRadius(1.9.cssRem, 1.9.cssRem)
                 .onFocusIn {
@@ -895,6 +909,7 @@ private fun BottomSectionMobile(
                 )
             }
         }
+        Box(Modifier.height(1.1.cssRem))
         Row(
             modifier = Modifier.gap(1.5.cssRem),
         ) {
@@ -938,6 +953,7 @@ private fun BottomSectionMobile(
                 )
             }
         }
+        Box(Modifier.height(1.1.cssRem))
         Div(SubheadlineRegularStyle.toAttrs()) {
             SpanText(
                 Resources.Strings.spb,

@@ -163,11 +163,33 @@ val MainTitleTextStyle by ComponentStyle {
     }
 }
 
+val MainTitleTextStyleHybrid by ComponentStyle {
+    base {
+        Modifier
+            .fontFamily(Fonts.MainFontName)
+            .fontSize(1.8.cssRem)
+            .textAlign(TextAlign.Start)
+            .fontWeight(FontWeight.Bold)
+            .color(colorMode.toPalette().color.toRgb())
+    }
+}
+
 val SubheadlineRegularStyle by ComponentStyle {
     base {
         Modifier
             .fontFamily(Fonts.MainFontName)
             .fontSize(1.6.cssRem)
+            .textAlign(TextAlign.Start)
+            .fontWeight(FontWeight.Normal)
+            .color(colorMode.toPalette().color.toRgb())
+    }
+}
+
+val SubheadlineRegularStyleHybrid by ComponentStyle {
+    base {
+        Modifier
+            .fontFamily(Fonts.MainFontName)
+            .fontSize(1.2.cssRem)
             .textAlign(TextAlign.Start)
             .fontWeight(FontWeight.Normal)
             .color(colorMode.toPalette().color.toRgb())
@@ -218,6 +240,15 @@ val SubheadlineBoldStyleLaptop by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
         .fontSize(0.8.cssRem)
+        .textAlign(TextAlign.Start)
+        .fontWeight(FontWeight.SemiBold)
+        .color(colorMode.toPalette().color.toRgb())
+}
+
+val SubheadlineBoldStyleHybrid by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(1.1.cssRem)
         .textAlign(TextAlign.Start)
         .fontWeight(FontWeight.SemiBold)
         .color(colorMode.toPalette().color.toRgb())
@@ -305,10 +336,18 @@ val TitleStyle by ComponentStyle.base {
         .fontWeight(FontWeight.Bold)
 }
 
+val TitleStyleHybrid by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(2.1.cssRem)
+        .textAlign(TextAlign.Center)
+        .fontWeight(FontWeight.Bold)
+}
+
 val TitleStyleMobile by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
-        .fontSize(3.2.vh)
+        .fontSize(1.6.cssRem)
         .textAlign(TextAlign.Center)
         .fontWeight(FontWeight.Bold)
 }
@@ -317,6 +356,22 @@ val GridTextTitle by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
         .fontSize(2.1.cssRem)
+        .textAlign(TextAlign.Center)
+        .fontWeight(FontWeight.Bold)
+}
+
+val GridTextTitleHybrid by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(1.3.cssRem)
+        .textAlign(TextAlign.Center)
+        .fontWeight(FontWeight.Bold)
+}
+
+val GridTextTitleMobile by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(1.2.cssRem)
         .textAlign(TextAlign.Center)
         .fontWeight(FontWeight.Bold)
 }
@@ -331,7 +386,7 @@ val VocalistTextTitle by ComponentStyle.base {
 val VocalistTextTitleMobile by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
-        .fontSize(2.4.vh)
+        .fontSize(1.3.cssRem)
         .textAlign(TextAlign.Center)
         .fontWeight(FontWeight.Bold)
 }

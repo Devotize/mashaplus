@@ -273,6 +273,11 @@ val DuetSectionGridStyle by ComponentStyle.base {
         .width(100.percent)
 }
 
+val DuetSectionGridStyleHybrid by ComponentStyle.base {
+    Modifier
+        .width(100.percent)
+}
+
 val VocalistsSectionGridStyle by ComponentStyle.base {
     Modifier
         .gap(rowGap = 1.vh, columnGap = 1.vw)

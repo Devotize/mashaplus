@@ -1,6 +1,7 @@
 package com.sychev.mashaplus.utils
 
 import androidx.compose.runtime.Composable
+import com.sychev.mashaplus.XXXLargePadding
 import com.sychev.mashaplus.XXXXLargePadding
 import com.varabyte.kobweb.compose.css.BoxSizing
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -29,6 +30,13 @@ val VideoFrameStyleLaptop by ComponentStyle {
     base {
         Modifier.width(890.px).height(420.px).boxSizing(BoxSizing.BorderBox).borderRadius(0.9.cssRem, 0.9.cssRem)
             .padding(leftRight = XXXXLargePadding)
+    }
+}
+
+val VideoFrameStyleHybrid by ComponentStyle {
+    base {
+        Modifier.width(720.px).height(400.px).boxSizing(BoxSizing.BorderBox).borderRadius(0.9.cssRem, 0.9.cssRem)
+            .padding(leftRight = XXXLargePadding)
     }
 }
 

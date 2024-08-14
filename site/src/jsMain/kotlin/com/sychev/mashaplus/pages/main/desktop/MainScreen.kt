@@ -298,12 +298,14 @@ fun CreatorSection(modifier: Modifier) {
                 }
             }
             GridCell(1, 3, 1, 8) {
-                Image(
-                    Resources.Images.maria_boronina,
-                    "null",
-                    CreatorPhotoStyle
-                        .toModifier().fadeInAnimation(),
-                )
+                Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                    Image(
+                        Resources.Images.maria_boronina,
+                        "null",
+                        CreatorPhotoStyle
+                            .toModifier().fadeInAnimation(),
+                    )
+                }
             }
             GridCell(6, 1, 1, 3) {
                 ShadowedCard(
@@ -651,7 +653,7 @@ fun VideosSection(modifier: Modifier) {
                 .fadeInAnimation(),
             contentAlignment = Alignment.Center,
         ) {
-            VideoYT("https://www.youtube.com/embed/_c2B9DN_khg?si=eVhKkAczzjP_Afsm")
+            VideoYT("https://www.youtube.com/embed/B2peeQmgBKA?si=HeJUlueJ8IHm8MK1")
         }
         Box(Modifier.height(XXXLargePadding))
         Div(TitleStyle.toAttrs()) {
@@ -672,7 +674,7 @@ fun VideosSection(modifier: Modifier) {
                 .fadeInAnimation(),
             contentAlignment = Alignment.Center,
         ) {
-            VideoYT("https://www.youtube.com/embed/aEh4p6dUbvU?si=sZIsdey5lwHZ-rBx")
+            VideoYT("https://www.youtube.com/embed/nXraKPsLyXc?si=b38wiQvWQFHYYqRR")
         }
     }
 }

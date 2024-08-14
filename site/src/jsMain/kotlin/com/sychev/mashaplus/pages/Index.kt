@@ -5,6 +5,7 @@ import com.sychev.mashaplus.LargePadding
 import com.sychev.mashaplus.XXXXLargePadding
 import com.sychev.mashaplus.components.layouts.PageLayout
 import com.sychev.mashaplus.pages.main.desktop.MainScreenDesktop
+import com.sychev.mashaplus.pages.main.hybrid.MainScreenHybrid
 import com.sychev.mashaplus.pages.main.laptop.MainScreenLaptop
 import com.sychev.mashaplus.pages.main.mobile.MainScreenMobile
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -14,7 +15,7 @@ import com.varabyte.kobweb.silk.components.animation.Keyframes
 import com.varabyte.kobweb.silk.components.style.ComponentStyle
 import com.varabyte.kobweb.silk.components.style.base
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
-import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
+import kotlinx.browser.window
 import org.jetbrains.compose.web.css.*
 
 // Container that has a tagline and grid on desktop, and just the tagline on mobile
@@ -33,18 +34,22 @@ val VideoStyle by ComponentStyle.base {
 @Composable
 fun HomePage() {
     PageLayout("Home") {
-        val bp = rememberBreakpoint()
-        when {
-            bp < Breakpoint.MD -> {
-                MainScreenMobile()
+        when (window.innerWidth) {
+            in (1280..Int.MAX_VALUE) -> {
+                MainScreenDesktop()
+
             }
 
-            bp < Breakpoint.XL -> {
+            in (800..1280) -> {
                 MainScreenLaptop()
             }
 
+            in (500..800) -> {
+                MainScreenHybrid()
+            }
+
             else -> {
-                MainScreenDesktop()
+                MainScreenMobile()
             }
         }
     }
