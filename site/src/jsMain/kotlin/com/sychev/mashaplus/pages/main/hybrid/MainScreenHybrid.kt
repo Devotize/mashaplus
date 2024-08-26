@@ -496,12 +496,15 @@ private fun VocalistsSectionHybrid(modifier: Modifier, title: String, list: List
                 Box(
                     modifier = Modifier.fillMaxSize()
                 ) {
+                    var leftEnter by remember { mutableStateOf(false) }
                     Image(
-                        src = Resources.Images.arrow_left,
+                        src = if (leftEnter && currentPosition != 0) Resources.Images.arrow_left_painted else Resources.Images.arrow_left,
                         description = "left",
                         modifier = ArrowImageStyleLaptop
                             .toModifier()
                             .align(Alignment.Center)
+                            .onMouseEnter { leftEnter = true }
+                            .onMouseLeave { leftEnter = false }
                             .fadeInAnimation(),
                         ref = ref { element ->
                             element.onclick = {
@@ -558,12 +561,15 @@ private fun VocalistsSectionHybrid(modifier: Modifier, title: String, list: List
                 Box(
                     modifier = Modifier.fillMaxSize()
                 ) {
+                    var rightEnter by remember { mutableStateOf(false) }
                     Image(
-                        src = Resources.Images.arrow_right,
+                        src = if (rightEnter && list.lastIndex != currentPosition + 2) Resources.Images.arrow_right_painted else Resources.Images.arrow_right,
                         description = "right",
                         modifier = ArrowImageStyleLaptop
                             .toModifier()
                             .align(Alignment.Center)
+                            .onMouseEnter { rightEnter = true }
+                            .onMouseLeave { rightEnter = false }
                             .fadeInAnimation(),
                         ref = ref { element ->
                             element.onclick = {

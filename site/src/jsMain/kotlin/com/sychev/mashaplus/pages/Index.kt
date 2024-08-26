@@ -39,7 +39,6 @@ fun HomePage() {
                 MainScreenDesktop()
 
             }
-
             in (800..1280) -> {
                 MainScreenLaptop()
             }

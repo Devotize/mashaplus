@@ -1,5 +1,7 @@
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
+import kotlinx.html.div
 import kotlinx.html.link
+import kotlinx.html.meta
 import kotlin.time.Duration.Companion.seconds
 
 plugins {
@@ -24,6 +26,7 @@ kobweb {
                     href = "https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600;700;800;900;905&display=swap",
                     rel = "stylesheet",
                 )
+                meta("og:image", "/masha_logo.png")
             }
         }
         export {

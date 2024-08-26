@@ -4,6 +4,7 @@ import androidx.compose.runtime.*
 import com.sychev.mashaplus.*
 import com.sychev.mashaplus.components.widgets.Card
 import com.sychev.mashaplus.components.widgets.SliderSimpleArrow
+import com.sychev.mashaplus.http.RequestSender
 import com.sychev.mashaplus.models.Vocalist
 import com.sychev.mashaplus.models.duetList
 import com.sychev.mashaplus.models.vocalistkyList
@@ -297,7 +298,7 @@ fun CreatorSection(modifier: Modifier) {
                     )
                 }
             }
-            GridCell(1, 3, 1, 8) {
+            GridCell(2, 3, 1, 8) {
                 Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                     Image(
                         Resources.Images.maria_boronina,
@@ -502,11 +503,14 @@ private fun VocalistsSection(modifier: Modifier, title: String, list: List<Vocal
                 Box(
                     modifier = Modifier.fillMaxSize()
                 ) {
+                    var leftEnter by remember { mutableStateOf(false) }
                     Image(
-                        src = Resources.Images.arrow_left,
+                        src = if (leftEnter && currentPosition != 0) Resources.Images.arrow_left_painted else Resources.Images.arrow_left,
                         description = "Main photo",
                         modifier = ArrowImageStyle
                             .toModifier()
+                            .onMouseEnter { leftEnter = true }
+                            .onMouseLeave { leftEnter = false }
                             .align(Alignment.Center)
                             .fadeInAnimation(),
                         ref = ref { element ->
@@ -527,7 +531,6 @@ private fun VocalistsSection(modifier: Modifier, title: String, list: List<Vocal
                 }
             }
             GridCell(1, 2, 8, 1) {
-                ScrollToViewEventProvider
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -564,12 +567,15 @@ private fun VocalistsSection(modifier: Modifier, title: String, list: List<Vocal
                 Box(
                     modifier = Modifier.fillMaxSize()
                 ) {
+                    var rightEnter by remember { mutableStateOf(false) }
                     Image(
-                        src = Resources.Images.arrow_right,
+                        src = if (rightEnter && list.lastIndex != currentPosition + 2) Resources.Images.arrow_right_painted else Resources.Images.arrow_right,
                         description = "Main photo",
                         modifier = ArrowImageStyle
                             .toModifier()
                             .align(Alignment.Center)
+                            .onMouseEnter { rightEnter = true }
+                            .onMouseLeave { rightEnter = false }
                             .fadeInAnimation(),
                         ref = ref { element ->
                             element.onclick = {
@@ -622,8 +628,8 @@ private fun VocalistCard(
             SpanText(
                 name,
                 modifier = Modifier
+                    .padding(left = 1.2.cssRem)
                     .fadeInAnimation()
-                    .whiteSpace(WhiteSpace.PreLine)
             )
         }
     }
@@ -1027,7 +1033,22 @@ fun BottomSection(modifier: Modifier) {
                 valid = isValid
             )
             Box(Modifier.height(LargePadding))
-            Button(ButtonStyle.toAttrs(OutlinedCircularButtonVariant)) {
+            Button(ButtonStyle.toAttrs(OutlinedCircularButtonVariant){
+                onClick {
+                    if (isValid) {
+                        RequestSender.sendTgMessage(
+                            inputPrefix + inputText,
+                            onSuccess = {
+                                window.alert("Номер телефона отправлен")
+                                inputText = ""
+                            },
+                            onError = {
+                                window.alert("Произошла ошибка при отправке телефона")
+                            }
+                        )
+                    }
+                }
+            }) {
                 Div(OutlineButtonTextSmallStyle.toAttrs()) {
                     SpanText(
                         Resources.Strings.otpravit,

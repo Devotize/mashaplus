@@ -36,6 +36,8 @@ fun <T> SliderSimpleArrow(
     content: @Composable (T, index: Int) -> Unit,
 ) {
     var selectedIndex by remember { mutableStateOf(0) }
+    var leftEnter by remember { mutableStateOf(false) }
+    var rightEnter by remember { mutableStateOf(false) }
     Box(modifier = modifier) {
         key(selectedIndex) {
             items.getOrNull(selectedIndex)?.let {
@@ -43,30 +45,39 @@ fun <T> SliderSimpleArrow(
             }
         }
         Row(Modifier.fillMaxWidth().align(Alignment.Center)) {
-            Box(Modifier.onClick {
-                if (selectedIndex == 0) {
-                    return@onClick
-                } else {
-                    selectedIndex--
-                }
-            }) {
+            Box(
+                Modifier
+                    .zIndex(3)
+                    .onMouseEnter { leftEnter = true }
+                    .onMouseLeave { leftEnter = false }
+                    .onClick {
+                        if (selectedIndex == 0) {
+                            return@onClick
+                        } else {
+                            selectedIndex--
+                        }
+                    }) {
                 leftArrow?.invoke() ?: Image(
-                    if (selectedIndex > 0) Resources.Images.arrow_left_painted else Resources.Images.arrow_left,
+                    if (selectedIndex > 0 && leftEnter) Resources.Images.arrow_left_painted else Resources.Images.arrow_left,
                     "Main photo",
                     ArrowImageStyle
                         .toModifier()
                 )
             }
             Spacer()
-            Box(Modifier.onClick {
-                if (selectedIndex == items.lastIndex) {
-                    return@onClick
-                } else {
-                    selectedIndex++
-                }
-            }) {
+            Box(Modifier
+                .zIndex(3)
+                .onMouseEnter { rightEnter = true }
+                .onMouseLeave { rightEnter = false }
+                .onClick {
+                    if (selectedIndex == items.lastIndex) {
+                        return@onClick
+                    } else {
+                        selectedIndex++
+                    }
+                }) {
                 rightArrow?.invoke() ?: Image(
-                    if (selectedIndex < items.lastIndex) Resources.Images.arrow_right_painted else Resources.Images.arrow_right,
+                    if (selectedIndex < items.lastIndex && rightEnter) Resources.Images.arrow_right_painted else Resources.Images.arrow_right,
                     "Main photo",
                     ArrowImageStyle
                         .toModifier()

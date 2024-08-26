@@ -4,6 +4,7 @@ import androidx.compose.runtime.*
 import com.sychev.mashaplus.*
 import com.sychev.mashaplus.components.widgets.Card
 import com.sychev.mashaplus.components.widgets.SliderSimpleArrow
+import com.sychev.mashaplus.http.RequestSender
 import com.sychev.mashaplus.models.Vocalist
 import com.sychev.mashaplus.models.duetList
 import com.sychev.mashaplus.models.vocalistkyList
@@ -48,6 +49,7 @@ import com.varabyte.kobweb.silk.components.style.toAttrs
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import kotlinx.browser.window
 import org.jetbrains.compose.web.attributes.InputType
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Button
@@ -827,7 +829,22 @@ private fun BottomSectionMobile(
             valid = isValid
         )
         Box(Modifier.height(1.1.cssRem))
-        Button(ButtonStyle.toAttrs(OutlinedCircularButtonVariantMobile)) {
+        Button(ButtonStyle.toAttrs(OutlinedCircularButtonVariantMobile){
+            onClick {
+                if (isValid) {
+                    RequestSender.sendTgMessage(
+                        inputPrefix + inputText,
+                        onSuccess = {
+                            window.alert("Номер телефона отправлен")
+                            inputText = ""
+                        },
+                        onError = {
+                            window.alert("Произошла ошибка при отправке телефона")
+                        }
+                    )
+                }
+            }
+        }) {
             Div(OutlineButtonTextSmallStyle.toAttrs()) {
                 SpanText(
                     Resources.Strings.otpravit,
@@ -839,7 +856,7 @@ private fun BottomSectionMobile(
             }
         }
         Box(Modifier.height(1.8.cssRem))
-        Link(
+        ShadowedLink(
             path = "https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg",
             modifier = Modifier.color(DesignWhiteText),
         ) {
@@ -853,7 +870,7 @@ private fun BottomSectionMobile(
                 )
             }
         }
-        Link(
+        ShadowedLink(
             path = "https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg",
             modifier = Modifier.color(DesignWhiteText),
         ) {
@@ -867,7 +884,7 @@ private fun BottomSectionMobile(
                 )
             }
         }
-        Link(
+        ShadowedLink(
             path = "https://vk.com/doc160634310_670249096?hash=7CtPzagSz8E3ehIhq5vPBeEZSmdX2LVceNKUOxo1NKc&dl=4hyXQEjQnTZZZDXjxwG4oIoR1EQwmoqY4qoySjZzeLg",
             modifier = Modifier.color(DesignWhiteText)
         ) {
@@ -881,7 +898,7 @@ private fun BottomSectionMobile(
                 )
             }
         }
-        Link(
+        ShadowedLink(
             "https://vk.com/masha_plus_band",
             modifier = Modifier.color(DesignWhiteText)
         ) {
@@ -895,7 +912,7 @@ private fun BottomSectionMobile(
                 )
             }
         }
-        Link(
+        ShadowedLink(
             "https://vk.com/masha_plus_band",
             modifier = Modifier.color(DesignWhiteText)
         ) {
