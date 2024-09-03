@@ -37,6 +37,7 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
+import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
@@ -829,13 +830,14 @@ private fun BottomSectionMobile(
             valid = isValid
         )
         Box(Modifier.height(1.1.cssRem))
+        val ctx = rememberPageContext()
         Button(ButtonStyle.toAttrs(OutlinedCircularButtonVariantMobile){
             onClick {
-                if (isValid) {
+                if (isValid && inputText.isNotEmpty()) {
                     RequestSender.sendTgMessage(
                         inputPrefix + inputText,
                         onSuccess = {
-                            window.alert("Номер телефона отправлен")
+                            ctx.router.navigateTo("/success")
                             inputText = ""
                         },
                         onError = {

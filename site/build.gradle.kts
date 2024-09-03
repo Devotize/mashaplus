@@ -17,7 +17,7 @@ version = "1.1"
 kobweb {
     app {
         index {
-            faviconPath.set("/masha_logo.png")
+            faviconPath.set("/favicon.ico")
             description.set("Musical Band")
             head.add {
                 link(rel = "preconnect", href = "https://fonts.googleapis.com")

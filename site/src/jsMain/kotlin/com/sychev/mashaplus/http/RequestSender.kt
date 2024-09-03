@@ -4,6 +4,9 @@ import org.w3c.xhr.XMLHttpRequest
 
 object RequestSender {
 
+    /*
+    Первый мой, второй Юли
+     */
     private val CHAT_IDS = listOf("903452317", "384321487")
 
     fun sendTgMessage(message: String, onSuccess: () -> Unit = {}, onError: () -> Unit = {}) {
@@ -13,7 +16,7 @@ object RequestSender {
             request.open(
                 method = "POST",
                 url = "https://api.telegram.org/bot6747408655:AAHvT-xv4z88R6PFeZPG03TV6y4jQkVJHtY/sendMessage",
-                async = true
+                async = false
             )
             request.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
             request.addEventListener(

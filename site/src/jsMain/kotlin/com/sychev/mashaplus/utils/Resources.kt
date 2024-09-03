@@ -18,6 +18,7 @@ object Resources {
         const val ogromnym_priemushestvom = "Огромным приемуществом нашего проекта является взаимозаменяемость"
         const val ostavit_zayavku = "Оставить заявку"
         const val otpravit = "Отправить"
+        const val go_back = "Вернуться"
         const val muzik_project =
             "MASHA PLUS – музыкальный проект, который реализует все форматы живых выступлений. От соло-вокалистов до кавер бэнда"
         const val sozday_meropriyatie = "Создай мероприятие по своим правилам"
@@ -65,6 +66,8 @@ object Resources {
         const val alya_plus_diana = "АЛЯ + ДИАНА"
         const val spb = "г. Санкт - Петербург"
         const val ostavte_nomer = "Оставьте свой номер, создадим ваше мероприятие вместе"
+        const val success_thx_message = "Спасибо!"
+        const val success_message = "В скором времени с вами свяжутся"
         const val bolshe_o_nas = "Больше о нас"
         const val vvedite_nomer_telefona_hint = "Введите номер телефона"
         const val jiviye_vystuplenya = "ЖИВЫЕ ВЫСТУПЛЕНИЯ"

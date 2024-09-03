@@ -30,7 +30,7 @@ val VideoStyle by ComponentStyle.base {
         .width(320.px)
 }
 
-@Page
+@Page()
 @Composable
 fun HomePage() {
     PageLayout("Home") {

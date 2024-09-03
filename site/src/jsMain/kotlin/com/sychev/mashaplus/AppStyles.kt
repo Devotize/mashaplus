@@ -422,6 +422,14 @@ val BottomCaptionTitle by ComponentStyle.base {
         .fontWeight(FontWeight.Bold)
 }
 
+val SuccessTitle by ComponentStyle.base {
+    Modifier
+        .fontFamily(Fonts.MainFontName)
+        .fontSize(1.6.cssRem)
+        .textAlign(TextAlign.Center)
+        .fontWeight(FontWeight.Bold)
+}
+
 val BottomCaptionTitleMobile by ComponentStyle.base {
     Modifier
         .fontFamily(Fonts.MainFontName)
